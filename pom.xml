@@ -18,18 +18,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>corner</groupId>
 	<artifactId>corner</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version>
 	<name>Corner</name>
 	<description>core library</description>
 	<url>http://corner.1king1.com</url>
 	<inceptionYear>2008</inceptionYear>
 	<issueManagement>
-		<system>redmine</system>
-		<url>http://bug.1king1.com</url>
+		<system>googlecode</system>
+		<url>http://code.google.com/p/corner</url>
 	</issueManagement>
 	<organization>
 		<name>The Corner Team</name>
-		<url>http://corner.1king1.com</url>
+		<url>http://code.google.com/p/corner</url>
 	</organization>
 	<build>
 		<resources>
