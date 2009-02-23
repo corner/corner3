@@ -35,8 +35,8 @@ import corner.table.RecordQueryModelImpl;
 /**
  * 用来展示数据的视图,对TableView的简单修改,使用RecordQueryModelImpl获取数据
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
- * @author <a href="d0ng@ouriba.com">dong</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
+ * @author <a href="d0ng@ganshane.net">dong</a>
  * @version $Revision: 2956 $
  * @since 0.0.1
  */

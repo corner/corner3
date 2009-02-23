@@ -33,7 +33,7 @@ import corner.services.hadoop.HadoopModule;
 /**
  * 针对Hadoop进行访问的服务类
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.2
  */

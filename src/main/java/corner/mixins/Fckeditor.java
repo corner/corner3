@@ -35,7 +35,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  * 	&gt;t:textarea value="testValue" t:mixins="corner/fckeditor"/&lt;
  * </code>
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2817 $
  * @since 0.0.2
  */

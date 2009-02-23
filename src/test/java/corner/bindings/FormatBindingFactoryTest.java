@@ -33,7 +33,7 @@ import corner.bindings.FormatterSourceImpl;
 
 /**
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 3018 $
  * @since 0.0.2
  */

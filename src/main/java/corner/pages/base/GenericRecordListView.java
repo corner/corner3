@@ -28,8 +28,8 @@ import corner.table.RecordQueryCallback;
 /**
  * 只读的范型的列表页面,与GenericListView不同的之处在于使用RecordView代替TableView实现数据的读取
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
- * @author <a href="d0ng@ouriba.com">dong</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
+ * @author <a href="d0ng@ganshane.net">dong</a>
  * @version $Revision: 2088 $
  * @since 0.0.1
  */

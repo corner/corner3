@@ -29,7 +29,7 @@ import corner.entities.base.TreeAdapter;
 /**
  * 向上移动
  * 
- * @author <a href="mailto:jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2956 $
  * @since 0.0.1 
  */

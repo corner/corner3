@@ -1,6 +1,6 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
- * site: http://ouriba.com
+ * site: http://ganshane.net
  * file: $Id: ServiceConfigSourceImpl.java 4355 2008-12-05 02:39:02Z d0ng $
  * created at:2008-10-08
  */
@@ -25,7 +25,7 @@ import corner.services.config.ServiceConfigSource;
 /**
  * 实现服务配置工厂类.
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 4355 $
  * @since 0.0.1
  */

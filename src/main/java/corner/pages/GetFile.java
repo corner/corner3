@@ -35,7 +35,7 @@ import corner.services.hadoop.GetFileService;
  * </code>
  * </p>
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.2
  */

@@ -42,7 +42,7 @@ import corner.services.payment.impl.view.AlipayViewHelper;
 /**
  * 针对支付宝的处理类
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 4056 $
  * @since 0.0.2
  */

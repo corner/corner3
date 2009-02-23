@@ -37,7 +37,7 @@ import corner.table.QueryModel;
 /**
  * 用来展示表格的视图
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2956 $
  * @since 0.0.1
  */

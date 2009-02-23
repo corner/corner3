@@ -23,7 +23,7 @@ import corner.services.payment.PaymentServiceSource;
 
 /**
  * 实现支付服务类
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2138 $
  * @since 0.0.2
  */

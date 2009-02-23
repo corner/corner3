@@ -19,7 +19,7 @@ import org.hibernate.Criteria;
 
 /**
  * 用来查询使用的回掉
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 158 $
  * @since 0.0.1
  */

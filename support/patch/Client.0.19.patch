@@ -30,10 +30,10 @@
      this.maxRetries = conf.getInt("ipc.client.connect.max.retries", 10);
      this.tcpNoDelay = conf.getBoolean("ipc.client.tcpnodelay", false);
      this.pingInterval = getPingInterval(conf);
-+		//d0ng@ouriba.com add begin
++		//d0ng@ganshane.net add begin
 +		this.maxTimeoutRetries = conf.getInt("ipc.client.socket.timeout.max.retries",45);
 +		this.socketTimeout = conf.getInt("ipc.client.socket.timeout",20000);
-+		//d0ng@ouriba.com add end
++		//d0ng@ganshane.net add end
      if (LOG.isDebugEnabled()) {
        LOG.debug("The ping interval is" + this.pingInterval + "ms.");
      }

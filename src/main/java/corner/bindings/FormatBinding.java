@@ -22,7 +22,7 @@ import org.apache.tapestry5.ioc.Location;
 
 /**
  * 针对格式化的一些前缀
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2088 $
  * @since 0.0.2
  */

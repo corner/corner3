@@ -17,7 +17,7 @@ package corner.utils;
 
 /**
  * 用来对实体类进行常规操作的util类.
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 716 $
  * @since 0.0.1
  */

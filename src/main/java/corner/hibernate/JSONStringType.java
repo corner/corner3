@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 实现JSON字符串作为一个Hibernate的类型存入数据库
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.2
  */

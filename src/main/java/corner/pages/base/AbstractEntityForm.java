@@ -28,7 +28,7 @@ import corner.services.EntityService;
 
 /**
  * 抽象的对实体进行操作表单类
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 5171 $
  * @since 0.0.1
  */

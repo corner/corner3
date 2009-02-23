@@ -30,8 +30,8 @@ import corner.table.QueryCallback;
 /**
  * 只读的范型的列表页面
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
- * @author <a href="d0ng@ouriba.com">dong</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
+ * @author <a href="d0ng@ganshane.net">dong</a>
  * @version $Revision: 2088 $
  * @since 0.0.1
  */

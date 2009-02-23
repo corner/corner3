@@ -55,7 +55,7 @@ import corner.services.migration.impl.fragment.RenameColumnFragment;
 /**
  * 数据库升级服务的实现类
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 5317 $
  * @since 0.0.2
  */

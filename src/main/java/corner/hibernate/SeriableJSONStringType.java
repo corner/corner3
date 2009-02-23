@@ -34,8 +34,8 @@ import corner.SeriableJSONObject;
 /**
  * 实现SeriableJSONObject字符串作为一个Hibernate的类型存入数据库
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
- * @author <a href="d0ng@ouriba.com">d0ng</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
+ * @author <a href="d0ng@ganshane.net">d0ng</a>
  * @version $Revision$
  * @since 0.0.2
  */

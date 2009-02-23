@@ -31,7 +31,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 /**
  * 公用的服务类.
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 5477 $
  * @since 0.0.1
  */

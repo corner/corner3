@@ -33,7 +33,7 @@ import org.apache.tapestry5.services.ValueEncoderFactory;
  * 提供了通过Object<->String两者之间的转换,方便在查询的时候记录查询条件.
  * 
  * @author dong
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2956 $
  * @since 0.0.1
  */
@@ -68,7 +68,7 @@ public class ProtocolBuffersModule {
 	/**
 	 * 针对Protobuf类型的对象进行Encoder
 	 * @author dong
-	 * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+	 * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
 	 * @version $Revision: 2956 $
 	 * @since 0.0.1
 	 */
@@ -101,7 +101,7 @@ public class ProtocolBuffersModule {
 	 * 从String 到Protobuffer
 	 * 
 	 * @author dong
-	 * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+	 * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
 	 * @version $Revision: 2956 $
 	 * @since 0.0.1
 	 */
@@ -141,7 +141,7 @@ public class ProtocolBuffersModule {
 	/**
 	 * 从对象到Protobuf的string的转换
 	 * @author dong
-	 * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+	 * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
 	 * @version $Revision: 2956 $
 	 * @since 0.0.1
 	 */

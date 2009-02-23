@@ -24,7 +24,7 @@ import corner.entities.base.TreeAdapter;
 
 /**
  * 用来操作树的服务类
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 718 $
  * @since 0.0.1
  */

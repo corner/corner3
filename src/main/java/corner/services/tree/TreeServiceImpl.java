@@ -34,7 +34,7 @@ import corner.utils.EntityUtil;
  * 提供了对tee组件的操作服务类.
  * 
  * 
- * @author <a href="mailto:jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 3034 $
  * @since 0.0.1 
  */

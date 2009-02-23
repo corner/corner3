@@ -20,7 +20,7 @@ import corner.services.migration.impl.SchemaInfo;
 
 /**
  * 用来数据库升级的服务类
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 3143 $
  * @since 0.0.2
  */

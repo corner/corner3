@@ -31,8 +31,8 @@ import corner.services.security.ResourceSecurityObject;
 /**
  * 范性化的表单页面
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
- * @author <a href="d0ng@ouriba.com">d0ng</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
+ * @author <a href="d0ng@ganshane.net">d0ng</a>
  * @version $Revision: 3822 $
  * @since 0.0.1
  */

@@ -64,7 +64,7 @@ public class FileUtils {
 	/**
 	 * 对文件通过正则表达式进行过滤
 	 * 
-	 * @author <a href="mailto:jun.tsai@ouriba.com">Jun Tsai</a>
+	 * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
 	 * @version $Revision: 2250 $
 	 * @since 0.9.0
 	 */
@@ -87,7 +87,7 @@ public class FileUtils {
 	/**
 	 * 文件集合
 	 * 
-	 * @author <a href="mailto:jun.tsai@ouriba.com">Jun Tsai</a>
+	 * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
 	 * @version $Revision: 2250 $
 	 * @since 0.9.0
 	 */
@@ -158,7 +158,7 @@ public class FileUtils {
 	/**
 	 * 默认对文件进行排序的类
 	 * 
-	 * @author <a href="mailto:jun.tsai@ouriba.com">Jun Tsai</a>
+	 * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
 	 * @version $Revision: 2250 $
 	 * @since 0.9.0
 	 */
@@ -187,7 +187,7 @@ public class FileUtils {
 	/**
 	 * 对排序进行回掉的类.
 	 * 
-	 * @author <a href="mailto:jun.tsai@ouriba.com">Jun Tsai</a>
+	 * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
 	 * @version $Revision: 2250 $
 	 * @since 0.9.0
 	 */

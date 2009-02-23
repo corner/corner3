@@ -37,7 +37,7 @@ import corner.entities.base.BaseModel;
 
 /**
  * 针对JSON字符串的测试
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.2
  */

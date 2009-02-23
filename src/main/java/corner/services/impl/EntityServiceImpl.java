@@ -35,7 +35,7 @@ import corner.services.EntityService;
 
 /**
  * 公用的实体服务类的实现.
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 5477 $
  * @since 0.0.1
  */

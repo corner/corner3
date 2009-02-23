@@ -28,7 +28,7 @@ import corner.services.migration.MigrateFragment;
 
 /**
  * 抽象的数据库升级碎片
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 5182 $
  * @since 0.0.2
  */

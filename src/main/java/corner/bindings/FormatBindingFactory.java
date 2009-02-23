@@ -24,7 +24,7 @@ import org.apache.tapestry5.services.BindingFactory;
 
 /**
  * 针对格式化的binding工厂类
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 3018 $
  * @since 0.0.2
  */

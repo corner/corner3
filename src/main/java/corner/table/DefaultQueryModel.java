@@ -22,7 +22,7 @@ import org.hibernate.criterion.Projections;
 
 /**
  * 用来查询使用的模型
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2305 $
  * @since 0.0.1
  */

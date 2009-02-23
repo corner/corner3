@@ -1,6 +1,6 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
- * site: http://ouriba.com
+ * site: http://ganshane.net
  * file: $Id: ServiceConfigSource.java 2424 2008-10-31 17:13:57Z d0ng $
  * created at:2008-10-08
  */
@@ -9,7 +9,7 @@ package corner.services.config;
 
 /**
  * 得到服务配置的工厂类
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2424 $
  * @since 0.0.1
  */

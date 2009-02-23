@@ -40,7 +40,7 @@ import corner.services.migration.impl.adapter.MySQLConnectionAdapter;
 /**
  * 数据库升级的module
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 5160 $
  * @since 0.0.2
  */

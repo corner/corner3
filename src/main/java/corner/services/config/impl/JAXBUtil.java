@@ -1,6 +1,6 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
- * site: http://ouriba.com
+ * site: http://ganshane.net
  * file: $Id: JAXBUtil.java 2424 2008-10-31 17:13:57Z d0ng $
  * created at:2008-10-08
  */

@@ -32,7 +32,7 @@ import corner.CornerConstants;
 /**
  * 禁止访问模板资源
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2088 $
  * @since 0.0.2
  */

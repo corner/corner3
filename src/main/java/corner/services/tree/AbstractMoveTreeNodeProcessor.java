@@ -33,7 +33,7 @@ import corner.utils.EntityUtil;
 /**
  * 抽象对树的移动进行的处理
  * 
- * @author <a href="mailto:jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 718 $
  * @since 0.0.1 
  */

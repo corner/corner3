@@ -44,7 +44,7 @@ import corner.table.QueryCallback;
 
 /**
  * 范型的列表页面
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 3789 $
  * @since 0.0.1
  */

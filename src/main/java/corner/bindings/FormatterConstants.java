@@ -17,7 +17,7 @@ package corner.bindings;
 
 /**
  * 针对格式化工具类的一些常量
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.2
  */

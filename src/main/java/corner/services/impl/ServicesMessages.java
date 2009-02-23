@@ -20,7 +20,7 @@ import org.apache.tapestry5.ioc.internal.util.MessagesImpl;
 
 /**
  * 用来提供消息提示的类
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2088 $
  * @since 0.0.2
  */

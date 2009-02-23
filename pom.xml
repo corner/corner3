@@ -85,12 +85,12 @@
 		<repository>
 			<id>ouriba-snapshots</id>
 			<url>
-				http://mvn.ouriba.com/content/groups/public-snapshots/
+				http://mvn.ganshane.net/content/groups/public-snapshots/
 			</url>
 		</repository>
 		<repository>
 			<id>ouriba-release</id>
-			<url>http://mvn.ouriba.com/content/groups/public</url>
+			<url>http://mvn.ganshane.net/content/groups/public</url>
 		</repository>
 		<!--
 			<repository>
@@ -263,20 +263,20 @@
 			<id>ouriba-snapshots</id>
 			<name>ouriba-snapshots</name>
 			<url>
-				http://mvn.ouriba.com/content/repositories/snapshots
+				http://mvn.ganshane.net/content/repositories/snapshots
 			</url>
 		</snapshotRepository>
 		<repository>
 			<id>ouriba-releases</id>
 			<name>ouriba-releases</name>
 			<url>
-				http://mvn.ouriba.com/content/repositories/releases
+				http://mvn.ganshane.net/content/repositories/releases
 			</url>
 		</repository>
 		<site>
 			<id>ouriba</id>
 			<url>
-				scp://dev.ouriba.com/home/jcai/public_html/projects/${pom.artifactId}
+				scp://dev.ganshane.net/home/jcai/public_html/projects/${pom.artifactId}
 			</url>
 		</site>
 	</distributionManagement>

@@ -29,7 +29,7 @@ import corner.services.migration.ConnectionAdapter;
 
 /**
  * 创建表
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 5182 $
  * @since 0.0.2
  */

@@ -24,7 +24,7 @@ import corner.entities.base.BaseModel;
 
 /**
  * 用来保存数据库的表格
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 5183 $
  * @since 0.0.2
  */

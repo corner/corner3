@@ -1,6 +1,6 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
- * site: http://ouriba.com
+ * site: http://ganshane.net
  * file: $Id: StaticLink.java 1489 2008-10-13 00:28:01Z d0ng $
  * created at:2008-09-30
  */

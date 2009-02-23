@@ -34,7 +34,7 @@ import corner.services.migration.MigrationService;
 /**
  * 支持手工升级数据库,运行方式一般是:
  * java -Dtapestry.app-package=com.ouriba.eweb -Dupgrade.script.path=webapp/WEB-INF/groovy-db/ corner.services.migration.impl.DatabaseUpgrade
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.2
  */

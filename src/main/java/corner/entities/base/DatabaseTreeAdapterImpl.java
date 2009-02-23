@@ -21,7 +21,7 @@ import javax.persistence.Transient;
 
 /**
  * 抽象的树的实现
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 5183 $
  * @since 0.0.1
  */

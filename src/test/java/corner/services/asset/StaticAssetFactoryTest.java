@@ -26,7 +26,7 @@ import corner.services.asset.StaticAsseUrlFactory;
 import corner.services.asset.StaticAssetFactory;
 
 /**
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2088 $
  * @since 0.0.2
  */

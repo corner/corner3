@@ -22,7 +22,7 @@ import org.apache.tapestry5.json.JSONObject;
 
 /**
  * 用来针对支付宝的前端输出帮助类
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2217 $
  * @since 0.0.2
  */

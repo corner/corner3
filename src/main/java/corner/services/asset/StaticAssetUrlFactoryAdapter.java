@@ -1,6 +1,6 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
- * site: http://ouriba.com
+ * site: http://ganshane.net
  * file: $Id$
  * created at:2008-11-3
  */

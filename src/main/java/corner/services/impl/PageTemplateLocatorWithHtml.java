@@ -31,7 +31,7 @@ import corner.CornerConstants;
 
 /**
  * 针对在context中能够寻找html作为模板。
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 967 $
  * @since 0.0.1
  */

@@ -24,7 +24,7 @@ import org.apache.tapestry5.json.JSONObject;
 
 /**
  * 进行支付操作的处理器
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2268 $
  * @since 0.0.2
  */

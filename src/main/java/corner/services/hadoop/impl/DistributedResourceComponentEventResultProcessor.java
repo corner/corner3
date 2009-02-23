@@ -34,7 +34,7 @@ import corner.services.hadoop.FileDesc;
 /**
  * 针对Hadoop资源文件的引用处理方式
  * 
- * @author <a href="jun.tsai@ouriba.com">Jun Tsai</a>
+ * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.2
  */
