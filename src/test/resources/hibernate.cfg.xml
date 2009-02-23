@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2008 The Ganshane Network Service Team. 
+	site: http://ganshane.net
+	file : $Id: hibernate.cfg.xml 158 2008-09-04 02:41:08Z jcai $
+	created at:2008-08-23
+-->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="show_sql">true</property>
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
+		
+	</session-factory>
+</hibernate-configuration>

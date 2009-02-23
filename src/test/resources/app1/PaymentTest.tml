@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2008 The Ganshane Network Service Team. 
+	site: http://ganshane.net
+	file : $Id: PaymentTest.tml 2088 2008-10-24 02:45:21Z jcai $
+	created at:2008-08-23
+-->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head>
+<title>支付测试页面</title>
+</head>
+<body>
+	<h1>支付测试页面</h1>
+	<div>
+	
+	</div>
+	<hr />
+支付宝测试:<span t:type="lichen/payment" service="alipay" options="paymentParameter"/>	
+</body>
+</html>

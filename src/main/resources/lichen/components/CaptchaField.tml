@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2008 The OurIBA Develope Team. 
+	site: http://ouriba.com
+	file : $Id: CaptchaField.tml 3420 2008-11-20 12:05:31Z d0ng $
+	created at:2008-09-24
+-->
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<input t:id="checkCodeField"  max="6" type="text" class="${inputValueClass}" style="margin-bottom:0;padding-bottom:0"/>
+<t:zone t:id="ccode" update="show" class="inline" style="margin-top:0;padding-top:0;display:inline">
+	<t:delegate to="codeBlock"/>
+</t:zone>
+<br/>
+<span>
+    <t:actionlink t:id="refresh" zone="ccode" context="${clientId}">看不清,换一张</t:actionlink>
+</span>
+<t:block id="codeBlock">
+    <img src="${imageLink}" width="${imgWidth}" height="${imgHeight}"/>
+    <input type="hidden" id="${blockClientId}" name="${blockClientId}" value="${code}"/>
+</t:block>
+</t:container>

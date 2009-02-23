@@ -1,0 +1,413 @@
+/* 针对 tapestry 框架的一些定义 */
+
+/* tapestry styles all start with "t-" */
+div.t-error {
+    border: 1px solid red;
+    padding: 0px;
+    margin: 4px 0px;
+}
+
+div.t-error div {
+    padding: 2px;
+    display: block;
+    margin: 0px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+div.t-error ul {
+    margin: 2px 0px;
+    background-color: white;
+    color: red;
+}
+
+div.t-error li {
+    margin-left: 20px;
+}
+
+html>body div.t-error li {
+    margin-left: -20px;
+}
+
+.t-invisible {
+    display: none;
+}
+
+label.t-error {
+    color: red;
+}
+
+input.t-error, textarea.t-error {
+    border-color: red;
+    font-style: italic;
+    color: red;
+}
+
+img.t-error-icon {
+    margin-left: 4px;
+}
+
+img.t-sort-icon {
+    margin-left: 4px;
+}
+
+div.t-exception-message {
+    font-style: italic;
+    font-size: 12pt;
+    border: thin dotted silver;
+    margin: 5px 0px;
+    padding: 3px;
+}
+
+div.t-exception-report, div.t-env-data {
+    font-family: "trebuchet ms", arial, sans-serif;
+}
+
+div.t-exception-report li {
+    margin-left: -40px;
+}
+
+div.t-exception-report dt, div.t-env-data dt {
+    color: green;
+    padding-left: 2px;
+    background-color: #ffffcf;
+}
+
+div.t-exception-report li {
+    list-style: none;
+}
+
+span.t-exception-class-name {
+    display: block;
+    margin-top: 15px;
+    font-size: 12pt;
+    background-color: #e1e1e1;
+    color: blue;
+    padding: 2px 3px;
+    font-weight: bold;
+}
+
+ul.t-stack-trace li {
+    font-family: monaco, times, monospace;
+    font-size: 10pt;
+    margin-left: -25px;
+    list-style: square;
+}
+
+li.t-usercode-frame {
+    font-weight: bold;
+    color: blue;
+}
+
+h1.t-exception-report {
+    font-family: "trebuchet ms", arial, sans-serif;
+    color: red;
+}
+
+div.t-exception-report dt:after {
+    content: ":";
+}
+
+div.t-exception-report dd, div.t-env-data dd {
+    margin-left: 10px;
+}
+
+table.t-data-table {
+    border-collapse: collapse;
+    margin: 0px;
+    padding: 2px;
+}
+
+table.t-data-table th {
+    background-color: black;
+    color: white;
+}
+
+table.t-data-table td {
+    border: 1px solid silver;
+    margin: 0px;
+}
+
+div.t-beaneditor, div.t-beandisplay {
+    display: block;
+    background: #ffc;
+    padding: 2px;
+    font-family: "trebuchet ms", arial, sans-serif;
+}
+
+div.t-beandisplay {
+    background: #ccbe99;
+    border: 2px outset black;
+    width: auto;
+}
+
+div.t-beaneditor-row {
+    padding: 4px 0px 2px 0px;
+}
+
+div.t-beaneditor-row label:after {
+    content: ":";
+}
+
+div.t-beandisplay-row {
+    clear: both;
+}
+
+div.t-beaneditor-row label, div.t-beandisplay div.t-beandisplay-label {
+    width: 250px;
+    display: block;
+    float: left;
+    text-align: right;
+    clear: left;
+    padding-right: 3px;
+    vertical-align: middle;
+}
+
+input.t-number {
+    text-align: right;
+}
+
+div.t-beandisplay div.t-beandisplay-label {
+    padding-right: 5px;
+}
+
+table.t-data-grid thead tr {
+    color: white;
+    background-color: #809fff;
+}
+
+table.t-data-grid thead tr th {
+    text-align: left;
+    padding: 3px;
+    white-space: nowrap;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+}
+
+table.t-data-grid {
+    border-collapse: collapse;
+    border-left: 1px solid silver;
+}
+
+table.t-data-grid tbody tr td {
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+    padding: 2px;
+}
+
+div.t-data-grid {
+    font-family: "trebuchet ms", arial, sans-serif;
+}
+
+div.t-data-grid-pager {
+    margin: 8px 0px;
+}
+
+div.t-data-grid-pager a, div.t-data-grid-pager span.current {
+    text-decoration: none;
+    color: black;
+    padding: 2px 5px;
+    font-size: medium;
+    border: 1px solid silver;
+    margin-right: 5px;
+}
+
+div.t-data-grid-pager a:hover {
+    border: 1px solid black;
+}
+
+div.t-data-grid-pager span.current {
+    color: white;
+    background-color: #809fff;
+}
+
+table.t-data-grid tr th a {
+    color: white;
+}
+
+img {
+    border: none;
+}
+
+div.t-env-data-section {
+    padding-left: 5px;
+}
+
+div.t-env-data dd, div.t-exception-report dd {
+    margin-left: 25px;
+    margin-bottom: 10px;
+}
+
+div.t-env-data li {
+    margin-left: -25px;
+}
+
+div.t-env-data-section {
+    font-size: 12pt;
+    background-color: #e1e1e1;
+    color: blue;
+    padding: 2px 3px;
+    font-weight: bold;
+}
+
+table.t-location-outer {
+    padding: 5px;
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+}
+
+td.t-location-line {
+    width: 40px;
+    text-align: right;
+    padding: 0px;
+    background-color: #e1e1e1;
+    padding-right: 3px;
+    border-right: 1px solid black;
+}
+
+td.t-location-content {
+    border-top: 1px solid silver;
+    border-right: 1px solid black;
+    white-space: pre;
+}
+
+td.t-location-current {
+    background-color: #ffffcf;
+}
+
+td.t-location-content-first {
+    border-top: 1px solid black;
+}
+
+div.t-palette {
+    display: inline;
+}
+
+div.t-palette select {
+    margin-bottom: 2px;
+    width: 200px;
+}
+
+div.t-palette-title {
+    color: white;
+    background-color: #809fff;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 3px;
+    display: block;
+}
+
+div.t-palette-available {
+    float: left;
+}
+
+div.t-palette-controls {
+    margin: 5px 5px;
+    float: left;
+    text-align: center;
+}
+
+div.t-palette-controls button {
+    display: block;
+    margin-bottom: 3px;
+}
+
+
+div.t-palette-selected {
+    float: left;
+    clear: right;
+}
+
+div.t-palette-spacer {
+    clear: left;
+}
+
+img.t-calendar-trigger {
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+div.t-autocomplete-menu ul {
+    border: 2px outset #cc9933;
+    background-color: #cc9933;
+    padding: 4px 6px;
+    overflow: auto;
+}
+
+div.t-autocomplete-menu li {
+    color: white;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+div.t-autocomplete-menu li.selected {
+    color: black;
+    font-weight: bold;
+}
+
+div.t-error-popup span {
+    background: transparent url( 'media/error-bevel-left.gif' ) no-repeat;
+    display: block;
+    line-height: 28px;
+    margin-left: 0px;
+    padding: 0px 5px 10px 22px;
+}
+
+html>body div.t-error-popup span {
+    background: transparent url( 'media/error-bevel-left_b.png' ) no-repeat;
+}
+
+div.t-error-popup {
+    background: transparent url( 'media/error-bevel-right.gif' ) no-repeat scroll top right;
+    cursor: pointer;
+    color: #fff;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 39px;
+    margin-right: 6px;
+    padding-right: 29px;
+    text-decoration: none;
+}
+
+html>body div.t-error-popup {
+    background: transparent url( 'media/error-bevel-right_b.png' ) no-repeat scroll top right;
+}
+
+ul.t-data-list li {
+    list-style-type: square;
+}
+
+/* the console is used to show debugging messages. */
+div.t-console {
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    left: 2px;
+}
+
+div.t-console div {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0px 2px;
+}
+
+div.t-console div.t-err {
+    background-color: red;
+    color: white;
+}
+
+div.t-console div.t-warn {
+    background-color: yellow;
+    color: black;
+}
+
+div.t-console div.t-debug {
+    background-color: silver;
+    color: black;
+}

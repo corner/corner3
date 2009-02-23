@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2008 The OurIBA Develope Team. 
+	site: http://ouriba.com
+	file : $Id: AreaSelect.tml 2025 2008-10-23 06:36:04Z d0ng $
+	created at:2008-09-16
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+    	<select t:id="provinceField"></select>
+    	<select t:id="cityField"></select>
+    	<select t:id="townField"></select>
+</t:container>

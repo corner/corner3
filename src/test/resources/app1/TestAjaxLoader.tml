@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2008 The Ganshane Network Service Team. 
+	site: http://ganshane.net
+	file : $Id: Start.tml 1465 2008-10-12 15:05:07Z jcai $
+	created at:2008-08-23
+-->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head>
+<title>Test Ajax Loader</title>
+</head>
+<body>
+<t:actionlink t:id="test" zone="testDiv">test ajax </t:actionlink>
+<div t:type="zone" id="testDiv"/>
+<span t:type="lichen/ajaxloader"/>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2008 The Ganshane Network Service Team. 
+	site: http://ganshane.net
+	file : $Id: Start.tml 3408 2008-11-20 08:35:48Z jcai $
+	created at:2008-08-23
+-->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head>
+<title>StaticLinkTest</title>
+</head>
+<body>
+<a href="/test/a.jpg" t:type="lichen/StaticLink" version="true">a.jpg version</a>
+<a href="/test/a.jpg" t:type="lichen/StaticLink" >a.jpg no version</a>
+</body>
+</html>

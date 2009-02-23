@@ -1,0 +1,44 @@
+/* message boxes: warning, error, confirmation */
+div.notice,div.warning,div.error{
+  clear:both;
+  width:80%;
+  float:left;
+  margin:0.5em 0 0.5em 0;
+  padding:10px 0px;  
+}
+div.notice p,div.warning p,div.error p{
+  padding-left:36px;
+}
+
+div.notice {
+  color:              #000000;
+  background-color:   #FFFFDD;
+  border:             1px solid #FFD700;
+  background-image:   url(media/s_notice.png);
+  background-repeat:  no-repeat;
+  background-position: 10px 50%;
+
+}
+
+div.warning {
+  color:              #CC0000;
+  background-color:   #FFFFCC;
+  border:             1px solid #CC0000;
+  background-image:   url(media/s_warn.png);
+  background-repeat:  no-repeat;
+  background-position: 10px 50%;
+  padding:10px 0px;
+}
+
+div.error {
+  background-color:   #FFFFCC;
+  color:              #ff0000;
+  margin:             0.5em 0 0.5em 0;
+  border:             1px solid #ff0000;
+  background-image:   url(media/s_error.png);
+  background-repeat:  no-repeat;
+  background-position: 10px 50%;
+}
+
+/* end messageboxes */
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2008 The Ganshane Network Service Team. 
+	site: http://ganshane.net
+	file : $Id: TestFormat.tml 2088 2008-10-24 02:45:21Z jcai $
+	created at:2008-08-23
+-->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head>
+<title>MutiplePresence Test</title>
+</head>
+<body>
+<t:loop source="1..2">
+    <form t:id="testForm">
+    a:<input t:id="a" value="a" />
+    b:<input t:id="b"/>
+    c:<input t:id="c"/>
+    <input type="submit"/>
+</form>
+</t:loop>
+</body>
+</html>

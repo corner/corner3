@@ -1,0 +1,39 @@
+--- src/core/org/apache/hadoop/ipc/Client.java	2008-11-14 11:09:30.000000000 +0800
++++ Client.java	2008-11-30 22:55:49.000000000 +0800
+@@ -71,6 +71,8 @@
+   final private int maxIdleTime; //connections will be culled if it was idle for 
+                            //maxIdleTime msecs
+   final private int maxRetries; //the max. no. of retries for socket connections
++  final private int maxTimeoutRetries; //the max. no. of retries for socket time out
++  final private int socketTimeout; //socket time out
+   private boolean tcpNoDelay; // if T then disable Nagle's Algorithm
+   private int pingInterval; // how often sends ping to the server in msecs
+ 
+@@ -296,14 +298,14 @@
+             this.socket = socketFactory.createSocket();
+             this.socket.setTcpNoDelay(tcpNoDelay);
+             // connection time out is 20s
+-            this.socket.connect(remoteId.getAddress(), 20000);
++            this.socket.connect(remoteId.getAddress(), socketTimeout);
+             this.socket.setSoTimeout(pingInterval);
+             break;
+           } catch (SocketTimeoutException toe) {
+             /* The max number of retries is 45,
+              * which amounts to 20s*45 = 15 minutes retries.
+              */
+-            handleConnectionFailure(timeoutFailures++, 45, toe);
++            handleConnectionFailure(timeoutFailures++,maxTimeoutRetries, toe);
+           } catch (IOException ie) {
+             handleConnectionFailure(ioFailures++, maxRetries, ie);
+           }
+@@ -619,6 +621,10 @@
+     this.maxRetries = conf.getInt("ipc.client.connect.max.retries", 10);
+     this.tcpNoDelay = conf.getBoolean("ipc.client.tcpnodelay", false);
+     this.pingInterval = getPingInterval(conf);
++		//d0ng@ouriba.com add begin
++		this.maxTimeoutRetries = conf.getInt("ipc.client.socket.timeout.max.retries",45);
++		this.socketTimeout = conf.getInt("ipc.client.socket.timeout",20000);
++		//d0ng@ouriba.com add end
+     if (LOG.isDebugEnabled()) {
+       LOG.debug("The ping interval is" + this.pingInterval + "ms.");
+     }

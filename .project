@@ -1,0 +1,18 @@
+<projectDescription>
+  <name>lichen</name>
+  <comment></comment>
+  <projects/>
+  <buildSpec>
+    <buildCommand>
+      <name>org.maven.ide.eclipse.maven2Builder</name>
+    </buildCommand>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+    <nature>org.maven.ide.eclipse.maven2Nature</nature>
+    <nature>org.eclipse.dltk.ruby.core.nature</nature>
+  </natures>
+</projectDescription>
