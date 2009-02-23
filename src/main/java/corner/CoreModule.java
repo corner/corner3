@@ -169,7 +169,7 @@ public class CoreModule {
 	public void contributeServiceLifecycleSource(
 			MappedConfiguration<String, ServiceLifecycle> configuration,
 			ObjectLocator locator) {
-		configuration.add(LichenConstants.REMOTE_SCOPE, locator
+		configuration.add(CornerConstants.REMOTE_SCOPE, locator
 				.autobuild(RemoteCallServiceLifecycle.class));
 	}
 
@@ -181,17 +181,17 @@ public class CoreModule {
 	 */
 	public static void contributeFactoryDefaults(
 			MappedConfiguration<String, String> configuration) {
-		configuration.add(LichenConstants.REMOTE_SERVER_URL,
+		configuration.add(CornerConstants.REMOTE_SERVER_URL,
 				"http://localhost:5180/corner/remote.hessian");
-		configuration.add(LichenConstants.DEFAULT_CALLER, "hessian");
-		configuration.add(LichenConstants.ENABLE_REMOTE_CALL, "false");
+		configuration.add(CornerConstants.DEFAULT_CALLER, "hessian");
+		configuration.add(CornerConstants.ENABLE_REMOTE_CALL, "false");
 
-		configuration.add(LichenConstants.ENABLE_HTML_TEMPLATE, "false");
-		configuration.add(LichenConstants.ENABLE_HTML_ACCESS, "true");
+		configuration.add(CornerConstants.ENABLE_HTML_TEMPLATE, "false");
+		configuration.add(CornerConstants.ENABLE_HTML_ACCESS, "true");
 
 		// 配置默认的资源引用类型为classpath
-		configuration.add(LichenConstants.ASSET_TYPE, "classpath");
-		configuration.add(LichenConstants.COMPOENT_TABLEVIEW_ROWS_PERPAGE, "15");
+		configuration.add(CornerConstants.ASSET_TYPE, "classpath");
+		configuration.add(CornerConstants.COMPOENT_TABLEVIEW_ROWS_PERPAGE, "15");
 	}
 
 	/**
@@ -244,7 +244,7 @@ public class CoreModule {
 			AssetFactory contextAssetFactory,
 
 			ComponentClassResolver componentClassResolver,
-			@Symbol(LichenConstants.ENABLE_HTML_TEMPLATE)
+			@Symbol(CornerConstants.ENABLE_HTML_TEMPLATE)
 			boolean enableHtmlTemplate) {
 		return new PageTemplateLocatorWithHtml(contextAssetFactory
 				.getRootResource(), componentClassResolver, enableHtmlTemplate);
@@ -264,8 +264,8 @@ public class CoreModule {
 	public void contributeRequestHandler(
 			OrderedConfiguration<RequestFilter> configuration, Context context,
 
-			@Symbol(LichenConstants.ENABLE_HTML_TEMPLATE)
-			boolean enableHtmlTemplate,@Symbol(LichenConstants.ENABLE_HTML_ACCESS) boolean enableHtmlAccess) {
+			@Symbol(CornerConstants.ENABLE_HTML_TEMPLATE)
+			boolean enableHtmlTemplate,@Symbol(CornerConstants.ENABLE_HTML_ACCESS) boolean enableHtmlAccess) {
 		if (enableHtmlTemplate && !enableHtmlAccess) {
 			RequestFilter foridViewHtmlTempalteFilter = new ForbidViewHtmlTemplate(
 					context);

@@ -27,7 +27,7 @@ import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
 
-import corner.LichenConstants;
+import corner.CornerConstants;
 
 /**
  * 禁止访问模板资源
@@ -84,7 +84,7 @@ public class ForbidViewHtmlTemplate implements RequestFilter {
 					// WEB-INF.
 
 					if (suffix
-							.equalsIgnoreCase(LichenConstants.HTML_TEMPLATE_EXTENSION)) {
+							.equalsIgnoreCase(CornerConstants.HTML_TEMPLATE_EXTENSION)) {
 
 						response
 								.sendError(HttpServletResponse.SC_FORBIDDEN,

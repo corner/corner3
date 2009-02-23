@@ -32,7 +32,7 @@ import org.apache.tapestry5.ioc.services.ClassFab;
 import org.apache.tapestry5.ioc.services.ClassFactory;
 import org.apache.tapestry5.ioc.services.MethodSignature;
 
-import corner.LichenConstants;
+import corner.CornerConstants;
 import corner.services.RemoteServiceCaller;
 import corner.services.RemoteServiceCallerSource;
 
@@ -59,7 +59,7 @@ public class RemoteCallServiceLifecycle implements ServiceLifecycle {
 				@Builtin
             ClassFactory classFactory,
             @Inject
-				@Symbol(LichenConstants.DEFAULT_CALLER)
+				@Symbol(CornerConstants.DEFAULT_CALLER)
 				String defaultCaller
             	){
 		

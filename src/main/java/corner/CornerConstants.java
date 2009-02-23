@@ -22,7 +22,7 @@ package corner;
  * @version $Revision: 3041 $
  * @since 0.0.1
  */
-public class LichenConstants {
+public class CornerConstants {
 	public static final String REMOTE_SCOPE = "remote";
 	public static final String REMOTE_SERVER_URL = "remote-service-url";
 	/**

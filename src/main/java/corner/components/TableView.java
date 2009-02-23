@@ -29,7 +29,7 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.Environment;
 import org.slf4j.Logger;
 
-import corner.LichenConstants;
+import corner.CornerConstants;
 import corner.table.DefaultQueryModel;
 import corner.table.QueryCallback;
 import corner.table.QueryModel;
@@ -80,7 +80,7 @@ public class TableView {
 	private Logger logger;
 
 	@Inject
-	@Symbol(LichenConstants.COMPOENT_TABLEVIEW_ROWS_PERPAGE)
+	@Symbol(CornerConstants.COMPOENT_TABLEVIEW_ROWS_PERPAGE)
 	private String  _rowsPerPage;
 	
 

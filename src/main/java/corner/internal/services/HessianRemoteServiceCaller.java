@@ -24,7 +24,7 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 
 import com.caucho.hessian.client.HessianProxyFactory;
 
-import corner.LichenConstants;
+import corner.CornerConstants;
 import corner.services.RemoteServiceCaller;
 
 /**
@@ -41,10 +41,10 @@ public class HessianRemoteServiceCaller implements RemoteServiceCaller {
 
 	public HessianRemoteServiceCaller(
 			@Inject
-			@Symbol(LichenConstants.REMOTE_SERVER_URL)
+			@Symbol(CornerConstants.REMOTE_SERVER_URL)
 			String hessianUrl, 
 			@Inject
-			@Symbol(LichenConstants.ENABLE_REMOTE_CALL)
+			@Symbol(CornerConstants.ENABLE_REMOTE_CALL)
 			boolean enableRemoteCall) {
 		this.url = hessianUrl;
 		this.enableRemoteCall = enableRemoteCall;

@@ -27,7 +27,7 @@ import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.model.ComponentModel;
 import org.apache.tapestry5.services.ComponentClassResolver;
 
-import corner.LichenConstants;
+import corner.CornerConstants;
 
 /**
  * 针对在context中能够寻找html作为模板。
@@ -49,7 +49,7 @@ public class PageTemplateLocatorWithHtml implements PageTemplateLocator {
         this.contextRoot = contextRoot;
         this.resolver = resolver;
         if(enableHtmlTemplate){
-        	this.templateExtension = LichenConstants.HTML_TEMPLATE_EXTENSION;
+        	this.templateExtension = CornerConstants.HTML_TEMPLATE_EXTENSION;
         }else{
         	this.templateExtension = InternalConstants.TEMPLATE_EXTENSION;
         }
