@@ -15,6 +15,6 @@
 	
 	</div>
 	<hr />
-支付宝测试:<span t:type="lichen/payment" service="alipay" options="paymentParameter"/>	
+支付宝测试:<span t:type="corner/payment" service="alipay" options="paymentParameter"/>	
 </body>
 </html>

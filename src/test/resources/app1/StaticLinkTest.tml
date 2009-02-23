@@ -10,7 +10,7 @@
 <title>StaticLinkTest</title>
 </head>
 <body>
-<a href="/test/a.jpg" t:type="lichen/StaticLink" version="true">a.jpg version</a>
-<a href="/test/a.jpg" t:type="lichen/StaticLink" >a.jpg no version</a>
+<a href="/test/a.jpg" t:type="corner/StaticLink" version="true">a.jpg version</a>
+<a href="/test/a.jpg" t:type="corner/StaticLink" >a.jpg no version</a>
 </body>
 </html>

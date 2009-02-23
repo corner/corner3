@@ -12,6 +12,6 @@
 <body>
 <t:actionlink t:id="test" zone="testDiv">test ajax </t:actionlink>
 <div t:type="zone" id="testDiv"/>
-<span t:type="lichen/ajaxloader"/>
+<span t:type="corner/ajaxloader"/>
 </body>
 </html>

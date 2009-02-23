@@ -6,5 +6,5 @@
 	created at:2008-08-23
 -->
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
-<span t:type="lichen/Pagination" currentPage="1" totalRecord="100" >pagination</span>
+<span t:type="corner/Pagination" currentPage="1" totalRecord="100" >pagination</span>
 </html>

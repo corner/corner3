@@ -16,12 +16,12 @@
 -->
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>lichen</groupId>
-	<artifactId>lichen</artifactId>
+	<groupId>corner</groupId>
+	<artifactId>corner</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<name>Lichen</name>
 	<description>core library</description>
-	<url>http://lichen.1king1.com</url>
+	<url>http://corner.1king1.com</url>
 	<inceptionYear>2008</inceptionYear>
 	<issueManagement>
 		<system>redmine</system>
@@ -29,7 +29,7 @@
 	</issueManagement>
 	<organization>
 		<name>The Lichen Team</name>
-		<url>http://lichen.1king1.com</url>
+		<url>http://corner.1king1.com</url>
 	</organization>
 	<build>
 		<resources>
@@ -61,7 +61,7 @@
 					<archive>
 						<manifestEntries>
 							<Tapestry-Module-Classes>
-								lichen.CoreModule
+								corner.CoreModule
 							</Tapestry-Module-Classes>
 						</manifestEntries>
 					</archive>
@@ -326,7 +326,7 @@
                 <groupId>org.apache.tapestry</groupId>
                 <artifactId>tapestry-component-report</artifactId>
                 <configuration>
-                    <rootPackage>lichen</rootPackage>
+                    <rootPackage>corner</rootPackage>
                 </configuration>
             </plugin>
             <plugin>

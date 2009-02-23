@@ -12,7 +12,7 @@
     <display-name>Integration Test App 1</display-name>
     <context-param>
         <param-name>tapestry.app-package</param-name>
-        <param-value>lichen.integration.app1</param-value>
+        <param-value>corner.integration.app1</param-value>
     </context-param>
     <filter>
         <filter-name>app</filter-name>

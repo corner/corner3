@@ -120,7 +120,7 @@ FCKConfig.ToolbarSets["Basic"] = [
 	['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','About']
 ] ;
 
-FCKConfig.ToolbarSets["lichen"]=[
+FCKConfig.ToolbarSets["corner"]=[
     ['Source','Bold','Italic','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull','-','Link','Unlink','Image','-','FontName','FontSize','TextColor','BGColor','-']
 ];
 

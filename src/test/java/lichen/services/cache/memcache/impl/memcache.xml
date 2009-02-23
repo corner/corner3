@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<memcache>
-    <client defaultEncoding="UTF-8" compressEnable="true" name="test" poolName="testPool"/>
-    <pool name="testPool" socketTimeout="0" nagle="false" minConnections="3" maxConnections="9" maintSleep="0" initConnections="1" failover="true" aliveCheck="true">
-        <servers port="11211" address="127.0.0.1"/>
-    </pool>
-</memcache>
