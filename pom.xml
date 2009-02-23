@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-	Copyright 2008 The Lichen Team.
+	Copyright 2008 The Corner Team.
 	
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 	<groupId>corner</groupId>
 	<artifactId>corner</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
-	<name>Lichen</name>
+	<name>Corner</name>
 	<description>core library</description>
 	<url>http://corner.1king1.com</url>
 	<inceptionYear>2008</inceptionYear>
@@ -28,7 +28,7 @@
 		<url>http://bug.1king1.com</url>
 	</issueManagement>
 	<organization>
-		<name>The Lichen Team</name>
+		<name>The Corner Team</name>
 		<url>http://corner.1king1.com</url>
 	</organization>
 	<build>

@@ -39,7 +39,7 @@ Find.find(dir)  do |file|
         puts copyYears
         
          tmpFile<<"/* 
- * Copyright #{copyYears} The Lichen Team.
+ * Copyright #{copyYears} The Corner Team.
  * 
  * Licensed under the Apache License, Version 2.0 (the \"License\");
  * you may not use this file except in compliance with the License.

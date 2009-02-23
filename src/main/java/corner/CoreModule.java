@@ -1,5 +1,5 @@
 /* 
- * Copyright 2008 The Lichen Team.
+ * Copyright 2008 The Corner Team.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ import corner.services.tree.TreeModule;
 import corner.transform.PageRedirectWorker;
 
 /**
- * 定义了Lichen的核心module
+ * 定义了Corner的核心module
  * 
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 3041 $
