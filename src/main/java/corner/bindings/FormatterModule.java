@@ -20,10 +20,8 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 
 import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.services.BindingFactory;
 
 /**
@@ -46,19 +44,16 @@ public class FormatterModule {
 	} 
 	
 	// 针对日期的format
-	@Scope(ScopeConstants.PERTHREAD)
 	public static Format buildDateFormat() {
 		return new SimpleDateFormat("yyyy-MM-dd");
 	}
 
 	// 针对时间和日期的format
-	@Scope(ScopeConstants.PERTHREAD)
 	public static Format buildDateTimeFormat() {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	}
 
 	// 针对货币的format
-	@Scope(ScopeConstants.PERTHREAD)
 	public static Format buildCurrencyFormat() {
 		return new DecimalFormat("0.00");
 	}

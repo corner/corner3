@@ -89,13 +89,6 @@ import corner.transform.PageRedirectWorker;
 		HadoopModule.class, ServiceConfigModule.class,FormatterModule.class })
 public class CoreModule {
 
-	private RequestGlobals requestGlobals;
-
-	public CoreModule(RequestGlobals requestGlobals) {
-		this.requestGlobals = requestGlobals;
-
-	}
-
 	/**
 	 * 绑定使用的service.
 	 * 
@@ -220,7 +213,7 @@ public class CoreModule {
 	}
 
 	public void contributeComponentEventResultProcessor(
-			MappedConfiguration<Class, ComponentEventResultProcessor> configuration) {
+			MappedConfiguration<Class, ComponentEventResultProcessor> configuration,RequestGlobals requestGlobals) {
 
 		configuration.add(RemoteResponse.class,
 				new RemoteResponseResultProcessor(requestGlobals));

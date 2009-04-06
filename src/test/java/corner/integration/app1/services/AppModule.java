@@ -17,7 +17,6 @@ package corner.integration.app1.services;
 
 import java.security.Principal;
 
-
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
@@ -39,7 +38,7 @@ import corner.services.security.SecurityPrincipalService;
  * @version $Revision: 5021 $
  * @since 0.0.1
  */
-@SubModule( { CoreModule.class, HttpModule.class })
+@SubModule( {  CoreModule.class,HttpModule.class })
 public class AppModule {
 
 	public static class SecurityPrincipalServiceImpl implements
