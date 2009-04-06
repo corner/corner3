@@ -17,7 +17,7 @@ package corner.services.security;
 
 
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.internal.services.LinkFactory;
+import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -82,7 +82,7 @@ public class SecurityModule {
 	 * @param enableSecurity
 	 *            是否激活安全校验,当isProduct为true时,此参数不起作用,即生产环境肯定要激活安全校验
 	 */
-	public static void contributeComponentClassTransformWorker(OrderedConfiguration<ComponentClassTransformWorker> configuration, SecurityChecker checker, ComponentClassResolver resolver, LinkFactory linkFactory, @Inject
+	public static void contributeComponentClassTransformWorker(OrderedConfiguration<ComponentClassTransformWorker> configuration, SecurityChecker checker, ComponentClassResolver resolver, LinkSource linkFactory, @Inject
 	@Symbol(SymbolConstants.PRODUCTION_MODE)
 	boolean isProduct, @Inject
 	@Symbol(SecurityConstants.ENABLE_SECURITY)

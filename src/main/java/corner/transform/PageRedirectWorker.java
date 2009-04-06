@@ -16,7 +16,7 @@
 package corner.transform;
 
 import org.apache.tapestry5.Link;
-import org.apache.tapestry5.internal.services.LinkFactory;
+import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.model.MutableComponentModel;
 import org.apache.tapestry5.services.ClassTransformation;
 import org.apache.tapestry5.services.ComponentClassResolver;
@@ -34,7 +34,7 @@ import org.apache.tapestry5.services.TransformMethodSignature;
 public class PageRedirectWorker implements ComponentClassTransformWorker {
 
 	private final ComponentClassResolver _resolver;
-	private final LinkFactory _linkFactory;
+	private final LinkSource _linkFactory;
 
 	private final ComponentMethodAdvice advice = new ComponentMethodAdvice() {
 		public void advise(ComponentMethodInvocation invocation) {
@@ -62,7 +62,7 @@ public class PageRedirectWorker implements ComponentClassTransformWorker {
 					}
 				}
 				if (pageName != null) {
-    				Link retLink = _linkFactory.createPageRenderLink(pageName,false,new Object[0]);
+    				Link retLink = _linkFactory.createPageRenderLink(pageName, false,new Object[0]);
     				invocation.overrideResult(retLink);
 				}
 			} catch (RuntimeException ex) {
@@ -76,7 +76,7 @@ public class PageRedirectWorker implements ComponentClassTransformWorker {
 	 * @param resolver
 	 * @param linkFactory
 	 */
-	public PageRedirectWorker(ComponentClassResolver resolver, LinkFactory linkFactory) {
+	public PageRedirectWorker(ComponentClassResolver resolver, LinkSource linkFactory) {
 		this._resolver = resolver;
 		this._linkFactory = linkFactory;
 	}

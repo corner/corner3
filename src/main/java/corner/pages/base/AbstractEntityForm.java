@@ -19,7 +19,7 @@ package corner.pages.base;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.internal.services.LinkFactory;
+import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.PropertyConduitSource;
 import org.slf4j.Logger;
@@ -52,7 +52,7 @@ public abstract class AbstractEntityForm<T> {
 
 	
 	@Inject 
-	private LinkFactory linkFactory;
+	private  LinkSource linkFactory;
 	/** 用来操作的model对象 **/
 	private T entity;
 
@@ -73,7 +73,7 @@ public abstract class AbstractEntityForm<T> {
 	 * @since 0.0.2
 	 */
 	protected Object getReturnObject(){
-		return linkFactory.createPageRenderLink(getReturnPage(), false);
+		return linkFactory.createPageRenderLink(getReturnPage(),false);
 	}
 
 	/**

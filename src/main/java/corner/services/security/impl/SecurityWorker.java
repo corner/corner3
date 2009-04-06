@@ -18,7 +18,7 @@ package corner.services.security.impl;
 
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
-import org.apache.tapestry5.internal.services.LinkFactory;
+import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.ioc.util.BodyBuilder;
 import org.apache.tapestry5.model.MutableComponentModel;
 import org.apache.tapestry5.services.ClassTransformation;
@@ -40,7 +40,7 @@ public class SecurityWorker implements ComponentClassTransformWorker {
 
 	private final SecurityChecker _checker;
 	private final ComponentClassResolver _resolver;
-	private final LinkFactory _linkFactory;
+	private final LinkSource _linkFactory;
 
 	/**
 	 * 
@@ -49,7 +49,7 @@ public class SecurityWorker implements ComponentClassTransformWorker {
 	 * @param linkFactory
 	 */
 	public SecurityWorker(SecurityChecker checker,
-			ComponentClassResolver resolver, LinkFactory linkFactory) {
+			ComponentClassResolver resolver, LinkSource linkFactory) {
 		this._checker = checker;
 		this._resolver = resolver;
 		this._linkFactory = linkFactory;
@@ -132,7 +132,7 @@ public class SecurityWorker implements ComponentClassTransformWorker {
 		if (pageName == null) {
 			pageName = "";
 		}
-		String linkFactory = transformation.addInjectedField(LinkFactory.class,
+		String linkFactory = transformation.addInjectedField(LinkSource.class,
 				"linkFactory", this._linkFactory);
 		builder
 				.addln(

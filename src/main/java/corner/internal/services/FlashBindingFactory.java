@@ -41,7 +41,7 @@ public class FlashBindingFactory implements BindingFactory {
 	public Binding newBinding(String description, ComponentResources container,
 			ComponentResources component, String expression, Location location) {
 		String messageValue = this.facade.get(expression);
-		return new LiteralBinding(description, messageValue, location);
+		return new LiteralBinding(location, description,messageValue);
 	}
 
 }

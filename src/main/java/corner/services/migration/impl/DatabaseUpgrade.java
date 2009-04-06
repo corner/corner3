@@ -101,6 +101,11 @@ public class DatabaseUpgrade {
 			public List<String> getResourcePaths(String path) {
 				
 				return null;
+			}
+
+			@Override
+			public String getMimeType(String file) {
+				return "text/plain";
 			}};
 	}
 

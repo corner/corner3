@@ -81,23 +81,11 @@
 			</plugin>
 		</plugins>
 	</build>
+	<!-- 
 	<repositories>
-		<repository>
-			<id>ouriba-snapshots</id>
-			<url>
-				http://mvn.ganshane.net/content/groups/public-snapshots/
-			</url>
-		</repository>
-		<repository>
-			<id>ouriba-release</id>
-			<url>http://mvn.ganshane.net/content/groups/public</url>
-		</repository>
-		<!--
-			<repository>
-			<id>openqa-release</id>
-			<url>http://archiva.openqa.org/repository/releases</url>
-			</repository> -->
+		
 	</repositories>
+	 -->
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
@@ -343,7 +331,7 @@
 
 	<properties>
 		<hibernate-release-version>3.3.1.GA</hibernate-release-version>
-		<tapestry-release-version>5.0.18</tapestry-release-version>
+		<tapestry-release-version>5.1.0.2</tapestry-release-version>
 		<hibernate-annotations-release-version>
 			3.4.0.GA
 		</hibernate-annotations-release-version>

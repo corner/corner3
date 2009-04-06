@@ -190,6 +190,20 @@ public class MigrationServiceImplTest extends TapestryTestCase{
 			public void add(Class key, ConnectionAdapter value) {
 				r.put(key, value);
 			}
+
+			@Override
+			public void addInstance(Class key,
+					Class<? extends ConnectionAdapter> clazz) {
+			}
+
+			@Override
+			public void override(Class key, ConnectionAdapter value) {
+			}
+
+			@Override
+			public void overrideInstance(Class key,
+					Class<? extends ConnectionAdapter> clazz) {
+			}
 			 
 		 };
 		MigrationModule.contributeConnectionAdapterSource(configuration);

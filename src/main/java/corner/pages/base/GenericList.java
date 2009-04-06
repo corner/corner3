@@ -17,13 +17,12 @@ package corner.pages.base;
 
 import java.io.Serializable;
 
-
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.corelib.components.ActionLink;
-import org.apache.tapestry5.internal.services.LinkFactory;
+import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.PropertyConduitSource;
 import org.apache.tapestry5.services.ValueEncoderSource;
@@ -60,7 +59,7 @@ public class GenericList<T> {
 	private ValueEncoderSource valueEncoderSource;
 	
 	@Inject
-	private LinkFactory linkFactory;
+	private LinkSource linkFactory;
 	
 	@Inject
 	private ComponentResources resources;

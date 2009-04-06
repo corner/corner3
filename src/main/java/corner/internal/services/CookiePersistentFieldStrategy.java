@@ -25,45 +25,50 @@ import javax.servlet.http.Cookie;
 
 import org.apache.tapestry5.internal.services.CookieSource;
 import org.apache.tapestry5.internal.services.PersistentFieldChangeImpl;
-import org.apache.tapestry5.internal.util.Base64ObjectInputStream;
-import org.apache.tapestry5.internal.util.Base64ObjectOutputStream;
-import org.apache.tapestry5.ioc.internal.util.InternalUtils;
+import org.apache.tapestry5.services.ClientDataEncoder;
+import org.apache.tapestry5.services.ClientDataSink;
 import org.apache.tapestry5.services.Cookies;
 import org.apache.tapestry5.services.PersistentFieldChange;
 import org.apache.tapestry5.services.PersistentFieldStrategy;
+
 /**
  * 用来保存数据到客户端的cooki中的处理
+ * 
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 158 $
  * @since 0.0.1
  */
 public class CookiePersistentFieldStrategy implements PersistentFieldStrategy {
 
-	private String prefix="cookie:";
+	private String prefix = "cookie:";
 	private Cookies cookies;
 	private CookieSource cookieSource;
+	private ClientDataEncoder encoder;
 
-	public CookiePersistentFieldStrategy(Cookies cookies,CookieSource cookieSource){
+	public CookiePersistentFieldStrategy(Cookies cookies,
+			CookieSource cookieSource, ClientDataEncoder encoder) {
 		this.cookies = cookies;
 		this.cookieSource = cookieSource;
+		this.encoder = encoder;
 	}
+
 	/**
 	 * @see org.apache.tapestry5.services.PersistentFieldStrategy#discardChanges(java.lang.String)
 	 */
 	public void discardChanges(String pageName) {
 		String fullPrefix = prefix + pageName + ":";
-        
-        Cookie[] cookies = cookieSource.getCookies();
 
-        if (cookies == null) return;
+		Cookie[] cookies = cookieSource.getCookies();
 
-        for (Cookie cooky : cookies)
-        {
-            if (cooky.getName().startsWith(fullPrefix)) {
-            	
-            	this.cookies.readCookieValue(cooky.getName());
-            }
-        }
+		if (cookies == null)
+			return;
+
+		for (Cookie cooky : cookies) {
+			if (cooky.getName().startsWith(fullPrefix)) {
+
+				this.cookies.readCookieValue(cooky.getName());
+			}
+		}
 	}
 
 	/**
@@ -72,35 +77,32 @@ public class CookiePersistentFieldStrategy implements PersistentFieldStrategy {
 	public Collection<PersistentFieldChange> gatherFieldChanges(String pageName) {
 		List<PersistentFieldChange> result = newList();
 
-        String fullPrefix = prefix + pageName + ":";
-        
-        Cookie[] cookies = cookieSource.getCookies();
+		String fullPrefix = prefix + pageName + ":";
 
-        if (cookies == null) return result;
+		Cookie[] cookies = cookieSource.getCookies();
 
-        for (Cookie cooky : cookies)
-        {
-            if (cooky.getName().startsWith(fullPrefix)) {
-            	
-            	result.add(buildChange(cooky.getName(),cooky.getValue()));
-            }
-        }
-        
+		if (cookies == null)
+			return result;
+
+		for (Cookie cooky : cookies) {
+			if (cooky.getName().startsWith(fullPrefix)) {
+
+				result.add(buildChange(cooky.getName(), cooky.getValue()));
+			}
+		}
+
 		return result;
 	}
-    private PersistentFieldChange buildChange(String name, String attribute)
+
+	private PersistentFieldChange buildChange(String name, String attribute)
     {
-    	Base64ObjectInputStream is = null;
 		
 		Object r=null;
 		//解压缩
 		try{
-	     is= new Base64ObjectInputStream(attribute);
-	     r=is.readObject();
+	     r = this.encoder.decodeClientData(attribute).readObject();
 		}catch(Exception e){
 			return null;
-		}finally{
-			InternalUtils.close(is);
 		}
         
       
@@ -113,51 +115,39 @@ public class CookiePersistentFieldStrategy implements PersistentFieldStrategy {
         
         return new PersistentFieldChangeImpl(componentId, fieldName, r);
     }
+
 	/**
-	 * @see org.apache.tapestry5.services.PersistentFieldStrategy#postChange(java.lang.String, java.lang.String, java.lang.String, java.lang.Object)
+	 * @see org.apache.tapestry5.services.PersistentFieldStrategy#postChange(java.lang.String,
+	 *      java.lang.String, java.lang.String, java.lang.Object)
 	 */
 	public void postChange(String pageName, String componentId,
 			String fieldName, Object newValue) {
-        notBlank(pageName, "pageName");
-        notBlank(fieldName, "fieldName");
+		notBlank(pageName, "pageName");
+		notBlank(fieldName, "fieldName");
 
-        StringBuilder builder = new StringBuilder(prefix);
-        builder.append(pageName);
-        builder.append(':');
+		StringBuilder builder = new StringBuilder(prefix);
+		builder.append(pageName);
+		builder.append(':');
 
-        if (componentId != null) builder.append(componentId);
+		if (componentId != null)
+			builder.append(componentId);
 
-        builder.append(':');
-        builder.append(fieldName);
+		builder.append(':');
+		builder.append(fieldName);
 
-      //写入cookie
-		//用base64outputstream算法
-		Base64ObjectOutputStream os = null;
-		
-		if(newValue == null){
+		if (newValue == null) {
 			this.cookies.removeCookieValue(builder.toString());
 			return;
 		}
-        try
-        {
-            os = new Base64ObjectOutputStream();
-            os.writeObject(newValue);
+		ClientDataSink sink = this.encoder.createSink();
+		try {
+			sink.getObjectOutputStream().writeObject(newValue);
 
-        }
-        catch (Exception ex)
-        {
-            throw new RuntimeException(ex.getMessage(), ex);
-        }
-        finally
-        {
-            InternalUtils.close(os);
-        }
-        
-        cookies.writeCookieValue(builder.toString(), os.toBase64(),30*60);
+		} catch (Exception ex) {
+			throw new RuntimeException(ex.getMessage(), ex);
+		}
+		cookies.writeCookieValue(builder.toString(), sink.getClientData(), 30 * 60);
 
-        
 	}
-	
-	
 
 }

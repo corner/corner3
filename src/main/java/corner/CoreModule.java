@@ -17,9 +17,8 @@ package corner;
 
 import java.util.Map;
 
-
 import org.apache.tapestry5.hibernate.HibernateTransactionDecorator;
-import org.apache.tapestry5.internal.services.LinkFactory;
+import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.internal.services.PageTemplateLocator;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
@@ -134,7 +133,7 @@ public class CoreModule {
 	 */
 	public static void contributeComponentClassTransformWorker(
 			OrderedConfiguration<ComponentClassTransformWorker> configuration,
-			ComponentClassResolver resolver, LinkFactory linkFactory) {
+			ComponentClassResolver resolver, LinkSource linkFactory) {
 		configuration.add("pageRedirect", new PageRedirectWorker(resolver,
 				linkFactory));
 	}
