@@ -105,7 +105,6 @@ public class MigrationServiceImpl implements MigrationService {
 	 * 
 	 * @see corner.services.migration.MigrationService#createTable(java.lang.String)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void createTable(final String tableName) {
 		this.executeMigrateFragment(new CreateTableFragment(this.adapter,

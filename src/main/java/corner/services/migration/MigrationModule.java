@@ -91,7 +91,6 @@ public class MigrationModule {
 	/**
      * Contributes {@link ConnectionAdapter}s for types: <ul> <li>Object <li>String <li>Enum </ul>
      */
-    @SuppressWarnings("unchecked")
     public static void contributeConnectionAdapterSource(MappedConfiguration<Class, ConnectionAdapter> configuration)
     {
        configuration.add(H2Dialect.class, new H2ConnectionAdapter());

@@ -129,7 +129,6 @@ public class HadoopModule {
 	/**
 	 * 注册针对Hadoop文件的读取Processor
 	 */
-	@SuppressWarnings("unchecked")
 	public static void contributeComponentEventResultProcessor(
 			@Inject
 			@Service("DistributedResourceProcessorWrapper")

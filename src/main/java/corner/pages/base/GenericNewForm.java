@@ -43,7 +43,6 @@ public class GenericNewForm<T> extends AbstractEntityForm<T> {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
-	@SuppressWarnings("unchecked")
 	@OnEvent(value=EventConstants.PREPARE,component="entityForm")
 	void prepareEntityInstance() throws InstantiationException, IllegalAccessException{
 		if(this.getEntity()==null){

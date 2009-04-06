@@ -49,7 +49,6 @@ public interface TreeService {
 	 * 
 	 * @param clazz     对应的类
 	 */
-	@SuppressWarnings("unchecked")
 	public abstract List<? extends TreeAdapter> getTree(
 			Class<? extends TreeAdapter> clazz);
 

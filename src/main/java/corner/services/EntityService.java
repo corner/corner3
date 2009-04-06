@@ -35,7 +35,6 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
  * @version $Revision: 5477 $
  * @since 0.0.1
  */
-@SuppressWarnings("unchecked")
 public interface EntityService {
 	
 

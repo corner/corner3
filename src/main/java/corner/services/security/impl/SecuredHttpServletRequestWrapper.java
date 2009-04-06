@@ -110,7 +110,6 @@ public class SecuredHttpServletRequestWrapper implements HttpServletRequest {
 	 * 
 	 * @see javax.servlet.ServletRequest#getAttributeNames()
 	 */
-	@SuppressWarnings("unchecked")
 	public Enumeration getAttributeNames() {
 		return _request.getAttributeNames();
 	}
@@ -185,7 +184,6 @@ public class SecuredHttpServletRequestWrapper implements HttpServletRequest {
 	 * 
 	 * @see javax.servlet.http.HttpServletRequest#getHeaderNames()
 	 */
-	@SuppressWarnings("unchecked")
 	public Enumeration getHeaderNames() {
 		return _request.getHeaderNames();
 	}
@@ -195,7 +193,6 @@ public class SecuredHttpServletRequestWrapper implements HttpServletRequest {
 	 * 
 	 * @see javax.servlet.http.HttpServletRequest#getHeaders(java.lang.String)
 	 */
-	@SuppressWarnings("unchecked")
 	public Enumeration getHeaders(String name) {
 		return _request.getHeaders(name);
 	}
@@ -230,7 +227,6 @@ public class SecuredHttpServletRequestWrapper implements HttpServletRequest {
 	 * 
 	 * @see javax.servlet.ServletRequest#getLocales()
 	 */
-	@SuppressWarnings("unchecked")
 	public Enumeration getLocales() {
 		return _request.getLocales();
 	}
@@ -256,7 +252,6 @@ public class SecuredHttpServletRequestWrapper implements HttpServletRequest {
 	 * 
 	 * @see javax.servlet.ServletRequest#getParameterMap()
 	 */
-	@SuppressWarnings("unchecked")
 	public Map getParameterMap() {
 		return _request.getParameterMap();
 	}
@@ -265,7 +260,6 @@ public class SecuredHttpServletRequestWrapper implements HttpServletRequest {
 	 * 
 	 * @see javax.servlet.ServletRequest#getParameterNames()
 	 */
-	@SuppressWarnings("unchecked")
 	public Enumeration getParameterNames() {
 		return _request.getParameterNames();
 	}

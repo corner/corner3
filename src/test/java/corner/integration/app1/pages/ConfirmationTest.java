@@ -31,6 +31,7 @@ public class ConfirmationTest {
 	@Component
 	private Form testForm;
 
+	@SuppressWarnings("unused")
 	@Component(parameters = { "value=av", "validate=presence" })
 	private TextField a;
 

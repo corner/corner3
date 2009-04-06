@@ -219,7 +219,6 @@ public class CoreModule {
 		};
 	}
 
-	@SuppressWarnings("unchecked")
 	public void contributeComponentEventResultProcessor(
 			MappedConfiguration<Class, ComponentEventResultProcessor> configuration) {
 

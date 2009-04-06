@@ -44,7 +44,6 @@ public class ValidationModule {
 	 *            配置.
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
 	public static void contributeFieldValidatorSource(
 			MappedConfiguration<String, Validator> configuration,
 			ObjectLocator locator) {

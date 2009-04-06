@@ -78,7 +78,6 @@ public class AreaSelect extends AbstractField implements AreaSelectField{
 	@SuppressWarnings("unused")
 	private String _class;
 
-	@SuppressWarnings("unused")
 	@Parameter(required = false)
 	@Property
 	private AreaModel _value;
@@ -95,15 +94,12 @@ public class AreaSelect extends AbstractField implements AreaSelectField{
 	/* 组件参数定义 结束 */
 
 	/* 内部组件定义 开始 */
-	@SuppressWarnings("unused")
 	@Component(parameters = { "value=province", "model=provinceModel", "event=change", "onCompleteCallback=onAreaChanged", "blankLabel=请选择" })
 	@Mixins("corner/OnAjaxEvent")
 	private Select provinceField;
-	@SuppressWarnings("unused")
 	@Component(parameters = { "value=city", "model=cityModel", "event=change", "onCompleteCallback=onAreaChanged", "blankLabel=请选择" })
 	@Mixins("corner/OnAjaxEvent")
 	private Select cityField;
-	@SuppressWarnings("unused")
 	@Component(parameters = { "value=town", "model=townModel", "blankLabel=请选择" })
 	private Select townField;
 	/* 内部组件定义 结束 */
@@ -120,7 +116,6 @@ public class AreaSelect extends AbstractField implements AreaSelectField{
 	private ValidationTracker tracker;
 
 	@Parameter(defaultPrefix = BindingConstants.VALIDATE)
-	@SuppressWarnings("unchecked")
 	private FieldValidator<Object> validate;
 
 	@Property
@@ -141,7 +136,6 @@ public class AreaSelect extends AbstractField implements AreaSelectField{
     }
 
 	@SetupRender
-	@SuppressWarnings("unused")
 	void setupRedner() {
 		if (this._value != null) {
 			this.province = this._value.getProvince() != null ? _value.getProvince().getCode() : null;

@@ -67,7 +67,6 @@ public class ChangeColumnFragment extends AbstractMigrateFragment {
 	}
 
 	// 根据不同的数据库生成DDL脚本的方法
-	@SuppressWarnings("unchecked")
 	String sqlAlterStrings(Table table,String columnName, Dialect dialect, Mapping p, TableMetadata tableInfo, 
 			String defaultCatalog, String defaultSchema) throws HibernateException {
 		

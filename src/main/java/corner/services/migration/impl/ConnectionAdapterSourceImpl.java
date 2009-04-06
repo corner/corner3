@@ -35,7 +35,6 @@ public class ConnectionAdapterSourceImpl implements ConnectionAdapterSource {
 	
 	private StrategyRegistry<ConnectionAdapter> registry;
 
-	@SuppressWarnings("unchecked")
 	public ConnectionAdapterSourceImpl(Map<Class, ConnectionAdapter> configuration) {
 
         registry = StrategyRegistry.newInstance(ConnectionAdapter.class,configuration);

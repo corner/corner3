@@ -35,7 +35,6 @@ import corner.services.EntityService;
 public abstract class AbstractEntityForm<T> {
 
 	/** 前端的用来提交的表单页面 **/
-	@SuppressWarnings("unused")
 	@Component 
 	private Form entityForm;
 
