@@ -41,7 +41,7 @@
     <orderEntry type="library" exported="" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.caucho:hessian:3.1.5" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.codehaus.groovy:groovy-all-minimal:1.5.7" level="project" />
-    <orderEntry type="library" exported="" name="Maven: alipay.inc:memcache-client:0.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.fepss.3rd:alipay-memcache-client:0.0.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.4" level="project" />
     <orderEntry type="library" name="Maven: org.easymock:easymock:2.4" level="project" />
     <orderEntry type="library" name="Maven: org.testng:testng:jdk15:5.7" level="project" />
