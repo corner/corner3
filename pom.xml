@@ -21,7 +21,7 @@
 	<version>3.0-SNAPSHOT</version>
 	<name>Corner</name>
 	<description>core library</description>
-	<url>http://corner.1king1.com</url>
+	<url>http://corner.googlecode.com</url>
 	<inceptionYear>2008</inceptionYear>
 	<issueManagement>
 		<system>googlecode</system>
@@ -176,8 +176,8 @@
 		</dependency>
 		<!--  alipay inc memcache client -->
 		<dependency>
-			<groupId>alipay.inc</groupId>
-			<artifactId>memcache-client</artifactId>
+			<groupId>com.fepss.3rd</groupId>
+			<artifactId>alipay-memcache-client</artifactId>
 			<version>0.0.1</version>
 		</dependency>
 		<dependency>

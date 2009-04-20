@@ -20,6 +20,7 @@ import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.ComponentClassResolver;
@@ -30,6 +31,7 @@ import org.apache.tapestry5.services.RequestGlobals;
 import corner.services.security.impl.SecurityCheckerImpl;
 import corner.services.security.impl.SecurityContextFilter;
 import corner.services.security.impl.SecurityWorker;
+import corner.services.security.impl.NoneSecurityPrincipalService;
 
 /**
  * 定义安全的module
@@ -49,7 +51,12 @@ public class SecurityModule {
 	 */
 	public static void bind(ServiceBinder binder) {
 		binder.bind(SecurityChecker.class, SecurityCheckerImpl.class);
+        binder.bind(SecurityPrincipalService.class, NoneSecurityPrincipalService.class);
 	}
+     public static void contributeFactoryDefaults(MappedConfiguration<String, String> configuration)
+    {
+        configuration.add("enable-security", "false");
+    }
 
 	/**
 	 * 对安全控制的过滤.
