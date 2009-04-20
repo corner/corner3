@@ -18,7 +18,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>corner</groupId>
 	<artifactId>corner</artifactId>
-	<version>3.0-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version>
 	<name>Corner</name>
 	<description>core library</description>
 	<url>http://corner.googlecode.com</url>
@@ -246,25 +246,27 @@
 			<version>${tapestry-release-version}</version>
 		</dependency>
 	</dependencies>
-    <repositories>
-        <repository>
-            <id>fepss</id>
-            <url>http://app.fepss.com/nexus/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>fepss.snapshots</id>
-            <url>http://app.fepss.com/nexus/content/groups/public-snapshots/</url>
-        </repository>
-    </repositories>
 	<distributionManagement>
 		<snapshotRepository>
-            <id>fepss.snapshots</id>
-            <url>http://app.fepss.com/nexus/content/repositories/snapshots/</url>
+			<id>ouriba-snapshots</id>
+			<name>ouriba-snapshots</name>
+			<url>
+				http://mvn.ganshane.net/content/repositories/snapshots
+			</url>
 		</snapshotRepository>
 		<repository>
-            <id>fepss.releases</id>
-            <url>http://app.fepss.com/nexus/content/repositories/releases/</url>
+			<id>ouriba-releases</id>
+			<name>ouriba-releases</name>
+			<url>
+				http://mvn.ganshane.net/content/repositories/releases
+			</url>
 		</repository>
+		<site>
+			<id>ouriba</id>
+			<url>
+				scp://dev.ganshane.net/home/jcai/public_html/projects/${pom.artifactId}
+			</url>
+		</site>
 	</distributionManagement>
 	<reporting>
 		<plugins>
@@ -333,6 +335,5 @@
 		<hibernate-annotations-release-version>
 			3.4.0.GA
 		</hibernate-annotations-release-version>
-         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
 	</properties>
 </project>
