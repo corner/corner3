@@ -97,7 +97,6 @@ limitations under the License.
       <artifactId>tapestry-hibernate</artifactId>
       <version>${tapestry-release-version}</version>
     </dependency>
-    <!--  对Hibernate的依赖  -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -248,11 +247,11 @@ limitations under the License.
   <repositories>
     <repository>
       <id>fepss</id>
-      <url>http://app.fepss.com/nexus/content/groups/public/</url>
+      <url>http://app.fepss.com/nexus/content/groups/public</url>
     </repository>
     <repository>
       <id>fepss.snapshots</id>
-      <url>http://app.fepss.com/nexus/content/groups/public-snapshots/</url>
+      <url>http://app.fepss.com/nexus/content/groups/public-snapshots</url>
     </repository>
   </repositories>
   <distributionManagement>
@@ -328,7 +327,7 @@ limitations under the License.
 
   <properties>
     <hibernate-release-version>3.3.1.GA</hibernate-release-version>
-    <tapestry-release-version>5.1.0.2</tapestry-release-version>
+    <tapestry-release-version>5.1.0.3</tapestry-release-version>
     <hibernate-annotations-release-version>
       3.4.0.GA
     </hibernate-annotations-release-version>
