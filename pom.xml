@@ -258,11 +258,11 @@ limitations under the License.
   <distributionManagement>
     <snapshotRepository>
       <id>fepss.snapshots</id>
-      <url>http://app.fepss.com/nexus/content/repositories/snapshots/</url>
+      <url>http://app.fepss.com/nexus/content/repositories/fepss-snapshots/</url>
     </snapshotRepository>
     <repository>
       <id>fepss.releases</id>
-      <url>http://app.fepss.com/nexus/content/repositories/releases/</url>
+      <url>http://app.fepss.com/nexus/content/repositories/fepss/</url>
     </repository>
   </distributionManagement>
   <reporting>
