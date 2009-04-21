@@ -51,7 +51,7 @@ public class DBMigrationInitializerTest extends TapestryTestCase{
 	@BeforeMethod
 	void setUpTestEnv(){
 		cfg = new AnnotationConfiguration();
-		cfg.setProperty( Environment.HBM2DDL_AUTO, "");
+		cfg.setProperty( Environment.HBM2DDL_AUTO, "create");
 		cfg.addAnnotatedClass(TestA.class);
 		cfg.addAnnotatedClass(SchemaInfo.class);
 		factory = (SessionFactoryImplementor) cfg.buildSessionFactory();
