@@ -59,7 +59,7 @@ public class RemoteResponseResultProcessor implements
 			this.requestGlobals.getHTTPServletResponse().setContentType(remoteResponse.getContentType());
 			remoteResponse.invoke(this.requestGlobals.getHTTPServletRequest(),this.requestGlobals.getHTTPServletResponse());
 		}catch(Exception e){
-			e.printStackTrace();
+            throw new RuntimeException(e);
 		}
 		finally {
 			InternalUtils.close(is);
