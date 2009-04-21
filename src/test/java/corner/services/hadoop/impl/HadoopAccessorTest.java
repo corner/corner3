@@ -57,7 +57,7 @@ public class HadoopAccessorTest {
 		}
 	}
 
-	@Test
+//	@Test
 	public void test_hdfs_list() throws IOException {
 		try {
 			DistributedResourceAccessor accessor = new HadoopAccessorImpl(null,

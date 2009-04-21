@@ -80,6 +80,6 @@ public class PaymentTest extends TapestryTestCase{
 		payment.renderPaymentForm(writer);
 		payment.endRenderPaymentForm(writer);
 		verify();
-		assertEquals("<form action=\"https://www.alipay.com/cooperate/gateway.do?\" method=\"post\"><input type=\"submit\" value=\"支付\"></input></form>",writer.toString());
+		assertEquals("<form method=\"post\" action=\"https://www.alipay.com/cooperate/gateway.do?\"><input value=\"支付\" type=\"submit\"></input></form>",writer.toString());
 	}
 }
