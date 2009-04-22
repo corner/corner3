@@ -28,10 +28,6 @@ import org.slf4j.Logger;
  * @since 0.0.1
  */
 public class GenericNewForm<T> extends AbstractEntityForm<T> {
-
-	
-
-
 	/** Logger **/
 	@Inject
 	private Logger logger;

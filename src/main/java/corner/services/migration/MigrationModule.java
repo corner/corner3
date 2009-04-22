@@ -45,7 +45,8 @@ import corner.services.migration.impl.adapter.MySQLConnectionAdapter;
  * @since 0.0.2
  */
 public class MigrationModule {
-	private static final String ENABLE_AUTO_UPGRADE="enable-db-upgrade";
+    /** enable database auto upgrade **/
+	public static final String ENABLE_AUTO_UPGRADE="enable-db-upgrade";
 	public static void bind(ServiceBinder binder) {
 		binder.bind(MigrationService.class, MigrationServiceImpl.class);
 		binder.bind(ConnectionAdapterSource.class,ConnectionAdapterSourceImpl.class);
