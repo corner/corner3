@@ -33,19 +33,19 @@ import org.hibernate.annotations.Cache;
 @Cache(usage=org.hibernate.annotations.CacheConcurrencyStrategy.READ_ONLY)
 public class BaseModel implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private Long id;
 	
 	
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@NonVisual
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
