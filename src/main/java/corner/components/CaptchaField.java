@@ -184,17 +184,17 @@ public class CaptchaField extends AbstractField {
 				final String _inputValue = inputValue;
 				inputValue = "";
 				if (_encryptCode == null) {
-					tracker.recordError(CaptchaField.this, resources
+					tracker.recordError(CaptchaField.this.checkCodeField, resources
 							.getMessages().get("challengecode-noencrpty"));
 					return;
 				}
 				if (_inputValue == null) {
-					tracker.recordError(CaptchaField.this, resources
+					tracker.recordError(CaptchaField.this.checkCodeField, resources
 							.getMessages().get("challengecode-noinput"));
 					return;
 				}
 				if (!check(_inputValue, _encryptCode)) {
-					tracker.recordError(CaptchaField.this, resources
+					tracker.recordError(CaptchaField.this.checkCodeField, resources
 							.getMessages().get("challengecode-nomatch"));
 				}
 				// 验证完毕之后,清空checkCodeField
