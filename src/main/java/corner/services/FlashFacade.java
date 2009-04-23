@@ -39,4 +39,20 @@ public interface FlashFacade {
 	 * @return 消息
 	 */
 	public String get(String key);
+
+    /**
+     * 直接输出notice
+     * @param  message message
+     */
+    public void notice(String message);
+    /**
+     * 直接输出warn
+     * @param  message message
+     */
+    public void warn(String message);
+    /**
+     * 直接输出error
+     * @param  message message
+     */
+    public void error(String message);
 }

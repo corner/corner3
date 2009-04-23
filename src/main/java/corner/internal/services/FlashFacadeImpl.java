@@ -42,11 +42,25 @@ public class FlashFacadeImpl implements FlashFacade {
 		return v;
 	}
 
-	/**
-	 * @see ganshane.services.flash.FlashFacade#push(java.lang.String, java.lang.String)
-	 */
+
+    /**
+     * 
+     * @param key key的键值
+     * @param value 对应的消息值
+     */
 	public void push(String key, String value) {
 		cookies.writeCookieValue(key, value, 30);
 	}
+    public void notice(String message) {
+        this.push(NOTICE_KEY,message);
+    }
+
+    public void warn(String message) {
+        this.push(WARN_KEY,message);
+    }
+
+    public void error(String message) {
+        this.push(ERROR_KEY,message);
+    }
 
 }
