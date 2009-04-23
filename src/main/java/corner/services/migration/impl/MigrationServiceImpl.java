@@ -277,10 +277,10 @@ public class MigrationServiceImpl implements MigrationService {
 				try {
 					for (int i = 0; i < sql.length; i++) {
 						try {
-							System.err.println("[db-upgrade] " + sql[i]);
+							logger.info("[db-upgrade] " + sql[i]);
 							executeSchemaStatement(stmt, sql[i]);
 						} catch (SQLException se) {
-							System.err.println("[db-upgrade] " + sql[i]+" error");
+							logger.info("[db-upgrade] " + sql[i]+" error");
 							se.printStackTrace();
 							throw se;
 						}
@@ -334,6 +334,7 @@ public class MigrationServiceImpl implements MigrationService {
 				List<String> script = new ArrayList<String>();
 				// 此数据库中，没有schema_info表，说明当前库为空库，直接创建所有的数据库
 				if (tableInfo == null) {
+                    logger.info("数据库中无["+SCHEMA_INFO_TABLE_NAME+"],直接创建数据库!");
 					String[] sqls = cfg.generateSchemaCreationScript(dialect);
 					executeSchemaScript(sqls);
 				}

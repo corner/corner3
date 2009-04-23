@@ -24,6 +24,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.SessionHolder;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.slf4j.Logger;
 
 import corner.services.migration.MigrationService;
 import corner.services.migration.impl.console.ConsoleBackgroundColor;
@@ -41,13 +42,15 @@ import corner.services.migration.impl.console.UnixConsole;
 public class DBMigrationInitializer extends AbstractDBMigrationInitializer {
 	
 	private HibernateSessionManager sessionManager;
+    private Logger logger;
 
 	public DBMigrationInitializer(
-			MigrationService migrationService,HibernateSessionManager manager) {
+            MigrationService migrationService, HibernateSessionManager manager, Logger logger) {
 		super(migrationService);
 		this.sessionManager = manager;
-		
-	}
+
+        this.logger = logger;
+    }
 
 	private static final String GROOVY_DB_PATH = "/WEB-INF/groovy-db/";
 
@@ -70,16 +73,16 @@ public class DBMigrationInitializer extends AbstractDBMigrationInitializer {
 			
 			//初始化SchemaInfo 表格
 			int dbVersion=this.getMigrationService().initSchemaInfo().getDbversion();
-			System.out.println("get database version :["+dbVersion+"]");
+			logger.info("get database version :["+dbVersion+"]");
 			int maxVersion=0;
 			
 			//更新public schema下的表
 			maxVersion = this.executeDbScript(DB_SCRIPT_TYPE_STR,dbVersion, getPath(context,GROOVY_DB_PATH));
-			System.out.println("file version :["+maxVersion+"]");
+			logger.info("file version :["+maxVersion+"]");
 			
 			// 把数据库的db字段更新到最大值.
 			if(maxVersion>0){
-				System.out.println("update database version :["+maxVersion+"]");
+				logger.info("update database version :["+maxVersion+"]");
 				this.getMigrationService().updateDbMaxVersion(DB_SCRIPT_TYPE_STR,maxVersion);
 			}
 			tx.commit();

@@ -27,6 +27,8 @@ import org.apache.tapestry5.ioc.RegistryBuilder;
 import org.apache.tapestry5.ioc.services.SymbolSource;
 import org.apache.tapestry5.services.ApplicationInitializer;
 import org.apache.tapestry5.services.Context;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import corner.services.migration.MigrationModule;
 import corner.services.migration.MigrationService;
@@ -52,7 +54,8 @@ public class DatabaseUpgrade {
 		MigrationService service = registry.getService(MigrationService.class);
 		
 		HibernateSessionManager sessionManager = registry.getService(HibernateSessionManager.class);
-		DBMigrationInitializer initializer = new DBMigrationInitializer(service, sessionManager );
+        Logger logger= LoggerFactory.getLogger(DatabaseUpgrade.class);
+        DBMigrationInitializer initializer = new DBMigrationInitializer(service, sessionManager, logger);
 		Context context= createMockContext(scriptPath);
 		ApplicationInitializer delegateInitializer=new ApplicationInitializer(){
 			@Override
