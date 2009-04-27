@@ -27,6 +27,7 @@ import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.ioc.services.ClassNameLocator;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.services.ValueEncoderFactory;
+import corner.model.PaginationBean;
 
 /**
  * 配置<a href="http://code.google.com/p/protobuf/">Google protocol buffer</a>的Value Encoder.
@@ -47,24 +48,31 @@ public class ProtocolBuffersModule {
 		final Collection<String> protoClasses = classNameLocator.locateClassNames(protoPackage);
 		final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
 		for (String className : protoClasses) {
-			try {
-				Class protoClass = contextClassLoader.loadClass(className);
-				
-				//假如class是ProtocolBuffer的子类，则进行处理
-				if (ProtocolBuffer.class.isAssignableFrom(protoClass)) {
-					final 
-					ValueEncoderFactory factory = new ValueEncoderFactory() {
-						public ValueEncoder create(Class type) {
-							return new ProtoValueEncoder(type);
-						}
-					};
-					configuration.add(protoClass,factory);
-				}
-			} catch (ClassNotFoundException ex) {
-				throw new RuntimeException(ex);
-			}
+            addProtobufferCoercer(configuration,contextClassLoader,className);
 		}
+        //add PaginationBean class type coercer
+        addProtobufferCoercer(configuration,contextClassLoader, PaginationBean.class.getName());
 	}
+    private static void addProtobufferCoercer(MappedConfiguration<Class, ValueEncoderFactory> configuration,
+                                       ClassLoader contextClassLoader,String className){
+
+        try {
+            Class protoClass = contextClassLoader.loadClass(className);
+
+            //假如class是ProtocolBuffer的子类，则进行处理
+            if (ProtocolBuffer.class.isAssignableFrom(protoClass)) {
+                final
+                ValueEncoderFactory factory = new ValueEncoderFactory() {
+                    public ValueEncoder create(Class type) {
+                        return new ProtoValueEncoder(type);
+                    }
+                };
+                configuration.add(protoClass,factory);
+            }
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 	/**
 	 * 针对Protobuf类型的对象进行Encoder
 	 * @author dong

@@ -70,6 +70,7 @@ import corner.services.security.SecurityModule;
 import corner.services.tree.TreeModule;
 import corner.transform.PageRedirectWorker;
 import corner.model.PaginationList;
+import corner.model.PaginationBean;
 
 /**
  * 定义了Corner的核心module
@@ -284,10 +285,10 @@ public class CoreModule {
                                              TypeCoercer coercer)
 
     {
-        add(configuration, PaginationList.class, JSONObject.class,
-                new Coercion<PaginationList, JSONObject>()
+        add(configuration, PaginationList.class, PaginationBean.class,
+                new Coercion<PaginationList, PaginationBean>()
                 {
-                    public JSONObject coerce(PaginationList input)
+                    public PaginationBean coerce(PaginationList input)
                     {
                         return input.options();
                     }

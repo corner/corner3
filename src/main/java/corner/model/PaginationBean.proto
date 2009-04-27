@@ -1,0 +1,10 @@
+package corner.model;
+
+option java_package = "corner.model";
+option java_outer_classname = "PaginationProtoBuffer";
+message Pagination{
+    required int64 totalRecord=1;
+    optional int32 page =2 [default=1];
+    optional int32 perPage=3 [default=10];
+    optional string parameters=4;
+}

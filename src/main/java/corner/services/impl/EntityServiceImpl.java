@@ -26,10 +26,10 @@ import org.hibernate.*;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.apache.tapestry5.json.JSONObject;
 
 import corner.services.EntityService;
 import corner.model.PaginationList;
+import corner.model.PaginationBean;
 
 /**
  * 公用的实体服务类的实现.
@@ -152,7 +152,7 @@ public class EntityServiceImpl  implements EntityService{
 			throws DataAccessException {
 		return template.find(queryString, value);
 	}
-    public PaginationList paginate(String queryString, Object value,JSONObject options)
+    public PaginationList paginate(String queryString, Object value, PaginationBean options)
             throws DataAccessException {
         return this.paginate(queryString,new Object[]{value},options);
     }
@@ -175,13 +175,10 @@ public class EntityServiceImpl  implements EntityService{
      * @throws DataAccessException
      * @see org.springframework.orm.hibernate3.HibernateTemplate#find(java.lang.String, java.lang.Object[])
      */
-    public PaginationList paginate(final String queryString, final Object[] values, final JSONObject options)
+    public PaginationList paginate(final String queryString, final Object[] values, final PaginationBean options)
             throws DataAccessException {
         if(options==null){
             throw new RuntimeException("must set pagination parameters");
-        }
-        if(!options.has("page")){
-            options.put("page",1);
         }
 
         return (PaginationList) template.executeWithNativeSession(new HibernateCallback() {
@@ -193,11 +190,8 @@ public class EntityServiceImpl  implements EntityService{
                     }
                 }
                 //get perpage
-                int perPage = 10;
-                if(options.has("perPage")){
-                    perPage = options.getInt("perPage");
-                }
-                int page = options.getInt("page");
+                int perPage = options.getPerPage();
+                int page = options.getPage();
                 if(page<1){
                     page =1;
                 }
@@ -213,7 +207,7 @@ public class EntityServiceImpl  implements EntityService{
                         queryObject.setParameter(i, values[i]);
                     }
                 }
-                options.put("totalRecord",queryObject.iterate().next());
+                options.setTotalRecord((Long) queryObject.iterate().next());
                 return  new PaginationList(list,options);
             }
         });
@@ -231,7 +225,7 @@ public class EntityServiceImpl  implements EntityService{
 	public List find(String queryString) throws DataAccessException {
 		return template.find(queryString);
 	}
-    public PaginationList paginate(String queryString, JSONObject options)
+    public PaginationList paginate(String queryString, PaginationBean options)
             throws DataAccessException {
         return this.paginate(queryString,new Object[]{},options);
     }

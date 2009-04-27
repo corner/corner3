@@ -6,10 +6,6 @@
  */
 package corner.model;
 
-import org.apache.tapestry5.json.JSONObject;
-
-import java.util.Iterator;
-
 /**
  * provide pagination function list based on ArrayList Object
  * @author <a href="jun.tsai@fepss.com">Jun Tsai</a>
@@ -18,13 +14,13 @@ import java.util.Iterator;
  */
 public class PaginationList {
     private Object it;
-    private JSONObject options;
+    private PaginationBean options;
 
     /**
      * construct pagination list by iterator
      * @param it collection object
      **/
-    public PaginationList(Object it, JSONObject options){
+    public PaginationList(Object it, PaginationBean options){
         this.it = it;
         this.options = options;
     }
@@ -32,7 +28,7 @@ public class PaginationList {
     public Object collectionObject() {
         return it;
     }
-    public JSONObject options(){
+    public PaginationBean options(){
         return this.options;
     }
 }

@@ -20,6 +20,7 @@ import org.apache.tapestry5.Link;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.ComponentResources;
+import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.internal.structure.ComponentPageElementImpl;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.annotations.*;
@@ -28,6 +29,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 
 import corner.table.QueryModel;
 import corner.model.PaginationList;
+import corner.model.PaginationBean;
 
 /**
  * 用来分页使用的组件
@@ -40,7 +42,7 @@ import corner.model.PaginationList;
 public class WillPagination {
 
     @Parameter(required=true)
-    private JSONObject options;
+    private PaginationBean options;
 
     @Parameter("5")
     private int range;
@@ -57,29 +59,24 @@ public class WillPagination {
 
     @Inject
     private ComponentResources resources;
+    @Inject
+    private PageRenderLinkSource pageRenderLinkSource;
 
 
     private int page;
-    private int availableRows;
+    private long availableRows;
     private int perPage;
-    @PageActivationContext
-    private int pageNum;
 
     @SetupRender
     void setup(){
-        availableRows = options.getInt("totalRecord");
-        perPage = 10;
-        page = options.getInt("page");
-        if(options.has("perPage")){
-            perPage = options.getInt("perPage");
-        }
-
+        availableRows = options.getTotalRecord();
+        perPage = options.getPerPage();
+        page = options.getPage();
     }
 
     void beginRender(MarkupWriter writer) {
 
-
-		maxPages = ((availableRows - 1) / perPage) + 1;
+		maxPages = (int) (((availableRows - 1) / perPage) + 1);
 
 		if (maxPages < 2)
 			return;
@@ -137,7 +134,10 @@ public class WillPagination {
 
 
 
-        Object[] context = new Object[] { pageIndex };
+
+        options.setPage(pageIndex);
+        Object[] context = new Object[] { options };
+
         Link link = resources.createEventLink(EventConstants.ACTION,
                 context);
 
@@ -149,10 +149,7 @@ public class WillPagination {
 		writer.end();
 
 	}
-    void onAction(int pageNum){
-        this.pageNum = pageNum;
-    }
-    public int pageNum(){
-        return this.pageNum;
+    Link onAction(Object ... pageContext){
+        return pageRenderLinkSource.createPageRenderLinkWithContext(resources.getPageName(),pageContext);
     }
 }
