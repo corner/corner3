@@ -17,8 +17,13 @@ package corner.internal.services;
 
 
 import org.apache.tapestry5.services.Cookies;
+import org.slf4j.Logger;
 
 import corner.services.FlashFacade;
+
+import java.net.URLEncoder;
+import java.net.URLDecoder;
+import java.io.UnsupportedEncodingException;
 
 /**
  * 实现flash消息机制
@@ -28,17 +33,25 @@ import corner.services.FlashFacade;
  */
 public class FlashFacadeImpl implements FlashFacade {
 	private Cookies cookies;
+    private Logger logger;
 
-	public FlashFacadeImpl(Cookies cookies){
+    public FlashFacadeImpl(Cookies cookies, Logger logger){
 		this.cookies = cookies;
+        this.logger = logger;
 	}
 
 	/**
-	 * @see ganshane.services.flash.FlashFacade#get(java.lang.String)
 	 */
 	public String get(String key) {
 		String v = this.cookies.readCookieValue(key);
-		this.cookies.removeCookieValue(key);
+        try {
+            if(v!=null)
+                v=URLDecoder.decode(v,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            logger.warn("cant' support utf-8",e);
+
+        }
+        this.cookies.removeCookieValue(key);
 		return v;
 	}
 
@@ -49,7 +62,11 @@ public class FlashFacadeImpl implements FlashFacade {
      * @param value 对应的消息值
      */
 	public void push(String key, String value) {
-		cookies.writeCookieValue(key, value, 30);
+        try {
+            cookies.writeCookieValue(key, URLEncoder.encode(value,"UTF-8"), 30);
+        } catch (UnsupportedEncodingException e) {
+            cookies.writeCookieValue(key, value, 30);
+        }
 	}
     public void notice(String message) {
         this.push(NOTICE_KEY,message);
