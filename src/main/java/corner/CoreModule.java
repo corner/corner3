@@ -36,7 +36,6 @@ import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.*;
-import org.apache.tapestry5.json.JSONObject;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -70,7 +69,7 @@ import corner.services.security.SecurityModule;
 import corner.services.tree.TreeModule;
 import corner.transform.PageRedirectWorker;
 import corner.model.PaginationList;
-import corner.model.PaginationBean;
+import corner.model.PaginationOptions;
 
 /**
  * 定义了Corner的核心module
@@ -285,10 +284,10 @@ public class CoreModule {
                                              TypeCoercer coercer)
 
     {
-        add(configuration, PaginationList.class, PaginationBean.class,
-                new Coercion<PaginationList, PaginationBean>()
+        add(configuration, PaginationList.class, PaginationOptions.class,
+                new Coercion<PaginationList, PaginationOptions>()
                 {
-                    public PaginationBean coerce(PaginationList input)
+                    public PaginationOptions coerce(PaginationList input)
                     {
                         return input.options();
                     }

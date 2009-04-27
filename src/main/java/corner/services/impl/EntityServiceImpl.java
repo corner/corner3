@@ -29,7 +29,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import corner.services.EntityService;
 import corner.model.PaginationList;
-import corner.model.PaginationBean;
+import corner.model.PaginationOptions;
 
 /**
  * 公用的实体服务类的实现.
@@ -152,7 +152,7 @@ public class EntityServiceImpl  implements EntityService{
 			throws DataAccessException {
 		return template.find(queryString, value);
 	}
-    public PaginationList paginate(String queryString, Object value, PaginationBean options)
+    public PaginationList paginate(String queryString, Object value, PaginationOptions options)
             throws DataAccessException {
         return this.paginate(queryString,new Object[]{value},options);
     }
@@ -175,7 +175,7 @@ public class EntityServiceImpl  implements EntityService{
      * @throws DataAccessException
      * @see org.springframework.orm.hibernate3.HibernateTemplate#find(java.lang.String, java.lang.Object[])
      */
-    public PaginationList paginate(final String queryString, final Object[] values, final PaginationBean options)
+    public PaginationList paginate(final String queryString, final Object[] values, final PaginationOptions options)
             throws DataAccessException {
         if(options==null){
             throw new RuntimeException("must set pagination parameters");
@@ -225,7 +225,7 @@ public class EntityServiceImpl  implements EntityService{
 	public List find(String queryString) throws DataAccessException {
 		return template.find(queryString);
 	}
-    public PaginationList paginate(String queryString, PaginationBean options)
+    public PaginationList paginate(String queryString, PaginationOptions options)
             throws DataAccessException {
         return this.paginate(queryString,new Object[]{},options);
     }

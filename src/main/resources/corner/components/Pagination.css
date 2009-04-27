@@ -1,5 +1,5 @@
 /* ========== pagination ========== */
-.pagination{ margin:10px auto; display:block; width:98%; vertical-align:middle; height:40px; line-height:40px;}
+.pagination{ margin:0; display:block; width:98%; vertical-align:middle; height:20px; line-height:20px;text-align:right;}
 .pagination span,.pagination a{ border:1px solid #ccc; padding:2px 5px;margin:2px 1px;}
 .pagination span{ color:#999;}
 .pagination a:hover{border:1px solid #ccc; padding:2px 5px; background:#B4D548; color:#fff;}

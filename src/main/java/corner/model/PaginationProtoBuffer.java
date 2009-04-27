@@ -258,7 +258,7 @@ public final class PaginationProtoBuffer {
       descriptor;
   static {
     java.lang.String descriptorData =
-      "\n!corner/model/PaginationBean.proto\022\014cor" +
+      "\n!corner/model/PaginationOptions.proto\022\014cor" +
       "ner.model\"[\n\nPagination\022\023\n\013totalRecord\030\001" +
       " \002(\003\022\017\n\004page\030\002 \001(\005:\0011\022\023\n\007perPage\030\003 \001(\005:\002" +
       "10\022\022\n\nparameters\030\004 \001(\tB%\n\014corner.modelB\025" +

@@ -28,7 +28,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import corner.model.PaginationList;
-import corner.model.PaginationBean;
+import corner.model.PaginationOptions;
 
 
 /**
@@ -544,12 +544,12 @@ public interface EntityService {
 	 */
 	public SessionFactory getSessionFactory();
 
-    PaginationList paginate(String queryString, Object value, PaginationBean options)
+    PaginationList paginate(String queryString, Object value, PaginationOptions options)
             throws DataAccessException;
 
-    PaginationList paginate(String queryString, Object[] values, PaginationBean options)
+    PaginationList paginate(String queryString, Object[] values, PaginationOptions options)
                     throws DataAccessException;
 
-    PaginationList paginate(String queryString, PaginationBean options)
+    PaginationList paginate(String queryString, PaginationOptions options)
                             throws DataAccessException;
 }

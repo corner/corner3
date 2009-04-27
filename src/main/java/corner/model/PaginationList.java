@@ -14,13 +14,13 @@ package corner.model;
  */
 public class PaginationList {
     private Object it;
-    private PaginationBean options;
+    private PaginationOptions options;
 
     /**
      * construct pagination list by iterator
      * @param it collection object
      **/
-    public PaginationList(Object it, PaginationBean options){
+    public PaginationList(Object it, PaginationOptions options){
         this.it = it;
         this.options = options;
     }
@@ -28,7 +28,7 @@ public class PaginationList {
     public Object collectionObject() {
         return it;
     }
-    public PaginationBean options(){
+    public PaginationOptions options(){
         return this.options;
     }
 }

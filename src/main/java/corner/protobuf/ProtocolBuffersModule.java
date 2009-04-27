@@ -27,7 +27,7 @@ import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.ioc.services.ClassNameLocator;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.services.ValueEncoderFactory;
-import corner.model.PaginationBean;
+import corner.model.PaginationOptions;
 
 /**
  * 配置<a href="http://code.google.com/p/protobuf/">Google protocol buffer</a>的Value Encoder.
@@ -50,8 +50,8 @@ public class ProtocolBuffersModule {
 		for (String className : protoClasses) {
             addProtobufferCoercer(configuration,contextClassLoader,className);
 		}
-        //add PaginationBean class type coercer
-        addProtobufferCoercer(configuration,contextClassLoader, PaginationBean.class.getName());
+        //add PaginationOptions class type coercer
+        addProtobufferCoercer(configuration,contextClassLoader, PaginationOptions.class.getName());
 	}
     private static void addProtobufferCoercer(MappedConfiguration<Class, ValueEncoderFactory> configuration,
                                        ClassLoader contextClassLoader,String className){

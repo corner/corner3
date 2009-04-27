@@ -20,7 +20,7 @@ import org.apache.tapestry5.json.JSONObject;
  * @version $Revision$
  * @since 0.0.1
  */
-public class PaginationBean implements Serializable, ProtocolBuffer {
+public class PaginationOptions implements Serializable, ProtocolBuffer {
     private static final long serialVersionUID = 1L;
     private final PaginationProtoBuffer.Pagination.Builder builder = PaginationProtoBuffer.Pagination.newBuilder();
 

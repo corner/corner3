@@ -21,15 +21,11 @@ import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.services.PageRenderLinkSource;
-import org.apache.tapestry5.internal.structure.ComponentPageElementImpl;
-import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import corner.table.QueryModel;
-import corner.model.PaginationList;
-import corner.model.PaginationBean;
+import corner.model.PaginationOptions;
 
 /**
  * 用来分页使用的组件
@@ -42,7 +38,7 @@ import corner.model.PaginationBean;
 public class WillPagination {
 
     @Parameter(required=true)
-    private PaginationBean options;
+    private PaginationOptions options;
 
     @Parameter("5")
     private int range;
