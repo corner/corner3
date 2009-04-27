@@ -24,7 +24,7 @@ public final class AreaQueryProtocol {
   private static final com.google.protobuf.Descriptors.FileDescriptor
       descriptor = buildDescriptor();
   private static
-      com.google.protobuf.Descriptors.FileDescriptor
+          com.google.protobuf.Descriptors.FileDescriptor
       buildDescriptor() {
     java.lang.String descriptorData =
       "\n\020orderquery.proto\022\030com.ouriba.eweb.prot" +
@@ -32,10 +32,11 @@ public final class AreaQueryProtocol {
       "\n\005qcode\030\002 \001(\tB-\n\030com.ouriba.eweb.protobu" +
       "fB\021AreaQueryProtocol";
     try {
-      return com.google.protobuf.Descriptors.FileDescriptor
-        .internalBuildGeneratedFileFrom(descriptorData,
-          new com.google.protobuf.Descriptors.FileDescriptor[] {
-          });
+        return null;
+//      return com.google.protobuf.Descriptors.FileDescriptor
+//        .internalBuildGeneratedFileFrom(descriptorData,
+//          new com.google.protobuf.Descriptors.FileDescriptor[] {
+//          });
     } catch (Exception e) {
       throw new RuntimeException(
         "Failed to parse protocol buffer descriptor for " +
