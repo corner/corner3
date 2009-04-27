@@ -58,13 +58,18 @@ public class GenericEditForm<T> extends AbstractEntityForm<T> {
 	}
 
 	Object onPassivate() {
-		return this.getEntity();
+        if(logger.isDebugEnabled()){
+            logger.debug("onPassivate::"+this.getEntity());
+        }
+        return this.id;
 	}
 
 	@Override
 	public T getEntity() {
 		if (!inited) {
 			// 得到对应持久化对象
+            logger.debug("id:["+id+"]");
+            logger.debug("entity class :["+this.getEntityClass()+"]");
 			ValueEncoder<T> encoder = valueEncoderSource.getValueEncoder(this
 					.getEntityClass());
 			/*

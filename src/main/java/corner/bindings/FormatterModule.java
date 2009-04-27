@@ -15,13 +15,14 @@
  */
 package corner.bindings;
 
-import java.text.DecimalFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
+import java.text.*;
+import java.util.Date;
 
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.annotations.InjectService;
+import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.services.BindingFactory;
 
 /**
@@ -42,12 +43,28 @@ public class FormatterModule {
 		binder.bind(FormatterSource.class, FormatterSourceImpl.class);
 		binder.bind(BindingFactory.class,FormatBindingFactory.class).withId("FormatBindingFactory");
 	} 
-	
+
 	// 针对日期的format
 	public static Format buildDateFormat() {
 		return new SimpleDateFormat("yyyy-MM-dd");
 	}
 
+    // 针对日期的format
+    public static Format buildLongDateFormat() {
+        return new Format(){
+            private Format delegateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+            public StringBuffer format(Object o, StringBuffer stringBuffer, FieldPosition fieldPosition) {
+                if(o.getClass().isAssignableFrom(Long.class)){
+                    return delegateFormatter.format(new Date((Long) o),stringBuffer,fieldPosition);
+                }
+                throw new RuntimeException("only format long type date object");
+            }
+
+            public Object parseObject(String s, ParsePosition parsePosition) {
+                return Long.parseLong(s,parsePosition.getIndex());
+            }
+        };
+    }
 	// 针对时间和日期的format
 	public static Format buildDateTimeFormat() {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -62,9 +79,13 @@ public class FormatterModule {
 	public static void contributeFormatterSource(
 			MappedConfiguration<String, Format> configuration,
 			@InjectService("DateFormat")
-			Format dateFormat, @InjectService("DateTimeFormat")
+			Format dateFormat,
+            @InjectService("LongDateFormat")
+            Format longDateFormat,
+            @InjectService("DateTimeFormat")
 			Format dateTimeFormat,@InjectService("CurrencyFormat") Format currencyFormat) {
 		configuration.add(FormatterConstants.DATE, dateFormat);
+        configuration.add(FormatterConstants.LONG_DATE,longDateFormat);
 		configuration.add(FormatterConstants.DATE_TIME, dateTimeFormat);
 		configuration.add(FormatterConstants.CURRENCY, currencyFormat);
 	}

@@ -29,4 +29,6 @@ public final class FormatterConstants {
 	public final static String DATE_TIME="dateTime";
 	/** 日期 **/
 	public final static String DATE="date";
+    /** 针对数据库保存为long类型的格式化 **/
+    public static final String LONG_DATE = "long_date";
 }

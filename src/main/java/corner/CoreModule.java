@@ -16,6 +16,7 @@
 package corner;
 
 import java.util.Map;
+import java.util.List;
 
 import org.apache.tapestry5.hibernate.HibernateTransactionDecorator;
 import org.apache.tapestry5.internal.services.LinkSource;
@@ -26,23 +27,16 @@ import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.ServiceLifecycle;
+import org.apache.tapestry5.ioc.services.CoercionTuple;
+import org.apache.tapestry5.ioc.services.Builtin;
+import org.apache.tapestry5.ioc.services.TypeCoercer;
+import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.services.AliasContribution;
-import org.apache.tapestry5.services.AssetFactory;
-import org.apache.tapestry5.services.BindingFactory;
-import org.apache.tapestry5.services.ComponentClassResolver;
-import org.apache.tapestry5.services.ComponentClassTransformWorker;
-import org.apache.tapestry5.services.ComponentEventResultProcessor;
-import org.apache.tapestry5.services.Context;
-import org.apache.tapestry5.services.ContextProvider;
-import org.apache.tapestry5.services.LibraryMapping;
-import org.apache.tapestry5.services.PersistentFieldStrategy;
-import org.apache.tapestry5.services.Request;
-import org.apache.tapestry5.services.RequestFilter;
-import org.apache.tapestry5.services.RequestGlobals;
+import org.apache.tapestry5.services.*;
+import org.apache.tapestry5.json.JSONObject;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -75,6 +69,7 @@ import corner.services.payment.PaymentModule;
 import corner.services.security.SecurityModule;
 import corner.services.tree.TreeModule;
 import corner.transform.PageRedirectWorker;
+import corner.model.PaginationList;
 
 /**
  * 定义了Corner的核心module
@@ -282,6 +277,37 @@ public class CoreModule {
 				htmlTemplateLocator));
 	}
 
+    //add PaginationList --> List type coercer
+    public static void contributeTypeCoercer(Configuration<CoercionTuple> configuration,
+
+                                             @Builtin final
+                                             TypeCoercer coercer)
+
+    {
+        add(configuration, PaginationList.class, JSONObject.class,
+                new Coercion<PaginationList, JSONObject>()
+                {
+                    public JSONObject coerce(PaginationList input)
+                    {
+                        return input.options();
+                    }
+                });
+        add(configuration, PaginationList.class, List.class,
+                new Coercion<PaginationList, List>()
+                {
+                    public List coerce(PaginationList input)
+                    {
+                        return coercer.coerce(input.collectionObject(),List.class);
+                    }
+                });
+    }
+    private static <S, T> void add(Configuration<CoercionTuple> configuration, Class<S> sourceType, Class<T> targetType,
+                                   Coercion<S, T> coercion)
+    {
+        CoercionTuple<S, T> tuple = new CoercionTuple<S, T>(sourceType, targetType, coercion);
+
+        configuration.add(tuple);
+    }
 
 
 }
