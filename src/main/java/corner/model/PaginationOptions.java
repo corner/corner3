@@ -24,10 +24,6 @@ public class PaginationOptions implements Serializable, ProtocolBuffer {
     private static final long serialVersionUID = 1L;
     private final PaginationProtoBuffer.Pagination.Builder builder = PaginationProtoBuffer.Pagination.newBuilder();
 
-    public PaginationProtoBuffer.Pagination.Builder addRepeatedField(Descriptors.FieldDescriptor field, Object value) {
-        return builder.addRepeatedField(field, value);
-    }
-
     public int getPage() {
         return builder.getPage();
     }
