@@ -15,21 +15,20 @@
  */
 package corner.services.impl;
 
-import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
-
+import corner.model.PaginationList;
+import corner.model.PaginationOptions;
+import corner.services.EntityService;
+import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.hibernate.*;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import corner.services.EntityService;
-import corner.model.PaginationList;
-import corner.model.PaginationOptions;
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 公用的实体服务类的实现.
@@ -40,9 +39,9 @@ import corner.model.PaginationOptions;
 public class EntityServiceImpl  implements EntityService{
 	private final HibernateTemplate template;
 	private final SessionFactory sessionFactory;
+    private PaginatedEntityService paginatedService;
 
-
-	public EntityServiceImpl(final Session session){
+    public EntityServiceImpl(final Session session,final TypeCoercer typeCoercer){
 		this.template = new HibernateTemplate(){
 			/**
 			 * @see org.springframework.orm.hibernate3.HibernateTemplate#execute(org.springframework.orm.hibernate3.HibernateCallback, boolean)
@@ -59,6 +58,7 @@ public class EntityServiceImpl  implements EntityService{
 			}
 		};
 		this.sessionFactory = session.getSessionFactory();
+        this.paginatedService = new PaginatedEntityService(template,typeCoercer);
 	}
 
 
@@ -140,8 +140,19 @@ public class EntityServiceImpl  implements EntityService{
 		template.evict(entity);
 	}
 
+    public long count(Class<?> persistClass, Object conditions) {
+        return paginatedService.count(persistClass, conditions);
+    }
 
-	/**
+    public List find(Class<?> persistClass, Object conditions, String order) {
+        return paginatedService.find(persistClass, conditions, order);
+    }
+
+    public PaginationList paginate(Class<?> persistClass, Object conditions, String order, PaginationOptions options) {
+        return paginatedService.paginate(persistClass, conditions, order, options);
+    }
+
+    /**
 	 * @param queryString
 	 * @param value
 	 * @return
@@ -152,10 +163,6 @@ public class EntityServiceImpl  implements EntityService{
 			throws DataAccessException {
 		return template.find(queryString, value);
 	}
-    public PaginationList paginate(String queryString, Object value, PaginationOptions options)
-            throws DataAccessException {
-        return this.paginate(queryString,new Object[]{value},options);
-    }
 
 	/**
 	 * @param queryString
@@ -168,53 +175,8 @@ public class EntityServiceImpl  implements EntityService{
 			throws DataAccessException {
 		return template.find(queryString, values);
 	}
-    /**
-     * @param queryString
-     * @param values
-     * @return
-     * @throws DataAccessException
-     * @see org.springframework.orm.hibernate3.HibernateTemplate#find(java.lang.String, java.lang.Object[])
-     */
-    public PaginationList paginate(final String queryString, final Object[] values, final PaginationOptions options)
-            throws DataAccessException {
-        if(options==null){
-            throw new RuntimeException("must set pagination parameters");
-        }
 
-        return (PaginationList) template.executeWithNativeSession(new HibernateCallback() {
-            public Object doInHibernate(Session session) throws HibernateException {
-                Query queryObject = session.createQuery(queryString);
-                if (values != null) {
-                    for (int i = 0; i < values.length; i++) {
-                        queryObject.setParameter(i, values[i]);
-                    }
-                }
-                //get perpage
-                int perPage = options.getPerPage();
-                int page = options.getPage();
-                if(page<1){
-                    page =1;
-                }
-                queryObject.setFirstResult((page-1)*perPage);
-                queryObject.setMaxResults(perPage);
-                List list = queryObject.list();
 
-                //count all object
-                String countHql = constructCountHQL(queryString);
-                queryObject = session.createQuery(countHql);
-                if (values != null) {
-                    for (int i = 0; i < values.length; i++) {
-                        queryObject.setParameter(i, values[i]);
-                    }
-                }
-                options.setTotalRecord((Long) queryObject.iterate().next());
-                return  new PaginationList(list,options);
-            }
-        });
-    }
-    String constructCountHQL(String queryString){
-        return queryString.replaceFirst("^(.*)from","select count(*) from");
-    }
 
 	/**
 	 * @param queryString
@@ -225,10 +187,6 @@ public class EntityServiceImpl  implements EntityService{
 	public List find(String queryString) throws DataAccessException {
 		return template.find(queryString);
 	}
-    public PaginationList paginate(String queryString, PaginationOptions options)
-            throws DataAccessException {
-        return this.paginate(queryString,new Object[]{},options);
-    }
 
 
 	/**

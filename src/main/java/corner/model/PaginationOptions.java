@@ -9,6 +9,7 @@ package corner.model;
 import corner.protobuf.ProtocolBuffer;
 
 import java.io.Serializable;
+import java.util.*;
 
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -22,12 +23,14 @@ import org.apache.tapestry5.json.JSONObject;
  */
 public class PaginationOptions implements Serializable, ProtocolBuffer {
     private static final long serialVersionUID = 1L;
+    public List list=new ArrayList();
+
+
     private final PaginationProtoBuffer.Pagination.Builder builder = PaginationProtoBuffer.Pagination.newBuilder();
 
     public int getPage() {
         return builder.getPage();
     }
-
     public JSONObject getParameters() {
         if(builder.getParameters()!=null){
             return new JSONObject(builder.getParameters());

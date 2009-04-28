@@ -29,6 +29,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import corner.model.PaginationList;
 import corner.model.PaginationOptions;
+import corner.model.HQLQueryCallback;
 
 
 /**
@@ -544,12 +545,10 @@ public interface EntityService {
 	 */
 	public SessionFactory getSessionFactory();
 
-    PaginationList paginate(String queryString, Object value, PaginationOptions options)
-            throws DataAccessException;
 
-    PaginationList paginate(String queryString, Object[] values, PaginationOptions options)
-                    throws DataAccessException;
+    long count(Class<?> persistClass, Object conditions);
 
-    PaginationList paginate(String queryString, PaginationOptions options)
-                            throws DataAccessException;
+    List find(Class<?> persistClass, Object conditions, String order);
+
+    PaginationList paginate(Class<?> persistClass, Object conditions, String order, PaginationOptions options);
 }

@@ -21,20 +21,4 @@ import org.easymock.EasyMock;
 public class EntityServiceImplTest extends TapestryTestCase {
     private EntityServiceImpl entityService;
 
-    @Test
-    public void testConstructCountHQL(){
-        Session session = this.newMock(Session.class);
-        EasyMock.expect(session.getSessionFactory()).andReturn(null);
-        replay();
-        
-        entityService = new EntityServiceImpl(session);
-        executeTest("from A","select count(*) from A");
-        executeTest("select * from A","select count(*) from A");
-        executeTest("select id from A where A.x=?","select count(*) from A where A.x=?");
-        verify();
-    }
-    private void executeTest(String hql,String chql){
-        Assert.assertEquals(entityService.constructCountHQL(hql),
-                chql);
-    }
 }
