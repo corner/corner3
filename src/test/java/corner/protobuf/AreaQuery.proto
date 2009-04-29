@@ -1,0 +1,8 @@
+package corner.model;
+
+option java_package = "corner.protobuf";
+option java_outer_classname = "AreaQueryProtocol";
+message AreaQueryBuffer{
+     optional string qname = 1;
+     optional string qcode = 2;
+}
