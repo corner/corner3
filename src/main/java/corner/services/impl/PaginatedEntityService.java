@@ -40,14 +40,32 @@ public class PaginatedEntityService {
         this.typeCoercer = typeCoercer;
     }
 
-    private void validateModel(HQLQueryModel model){
-        if(model==null){
-            throw new RuntimeException("model is null!");
-        }
-        if(model.getPersistClass() == null){
-            throw new RuntimeException("persist class is null");
-        }
-    }
+    /**
+     * 
+     * magic paginate method.
+     * eg:
+     * <code>
+     *  options.setPage(2);
+     *
+     *
+     *  paginate(Member.class,new Object[]{"email=?","asdf@asdf.net"},"userName desc",options)
+
+     *  paginate(Member.class,"email='asdf@asdf.net'","userName desc",options)
+     *
+     *  List conditions = new ArrayList();
+     *  conditions.add("userName=? and password=?");
+     *  conditions.add(userName);
+     *  conditions.add(password);
+     *  paginate(Member.class,conditions,"userName desc",options)
+     * 
+     * </code>
+     * Magic conditions query criteria
+     * @param persistClass persistence class
+     * @param conditions query criteria
+     * @param order order by sql
+     * @param options pagination options.
+     * @return include result and totalRecord.
+     */
     public PaginationList paginate(final Class<?> persistClass,final Object conditions,
                                    final String order,final PaginationOptions options){
         final Iterable con = typeCoercer.coerce(conditions, Iterable.class);
