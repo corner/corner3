@@ -63,7 +63,7 @@ public class DBMigrationInitializer extends AbstractDBMigrationInitializer {
 		TransactionSynchronizationManager.bindResource(sessionFactory, new SessionHolder(session));
 		Transaction tx = null;
 		try{
-			tx = session.beginTransaction();
+//			tx = session.beginTransaction();
 			
 			console.resetColors();
 			//设定console的颜色
@@ -85,9 +85,11 @@ public class DBMigrationInitializer extends AbstractDBMigrationInitializer {
 				logger.info("update database version :["+maxVersion+"]");
 				this.getMigrationService().updateDbMaxVersion(DB_SCRIPT_TYPE_STR,maxVersion);
 			}
-			tx.commit();
+//			tx.commit();
+            sessionManager.commit();
 		} catch (Exception e) {
-			tx.rollback();
+            sessionManager.abort();
+//			tx.rollback();
 			throw new RuntimeException(e);
 		}finally{
 			console.resetColors();
