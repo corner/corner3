@@ -23,19 +23,11 @@ import org.apache.tapestry5.json.JSONObject;
  */
 public class PaginationOptions implements Serializable, ProtocolBuffer {
     private static final long serialVersionUID = 1L;
-    public List list=new ArrayList();
-
-
+    private static JSONObject parameters;
     private final PaginationProtoBuffer.Pagination.Builder builder = PaginationProtoBuffer.Pagination.newBuilder();
 
     public int getPage() {
         return builder.getPage();
-    }
-    public JSONObject getParameters() {
-        if(builder.getParameters()!=null){
-            return new JSONObject(builder.getParameters());
-        }
-        return null;
     }
 
     public int getPerPage() {
@@ -50,9 +42,6 @@ public class PaginationOptions implements Serializable, ProtocolBuffer {
         builder.setPage(value);
     }
 
-    public void setParameters(JSONObject value) {
-        builder.setParameters(value.toString());
-    }
 
     public void setPerPage(int value) {
         builder.setPerPage(value);
@@ -63,9 +52,43 @@ public class PaginationOptions implements Serializable, ProtocolBuffer {
     }
 
     /**
+     * add parameter,delegate to {@link JSONObject#put(String, Object)}
+     * @param key parameter name
+     * @param value parameter value
+     * @see JSONObject#put(String, Object)
+     */
+    public void addParameter(String key,Object value){
+        if(this.parameters==null){
+            parameters = new JSONObject();
+        }
+        parameters.put(key,value);
+    }
+
+    /**
+     * get parameters
+     * @return parameter ,return null if no parameters set
+     */
+    public JSONObject getParameters(){
+        return this.parameters;
+    }
+
+    /**
      * @see .ProtocolBuffer#getData()
      */
     public byte[] getData() {
+        //clear parameters
+        this.builder.clearParameters();
+        if(this.parameters!=null){
+            Iterator<String> it = parameters.keys().iterator();
+            while(it.hasNext()){
+                String key = it.next();
+                String value = parameters.getString(key);
+                PaginationProtoBuffer.Parameter.Builder pBuilder = PaginationProtoBuffer.Parameter.newBuilder();
+                pBuilder.setKey(key);
+                pBuilder.setValue(key);
+                builder.addParameters(pBuilder);
+            }
+        }
         return this.builder.clone().build().toByteArray();
     }
 
@@ -75,6 +98,11 @@ public class PaginationOptions implements Serializable, ProtocolBuffer {
     public void mergeData(byte[] byteData) {
         try {
             this.builder.mergeFrom(byteData);
+            Iterator<PaginationProtoBuffer.Parameter> it = this.builder.getParametersList().iterator();
+            while(it.hasNext()){
+                PaginationProtoBuffer.Parameter parameter = it.next();
+                this.addParameter(parameter.getKey(),parameter.getValue());
+            }
         } catch (InvalidProtocolBufferException e) {
             throw new RuntimeException(e);
         }

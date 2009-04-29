@@ -50,11 +50,16 @@ public final class PaginationProtoBuffer {
     public boolean hasPerPage() { return hasPerPage; }
     public int getPerPage() { return perPage_; }
     
-    // optional string parameters = 4;
-    private boolean hasParameters;
-    private java.lang.String parameters_ = "";
-    public boolean hasParameters() { return hasParameters; }
-    public java.lang.String getParameters() { return parameters_; }
+    // repeated .corner.model.Parameter parameters = 4;
+    private java.util.List<corner.model.PaginationProtoBuffer.Parameter> parameters_ =
+      java.util.Collections.emptyList();
+    public java.util.List<corner.model.PaginationProtoBuffer.Parameter> getParametersList() {
+      return parameters_;
+    }
+    public int getParametersCount() { return parameters_.size(); }
+    public corner.model.PaginationProtoBuffer.Parameter getParameters(int index) {
+      return parameters_.get(index);
+    }
     
     public static corner.model.PaginationProtoBuffer.Pagination parseFrom(
         com.google.protobuf.ByteString data)
@@ -160,6 +165,10 @@ public final class PaginationProtoBuffer {
       }
       
       public corner.model.PaginationProtoBuffer.Pagination buildPartial() {
+        if (result.parameters_ != java.util.Collections.EMPTY_LIST) {
+          result.parameters_ =
+            java.util.Collections.unmodifiableList(result.parameters_);
+        }
         corner.model.PaginationProtoBuffer.Pagination returnMe = result;
         result = null;
         return returnMe;
@@ -220,21 +229,237 @@ public final class PaginationProtoBuffer {
         return this;
       }
       
-      // optional string parameters = 4;
-      public boolean hasParameters() {
-        return result.hasParameters();
+      // repeated .corner.model.Parameter parameters = 4;
+      public java.util.List<corner.model.PaginationProtoBuffer.Parameter> getParametersList() {
+        return java.util.Collections.unmodifiableList(result.parameters_);
       }
-      public java.lang.String getParameters() {
-        return result.getParameters();
+      public int getParametersCount() {
+        return result.getParametersCount();
       }
-      public Builder setParameters(java.lang.String value) {
-        result.hasParameters = true;
-        result.parameters_ = value;
+      public corner.model.PaginationProtoBuffer.Parameter getParameters(int index) {
+        return result.getParameters(index);
+      }
+      public Builder setParameters(int index, corner.model.PaginationProtoBuffer.Parameter value) {
+        result.parameters_.set(index, value);
+        return this;
+      }
+      public Builder setParameters(int index, corner.model.PaginationProtoBuffer.Parameter.Builder builderForValue) {
+        result.parameters_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addParameters(corner.model.PaginationProtoBuffer.Parameter value) {
+        if (result.parameters_.isEmpty()) {
+          result.parameters_ = new java.util.ArrayList<corner.model.PaginationProtoBuffer.Parameter>();
+        }
+        result.parameters_.add(value);
+        return this;
+      }
+      public Builder addParameters(corner.model.PaginationProtoBuffer.Parameter.Builder builderForValue) {
+        if (result.parameters_.isEmpty()) {
+          result.parameters_ = new java.util.ArrayList<corner.model.PaginationProtoBuffer.Parameter>();
+        }
+        result.parameters_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllParameters(
+          java.lang.Iterable<? extends corner.model.PaginationProtoBuffer.Parameter> values) {
+        if (result.parameters_.isEmpty()) {
+          result.parameters_ = new java.util.ArrayList<corner.model.PaginationProtoBuffer.Parameter>();
+        }
+        super.addAll(values, result.parameters_);
         return this;
       }
       public Builder clearParameters() {
-        result.hasParameters = false;
-        result.parameters_ = "";
+        result.parameters_ = java.util.Collections.emptyList();
+        return this;
+      }
+    }
+    
+    static {
+      corner.model.PaginationProtoBuffer.getDescriptor();
+    }
+  }
+  
+  public static final class Parameter extends
+      com.google.protobuf.GeneratedMessage {
+    // Use Parameter.newBuilder() to construct.
+    private Parameter() {}
+    
+    private static final Parameter defaultInstance = new Parameter();
+    public static Parameter getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Parameter getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return corner.model.PaginationProtoBuffer.internal_static_corner_model_Parameter_descriptor;
+    }
+    
+    @Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return corner.model.PaginationProtoBuffer.internal_static_corner_model_Parameter_fieldAccessorTable;
+    }
+    
+    // required string key = 1;
+    private boolean hasKey;
+    private java.lang.String key_ = "";
+    public boolean hasKey() { return hasKey; }
+    public java.lang.String getKey() { return key_; }
+    
+    // required string value = 2;
+    private boolean hasValue;
+    private java.lang.String value_ = "";
+    public boolean hasValue() { return hasValue; }
+    public java.lang.String getValue() { return value_; }
+    
+    public static corner.model.PaginationProtoBuffer.Parameter parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static corner.model.PaginationProtoBuffer.Parameter parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static corner.model.PaginationProtoBuffer.Parameter parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static corner.model.PaginationProtoBuffer.Parameter parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static corner.model.PaginationProtoBuffer.Parameter parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static corner.model.PaginationProtoBuffer.Parameter parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static corner.model.PaginationProtoBuffer.Parameter parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static corner.model.PaginationProtoBuffer.Parameter parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return new Builder(); }
+    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder(corner.model.PaginationProtoBuffer.Parameter prototype) {
+      return new Builder().mergeFrom(prototype);
+    }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      // Construct using corner.model.PaginationProtoBuffer.Parameter.newBuilder()
+      private Builder() {}
+      
+      corner.model.PaginationProtoBuffer.Parameter result = new corner.model.PaginationProtoBuffer.Parameter();
+      
+      @Override
+      protected corner.model.PaginationProtoBuffer.Parameter internalGetResult() {
+        return result;
+      }
+      
+      @Override
+      public Builder clear() {
+        result = new corner.model.PaginationProtoBuffer.Parameter();
+        return this;
+      }
+      
+      @Override
+      public Builder clone() {
+        return new Builder().mergeFrom(result);
+      }
+      
+      @Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return corner.model.PaginationProtoBuffer.Parameter.getDescriptor();
+      }
+      
+      public corner.model.PaginationProtoBuffer.Parameter getDefaultInstanceForType() {
+        return corner.model.PaginationProtoBuffer.Parameter.getDefaultInstance();
+      }
+      
+      public corner.model.PaginationProtoBuffer.Parameter build() {
+        if (!isInitialized()) {
+          throw new com.google.protobuf.UninitializedMessageException(
+            result);
+        }
+        return buildPartial();
+      }
+      
+      private corner.model.PaginationProtoBuffer.Parameter buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw new com.google.protobuf.UninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public corner.model.PaginationProtoBuffer.Parameter buildPartial() {
+        corner.model.PaginationProtoBuffer.Parameter returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      
+      // required string key = 1;
+      public boolean hasKey() {
+        return result.hasKey();
+      }
+      public java.lang.String getKey() {
+        return result.getKey();
+      }
+      public Builder setKey(java.lang.String value) {
+        result.hasKey = true;
+        result.key_ = value;
+        return this;
+      }
+      public Builder clearKey() {
+        result.hasKey = false;
+        result.key_ = "";
+        return this;
+      }
+      
+      // required string value = 2;
+      public boolean hasValue() {
+        return result.hasValue();
+      }
+      public java.lang.String getValue() {
+        return result.getValue();
+      }
+      public Builder setValue(java.lang.String value) {
+        result.hasValue = true;
+        result.value_ = value;
+        return this;
+      }
+      public Builder clearValue() {
+        result.hasValue = false;
+        result.value_ = "";
         return this;
       }
     }
@@ -249,6 +474,11 @@ public final class PaginationProtoBuffer {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_corner_model_Pagination_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_corner_model_Parameter_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_corner_model_Parameter_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -259,10 +489,12 @@ public final class PaginationProtoBuffer {
   static {
     java.lang.String descriptorData =
       "\n!corner/model/PaginationBean.proto\022\014cor" +
-      "ner.model\"[\n\nPagination\022\023\n\013totalRecord\030\001" +
+      "ner.model\"t\n\nPagination\022\023\n\013totalRecord\030\001" +
       " \002(\003\022\017\n\004page\030\002 \001(\005:\0011\022\023\n\007perPage\030\003 \001(\005:\002" +
-      "10\022\022\n\nparameters\030\004 \001(\tB%\n\014corner.modelB\025" +
-      "PaginationProtoBuffer";
+      "10\022+\n\nparameters\030\004 \003(\0132\027.corner.model.Pa" +
+      "rameter\"\'\n\tParameter\022\013\n\003key\030\001 \002(\t\022\r\n\005val" +
+      "ue\030\002 \002(\tB%\n\014corner.modelB\025PaginationProt" +
+      "oBuffer";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
@@ -276,6 +508,14 @@ public final class PaginationProtoBuffer {
               new java.lang.String[] { "TotalRecord", "Page", "PerPage", "Parameters", },
               corner.model.PaginationProtoBuffer.Pagination.class,
               corner.model.PaginationProtoBuffer.Pagination.Builder.class);
+          internal_static_corner_model_Parameter_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_corner_model_Parameter_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_corner_model_Parameter_descriptor,
+              new java.lang.String[] { "Key", "Value", },
+              corner.model.PaginationProtoBuffer.Parameter.class,
+              corner.model.PaginationProtoBuffer.Parameter.Builder.class);
           return null;
         }
       };
