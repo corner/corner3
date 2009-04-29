@@ -150,15 +150,14 @@ public class CoreModule {
 
 	}
 
-	/**
-	 * Contributes the "remote" scope.
-	 */
-	public void contributeServiceLifecycleSource(
-			MappedConfiguration<String, ServiceLifecycle> configuration,
-			ObjectLocator locator) {
-		configuration.add(CornerConstants.REMOTE_SCOPE, locator
-				.autobuild(RemoteCallServiceLifecycle.class));
-	}
+//	/**
+//	 * Contributes the "remote" scope.
+//	 */
+//	public void contributeServiceLifecycleSource(
+//			MappedConfiguration<String, ServiceLifecycle> configuration
+//			) {
+//		configuration.addInstance(CornerConstants.REMOTE_SCOPE,RemoteCallServiceLifecycle.class);
+//	}
 
 	/**
 	 * 对一些基础配置进行了初步的设置

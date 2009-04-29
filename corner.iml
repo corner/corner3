@@ -12,9 +12,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-core:5.1.0.3" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-ioc:5.1.0.3" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry5-annotations:5.1.0.3" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-core:5.1.0.4" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-ioc:5.1.0.4" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry5-annotations:5.1.0.4" level="project" />
     <orderEntry type="library" exported="" name="Maven: javassist:javassist:3.9.0.GA" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.slf4j:slf4j-api:1.5.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: log4j:log4j:1.2.14" level="project" />
@@ -24,8 +24,8 @@
     <orderEntry type="library" exported="" name="Maven: org.codehaus.woodstox:woodstox-core-asl:4.0.3" level="project" />
     <orderEntry type="library" exported="" name="Maven: stax:stax-api:1.0.1" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.codehaus.woodstox:stax2-api:3.0.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-hibernate:5.1.0.3" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-hibernate-core:5.1.0.3" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-hibernate:5.1.0.4" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-hibernate-core:5.1.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:3.3.1.GA" level="project" />
     <orderEntry type="library" name="Maven: antlr:antlr:2.7.6" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.1" level="project" />
@@ -51,7 +51,7 @@
     <orderEntry type="library" exported="" name="Maven: com.google.protobuf:protobuf-java:2.0.3" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.jhlabs:filters:2.0.235" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.apache.mahout.hadoop:hadoop-core:0.19.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-upload:5.1.0.3" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.tapestry:tapestry-upload:5.1.0.4" level="project" />
     <orderEntry type="library" exported="" name="Maven: commons-fileupload:commons-fileupload:1.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: commons-io:commons-io:1.3" level="project" />
   </component>
