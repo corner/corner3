@@ -31,10 +31,7 @@ import org.apache.tapestry5.ioc.services.CoercionTuple;
 import org.apache.tapestry5.ioc.services.Builtin;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.ioc.services.Coercion;
-import org.apache.tapestry5.ioc.annotations.Marker;
-import org.apache.tapestry5.ioc.annotations.Match;
-import org.apache.tapestry5.ioc.annotations.SubModule;
-import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.ioc.annotations.*;
 import org.apache.tapestry5.services.*;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -96,6 +93,7 @@ public class CoreModule {
 		binder.bind(ServiceLocatorDelegate.class,
 				ServiceLocatorDelegateImpl.class);
 		binder.bind(EntityService.class, EntityServiceImpl.class);
+        binder.bind(ServiceLifecycle.class,RemoteCallServiceLifecycle.class).withId("RemoteServiceLifeCycle");
 	}
 
 	/**
@@ -150,14 +148,16 @@ public class CoreModule {
 
 	}
 
-//	/**
-//	 * Contributes the "remote" scope.
-//	 */
-//	public void contributeServiceLifecycleSource(
-//			MappedConfiguration<String, ServiceLifecycle> configuration
-//			) {
-//		configuration.addInstance(CornerConstants.REMOTE_SCOPE,RemoteCallServiceLifecycle.class);
-//	}
+	/**
+	 * Contributes the "remote" scope.
+	 */
+	public void contributeServiceLifecycleSource(
+			MappedConfiguration<String, ServiceLifecycle> configuration,
+            @Local
+            ServiceLifecycle serviceLifecycle
+			) {
+		configuration.add(CornerConstants.REMOTE_SCOPE,serviceLifecycle);
+	}
 
 	/**
 	 * 对一些基础配置进行了初步的设置
