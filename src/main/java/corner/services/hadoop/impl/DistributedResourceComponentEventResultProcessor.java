@@ -21,7 +21,6 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
-
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.services.ComponentEventResultProcessor;
 import org.apache.tapestry5.services.Request;

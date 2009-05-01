@@ -24,8 +24,6 @@ import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.junit.Test;
 
-import corner.services.impl.PageTemplateLocatorWithHtml;
-
 
 public class PageTemplateLocatorWithHtmlTest extends TapestryTestCase {
 	@Test

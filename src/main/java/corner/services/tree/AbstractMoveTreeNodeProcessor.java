@@ -18,7 +18,6 @@ package corner.services.tree;
 import java.sql.SQLException;
 import java.util.List;
 
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

@@ -17,7 +17,6 @@ package corner.components;
 
 import java.util.Iterator;
 
-
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;

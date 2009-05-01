@@ -18,8 +18,6 @@ package corner.utils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import corner.utils.NumberUtils;
-
 /**
  * @author user
  * @version $Revision$

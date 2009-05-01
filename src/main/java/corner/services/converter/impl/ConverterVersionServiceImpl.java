@@ -17,7 +17,6 @@ package corner.services.converter.impl;
 
 import java.util.Map;
 
-
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
 
 import corner.services.converter.ConverterVersion;

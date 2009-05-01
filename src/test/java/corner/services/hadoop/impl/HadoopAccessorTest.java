@@ -7,13 +7,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import corner.services.hadoop.DistributedResourceAccessor;
 import corner.services.hadoop.FileDesc;
-import corner.services.hadoop.impl.HadoopAccessorImpl;
 
 public class HadoopAccessorTest {
 

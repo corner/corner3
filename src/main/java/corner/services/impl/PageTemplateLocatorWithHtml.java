@@ -19,7 +19,6 @@ import static java.lang.String.format;
 
 import java.util.Locale;
 
-
 import org.apache.tapestry5.internal.InternalConstants;
 import org.apache.tapestry5.internal.services.PageTemplateLocator;
 import org.apache.tapestry5.ioc.Resource;

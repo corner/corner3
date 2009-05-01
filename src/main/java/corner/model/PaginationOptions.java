@@ -6,14 +6,14 @@
  */
 package corner.model;
 
-import corner.protobuf.ProtocolBuffer;
-
 import java.io.Serializable;
-import java.util.*;
+import java.util.Iterator;
 
-import com.google.protobuf.Descriptors;
-import com.google.protobuf.InvalidProtocolBufferException;
 import org.apache.tapestry5.json.JSONObject;
+
+import com.google.protobuf.InvalidProtocolBufferException;
+
+import corner.protobuf.ProtocolBuffer;
 
 /**
  * wrapper for pagination proto buffer
@@ -23,7 +23,7 @@ import org.apache.tapestry5.json.JSONObject;
  */
 public class PaginationOptions implements Serializable, ProtocolBuffer {
     private static final long serialVersionUID = 1L;
-    private static JSONObject parameters;
+    private JSONObject parameters;
     private final PaginationProtoBuffer.Pagination.Builder builder = PaginationProtoBuffer.Pagination.newBuilder();
 
     public int getPage() {
@@ -85,7 +85,7 @@ public class PaginationOptions implements Serializable, ProtocolBuffer {
                 String value = parameters.getString(key);
                 PaginationProtoBuffer.Parameter.Builder pBuilder = PaginationProtoBuffer.Parameter.newBuilder();
                 pBuilder.setKey(key);
-                pBuilder.setValue(key);
+                pBuilder.setValue(value);
                 builder.addParameters(pBuilder);
             }
         }

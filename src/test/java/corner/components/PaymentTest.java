@@ -17,14 +17,12 @@ package corner.components;
 
 import java.io.IOException;
 
-
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.testng.annotations.Test;
 
-import corner.components.Payment;
 import corner.services.payment.PaymentProcessor;
 import corner.services.payment.PaymentServiceSource;
 import corner.services.payment.ViewHelper;

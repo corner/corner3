@@ -21,10 +21,9 @@ import org.apache.tapestry5.services.ApplicationInitializer;
 import org.apache.tapestry5.services.Context;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.slf4j.Logger;
 import org.springframework.orm.hibernate3.SessionHolder;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-import org.slf4j.Logger;
 
 import corner.services.migration.MigrationService;
 import corner.services.migration.impl.console.ConsoleBackgroundColor;
@@ -61,7 +60,7 @@ public class DBMigrationInitializer extends AbstractDBMigrationInitializer {
 		Session session =  sessionManager.getSession();
 		SessionFactory sessionFactory = session.getSessionFactory();
 		TransactionSynchronizationManager.bindResource(sessionFactory, new SessionHolder(session));
-		Transaction tx = null;
+//		Transaction tx = null;
 		try{
 //			tx = session.beginTransaction();
 			

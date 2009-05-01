@@ -20,7 +20,6 @@ import java.net.URL;
 
 import javax.servlet.http.HttpServletResponse;
 
-
 import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;

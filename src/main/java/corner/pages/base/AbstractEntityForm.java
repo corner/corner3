@@ -16,9 +16,9 @@
 package corner.pages.base;
 
 
+import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.OnEvent;
-import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.ioc.annotations.Inject;

@@ -21,7 +21,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-
 import org.hibernate.HibernateException;
 import org.hibernate.type.Type;
 import org.hibernate.usertype.UserType;

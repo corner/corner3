@@ -17,7 +17,6 @@ package corner.services.hadoop;
 
 import java.util.Map;
 
-
 import org.apache.tapestry5.annotations.Service;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;

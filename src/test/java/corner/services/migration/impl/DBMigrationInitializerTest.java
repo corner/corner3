@@ -20,7 +20,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.hibernate.HibernateSessionSource;
 import org.apache.tapestry5.services.ApplicationInitializer;
@@ -38,9 +37,6 @@ import org.testng.annotations.Test;
 
 import corner.integration.app1.entities.TestA;
 import corner.services.migration.MigrationService;
-import corner.services.migration.impl.DBMigrationInitializer;
-import corner.services.migration.impl.MigrationServiceImpl;
-import corner.services.migration.impl.SchemaInfo;
 
 public class DBMigrationInitializerTest extends TapestryTestCase{
 	private AnnotationConfiguration cfg;

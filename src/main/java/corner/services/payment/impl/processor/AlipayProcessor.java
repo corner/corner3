@@ -28,7 +28,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.ioc.annotations.Inject;

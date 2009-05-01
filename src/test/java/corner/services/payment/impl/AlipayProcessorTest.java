@@ -21,7 +21,6 @@ import static org.testng.Assert.assertTrue;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import org.testng.annotations.Test;
 
 import corner.services.payment.impl.processor.AlipayProcessor;

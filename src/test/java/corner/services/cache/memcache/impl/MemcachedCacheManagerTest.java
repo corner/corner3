@@ -15,22 +15,20 @@
  */
 package corner.services.cache.memcache.impl;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.persistence.Column;
 
-
 import org.apache.tapestry5.json.JSONObject;
 import org.hibernate.annotations.Type;
 import org.testng.annotations.Test;
 
 import corner.services.cache.Cache;
-import corner.services.cache.memcache.impl.ErrorHandlerImpl;
-import corner.services.cache.memcache.impl.MemcacheConfig;
-import corner.services.cache.memcache.impl.MemcachedCacheManager;
 import corner.services.config.impl.JAXBUtil;
 
 

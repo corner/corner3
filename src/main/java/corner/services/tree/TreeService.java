@@ -17,7 +17,6 @@ package corner.services.tree;
 
 import java.util.List;
 
-
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 
 import corner.entities.base.TreeAdapter;

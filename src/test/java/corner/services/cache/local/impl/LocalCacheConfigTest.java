@@ -21,11 +21,8 @@ import java.io.Writer;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import org.testng.annotations.Test;
 
-import corner.services.cache.local.impl.LocalCacheConfig;
-import corner.services.cache.local.impl.LocalCacheItemConfig;
 import corner.services.config.impl.JAXBUtil;
 
 /**

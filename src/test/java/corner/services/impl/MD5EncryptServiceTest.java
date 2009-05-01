@@ -19,8 +19,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import corner.services.impl.MD5EncryptService;
-
 public class MD5EncryptServiceTest {
 
 	@Test

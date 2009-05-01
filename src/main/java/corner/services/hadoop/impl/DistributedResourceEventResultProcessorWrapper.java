@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import org.apache.tapestry5.services.ComponentEventResultProcessor;
 import org.slf4j.Logger;
 

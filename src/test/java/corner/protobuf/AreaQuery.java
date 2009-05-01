@@ -17,10 +17,8 @@ package corner.protobuf;
 
 import java.io.Serializable;
 
-
 import com.google.protobuf.InvalidProtocolBufferException;
 
-import corner.protobuf.ProtocolBuffer;
 import corner.protobuf.AreaQueryProtocol.AreaQueryBuffer;
 import corner.protobuf.AreaQueryProtocol.AreaQueryBuffer.Builder;
 

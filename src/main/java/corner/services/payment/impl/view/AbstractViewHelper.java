@@ -17,7 +17,6 @@ package corner.services.payment.impl.view;
 
 import java.util.Iterator;
 
-
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.json.JSONObject;
 

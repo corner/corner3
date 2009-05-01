@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.dialect.Dialect;

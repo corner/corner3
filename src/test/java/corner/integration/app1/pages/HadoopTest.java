@@ -3,7 +3,6 @@ package corner.integration.app1.pages;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Response;
 

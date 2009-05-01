@@ -21,7 +21,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
-
 import org.apache.tapestry5.ioc.ObjectCreator;
 import org.apache.tapestry5.ioc.ServiceLifecycle;
 import org.apache.tapestry5.ioc.ServiceResources;

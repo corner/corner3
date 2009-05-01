@@ -20,7 +20,6 @@ import junit.framework.TestCase;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.junit.Test;
 
-import corner.protobuf.ProtocolBuffer;
 import corner.protobuf.ProtocolBuffersModule.Object2ProtoStringCoercion;
 import corner.protobuf.ProtocolBuffersModule.ProtoString2ObjectCoercion;
 

@@ -17,7 +17,6 @@ package corner.services.hadoop.impl;
 
 import java.util.regex.Pattern;
 
-
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 

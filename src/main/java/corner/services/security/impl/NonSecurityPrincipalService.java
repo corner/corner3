@@ -6,9 +6,9 @@
  */
 package corner.services.security.impl;
 
-import corner.services.security.SecurityPrincipalService;
-
 import java.security.Principal;
+
+import corner.services.security.SecurityPrincipalService;
 
 /**
  * @author <a href="jun.tsai@fepss.com">Jun Tsai</a>

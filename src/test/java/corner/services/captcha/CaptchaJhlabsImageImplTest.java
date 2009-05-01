@@ -19,9 +19,6 @@ import java.io.FileOutputStream;
 
 import org.junit.Test;
 
-import corner.services.captcha.CaptchaImage;
-import corner.services.captcha.CaptchaJhlabsImageImpl;
-
 
 public class CaptchaJhlabsImageImplTest {
 

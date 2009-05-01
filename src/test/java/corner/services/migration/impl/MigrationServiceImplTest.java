@@ -21,7 +21,6 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import org.apache.tapestry5.hibernate.HibernateSessionSource;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.test.TapestryTestCase;
@@ -41,8 +40,6 @@ import corner.services.migration.ConnectionAdapter;
 import corner.services.migration.ConnectionAdapterSource;
 import corner.services.migration.MigrationModule;
 import corner.services.migration.MigrationService;
-import corner.services.migration.impl.ConnectionAdapterSourceImpl;
-import corner.services.migration.impl.MigrationServiceImpl;
 
 public class MigrationServiceImplTest extends TapestryTestCase{
 	private AnnotationConfiguration cfg;

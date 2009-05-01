@@ -6,8 +6,6 @@
  */
 package corner.model;
 
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * hibernate query model

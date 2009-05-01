@@ -20,8 +20,6 @@ import java.text.Format;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import corner.bindings.FormatterModule;
-
 /**
  * 
  * @author Jun Tsai

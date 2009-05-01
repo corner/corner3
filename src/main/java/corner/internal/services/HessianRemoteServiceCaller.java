@@ -17,7 +17,6 @@ package corner.internal.services;
 
 import java.net.MalformedURLException;
 
-
 import org.apache.tapestry5.ioc.ObjectCreator;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;

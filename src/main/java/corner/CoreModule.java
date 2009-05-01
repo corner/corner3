@@ -15,8 +15,8 @@
  */
 package corner;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.tapestry5.hibernate.HibernateTransactionDecorator;
 import org.apache.tapestry5.internal.services.LinkSource;
@@ -27,12 +27,28 @@ import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.ServiceLifecycle;
-import org.apache.tapestry5.ioc.services.CoercionTuple;
+import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Marker;
+import org.apache.tapestry5.ioc.annotations.Match;
+import org.apache.tapestry5.ioc.annotations.SubModule;
+import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.Builtin;
-import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.ioc.services.Coercion;
-import org.apache.tapestry5.ioc.annotations.*;
-import org.apache.tapestry5.services.*;
+import org.apache.tapestry5.ioc.services.CoercionTuple;
+import org.apache.tapestry5.ioc.services.TypeCoercer;
+import org.apache.tapestry5.services.AliasContribution;
+import org.apache.tapestry5.services.AssetFactory;
+import org.apache.tapestry5.services.BindingFactory;
+import org.apache.tapestry5.services.ComponentClassResolver;
+import org.apache.tapestry5.services.ComponentClassTransformWorker;
+import org.apache.tapestry5.services.ComponentEventResultProcessor;
+import org.apache.tapestry5.services.Context;
+import org.apache.tapestry5.services.ContextProvider;
+import org.apache.tapestry5.services.LibraryMapping;
+import org.apache.tapestry5.services.PersistentFieldStrategy;
+import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.services.RequestFilter;
+import org.apache.tapestry5.services.RequestGlobals;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -45,6 +61,8 @@ import corner.internal.services.RemoteCallServiceLifecycle;
 import corner.internal.services.RemoteResponseResultProcessor;
 import corner.internal.services.ServiceLocatorDelegateImpl;
 import corner.livevalidator.ValidationModule;
+import corner.model.PaginationList;
+import corner.model.PaginationOptions;
 import corner.protobuf.ProtocolBuffersModule;
 import corner.services.EntityService;
 import corner.services.FlashFacade;
@@ -65,8 +83,6 @@ import corner.services.payment.PaymentModule;
 import corner.services.security.SecurityModule;
 import corner.services.tree.TreeModule;
 import corner.transform.PageRedirectWorker;
-import corner.model.PaginationList;
-import corner.model.PaginationOptions;
 
 /**
  * 定义了Corner的核心module

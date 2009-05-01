@@ -30,7 +30,6 @@ import org.testng.annotations.Test;
 import corner.services.http.CacheHeader;
 import corner.services.http.CacheHeaderService;
 import corner.services.http.CacheHeaderType;
-import corner.services.http.impl.CacheHeaderWorker;
 
 /**
  * @author dong

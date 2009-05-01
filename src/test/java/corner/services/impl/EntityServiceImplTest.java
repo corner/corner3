@@ -6,11 +6,7 @@
  */
 package corner.services.impl;
 
-import org.testng.annotations.Test;
-import org.testng.Assert;
 import org.apache.tapestry5.test.TapestryTestCase;
-import org.hibernate.Session;
-import org.easymock.EasyMock;
 
 /**
  * test entity service

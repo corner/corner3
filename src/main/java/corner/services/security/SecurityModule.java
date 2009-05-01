@@ -16,21 +16,22 @@
 package corner.services.security;
 
 
-import corner.services.security.impl.NonSecurityPrincipalService;
-import corner.services.security.impl.SecurityCheckerImpl;
-import corner.services.security.impl.SecurityContextFilter;
-import corner.services.security.impl.SecurityWorker;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.LinkSource;
+import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.ComponentClassTransformWorker;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestGlobals;
+
+import corner.services.security.impl.NonSecurityPrincipalService;
+import corner.services.security.impl.SecurityCheckerImpl;
+import corner.services.security.impl.SecurityContextFilter;
+import corner.services.security.impl.SecurityWorker;
 
 /**
  * 定义安全的module

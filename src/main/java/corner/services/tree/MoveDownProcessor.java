@@ -17,7 +17,6 @@ package corner.services.tree;
 
 import java.util.List;
 
-
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;

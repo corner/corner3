@@ -22,7 +22,6 @@ import java.io.OutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import org.apache.tapestry5.services.Response;
 
 import com.caucho.hessian.io.AbstractHessianOutput;

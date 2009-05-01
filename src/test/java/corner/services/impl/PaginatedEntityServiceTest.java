@@ -6,8 +6,8 @@
  */
 package corner.services.impl;
 
-import org.testng.annotations.Test;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * @author <a href="jun.tsai@fepss.com">Jun Tsai</a>

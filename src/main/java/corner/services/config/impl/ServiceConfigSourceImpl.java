@@ -13,7 +13,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Map;
 
-
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
 import org.apache.tapestry5.ioc.internal.util.Defense;

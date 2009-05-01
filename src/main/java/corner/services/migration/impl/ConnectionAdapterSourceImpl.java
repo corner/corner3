@@ -17,7 +17,6 @@ package corner.services.migration.impl;
 
 import java.util.Map;
 
-
 import org.apache.tapestry5.ioc.util.StrategyRegistry;
 import org.hibernate.dialect.Dialect;
 

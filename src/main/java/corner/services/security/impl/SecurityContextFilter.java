@@ -19,7 +19,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestGlobals;

@@ -15,11 +15,9 @@
  */
 package corner.services.asset;
 
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
-import corner.services.asset.StaticAssetUrlDomainSequenceHash;
-import corner.services.asset.StaticAssetUrlFactoryDomainImpl;
-import static org.testng.Assert.*;
+import org.testng.annotations.Test;
 
 /**
  * @author dong

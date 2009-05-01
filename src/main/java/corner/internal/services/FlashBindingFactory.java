@@ -18,7 +18,6 @@ package corner.internal.services;
 
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.ComponentResources;
-import org.apache.tapestry5.internal.bindings.LiteralBinding;
 import org.apache.tapestry5.ioc.Location;
 import org.apache.tapestry5.services.BindingFactory;
 

@@ -19,7 +19,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 import org.apache.tapestry5.services.RequestGlobals;
 
 import corner.services.security.InvlidateRoleException;

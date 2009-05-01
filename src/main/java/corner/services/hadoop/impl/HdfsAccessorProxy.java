@@ -22,7 +22,6 @@ import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;

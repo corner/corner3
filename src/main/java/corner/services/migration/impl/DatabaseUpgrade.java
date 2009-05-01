@@ -19,7 +19,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
-
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.ioc.IOCUtilities;
 import org.apache.tapestry5.ioc.Registry;

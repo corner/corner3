@@ -17,7 +17,6 @@ package corner.pages.base;
 
 import java.util.List;
 
-
 import org.apache.tapestry5.annotations.Component;
 
 import corner.components.Pagination;

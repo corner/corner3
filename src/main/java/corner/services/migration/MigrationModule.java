@@ -19,9 +19,9 @@ package corner.services.migration;
 import org.apache.tapestry5.hibernate.HibernateConfigurer;
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.ApplicationInitializerFilter;
@@ -30,7 +30,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.MySQL5InnoDBDialect;
 import org.hibernate.dialect.MySQLInnoDBDialect;
-import org.slf4j.Logger;
 
 import corner.services.migration.impl.ConnectionAdapterSourceImpl;
 import corner.services.migration.impl.DBMigrationInitializer;

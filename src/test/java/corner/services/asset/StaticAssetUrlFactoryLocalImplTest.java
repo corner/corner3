@@ -19,8 +19,6 @@ import org.apache.tapestry5.test.TapestryTestCase;
 import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
-import corner.services.asset.StaticAssetUrlFactoryLocalImpl;
-
 /**
  * @author dong
  * @version $Revision: 2088 $

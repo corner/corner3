@@ -27,9 +27,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+
 import corner.model.PaginationList;
 import corner.model.PaginationOptions;
-import corner.model.HQLQueryCallback;
 
 
 /**

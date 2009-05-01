@@ -15,14 +15,16 @@
  */
 package corner.bindings;
 
-import java.text.*;
+import java.text.DecimalFormat;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.services.BindingFactory;
 
 /**
@@ -52,15 +54,21 @@ public class FormatterModule {
     // 针对日期的format
     public static Format buildLongDateFormat() {
         return new Format(){
-            private Format delegateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-            public StringBuffer format(Object o, StringBuffer stringBuffer, FieldPosition fieldPosition) {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 2187679797061508592L;
+			private Format delegateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+            @Override
+			public StringBuffer format(Object o, StringBuffer stringBuffer, FieldPosition fieldPosition) {
                 if(o.getClass().isAssignableFrom(Long.class)){
                     return delegateFormatter.format(new Date((Long) o),stringBuffer,fieldPosition);
                 }
                 throw new RuntimeException("only format long type date object");
             }
 
-            public Object parseObject(String s, ParsePosition parsePosition) {
+            @Override
+			public Object parseObject(String s, ParsePosition parsePosition) {
                 return Long.parseLong(s,parsePosition.getIndex());
             }
         };

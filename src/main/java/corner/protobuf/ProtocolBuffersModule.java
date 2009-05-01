@@ -27,6 +27,7 @@ import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.ioc.services.ClassNameLocator;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.services.ValueEncoderFactory;
+
 import corner.model.PaginationOptions;
 
 /**
@@ -40,7 +41,6 @@ import corner.model.PaginationOptions;
  */
 public class ProtocolBuffersModule {
 
-	@SuppressWarnings("unchecked")
 	public static void contributeValueEncoderSource(MappedConfiguration<Class, ValueEncoderFactory> configuration, final ClassNameLocator classNameLocator, @Inject
 	@Symbol(InternalConstants.TAPESTRY_APP_PACKAGE_PARAM)
 	String appRootPackage) {
@@ -63,7 +63,8 @@ public class ProtocolBuffersModule {
             if (ProtocolBuffer.class.isAssignableFrom(protoClass)) {
                 final
                 ValueEncoderFactory factory = new ValueEncoderFactory() {
-                    public ValueEncoder create(Class type) {
+                    @SuppressWarnings("unchecked")
+					public ValueEncoder create(Class type) {
                         return new ProtoValueEncoder(type);
                     }
                 };

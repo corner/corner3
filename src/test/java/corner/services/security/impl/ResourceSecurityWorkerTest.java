@@ -4,7 +4,6 @@ import java.lang.reflect.Modifier;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.model.MutableComponentModel;
 import org.apache.tapestry5.services.ClassTransformation;
@@ -14,7 +13,6 @@ import org.testng.annotations.Test;
 
 import corner.services.security.ResourceSecurity;
 import corner.services.security.ResourceSecurityObject;
-import corner.services.security.impl.ResourceSecurityWorker;
 
 
 public class ResourceSecurityWorkerTest extends TapestryTestCase {

@@ -22,13 +22,9 @@ import static org.testng.Assert.assertTrue;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import org.testng.annotations.Test;
 
 import corner.services.cache.Cache;
-import corner.services.cache.local.impl.LocalCacheConfig;
-import corner.services.cache.local.impl.LocalCacheItemConfig;
-import corner.services.cache.local.impl.LocalCacheManagerImpl;
 
 /**
  * @author dong

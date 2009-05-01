@@ -6,9 +6,8 @@
  */
 package corner.model;
 
-import org.hibernate.Session;
-import org.hibernate.Query;
 import org.apache.tapestry5.json.JSONObject;
+import org.hibernate.Query;
 
 /**
  * by hql query callback

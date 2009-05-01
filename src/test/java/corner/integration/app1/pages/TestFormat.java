@@ -17,7 +17,6 @@ package corner.integration.app1.pages;
 
 import java.util.Date;
 
-
 import org.apache.tapestry5.annotations.Meta;
 
 import corner.services.http.CacheHeader;

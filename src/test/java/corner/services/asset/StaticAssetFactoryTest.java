@@ -22,9 +22,6 @@ import org.apache.tapestry5.test.TapestryTestCase;
 import org.easymock.EasyMock;
 import org.testng.annotations.Test;
 
-import corner.services.asset.StaticAsseUrlFactory;
-import corner.services.asset.StaticAssetFactory;
-
 /**
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision: 2088 $

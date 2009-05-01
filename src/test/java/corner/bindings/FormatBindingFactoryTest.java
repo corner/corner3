@@ -27,10 +27,6 @@ import org.easymock.EasyMock;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import corner.bindings.FormatBindingFactory;
-import corner.bindings.FormatterSource;
-import corner.bindings.FormatterSourceImpl;
-
 /**
  * 
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>

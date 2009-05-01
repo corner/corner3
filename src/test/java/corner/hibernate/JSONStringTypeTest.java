@@ -20,7 +20,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-
 import org.apache.tapestry5.json.JSONObject;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
