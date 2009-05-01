@@ -61,6 +61,61 @@ public final class PaginationProtoBuffer {
       return parameters_.get(index);
     }
     
+    @Override
+    public final boolean isInitialized() {
+      if (!hasTotalRecord) return false;
+      for (corner.model.PaginationProtoBuffer.Parameter element : getParametersList()) {
+        if (!element.isInitialized()) return false;
+      }
+      return true;
+    }
+    
+    @Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasTotalRecord()) {
+        output.writeInt64(1, getTotalRecord());
+      }
+      if (hasPage()) {
+        output.writeInt32(2, getPage());
+      }
+      if (hasPerPage()) {
+        output.writeInt32(3, getPerPage());
+      }
+      for (corner.model.PaginationProtoBuffer.Parameter element : getParametersList()) {
+        output.writeMessage(4, element);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    @Override
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasTotalRecord()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, getTotalRecord());
+      }
+      if (hasPage()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, getPage());
+      }
+      if (hasPerPage()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, getPerPage());
+      }
+      for (corner.model.PaginationProtoBuffer.Parameter element : getParametersList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, element);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
     public static corner.model.PaginationProtoBuffer.Pagination parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -172,6 +227,89 @@ public final class PaginationProtoBuffer {
         corner.model.PaginationProtoBuffer.Pagination returnMe = result;
         result = null;
         return returnMe;
+      }
+      
+      @Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof corner.model.PaginationProtoBuffer.Pagination) {
+          return mergeFrom((corner.model.PaginationProtoBuffer.Pagination)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(corner.model.PaginationProtoBuffer.Pagination other) {
+        if (other == corner.model.PaginationProtoBuffer.Pagination.getDefaultInstance()) return this;
+        if (other.hasTotalRecord()) {
+          setTotalRecord(other.getTotalRecord());
+        }
+        if (other.hasPage()) {
+          setPage(other.getPage());
+        }
+        if (other.hasPerPage()) {
+          setPerPage(other.getPerPage());
+        }
+        if (!other.parameters_.isEmpty()) {
+          if (result.parameters_.isEmpty()) {
+            result.parameters_ = new java.util.ArrayList<corner.model.PaginationProtoBuffer.Parameter>();
+          }
+          result.parameters_.addAll(other.parameters_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      @Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return mergeFrom(input,
+          com.google.protobuf.ExtensionRegistry.getEmptyRegistry());
+      }
+      
+      @Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              setTotalRecord(input.readInt64());
+              break;
+            }
+            case 16: {
+              setPage(input.readInt32());
+              break;
+            }
+            case 24: {
+              setPerPage(input.readInt32());
+              break;
+            }
+            case 34: {
+              corner.model.PaginationProtoBuffer.Parameter.Builder subBuilder = corner.model.PaginationProtoBuffer.Parameter.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addParameters(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
       }
       
       
@@ -317,6 +455,45 @@ public final class PaginationProtoBuffer {
     public boolean hasValue() { return hasValue; }
     public java.lang.String getValue() { return value_; }
     
+    @Override
+    public final boolean isInitialized() {
+      if (!hasKey) return false;
+      if (!hasValue) return false;
+      return true;
+    }
+    
+    @Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasKey()) {
+        output.writeString(1, getKey());
+      }
+      if (hasValue()) {
+        output.writeString(2, getValue());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    @Override
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasKey()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getKey());
+      }
+      if (hasValue()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getValue());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
     public static corner.model.PaginationProtoBuffer.Parameter parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -426,6 +603,70 @@ public final class PaginationProtoBuffer {
         return returnMe;
       }
       
+      @Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof corner.model.PaginationProtoBuffer.Parameter) {
+          return mergeFrom((corner.model.PaginationProtoBuffer.Parameter)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(corner.model.PaginationProtoBuffer.Parameter other) {
+        if (other == corner.model.PaginationProtoBuffer.Parameter.getDefaultInstance()) return this;
+        if (other.hasKey()) {
+          setKey(other.getKey());
+        }
+        if (other.hasValue()) {
+          setValue(other.getValue());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      @Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return mergeFrom(input,
+          com.google.protobuf.ExtensionRegistry.getEmptyRegistry());
+      }
+      
+      @Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setKey(input.readString());
+              break;
+            }
+            case 18: {
+              setValue(input.readString());
+              break;
+            }
+          }
+        }
+      }
+      
       
       // required string key = 1;
       public boolean hasKey() {
@@ -493,8 +734,8 @@ public final class PaginationProtoBuffer {
       " \002(\003\022\017\n\004page\030\002 \001(\005:\0011\022\023\n\007perPage\030\003 \001(\005:\002" +
       "10\022+\n\nparameters\030\004 \003(\0132\027.corner.model.Pa" +
       "rameter\"\'\n\tParameter\022\013\n\003key\030\001 \002(\t\022\r\n\005val" +
-      "ue\030\002 \002(\tB%\n\014corner.modelB\025PaginationProt" +
-      "oBuffer";
+      "ue\030\002 \002(\tB\'\n\014corner.modelB\025PaginationProt" +
+      "oBufferH\001";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
