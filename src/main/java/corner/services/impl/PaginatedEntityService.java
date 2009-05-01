@@ -160,7 +160,7 @@ public class PaginatedEntityService {
 
     private StringBuffer buildConditionHQL(Class<?> persistClass, Iterator conditions) {
         final StringBuffer sb = new StringBuffer();
-        sb.append("from ").append(persistClass.getName());
+        sb.append("from ").append(persistClass.getName()).append(" as root ");
         if(conditions !=null&& conditions.hasNext()){
             String where = String.valueOf(conditions.next()).trim();
             
