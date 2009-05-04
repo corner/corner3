@@ -1,3 +1,4 @@
 /target
 /test-output
 *.iml
+temp-testng-customsuite.xml
