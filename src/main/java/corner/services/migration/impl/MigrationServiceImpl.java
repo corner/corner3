@@ -74,7 +74,6 @@ public class MigrationServiceImpl implements MigrationService {
 	private Settings settings;
 	public Dialect dialect;
 	private Logger logger;
-	private Iterator<?> tableMappings;
 	public ConnectionAdapter adapter;
 
 	private Configuration cfg;
@@ -89,8 +88,6 @@ public class MigrationServiceImpl implements MigrationService {
 		this.cfg = sessionSource.getConfiguration();
 		this.dialect = this.settings.getDialect();
 		this.logger = logger;
-		// 通过配置得到所有的表格映射集合
-		tableMappings = sessionSource.getConfiguration().getTableMappings();
 		adapter = adapterSource.getConnectionAdapter(dialect.getClass());
 		if (adapter == null) {
 			throw new RuntimeException("未能发现和Dialect["
@@ -194,6 +191,8 @@ public class MigrationServiceImpl implements MigrationService {
 	 * @since 0.0.2
 	 */
 	public void executeMigrateFragment(MigrateFragment fragment) {
+		// 通过配置得到所有的表格映射集合
+		Iterator tableMappings = this.cfg.getTableMappings();
 
 		while (tableMappings.hasNext()) {
 
