@@ -42,7 +42,7 @@ public class PegLength extends AbstractValidator<Integer, String> {
 	public void validate(Field field, Integer constraintValue,
 			MessageFormatter formatter, String value)
 			throws ValidationException {
-		if (value.length() > constraintValue)
+		if (value.length() != constraintValue)
 			throw new ValidationException(buildMessage(formatter, field,
 					constraintValue));
 	}
