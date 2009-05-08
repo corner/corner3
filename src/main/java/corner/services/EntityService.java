@@ -112,7 +112,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#find(java.lang.String, java.lang.Object)
 	 */
-	public List find(String queryString, Object value) throws DataAccessException;
+	public Iterator<?> find(String queryString, Object value) throws DataAccessException;
 
 	/**
 	 * @param queryString
@@ -121,7 +121,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#find(java.lang.String, java.lang.Object[])
 	 */
-	public List find(String queryString, Object[] values) throws DataAccessException;
+	public Iterator<?> find(String queryString, Object[] values) throws DataAccessException;
 
 	/**
 	 * @param queryString
@@ -129,26 +129,9 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#find(java.lang.String)
 	 */
-	public List find(String queryString) throws DataAccessException;
+	public Iterator<?> find(String queryString) throws DataAccessException;
 
-	/**
-	 * @param exampleEntity
-	 * @param firstResult
-	 * @param maxResults
-	 * @return
-	 * @throws DataAccessException
-	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByExample(java.lang.Object, int, int)
-	 */
-	public List findByExample(Object exampleEntity, int firstResult, int maxResults)
-			throws DataAccessException;
 
-	/**
-	 * @param exampleEntity
-	 * @return
-	 * @throws DataAccessException
-	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByExample(java.lang.Object)
-	 */
-	public List findByExample(Object exampleEntity) throws DataAccessException;
 
 	/**
 	 * @param queryString
@@ -158,7 +141,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedParam(java.lang.String, java.lang.String, java.lang.Object)
 	 */
-	public List findByNamedParam(String queryString, String paramName, Object value)
+	public Iterator<?> findByNamedParam(String queryString, String paramName, Object value)
 			throws DataAccessException;
 
 	/**
@@ -169,7 +152,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedParam(java.lang.String, java.lang.String[], java.lang.Object[])
 	 */
-	public List findByNamedParam(String queryString, String[] paramNames, Object[] values)
+	public Iterator<?> findByNamedParam(String queryString, String[] paramNames, Object[] values)
 			throws DataAccessException;
 
 	/**
@@ -179,7 +162,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQuery(java.lang.String, java.lang.Object)
 	 */
-	public List findByNamedQuery(String queryName, Object value)
+	public Iterator<?> findByNamedQuery(String queryName, Object value)
 			throws DataAccessException;
 
 	/**
@@ -189,7 +172,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQuery(java.lang.String, java.lang.Object[])
 	 */
-	public List findByNamedQuery(String queryName, Object[] values)
+	public Iterator<?> findByNamedQuery(String queryName, Object[] values)
 			throws DataAccessException;
 
 	/**
@@ -198,7 +181,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQuery(java.lang.String)
 	 */
-	public List findByNamedQuery(String queryName) throws DataAccessException;
+	public Iterator<?> findByNamedQuery(String queryName) throws DataAccessException;
 
 	/**
 	 * @param queryName
@@ -208,7 +191,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQueryAndNamedParam(java.lang.String, java.lang.String, java.lang.Object)
 	 */
-	public List findByNamedQueryAndNamedParam(String queryName, String paramName,
+	public Iterator<?> findByNamedQueryAndNamedParam(String queryName, String paramName,
 			Object value) throws DataAccessException;
 
 	/**
@@ -219,28 +202,8 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQueryAndNamedParam(java.lang.String, java.lang.String[], java.lang.Object[])
 	 */
-	public List findByNamedQueryAndNamedParam(String queryName, String[] paramNames,
+	public Iterator<?> findByNamedQueryAndNamedParam(String queryName, String[] paramNames,
 			Object[] values) throws DataAccessException;
-
-	/**
-	 * @param queryName
-	 * @param valueBean
-	 * @return
-	 * @throws DataAccessException
-	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQueryAndValueBean(java.lang.String, java.lang.Object)
-	 */
-	public List findByNamedQueryAndValueBean(String queryName, Object valueBean)
-			throws DataAccessException;
-
-	/**
-	 * @param queryString
-	 * @param valueBean
-	 * @return
-	 * @throws DataAccessException
-	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByValueBean(java.lang.String, java.lang.Object)
-	 */
-	public List findByValueBean(String queryString, Object valueBean)
-			throws DataAccessException;
 
 	/**
 	 * @throws DataAccessException
@@ -302,7 +265,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#iterate(java.lang.String, java.lang.Object)
 	 */
-	public Iterator iterate(String queryString, Object value) throws DataAccessException;
+	public Iterator<?> iterate(String queryString, Object value) throws DataAccessException;
 
 	/**
 	 * @param queryString
@@ -311,7 +274,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#iterate(java.lang.String, java.lang.Object[])
 	 */
-	public Iterator iterate(String queryString, Object[] values) throws DataAccessException;
+	public Iterator<?> iterate(String queryString, Object[] values) throws DataAccessException;
 
 	/**
 	 * @param queryString
@@ -319,7 +282,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#iterate(java.lang.String)
 	 */
-	public Iterator iterate(String queryString) throws DataAccessException;
+	public Iterator<?> iterate(String queryString) throws DataAccessException;
 
 	/**
 	 * @param entityClass
@@ -548,7 +511,7 @@ public interface EntityService {
 
     long count(Class<?> persistClass, Object conditions);
 
-    List find(Class<?> persistClass, Object conditions, String order);
+    Iterator<?> find(Class<?> persistClass, Object conditions, String order);
 
     PaginationList paginate(Class<?> persistClass, Object conditions, String order, PaginationOptions options);
 }

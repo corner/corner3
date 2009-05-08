@@ -8,7 +8,6 @@ package corner.services.impl;
 
 import java.sql.SQLException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.tapestry5.ioc.services.TypeCoercer;
@@ -102,7 +101,7 @@ public class PaginatedEntityService {
                 }
                 query.setFirstResult((page-1)*perPage);
                 query.setMaxResults(perPage);
-                PaginationList list = new PaginationList(query.list(),options);
+                PaginationList list = new PaginationList(query.iterate(),options);
 
                 //query total record number
                 options.setTotalRecord((Long) countQuery.iterate().next());
@@ -111,8 +110,8 @@ public class PaginatedEntityService {
             }
         });
     }
-    public List find(final Class<?> persistClass,final Object conditions,final String order){
-       return (List) this.template.execute(new HibernateCallback(){
+    public Iterator find(final Class<?> persistClass,final Object conditions,final String order){
+       return (Iterator) this.template.execute(new HibernateCallback(){
            public Object doInHibernate(Session session) throws HibernateException, SQLException {
                Iterable con = typeCoercer.coerce(conditions, Iterable.class);
                final Iterator it = con==null?null:con.iterator();
@@ -125,7 +124,7 @@ public class PaginatedEntityService {
                       query.setParameter(i++,it.next());
                   }
                }
-               return query.list();
+               return query.iterate();
            }
        });
     }

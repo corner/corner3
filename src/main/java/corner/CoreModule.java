@@ -15,7 +15,7 @@
  */
 package corner;
 
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.tapestry5.hibernate.HibernateTransactionDecorator;
@@ -299,20 +299,33 @@ public class CoreModule {
                                              TypeCoercer coercer)
 
     {
-        add(configuration, PaginationList.class, PaginationOptions.class,
-                new Coercion<PaginationList, PaginationOptions>()
+    	 add(configuration, PaginationList.class, PaginationOptions.class,
+                 new Coercion<PaginationList, PaginationOptions>()
+                 {
+                     public PaginationOptions coerce(PaginationList input)
+                     {
+                         return input.options();
+                     }
+                 });
+    	 add(configuration,Iterator.class,Iterable.class,
+                 new Coercion<Iterator, Iterable>()
+                 {
+                     public Iterable coerce(final Iterator input)
+                     {
+                         return new Iterable(){
+
+							@Override
+							public Iterator iterator() {
+								return input;
+							}};
+                     }
+                 });
+         add(configuration, PaginationList.class, Iterable.class,
+                new Coercion<PaginationList, Iterable>()
                 {
-                    public PaginationOptions coerce(PaginationList input)
+                    public Iterable coerce(PaginationList input)
                     {
-                        return input.options();
-                    }
-                });
-        add(configuration, PaginationList.class, List.class,
-                new Coercion<PaginationList, List>()
-                {
-                    public List coerce(PaginationList input)
-                    {
-                        return coercer.coerce(input.collectionObject(),List.class);
+                        return coercer.coerce(input.collectionObject(),Iterable.class);
                     }
                 });
     }

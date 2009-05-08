@@ -24,6 +24,7 @@ import java.util.List;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -149,7 +150,7 @@ public class EntityServiceImpl  implements EntityService{
         return paginatedService.count(persistClass, conditions);
     }
 
-    public List find(Class<?> persistClass, Object conditions, String order) {
+    public Iterator<?> find(Class<?> persistClass, Object conditions, String order) {
         return paginatedService.find(persistClass, conditions, order);
     }
 
@@ -164,9 +165,9 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#find(java.lang.String, java.lang.Object)
 	 */
-	public List find(String queryString, Object value)
+	public Iterator<?> find(String queryString, Object value)
 			throws DataAccessException {
-		return template.find(queryString, value);
+		return find(queryString, new Object[]{value});
 	}
 
 	/**
@@ -176,11 +177,24 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#find(java.lang.String, java.lang.Object[])
 	 */
-	public List find(String queryString, Object[] values)
+	public Iterator<?> find(final String queryString, final Object[] values)
 			throws DataAccessException {
-		return template.find(queryString, values);
+		return  (Iterator<?>) template.executeWithNativeSession(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query queryObject = session.createQuery(queryString);
+				if (values != null) {
+					for (int i = 0; i < values.length; i++) {
+						queryObject.setParameter(i, values[i]);
+					}
+				}
+				return queryObject.iterate();
+			}
+		});
 	}
 
+
+
+	
 
 
 	/**
@@ -189,32 +203,8 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#find(java.lang.String)
 	 */
-	public List find(String queryString) throws DataAccessException {
-		return template.find(queryString);
-	}
-
-
-	/**
-	 * @param exampleEntity
-	 * @param firstResult
-	 * @param maxResults
-	 * @return
-	 * @throws DataAccessException
-	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByExample(java.lang.Object, int, int)
-	 */
-	public List findByExample(Object exampleEntity, int firstResult,
-			int maxResults) throws DataAccessException {
-		return template.findByExample(exampleEntity, firstResult, maxResults);
-	}
-
-	/**
-	 * @param exampleEntity
-	 * @return
-	 * @throws DataAccessException
-	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByExample(java.lang.Object)
-	 */
-	public List findByExample(Object exampleEntity) throws DataAccessException {
-		return template.findByExample(exampleEntity);
+	public Iterator<?> find(String queryString) throws DataAccessException {
+		return find(queryString,new Object[]{});
 	}
 
 	/**
@@ -225,9 +215,9 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedParam(java.lang.String, java.lang.String, java.lang.Object)
 	 */
-	public List findByNamedParam(String queryString, String paramName,
+	public Iterator<?> findByNamedParam(String queryString, String paramName,
 			Object value) throws DataAccessException {
-		return template.findByNamedParam(queryString, paramName, value);
+		return findByNamedParam(queryString,new String[]{paramName},new Object[]{value});
 	}
 
 	/**
@@ -238,11 +228,41 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedParam(java.lang.String, java.lang.String[], java.lang.Object[])
 	 */
-	public List findByNamedParam(String queryString, String[] paramNames,
-			Object[] values) throws DataAccessException {
-		return template.findByNamedParam(queryString, paramNames, values);
+	public Iterator<?> findByNamedParam(final String queryString, final String[] paramNames,
+			final Object[] values) throws DataAccessException {
+		if (paramNames.length != values.length) {
+			throw new IllegalArgumentException("Length of paramNames array must match length of values array");
+		}
+		return (Iterator<?>) template.executeWithNativeSession(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query queryObject = session.createQuery(queryString);
+					for (int i = 0; i < values.length; i++) {
+						applyNamedParameterToQuery(queryObject, paramNames[i], values[i]);
+					}
+				return queryObject.list();
+			}
+		});
 	}
+	/**
+	 * Apply the given name parameter to the given Query object.
+	 * @param queryObject the Query object
+	 * @param paramName the name of the parameter
+	 * @param value the value of the parameter
+	 * @throws HibernateException if thrown by the Query object
+	 */
+	protected void applyNamedParameterToQuery(Query queryObject, String paramName, Object value)
+			throws HibernateException {
 
+		if (value instanceof Collection) {
+			queryObject.setParameterList(paramName, (Collection) value);
+		}
+		else if (value instanceof Object[]) {
+			queryObject.setParameterList(paramName, (Object[]) value);
+		}
+		else {
+			queryObject.setParameter(paramName, value);
+		}
+	}
 	/**
 	 * @param queryName
 	 * @param value
@@ -250,9 +270,9 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQuery(java.lang.String, java.lang.Object)
 	 */
-	public List findByNamedQuery(String queryName, Object value)
+	public Iterator<?> findByNamedQuery(String queryName, Object value)
 			throws DataAccessException {
-		return template.findByNamedQuery(queryName, value);
+		return findByNamedQuery(queryName,new Object[]{value});
 	}
 
 	/**
@@ -262,9 +282,19 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQuery(java.lang.String, java.lang.Object[])
 	 */
-	public List findByNamedQuery(String queryName, Object[] values)
+	public Iterator<?> findByNamedQuery(final String queryName, final Object[] values)
 			throws DataAccessException {
-		return template.findByNamedQuery(queryName, values);
+		return  (Iterator<?>) template.executeWithNativeSession(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query queryObject = session.getNamedQuery(queryName);
+				if (values != null) {
+					for (int i = 0; i < values.length; i++) {
+						queryObject.setParameter(i, values[i]);
+					}
+				}
+				return queryObject.iterate();
+			}
+		});	
 	}
 
 	/**
@@ -273,8 +303,8 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQuery(java.lang.String)
 	 */
-	public List findByNamedQuery(String queryName) throws DataAccessException {
-		return template.findByNamedQuery(queryName);
+	public Iterator<?> findByNamedQuery(String queryName) throws DataAccessException {
+		return findByNamedQuery(queryName,new Object[]{});
 	}
 
 	/**
@@ -285,10 +315,10 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQueryAndNamedParam(java.lang.String, java.lang.String, java.lang.Object)
 	 */
-	public List findByNamedQueryAndNamedParam(String queryName,
+	public Iterator<?> findByNamedQueryAndNamedParam(String queryName,
 			String paramName, Object value) throws DataAccessException {
-		return template.findByNamedQueryAndNamedParam(queryName, paramName,
-				value);
+		return findByNamedQueryAndNamedParam(queryName, new String[]{paramName},
+				new Object[]{value});
 	}
 
 	/**
@@ -299,35 +329,27 @@ public class EntityServiceImpl  implements EntityService{
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQueryAndNamedParam(java.lang.String, java.lang.String[], java.lang.Object[])
 	 */
-	public List findByNamedQueryAndNamedParam(String queryName,
-			String[] paramNames, Object[] values) throws DataAccessException {
-		return template.findByNamedQueryAndNamedParam(queryName, paramNames,
-				values);
+	public Iterator<?> findByNamedQueryAndNamedParam(final String queryName,
+			final String[] paramNames, final Object[] values) throws DataAccessException {
+		if (paramNames != null && values != null && paramNames.length != values.length) {
+			throw new IllegalArgumentException("Length of paramNames array must match length of values array");
+		}
+		return (Iterator<?>) template.executeWithNativeSession(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query queryObject = session.getNamedQuery(queryName);
+				if (values != null) {
+					for (int i = 0; i < values.length; i++) {
+						applyNamedParameterToQuery(queryObject, paramNames[i], values[i]);
+					}
+				}
+				return queryObject.iterate();
+			}
+		});
 	}
 
-	/**
-	 * @param queryName
-	 * @param valueBean
-	 * @return
-	 * @throws DataAccessException
-	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByNamedQueryAndValueBean(java.lang.String, java.lang.Object)
-	 */
-	public List findByNamedQueryAndValueBean(String queryName, Object valueBean)
-			throws DataAccessException {
-		return template.findByNamedQueryAndValueBean(queryName, valueBean);
-	}
+	
 
-	/**
-	 * @param queryString
-	 * @param valueBean
-	 * @return
-	 * @throws DataAccessException
-	 * @see org.springframework.orm.hibernate3.HibernateTemplate#findByValueBean(java.lang.String, java.lang.Object)
-	 */
-	public List findByValueBean(String queryString, Object valueBean)
-			throws DataAccessException {
-		return template.findByValueBean(queryString, valueBean);
-	}
+	
 
 	/**
 	 * @throws DataAccessException

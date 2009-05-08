@@ -69,7 +69,7 @@ public class TreeServiceImpl implements TreeService {
 			currentParentNode = (TreeAdapter) BeanUtils.instantiateClass(EntityUtil.getEntityClass(node));
 			currentParentNode.setLeft(0);
 			currentParentNode.setDepth(0);
-			long rowCount = (Long) this.entityService.find(String.format(COUNT_ALL_NODE_HSQL, treeClassName)).get(0);
+			long rowCount = (Long) this.entityService.find(String.format(COUNT_ALL_NODE_HSQL, treeClassName)).next();
 			currentParentNode.setRight((int) (rowCount * 2 + 1));
 		} else { // reload parent object
 			entityService.refresh(currentParentNode);
