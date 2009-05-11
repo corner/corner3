@@ -76,8 +76,7 @@ public class MigrationModule {
             ObjectLocator locator
 	) {
 		if(enableAutoUpgrade){
-//			configuration.add("dbmigraion",new DBMigrationInitializer(migrationService,sessionManager));
-			configuration.add("dbmigraion",locator.autobuild(DBMigrationInitializer.class));
+			configuration.add("dbmigration",locator.autobuild(DBMigrationInitializer.class));
 		}
 
 	}
