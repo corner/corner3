@@ -12,7 +12,7 @@ package corner.model;
  * @version $Revision$
  * @since 0.0.1
  */
-public class PaginationList {
+public class PaginationList <T>{
     private Object it;
     private PaginationOptions options;
 

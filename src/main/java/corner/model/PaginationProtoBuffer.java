@@ -32,7 +32,7 @@ public final class PaginationProtoBuffer {
       return corner.model.PaginationProtoBuffer.internal_static_corner_model_Pagination_fieldAccessorTable;
     }
     
-    // required int64 totalRecord = 1;
+    // optional int64 totalRecord = 1 [default = 0];
     private boolean hasTotalRecord;
     private long totalRecord_ = 0L;
     public boolean hasTotalRecord() { return hasTotalRecord; }
@@ -63,7 +63,6 @@ public final class PaginationProtoBuffer {
     
     @Override
     public final boolean isInitialized() {
-      if (!hasTotalRecord) return false;
       for (corner.model.PaginationProtoBuffer.Parameter element : getParametersList()) {
         if (!element.isInitialized()) return false;
       }
@@ -313,7 +312,7 @@ public final class PaginationProtoBuffer {
       }
       
       
-      // required int64 totalRecord = 1;
+      // optional int64 totalRecord = 1 [default = 0];
       public boolean hasTotalRecord() {
         return result.hasTotalRecord();
       }
@@ -730,12 +729,12 @@ public final class PaginationProtoBuffer {
   static {
     java.lang.String descriptorData =
       "\n!corner/model/PaginationBean.proto\022\014cor" +
-      "ner.model\"t\n\nPagination\022\023\n\013totalRecord\030\001" +
-      " \002(\003\022\017\n\004page\030\002 \001(\005:\0011\022\023\n\007perPage\030\003 \001(\005:\002" +
-      "10\022+\n\nparameters\030\004 \003(\0132\027.corner.model.Pa" +
-      "rameter\"\'\n\tParameter\022\013\n\003key\030\001 \002(\t\022\r\n\005val" +
-      "ue\030\002 \002(\tB\'\n\014corner.modelB\025PaginationProt" +
-      "oBufferH\001";
+      "ner.model\"w\n\nPagination\022\026\n\013totalRecord\030\001" +
+      " \001(\003:\0010\022\017\n\004page\030\002 \001(\005:\0011\022\023\n\007perPage\030\003 \001(" +
+      "\005:\00210\022+\n\nparameters\030\004 \003(\0132\027.corner.model" +
+      ".Parameter\"\'\n\tParameter\022\013\n\003key\030\001 \002(\t\022\r\n\005" +
+      "value\030\002 \002(\tB\'\n\014corner.modelB\025PaginationP" +
+      "rotoBufferH\001";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
