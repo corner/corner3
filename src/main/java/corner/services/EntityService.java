@@ -20,13 +20,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.hibernate.LockMode;
 import org.hibernate.ReplicationMode;
 import org.hibernate.SessionFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import corner.model.PaginationList;
 import corner.model.PaginationOptions;
@@ -48,7 +48,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#bulkUpdate(java.lang.String, java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public int bulkUpdate(String queryString, Object value)
 			throws DataAccessException;
 
@@ -59,7 +59,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#bulkUpdate(java.lang.String, java.lang.Object[])
 	 */
-	@CommitAfter
+	@Transactional
 	public int bulkUpdate(String queryString, Object[] values)
 			throws DataAccessException;
 
@@ -69,7 +69,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#bulkUpdate(java.lang.String)
 	 */
-	@CommitAfter
+	@Transactional
 	public int bulkUpdate(String queryString) throws DataAccessException;
 
 	/**
@@ -78,7 +78,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#delete(java.lang.Object, org.hibernate.LockMode)
 	 */
-	@CommitAfter
+	@Transactional
 	public void delete(Object entity, LockMode lockMode) throws DataAccessException;
 
 	/**
@@ -86,7 +86,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#delete(java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public void delete(Object entity) throws DataAccessException;
 
 	/**
@@ -94,7 +94,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#deleteAll(java.util.Collection)
 	 */
-	@CommitAfter
+	@Transactional
 	public void deleteAll(Collection entities) throws DataAccessException;
 
 	/**
@@ -347,7 +347,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#persist(java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public void persist(Object entity) throws DataAccessException;
 
 	/**
@@ -356,7 +356,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#persist(java.lang.String, java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public void persist(String entityName, Object entity) throws DataAccessException;
 
 	/**
@@ -399,7 +399,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#save(java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public Serializable save(Object entity) throws DataAccessException;
 
 	/**
@@ -409,7 +409,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#save(java.lang.String, java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public Serializable save(String entityName, Object entity) throws DataAccessException;
 
 	/**
@@ -417,7 +417,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#saveOrUpdate(java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public void saveOrUpdate(Object entity) throws DataAccessException;
 
 	/**
@@ -426,7 +426,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#saveOrUpdate(java.lang.String, java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public void saveOrUpdate(String entityName, Object entity)
 			throws DataAccessException;
 
@@ -435,7 +435,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#saveOrUpdateAll(java.util.Collection)
 	 */
-	@CommitAfter
+	@Transactional
 	public void saveOrUpdateAll(Collection entities) throws DataAccessException;
 
 	/**
@@ -444,7 +444,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#update(java.lang.Object, org.hibernate.LockMode)
 	 */
-	@CommitAfter
+	@Transactional
 	public void update(Object entity, LockMode lockMode) throws DataAccessException;
 
 	/**
@@ -452,7 +452,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#update(java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public void update(Object entity) throws DataAccessException;
 
 	/**
@@ -462,7 +462,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#update(java.lang.String, java.lang.Object, org.hibernate.LockMode)
 	 */
-	@CommitAfter
+	@Transactional
 	public void update(String entityName, Object entity, LockMode lockMode)
 			throws DataAccessException;
 
@@ -472,7 +472,7 @@ public interface EntityService {
 	 * @throws DataAccessException
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#update(java.lang.String, java.lang.Object)
 	 */
-	@CommitAfter
+	@Transactional
 	public void update(String entityName, Object entity) throws DataAccessException;
 
 	/**
@@ -491,7 +491,7 @@ public interface EntityService {
 	 * @see org.springframework.orm.hibernate3.HibernateTemplate#execute(org.springframework.orm.hibernate3.HibernateCallback)
 	 * @since 0.0.2
 	 */
-	@CommitAfter
+	@Transactional
 	public Object executeBatchUpdate(HibernateCallback action) throws DataAccessException;
 
 	/**

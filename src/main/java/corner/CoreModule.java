@@ -81,6 +81,7 @@ import corner.services.impl.PageTemplateLocatorWithHtml;
 import corner.services.migration.MigrationModule;
 import corner.services.payment.PaymentModule;
 import corner.services.security.SecurityModule;
+import corner.services.transaction.SpringTransactionModule;
 import corner.services.tree.TreeModule;
 import corner.transform.PageRedirectWorker;
 
@@ -94,7 +95,7 @@ import corner.transform.PageRedirectWorker;
 @SubModule( { ValidationModule.class, StaticAssetModule.class,
 		TreeModule.class, SecurityModule.class, ProtocolBuffersModule.class,
 		FckeditorModule.class, PaymentModule.class, MigrationModule.class,
-		HadoopModule.class, ServiceConfigModule.class,FormatterModule.class })
+		HadoopModule.class, ServiceConfigModule.class,FormatterModule.class ,SpringTransactionModule.class})
 public class CoreModule {
 
 	/**
