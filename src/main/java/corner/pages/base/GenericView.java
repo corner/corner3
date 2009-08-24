@@ -28,7 +28,7 @@ import corner.services.security.ResourceSecurity;
 import corner.services.security.ResourceSecurityObject;
 
 /**
- * 范性化的浏览页面
+ * 泛型化的浏览页面
  * 
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @author <a href="d0ng@ganshane.net">dong</a>
