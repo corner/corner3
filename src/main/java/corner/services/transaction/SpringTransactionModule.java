@@ -6,15 +6,22 @@
  */
 package corner.services.transaction;
 
+import java.io.IOException;
+
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.hibernate.HibernateSessionSource;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
 import org.apache.tapestry5.ioc.Configuration;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.ioc.services.PerthreadManager;
 import org.apache.tapestry5.services.AliasContribution;
+import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.services.RequestFilter;
+import org.apache.tapestry5.services.RequestHandler;
+import org.apache.tapestry5.services.Response;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.AnnotationTransactionAttributeSource;
@@ -88,4 +95,22 @@ public class SpringTransactionModule {
 		advisorConfiguration.add(AliasContribution.create(HibernateTransactionAdvisor.class, advisor));
 	}
 	
+    public void contributeRequestHandler(OrderedConfiguration<RequestFilter> configuration,@Local final HibernateSessionManager hibernateSessionManager)
+    {
+
+        RequestFilter openSessionInView = new RequestFilter()
+        {
+            public boolean service(Request request, Response response, RequestHandler handler)
+                    throws IOException
+            {
+            	//get session
+            	hibernateSessionManager.getSession();
+                return handler.service(request, response);
+            }
+        };
+        
+        configuration.add("OpenSessionInView",openSessionInView,
+        		"after:StoreIntoGlobals","before:EndOfRequest");
+    }
+
 }
