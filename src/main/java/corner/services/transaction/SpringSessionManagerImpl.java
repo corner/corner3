@@ -15,8 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.orm.hibernate3.SessionFactoryUtils;
-import org.springframework.orm.hibernate3.SessionHolder;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 /**
  * 使用Spring来管理session，覆盖T5自带的Session管理
@@ -35,16 +33,7 @@ public class SpringSessionManagerImpl implements HibernateSessionManager,
 
 	public SpringSessionManagerImpl(HibernateSessionSource source) {
 		sessionFactory = source.getSessionFactory();
-		// single session mode
-		if (TransactionSynchronizationManager.hasResource(sessionFactory)) {
-			// Do not modify the Session: just set the participate flag.
-			participate = true;
-		}
-		else {
-			logger.debug("Opening single Hibernate Session in OpenSessionInViewFilter");
-			Session session = getSession(sessionFactory);
-			TransactionSynchronizationManager.bindResource(sessionFactory, new SessionHolder(session));
-		}
+		SessionFactoryUtils.initDeferredClose(sessionFactory);
 	}
 
 	/**
@@ -68,7 +57,7 @@ public class SpringSessionManagerImpl implements HibernateSessionManager,
 	 */
 	@Override
 	public Session getSession() {
-		return SessionFactoryUtils.getSession(sessionFactory, false);
+		return SessionFactoryUtils.getSession(sessionFactory, true);
 	}
 
 	protected Session getSession(SessionFactory sessionFactory)
@@ -87,11 +76,6 @@ public class SpringSessionManagerImpl implements HibernateSessionManager,
 
 	@Override
 	public void threadDidCleanup() {
-		if (!participate) {
-    		// single session mode
-    		SessionHolder sessionHolder = (SessionHolder) TransactionSynchronizationManager
-    				.unbindResource(sessionFactory);
-    		closeSession(sessionHolder.getSession(), sessionFactory);
-		}
+		SessionFactoryUtils.processDeferredClose(sessionFactory);
 	}
 }
