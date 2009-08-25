@@ -247,21 +247,21 @@ limitations under the License.
   <repositories>
     <repository>
       <id>fepss</id>
-      <url>http://app.fepss.com/nexus/content/groups/public</url>
+      <url>http://maven.fepss.com/nexus/content/groups/public</url>
     </repository>
     <repository>
       <id>fepss.snapshots</id>
-      <url>http://app.fepss.com/nexus/content/groups/public-snapshots</url>
+      <url>http://maven.fepss.com/nexus/content/groups/public-snapshots</url>
     </repository>
   </repositories>
   <distributionManagement>
     <snapshotRepository>
       <id>fepss.snapshots</id>
-      <url>http://app.fepss.com/nexus/content/repositories/fepss-snapshots/</url>
+      <url>http://maven.fepss.com/nexus/content/repositories/fepss-snapshots/</url>
     </snapshotRepository>
     <repository>
       <id>fepss.releases</id>
-      <url>http://app.fepss.com/nexus/content/repositories/fepss/</url>
+      <url>http://maven.fepss.com/nexus/content/repositories/fepss/</url>
     </repository>
   </distributionManagement>
   <reporting>
