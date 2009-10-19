@@ -11,21 +11,30 @@ import java.io.IOException;
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.hibernate.HibernateSessionSource;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
+import org.apache.tapestry5.hibernate.HibernateTransactionDecorator;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.Scope;
+import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.PerthreadManager;
 import org.apache.tapestry5.services.AliasContribution;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.AnnotationTransactionAttributeSource;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
+
+import corner.services.EntityService;
+import corner.services.impl.EntityServiceImpl;
+import corner.services.migration.MigrationModule;
 
 /**
  * spring transaction module
@@ -34,9 +43,17 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
  * @version $Revision$
  * @since 0.1
  */
+@SubModule(MigrationModule.class)
 public class SpringTransactionModule {
+	public static HibernateTemplate buildHibernateTemplate(
+			SessionFactory sessionFactory) {
+		HibernateTemplate template = new HibernateTemplate(sessionFactory);
+		return template;
+
+	}
 	public static void bind(ServiceBinder binder) {
 		binder.bind(HibernateTransactionAdvisor.class,SpringTransactionAdvisor.class).withId("SpringTransactionAdvisor");
+		binder.bind(EntityService.class, EntityServiceImpl.class);
 	}
 	/**
 	 * build spring transaction interceptor
@@ -112,5 +129,10 @@ public class SpringTransactionModule {
         configuration.add("OpenSessionInView",openSessionInView,
         		"after:StoreIntoGlobals","before:EndOfRequest");
     }
-
+	@Match("EntityService")
+	public static <T> T decorateTransactionally(
+			HibernateTransactionDecorator decorator, Class<T> serviceInterface,
+			T delegate, String serviceId) {
+		return decorator.build(serviceInterface, delegate, serviceId);
+	}
 }

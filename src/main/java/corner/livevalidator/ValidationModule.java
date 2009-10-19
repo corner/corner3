@@ -64,8 +64,8 @@ public class ValidationModule {
 				.add("areapresence", locator.autobuild(AreaPresence.class));
 		configuration.add("multiplePresence", locator
 				.autobuild(MultiplePresence.class));
-		configuration.add("liveuploadregexp", locator
-				.autobuild(UploadRegexp.class));
+//		configuration.add("liveuploadregexp", locator
+//				.autobuild(UploadRegexp.class));
 		configuration.add("fckeditor", locator.autobuild(Fckeditor.class));
 	}
 

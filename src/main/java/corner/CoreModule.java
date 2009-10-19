@@ -18,7 +18,6 @@ package corner;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.tapestry5.hibernate.HibernateTransactionDecorator;
 import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.internal.services.PageTemplateLocator;
 import org.apache.tapestry5.ioc.Configuration;
@@ -29,7 +28,6 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.ServiceLifecycle;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Marker;
-import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.Builtin;
@@ -49,8 +47,6 @@ import org.apache.tapestry5.services.PersistentFieldStrategy;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestGlobals;
-import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import corner.bindings.FormatterModule;
 import corner.internal.services.CookiePersistentFieldStrategy;
@@ -64,7 +60,6 @@ import corner.livevalidator.ValidationModule;
 import corner.model.PaginationList;
 import corner.model.PaginationOptions;
 import corner.protobuf.ProtocolBuffersModule;
-import corner.services.EntityService;
 import corner.services.FlashFacade;
 import corner.services.HtmlTemplateProvider;
 import corner.services.RemoteResponse;
@@ -72,16 +67,12 @@ import corner.services.RemoteServiceCaller;
 import corner.services.RemoteServiceCallerSource;
 import corner.services.ServiceLocatorDelegate;
 import corner.services.asset.StaticAssetModule;
-import corner.services.config.ServiceConfigModule;
 import corner.services.fckeditor.FckeditorModule;
 import corner.services.hadoop.HadoopModule;
-import corner.services.impl.EntityServiceImpl;
 import corner.services.impl.ForbidViewHtmlTemplate;
 import corner.services.impl.PageTemplateLocatorWithHtml;
-import corner.services.migration.MigrationModule;
 import corner.services.payment.PaymentModule;
 import corner.services.security.SecurityModule;
-import corner.services.transaction.SpringTransactionModule;
 import corner.services.tree.TreeModule;
 import corner.transform.PageRedirectWorker;
 
@@ -94,8 +85,8 @@ import corner.transform.PageRedirectWorker;
  */
 @SubModule( { ValidationModule.class, StaticAssetModule.class,
 		TreeModule.class, SecurityModule.class, ProtocolBuffersModule.class,
-		FckeditorModule.class, PaymentModule.class, MigrationModule.class,
-		HadoopModule.class, ServiceConfigModule.class,FormatterModule.class ,SpringTransactionModule.class})
+		FckeditorModule.class, PaymentModule.class, 
+		HadoopModule.class, FormatterModule.class})
 public class CoreModule {
 
 	/**
@@ -109,7 +100,6 @@ public class CoreModule {
 		binder.bind(FlashFacade.class, FlashFacadeImpl.class);
 		binder.bind(ServiceLocatorDelegate.class,
 				ServiceLocatorDelegateImpl.class);
-		binder.bind(EntityService.class, EntityServiceImpl.class);
         binder.bind(ServiceLifecycle.class,RemoteCallServiceLifecycle.class).withId("RemoteServiceLifeCycle");
 	}
 
@@ -141,12 +131,7 @@ public class CoreModule {
 				linkFactory));
 	}
 
-	public static HibernateTemplate buildHibernateTemplate(
-			SessionFactory sessionFactory) {
-		HibernateTemplate template = new HibernateTemplate(sessionFactory);
-		return template;
-
-	}
+	
 
 	// 扩展一个flash前缀的binding
 	public static void contributeBindingSource(
@@ -230,12 +215,7 @@ public class CoreModule {
 				new RemoteResponseResultProcessor(requestGlobals));
 	}
 
-	@Match("EntityService")
-	public static <T> T decorateTransactionally(
-			HibernateTransactionDecorator decorator, Class<T> serviceInterface,
-			T delegate, String serviceId) {
-		return decorator.build(serviceInterface, delegate, serviceId);
-	}
+
 
 	/**
 	 * 构建基于HTML的PageTemplateLocator.
