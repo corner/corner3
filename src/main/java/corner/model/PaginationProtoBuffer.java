@@ -33,24 +33,28 @@ public final class PaginationProtoBuffer {
     }
     
     // optional int64 totalRecord = 1 [default = 0];
+    public static final int TOTALRECORD_FIELD_NUMBER = 1;
     private boolean hasTotalRecord;
     private long totalRecord_ = 0L;
     public boolean hasTotalRecord() { return hasTotalRecord; }
     public long getTotalRecord() { return totalRecord_; }
     
     // optional int32 page = 2 [default = 1];
+    public static final int PAGE_FIELD_NUMBER = 2;
     private boolean hasPage;
     private int page_ = 1;
     public boolean hasPage() { return hasPage; }
     public int getPage() { return page_; }
     
     // optional int32 perPage = 3 [default = 10];
+    public static final int PERPAGE_FIELD_NUMBER = 3;
     private boolean hasPerPage;
     private int perPage_ = 10;
     public boolean hasPerPage() { return hasPerPage; }
     public int getPerPage() { return perPage_; }
     
     // repeated .corner.model.Parameter parameters = 4;
+    public static final int PARAMETERS_FIELD_NUMBER = 4;
     private java.util.List<corner.model.PaginationProtoBuffer.Parameter> parameters_ =
       java.util.Collections.emptyList();
     public java.util.List<corner.model.PaginationProtoBuffer.Parameter> getParametersList() {
@@ -149,6 +153,17 @@ public final class PaginationProtoBuffer {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
+    public static corner.model.PaginationProtoBuffer.Pagination parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static corner.model.PaginationProtoBuffer.Pagination parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
     public static corner.model.PaginationProtoBuffer.Pagination parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
@@ -167,6 +182,7 @@ public final class PaginationProtoBuffer {
     public static Builder newBuilder(corner.model.PaginationProtoBuffer.Pagination prototype) {
       return new Builder().mergeFrom(prototype);
     }
+    public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -202,7 +218,7 @@ public final class PaginationProtoBuffer {
       }
       
       public corner.model.PaginationProtoBuffer.Pagination build() {
-        if (!isInitialized()) {
+        if (result != null && !isInitialized()) {
           throw new com.google.protobuf.UninitializedMessageException(
             result);
         }
@@ -219,6 +235,9 @@ public final class PaginationProtoBuffer {
       }
       
       public corner.model.PaginationProtoBuffer.Pagination buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");  }
         if (result.parameters_ != java.util.Collections.EMPTY_LIST) {
           result.parameters_ =
             java.util.Collections.unmodifiableList(result.parameters_);
@@ -377,6 +396,9 @@ public final class PaginationProtoBuffer {
         return result.getParameters(index);
       }
       public Builder setParameters(int index, corner.model.PaginationProtoBuffer.Parameter value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         result.parameters_.set(index, value);
         return this;
       }
@@ -385,6 +407,9 @@ public final class PaginationProtoBuffer {
         return this;
       }
       public Builder addParameters(corner.model.PaginationProtoBuffer.Parameter value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         if (result.parameters_.isEmpty()) {
           result.parameters_ = new java.util.ArrayList<corner.model.PaginationProtoBuffer.Parameter>();
         }
@@ -443,12 +468,14 @@ public final class PaginationProtoBuffer {
     }
     
     // required string key = 1;
+    public static final int KEY_FIELD_NUMBER = 1;
     private boolean hasKey;
     private java.lang.String key_ = "";
     public boolean hasKey() { return hasKey; }
     public java.lang.String getKey() { return key_; }
     
     // required string value = 2;
+    public static final int VALUE_FIELD_NUMBER = 2;
     private boolean hasValue;
     private java.lang.String value_ = "";
     public boolean hasValue() { return hasValue; }
@@ -527,6 +554,17 @@ public final class PaginationProtoBuffer {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
+    public static corner.model.PaginationProtoBuffer.Parameter parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static corner.model.PaginationProtoBuffer.Parameter parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
     public static corner.model.PaginationProtoBuffer.Parameter parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
@@ -545,6 +583,7 @@ public final class PaginationProtoBuffer {
     public static Builder newBuilder(corner.model.PaginationProtoBuffer.Parameter prototype) {
       return new Builder().mergeFrom(prototype);
     }
+    public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -580,7 +619,7 @@ public final class PaginationProtoBuffer {
       }
       
       public corner.model.PaginationProtoBuffer.Parameter build() {
-        if (!isInitialized()) {
+        if (result != null && !isInitialized()) {
           throw new com.google.protobuf.UninitializedMessageException(
             result);
         }
@@ -597,6 +636,9 @@ public final class PaginationProtoBuffer {
       }
       
       public corner.model.PaginationProtoBuffer.Parameter buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");  }
         corner.model.PaginationProtoBuffer.Parameter returnMe = result;
         result = null;
         return returnMe;
@@ -675,7 +717,10 @@ public final class PaginationProtoBuffer {
         return result.getKey();
       }
       public Builder setKey(java.lang.String value) {
-        result.hasKey = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasKey = true;
         result.key_ = value;
         return this;
       }
@@ -693,7 +738,10 @@ public final class PaginationProtoBuffer {
         return result.getValue();
       }
       public Builder setValue(java.lang.String value) {
-        result.hasValue = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasValue = true;
         result.value_ = value;
         return this;
       }
@@ -728,13 +776,13 @@ public final class PaginationProtoBuffer {
       descriptor;
   static {
     java.lang.String descriptorData =
-      "\n!corner/model/PaginationBean.proto\022\014cor" +
-      "ner.model\"w\n\nPagination\022\026\n\013totalRecord\030\001" +
-      " \001(\003:\0010\022\017\n\004page\030\002 \001(\005:\0011\022\023\n\007perPage\030\003 \001(" +
-      "\005:\00210\022+\n\nparameters\030\004 \003(\0132\027.corner.model" +
-      ".Parameter\"\'\n\tParameter\022\013\n\003key\030\001 \002(\t\022\r\n\005" +
-      "value\030\002 \002(\tB\'\n\014corner.modelB\025PaginationP" +
-      "rotoBufferH\001";
+      "\n/src/main/java/corner/model/PaginationB" +
+      "ean.proto\022\014corner.model\"w\n\nPagination\022\026\n" +
+      "\013totalRecord\030\001 \001(\003:\0010\022\017\n\004page\030\002 \001(\005:\0011\022\023" +
+      "\n\007perPage\030\003 \001(\005:\00210\022+\n\nparameters\030\004 \003(\0132" +
+      "\027.corner.model.Parameter\"\'\n\tParameter\022\013\n" +
+      "\003key\030\001 \002(\t\022\r\n\005value\030\002 \002(\tB\'\n\014corner.mode" +
+      "lB\025PaginationProtoBufferH\001";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
