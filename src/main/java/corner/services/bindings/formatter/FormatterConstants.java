@@ -13,39 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.bindings;
-
-import java.text.Format;
-
-import org.apache.tapestry5.internal.bindings.AbstractBinding;
-import org.apache.tapestry5.ioc.Location;
+package corner.services.bindings.formatter;
 
 /**
- * 针对格式化的一些前缀
+ * 针对格式化工具类的一些常量
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2088 $
+ * @version $Revision$
  * @since 0.0.2
  */
-public class FormatBinding extends AbstractBinding {
+public final class FormatterConstants {
 
-	private String toString;
-	private Format formatter;
-	public FormatBinding(Format formatter,String toString, Location location) {
-		super(location);
-		this.toString = toString;
-		this.formatter = formatter;
-	}
-
-	/**
-	 * @see org.apache.tapestry5.Binding#get()
-	 */
-	@Override
-	public Object get() {
-		return formatter;
-	}
-    @Override
-    public String toString()
-    {
-        return toString;
-    }
+	/** 货币 **/
+	public final static String CURRENCY="currency";
+	/** 时间 **/
+	public final static String DATE_TIME="dateTime";
+	/** 日期 **/
+	public final static String DATE="date";
+    /** 针对数据库保存为long类型的格式化 **/
+    public static final String LONG_DATE = "long_date";
 }

@@ -13,22 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.bindings;
+package corner.services.bindings.formatter;
+
+import java.text.Format;
+import java.util.Map;
 
 /**
- * 针对格式化工具类的一些常量
+ * 针对格式化源的实现
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.2
  */
-public final class FormatterConstants {
+public class FormatterSourceImpl implements FormatterSource {
 
-	/** 货币 **/
-	public final static String CURRENCY="currency";
-	/** 时间 **/
-	public final static String DATE_TIME="dateTime";
-	/** 日期 **/
-	public final static String DATE="date";
-    /** 针对数据库保存为long类型的格式化 **/
-    public static final String LONG_DATE = "long_date";
+	/**
+	 * 所有的格式化配置
+	 */
+	private Map<String, Format> configuration;
+
+	public FormatterSourceImpl(Map<String,Format> configuration) {
+		this.configuration = configuration;
+	}
+
+	/**
+	 * @see corner.services.bindings.formatter.FormatterSource#getFormatter(java.lang.String)
+	 */
+	@Override
+	public Format getFormatter(String formatName) {
+		return configuration.get(formatName);
+	}
+
 }

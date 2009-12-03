@@ -13,23 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.bindings;
+package corner.services.bindings.formatter;
 
 import java.text.Format;
 
+import org.apache.tapestry5.internal.bindings.AbstractBinding;
+import org.apache.tapestry5.ioc.Location;
+
 /**
- * 所有的格式化源
+ * 针对格式化的一些前缀
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision$
+ * @version $Revision: 2088 $
  * @since 0.0.2
  */
-public interface FormatterSource {
+public class FormatBinding extends AbstractBinding {
+
+	private String toString;
+	private Format formatter;
+	public FormatBinding(Format formatter,String toString, Location location) {
+		super(location);
+		this.toString = toString;
+		this.formatter = formatter;
+	}
 
 	/**
-	 * 通过给定的format的名称来的到格式化工具类.
-	 * @param formatName 格式化名称
-	 * @return 格式化工具类
-	 * @since 0.0.2
+	 * @see org.apache.tapestry5.Binding#get()
 	 */
-	public Format getFormatter(String formatName);
+	@Override
+	public Object get() {
+		return formatter;
+	}
+    @Override
+    public String toString()
+    {
+        return toString;
+    }
 }

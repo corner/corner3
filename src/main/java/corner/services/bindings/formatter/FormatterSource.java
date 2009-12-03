@@ -13,34 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.bindings;
+package corner.services.bindings.formatter;
 
 import java.text.Format;
-import java.util.Map;
 
 /**
- * 针对格式化源的实现
+ * 所有的格式化源
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.2
  */
-public class FormatterSourceImpl implements FormatterSource {
+public interface FormatterSource {
 
 	/**
-	 * 所有的格式化配置
+	 * 通过给定的format的名称来的到格式化工具类.
+	 * @param formatName 格式化名称
+	 * @return 格式化工具类
+	 * @since 0.0.2
 	 */
-	private Map<String, Format> configuration;
-
-	public FormatterSourceImpl(Map<String,Format> configuration) {
-		this.configuration = configuration;
-	}
-
-	/**
-	 * @see corner.bindings.FormatterSource#getFormatter(java.lang.String)
-	 */
-	@Override
-	public Format getFormatter(String formatName) {
-		return configuration.get(formatName);
-	}
-
+	public Format getFormatter(String formatName);
 }

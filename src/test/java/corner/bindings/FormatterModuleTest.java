@@ -20,6 +20,8 @@ import java.text.Format;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import corner.services.bindings.BindingModule;
+
 /**
  * 
  * @author Jun Tsai
@@ -30,7 +32,7 @@ public class FormatterModuleTest {
 
 	@Test
 	public void test_number_format(){
-		Format format = FormatterModule.buildCurrencyFormat();
+		Format format = BindingModule.buildCurrencyFormat();
 		Assert.assertEquals(format.format(0.1),"0.10");
 		Assert.assertEquals(format.format(110.1),"110.10");
 		Assert.assertEquals(format.format(11210.1),"11210.10");

@@ -16,7 +16,6 @@
 package corner;
 
 import java.util.Iterator;
-import java.util.Map;
 
 import org.apache.tapestry5.hibernate.HibernateTransactionDecorator;
 import org.apache.tapestry5.internal.services.LinkSource;
@@ -41,37 +40,23 @@ import org.apache.tapestry5.services.AssetFactory;
 import org.apache.tapestry5.services.BindingFactory;
 import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.ComponentClassTransformWorker;
-import org.apache.tapestry5.services.ComponentEventResultProcessor;
 import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.ContextProvider;
 import org.apache.tapestry5.services.LibraryMapping;
 import org.apache.tapestry5.services.PersistentFieldStrategy;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
-import org.apache.tapestry5.services.RequestGlobals;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import corner.bindings.FormatterModule;
-import corner.internal.services.CookiePersistentFieldStrategy;
-import corner.internal.services.FlashBindingFactory;
-import corner.internal.services.FlashFacadeImpl;
-import corner.internal.services.HessianRemoteServiceCaller;
-import corner.internal.services.RemoteCallServiceLifecycle;
-import corner.internal.services.RemoteResponseResultProcessor;
-import corner.internal.services.ServiceLocatorDelegateImpl;
 import corner.livevalidator.ValidationModule;
 import corner.model.PaginationList;
 import corner.model.PaginationOptions;
 import corner.protobuf.ProtocolBuffersModule;
 import corner.services.EntityService;
-import corner.services.FlashFacade;
 import corner.services.HtmlTemplateProvider;
-import corner.services.RemoteResponse;
-import corner.services.RemoteServiceCaller;
-import corner.services.RemoteServiceCallerSource;
-import corner.services.ServiceLocatorDelegate;
 import corner.services.asset.StaticAssetModule;
+import corner.services.bindings.BindingModule;
 import corner.services.config.ServiceConfigModule;
 import corner.services.fckeditor.FckeditorModule;
 import corner.services.hadoop.HadoopModule;
@@ -81,6 +66,7 @@ import corner.services.impl.PageTemplateLocatorWithHtml;
 import corner.services.migration.MigrationModule;
 import corner.services.payment.PaymentModule;
 import corner.services.security.SecurityModule;
+import corner.services.tapestry.impl.CookiePersistentFieldStrategy;
 import corner.services.transaction.SpringTransactionModule;
 import corner.services.tree.TreeModule;
 import corner.transform.PageRedirectWorker;
@@ -95,7 +81,7 @@ import corner.transform.PageRedirectWorker;
 @SubModule( { ValidationModule.class, StaticAssetModule.class,
 		TreeModule.class, SecurityModule.class, ProtocolBuffersModule.class,
 		FckeditorModule.class, PaymentModule.class, MigrationModule.class,
-		HadoopModule.class, ServiceConfigModule.class,FormatterModule.class ,SpringTransactionModule.class})
+		HadoopModule.class, ServiceConfigModule.class,BindingModule.class ,SpringTransactionModule.class})
 public class CoreModule {
 
 	/**
@@ -106,11 +92,7 @@ public class CoreModule {
 	 * @see ServiceBinder
 	 */
 	public static void bind(ServiceBinder binder) {
-		binder.bind(FlashFacade.class, FlashFacadeImpl.class);
-		binder.bind(ServiceLocatorDelegate.class,
-				ServiceLocatorDelegateImpl.class);
 		binder.bind(EntityService.class, EntityServiceImpl.class);
-        binder.bind(ServiceLifecycle.class,RemoteCallServiceLifecycle.class).withId("RemoteServiceLifeCycle");
 	}
 
 	/**
@@ -152,8 +134,7 @@ public class CoreModule {
 	public static void contributeBindingSource(
 			MappedConfiguration<String, BindingFactory> configuration,
 			ObjectLocator locator) {
-		configuration
-				.add("flash", locator.autobuild(FlashBindingFactory.class));
+		
 	}
 
 	// 扩展一个可以在客户端进行Persist的保存策略
@@ -197,38 +178,10 @@ public class CoreModule {
 		configuration.add(CornerConstants.COMPOENT_TABLEVIEW_ROWS_PERPAGE, "15");
 	}
 
-	/**
-	 * 对远程调用方法进行扩展.
-	 * 
-	 * @param configuration
-	 *            配置.
-	 * @param locator
-	 *            对应创建
-	 */
-	public static void contributeRemoteServiceCallerSource(
-			MappedConfiguration<String, RemoteServiceCaller> configuration,
-			ObjectLocator locator) {
-		configuration.add("hessian", locator
-				.autobuild(HessianRemoteServiceCaller.class));
-	}
+	
 
-	/**
-	 */
-	public static RemoteServiceCallerSource build(
-			final Map<String, RemoteServiceCaller> configuration) {
-		return new RemoteServiceCallerSource() {
-			public RemoteServiceCaller get(String remoteType) {
-				return configuration.get(remoteType);
-			}
-		};
-	}
+	
 
-	public void contributeComponentEventResultProcessor(
-			MappedConfiguration<Class, ComponentEventResultProcessor> configuration,RequestGlobals requestGlobals) {
-
-		configuration.add(RemoteResponse.class,
-				new RemoteResponseResultProcessor(requestGlobals));
-	}
 
 	@Match("EntityService")
 	public static <T> T decorateTransactionally(

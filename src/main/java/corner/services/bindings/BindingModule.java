@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.bindings;
+package corner.services.bindings;
 
 import java.text.DecimalFormat;
 import java.text.FieldPosition;
@@ -27,13 +27,21 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.BindingFactory;
 
+import corner.services.FlashFacade;
+import corner.services.bindings.flash.FlashBindingFactory;
+import corner.services.bindings.flash.FlashFacadeImpl;
+import corner.services.bindings.formatter.FormatBindingFactory;
+import corner.services.bindings.formatter.FormatterConstants;
+import corner.services.bindings.formatter.FormatterSource;
+import corner.services.bindings.formatter.FormatterSourceImpl;
+
 /**
  * 针对格式化的模块
  * @author Jun Tsai
  * @version $Revision$
  * @since 0.0.2
  */
-public class FormatterModule {
+public class BindingModule {
 	/**
 	 * 绑定使用的service.
 	 * 
@@ -44,6 +52,7 @@ public class FormatterModule {
 	public static void bind(ServiceBinder binder) {
 		binder.bind(FormatterSource.class, FormatterSourceImpl.class);
 		binder.bind(BindingFactory.class,FormatBindingFactory.class).withId("FormatBindingFactory");
+		binder.bind(FlashFacade.class, FlashFacadeImpl.class);
 	} 
 
 	// 针对日期的format
@@ -102,6 +111,9 @@ public class FormatterModule {
 			MappedConfiguration<String, BindingFactory> configuration,
 			@InjectService("FormatBindingFactory")
 			BindingFactory factory) {
+		//for format
 		configuration.add("format", factory);
+		//for flash
+		configuration.addInstance("flash", FlashBindingFactory.class);
 	}
 }
