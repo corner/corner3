@@ -16,14 +16,21 @@
 package corner.asset;
 
 /**
- * const varibles
+ * 资源的一些配置参数
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 0.1
  */
-public class AssetConstants {
-	//默认的资源类型
-	public static final String DEFAULT_ASSET_TYPE="default";
-	//hdfs类型的资源
-	public static final String HDFS_ASSET_TYPE = "hdfs";
+public class StaticAssetSymbols {
+	/** 
+	 * 配置domain 
+	 * 配置可为 http://asset.fepss.com
+	 * 
+	 **/
+	public static final String DOMAIN_NAME = "corner.asset.domain.name";
+	/** 配置是否使用泛域名解析 * */
+	public static final String DOMAIN_SUPPORT_MUTIL = "corner.asset.domain.mutil";
+	/** 配置用于散列的域名个数 * */
+	public static final String DOMAIN_SEHASH_COUNT = "corner.asset.domain.sehash.count";
+
 }

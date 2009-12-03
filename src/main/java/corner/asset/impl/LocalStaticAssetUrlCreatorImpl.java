@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.slf4j.Logger;
 
-import corner.asset.AssetConstants;
+import corner.asset.StaticAssetConstants;
 import corner.asset.StaticAssetUrlCreator;
 
 /**
@@ -46,7 +46,7 @@ public class LocalStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
 	@Override
 	public String createUrl(String context,String protocol,String path,String referPath) {
 		//仅仅针对default类型的资源
-		if(!AssetConstants.DEFAULT_ASSET_TYPE.equals(protocol)){
+		if(!StaticAssetConstants.DEFAULT_ASSET_TYPE.equals(protocol)){
 			return null;
 		}
 		if (logger.isDebugEnabled()) {

@@ -21,7 +21,8 @@ import java.net.URL;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 
-import corner.asset.AssetConstants;
+import corner.asset.StaticAssetConstants;
+import corner.asset.StaticAssetSymbols;
 import corner.asset.StaticAssetUrlCreator;
 
 /**
@@ -33,10 +34,6 @@ import corner.asset.StaticAssetUrlCreator;
  * @since 0.0.2
  */
 public class DomainStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
-	/** 配置domain * */
-	public static final String LICHEN_STATICASSET_DOMAINFACTORY_DOMAIN = "corner.staticasset.domainfactory.domain";
-	/** 配置是否使用泛域名解析 * */
-	public static final String LICHEN_STATICASSET_DOMAINFACTORY_SUPPORT_MUTIL = "corner.staticasset.domainfactory.mutil";
 	private final String domain;
 	private final boolean supportMutil;
 	private final StaticAssetUrlDomainHash hash;
@@ -50,9 +47,9 @@ public class DomainStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
 	 *            是否使用泛域名解析
 	 */
 	public DomainStaticAssetUrlCreatorImpl(@Inject
-	@Symbol(LICHEN_STATICASSET_DOMAINFACTORY_DOMAIN)
+	@Symbol(StaticAssetSymbols.DOMAIN_NAME)
 	String domain, @Inject
-	@Symbol(LICHEN_STATICASSET_DOMAINFACTORY_SUPPORT_MUTIL)
+	@Symbol(StaticAssetSymbols.DOMAIN_SUPPORT_MUTIL)
 	boolean supportMutil, StaticAssetUrlDomainHash hash) {
 		this.domain = domain;
 		this.supportMutil = supportMutil;
@@ -76,7 +73,7 @@ public class DomainStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
 	@Override
 	public String createUrl(String context,String protocol,String path,String referPath) {
 		//仅仅针对default类型的资源
-		if(!AssetConstants.DEFAULT_ASSET_TYPE.equals(protocol)){
+		if(!StaticAssetConstants.DEFAULT_ASSET_TYPE.equals(protocol)){
 			return null;
 		}
 		String _path = path.replaceFirst("^\\.+", "");

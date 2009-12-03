@@ -60,15 +60,9 @@ public class StaticAssetModule {
 			MappedConfiguration<String, String> configuration) {
 		configuration.add(LICHEN_STATICASSET_URLFACTORY_TYPE, LOCAL);
 		// 默认配置为不支持泛域名解析
-		configuration
-				.add(
-						DomainStaticAssetUrlCreatorImpl.LICHEN_STATICASSET_DOMAINFACTORY_SUPPORT_MUTIL,
-						"false");
+		configuration.add(StaticAssetSymbols.DOMAIN_SUPPORT_MUTIL,"false");
 		// 配置默认的域名散列个数为3个
-		configuration
-				.add(
-						StaticAssetUrlDomainSequenceHash.LICHEN_STATICASSET_DOMAINFACTORY_SEHASH_COUNT,
-						"3");
+		configuration.add(StaticAssetSymbols.DOMAIN_SEHASH_COUNT,"3");
 	}
 
 	

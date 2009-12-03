@@ -19,7 +19,7 @@ package corner.asset.impl;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 
-import corner.asset.AssetConstants;
+import corner.asset.StaticAssetConstants;
 import corner.asset.StaticAssetUrlCreator;
 import corner.hadoop.HadoopModule;
 
@@ -45,7 +45,7 @@ public class HadoopStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
 	@Override
 	public String createUrl(String context,String protocol,String path,String referPath) {
 		//仅仅针对hdfs类型的资源
-		if(!AssetConstants.HDFS_ASSET_TYPE.equals(protocol)){
+		if(!StaticAssetConstants.HDFS_ASSET_TYPE.equals(protocol)){
 			return null;
 		}
 		return String.format("%s/%s", this.hadoopPath, path);

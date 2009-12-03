@@ -16,7 +16,7 @@ import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 
-import corner.asset.AssetConstants;
+import corner.asset.StaticAssetConstants;
 import corner.asset.StaticAssetUrlCreator;
 import corner.converter.Converter;
 import corner.converter.ConverterSource;
@@ -87,7 +87,7 @@ public class StaticLink {
 						}
 					}
 
-					_value = this.locator.createUrl(request.getContextPath(),AssetConstants.DEFAULT_ASSET_TYPE,
+					_value = this.locator.createUrl(request.getContextPath(),StaticAssetConstants.DEFAULT_ASSET_TYPE,
 							_value, resources.getPageName());
 
 					// 是否需要判断文件的版本号

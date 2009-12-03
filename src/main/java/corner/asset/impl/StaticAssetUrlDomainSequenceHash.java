@@ -19,6 +19,8 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 
+import corner.asset.StaticAssetSymbols;
+
 /**
  * 从0开如,按数字的顺序生成域名的散列,每线程一个实例
  * 
@@ -29,8 +31,6 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 @Scope(org.apache.tapestry5.ioc.ScopeConstants.PERTHREAD)
 public class StaticAssetUrlDomainSequenceHash implements
 		StaticAssetUrlDomainHash {
-	/** 配置用于散列的域名个数 * */
-	public static final String LICHEN_STATICASSET_DOMAINFACTORY_SEHASH_COUNT = "corner.staticasset.domainfactory.sehash.count";
 	private final int count;
 	private int value;
 
@@ -40,7 +40,7 @@ public class StaticAssetUrlDomainSequenceHash implements
 	 * @param count
 	 */
 	public StaticAssetUrlDomainSequenceHash(@Inject
-	@Symbol(LICHEN_STATICASSET_DOMAINFACTORY_SEHASH_COUNT)
+	@Symbol(StaticAssetSymbols.DOMAIN_SEHASH_COUNT)
 	int count) {
 		if (count <= 0) {
 			throw new IllegalArgumentException(
