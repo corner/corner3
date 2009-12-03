@@ -28,7 +28,6 @@ import org.hibernate.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import corner.SeriableJSONObject;
 
 /**
  * 实现SeriableJSONObject字符串作为一个Hibernate的类型存入数据库
