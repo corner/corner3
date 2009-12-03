@@ -1,7 +1,7 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
  * site: http://ganshane.net
- * file: $Id: ServiceConfigSourceImpl.java 4355 2008-12-05 02:39:02Z d0ng $
+ * file: $Id: ConfigruationSourceImpl.java 4355 2008-12-05 02:39:02Z d0ng $
  * created at:2008-10-08
  */
 
@@ -28,14 +28,14 @@ import corner.config.ConfigruationSource;
  * @version $Revision: 4355 $
  * @since 0.0.1
  */
-public class ServiceConfigSourceImpl implements ConfigruationSource {
+public class ConfigruationSourceImpl implements ConfigruationSource {
 
 	private final StrategyRegistry<Resource> registry;
 
 	private final Map<Class, Object> cache = CollectionFactory
 			.newConcurrentMap();
 
-	public ServiceConfigSourceImpl(Map<Class, Resource> configuration) {
+	public ConfigruationSourceImpl(Map<Class, Resource> configuration) {
 		registry = StrategyRegistry.newInstance(Resource.class, configuration);
 	}
 
@@ -67,7 +67,7 @@ public class ServiceConfigSourceImpl implements ConfigruationSource {
 			throw new RuntimeException(e);
 		}
 		if (in == null) {
-			throw new RuntimeException("The config name [" + resource
+			throw new RuntimeException("The config source[" + resource
 					+ "] can't be found.");
 		}
 		Reader reader = new InputStreamReader(in);
