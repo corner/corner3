@@ -19,7 +19,7 @@ import org.apache.tapestry5.ioc.internal.util.Defense;
 import org.apache.tapestry5.ioc.util.StrategyRegistry;
 
 import corner.config.ConfigInitable;
-import corner.config.ServiceConfigSource;
+import corner.config.ConfigruationSource;
 
 /**
  * 实现服务配置工厂类.
@@ -28,8 +28,7 @@ import corner.config.ServiceConfigSource;
  * @version $Revision: 4355 $
  * @since 0.0.1
  */
-@SuppressWarnings("unchecked")
-public class ServiceConfigSourceImpl implements ServiceConfigSource {
+public class ServiceConfigSourceImpl implements ConfigruationSource {
 
 	private final StrategyRegistry<Resource> registry;
 
@@ -42,7 +41,7 @@ public class ServiceConfigSourceImpl implements ServiceConfigSource {
 
 	/**
 	 * 
-	 * @see corner.config.ServiceConfigSource#getServiceConfig(java.lang.Class)
+	 * @see corner.config.ConfigruationSource#getServiceConfig(java.lang.Class)
 	 */
 	@Override
 	public <T> T getServiceConfig(Class<T> type) {

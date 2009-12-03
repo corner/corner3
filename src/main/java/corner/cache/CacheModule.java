@@ -29,7 +29,7 @@ import corner.cache.local.impl.LocalCacheManagerImpl;
 import corner.cache.memcache.impl.ErrorHandlerImpl;
 import corner.cache.memcache.impl.MemcacheConfig;
 import corner.cache.memcache.impl.MemcachedCacheManager;
-import corner.config.ServiceConfigSource;
+import corner.config.ConfigruationSource;
 
 /**
  * Cache的配置,目前提供Memcache和LocalCache的配置:
@@ -60,7 +60,7 @@ public class CacheModule {
 	 * @since 0.0.2
 	 */
 	public CacheManager buildMemcachedCacheManager(
-			ServiceConfigSource configSource, Logger logger,
+			ConfigruationSource configSource, Logger logger,
 			ErrorHandler errorHandler) {
 		MemcacheConfig _config = configSource
 				.getServiceConfig(MemcacheConfig.class);
@@ -77,7 +77,7 @@ public class CacheModule {
 	 * @return
 	 * @since 0.0.2
 	 */
-	public CacheManager buildLocalCacheManager(ServiceConfigSource configSource) {
+	public CacheManager buildLocalCacheManager(ConfigruationSource configSource) {
 		LocalCacheConfig _config = configSource
 				.getServiceConfig(LocalCacheConfig.class);
 		CacheManager _manager = new LocalCacheManagerImpl(_config);
