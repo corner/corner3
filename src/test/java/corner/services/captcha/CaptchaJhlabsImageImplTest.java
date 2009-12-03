@@ -19,6 +19,9 @@ import java.io.FileOutputStream;
 
 import org.junit.Test;
 
+import corner.tapestry.captcha.CaptchaImage;
+import corner.tapestry.captcha.CaptchaJhlabsImageImpl;
+
 
 public class CaptchaJhlabsImageImplTest {
 

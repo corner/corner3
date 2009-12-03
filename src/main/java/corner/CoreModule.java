@@ -49,27 +49,27 @@ import org.apache.tapestry5.services.RequestFilter;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
+import corner.asset.StaticAssetModule;
+import corner.config.ServiceConfigModule;
+import corner.hadoop.HadoopModule;
 import corner.livevalidator.ValidationModule;
+import corner.migration.MigrationModule;
 import corner.model.PaginationList;
 import corner.model.PaginationOptions;
+import corner.payment.PaymentModule;
 import corner.protobuf.ProtocolBuffersModule;
+import corner.security.SecurityModule;
 import corner.services.EntityService;
 import corner.services.HtmlTemplateProvider;
-import corner.services.asset.StaticAssetModule;
-import corner.services.bindings.BindingModule;
-import corner.services.config.ServiceConfigModule;
-import corner.services.fckeditor.FckeditorModule;
-import corner.services.hadoop.HadoopModule;
 import corner.services.impl.EntityServiceImpl;
 import corner.services.impl.ForbidViewHtmlTemplate;
 import corner.services.impl.PageTemplateLocatorWithHtml;
-import corner.services.migration.MigrationModule;
-import corner.services.payment.PaymentModule;
-import corner.services.security.SecurityModule;
 import corner.services.tapestry.impl.CookiePersistentFieldStrategy;
-import corner.services.transaction.SpringTransactionModule;
-import corner.services.tree.TreeModule;
-import corner.transform.PageRedirectWorker;
+import corner.tapestry.bindings.BindingModule;
+import corner.tapestry.fckeditor.FckeditorModule;
+import corner.tapestry.transform.PageRedirectWorker;
+import corner.transaction.SpringTransactionModule;
+import corner.tree.TreeModule;
 
 /**
  * 定义了Corner的核心module
@@ -103,7 +103,7 @@ public class CoreModule {
 	 */
 	public static void contributeComponentClassResolver(
 			Configuration<LibraryMapping> configuration) {
-		configuration.add(new LibraryMapping("corner", "corner"));
+		configuration.add(new LibraryMapping("corner", "corner.tapestry"));
 	}
 
 	/**

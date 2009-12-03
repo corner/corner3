@@ -18,7 +18,7 @@ package corner.integration.app1.entities;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import corner.entities.base.BaseModel;
+import corner.jpa.BaseModel;
 
 
 @Entity

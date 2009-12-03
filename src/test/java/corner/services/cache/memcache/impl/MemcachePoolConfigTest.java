@@ -22,8 +22,11 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import corner.services.cache.memcache.impl.MemcachePoolConfig.Server;
-import corner.services.config.impl.JAXBUtil;
+import corner.cache.memcache.impl.MemcacheClientConfig;
+import corner.cache.memcache.impl.MemcacheConfig;
+import corner.cache.memcache.impl.MemcachePoolConfig;
+import corner.cache.memcache.impl.MemcachePoolConfig.Server;
+import corner.config.impl.JAXBUtil;
 
 /**
  * @author dong

@@ -19,7 +19,7 @@ package corner.integration.app1.pages;
 import org.apache.tapestry5.StreamResponse;
 import org.apache.tapestry5.util.TextStreamResponse;
 
-import corner.services.http.CacheHeader;
+import corner.http.CacheHeader;
 
 /**
  * @author dong

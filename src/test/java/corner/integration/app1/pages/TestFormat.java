@@ -19,8 +19,8 @@ import java.util.Date;
 
 import org.apache.tapestry5.annotations.Meta;
 
-import corner.services.http.CacheHeader;
-import corner.services.http.CacheHeaderType;
+import corner.http.CacheHeader;
+import corner.http.CacheHeaderType;
 
 @Meta({"tapestry.response-content-type=text/html"})
 @CacheHeader(type=CacheHeaderType.NOCACHE)

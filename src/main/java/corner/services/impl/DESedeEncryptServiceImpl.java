@@ -25,7 +25,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Hex;
 
 import corner.services.EncryptService;
-import corner.services.captcha.CipherKey;
+import corner.tapestry.captcha.CipherKey;
 
 /**
  * 使用DEsede加密算法实现的EncryptService

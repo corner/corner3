@@ -23,7 +23,7 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextField;
 
-import corner.mixins.FieldRenderTracker;
+import corner.tapestry.mixins.FieldRenderTracker;
 
 /**
  * @author dong

@@ -23,7 +23,9 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import corner.services.config.impl.JAXBUtil;
+import corner.cache.local.impl.LocalCacheConfig;
+import corner.cache.local.impl.LocalCacheItemConfig;
+import corner.config.impl.JAXBUtil;
 
 /**
  * @author dong

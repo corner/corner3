@@ -6,8 +6,8 @@ import java.io.InputStream;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Response;
 
-import corner.services.hadoop.DistributedResource;
-import corner.services.hadoop.DistributedResourceAccessor;
+import corner.hadoop.DistributedResource;
+import corner.hadoop.DistributedResourceAccessor;
 
 public class HadoopTest {
 	private static final String REMOTE_FILE_PATH="target/a/b/c/logo.jpg";

@@ -27,9 +27,10 @@ import org.apache.tapestry5.test.TapestryTestCase;
 import org.easymock.EasyMock;
 import org.testng.annotations.Test;
 
-import corner.services.http.CacheHeader;
-import corner.services.http.CacheHeaderService;
-import corner.services.http.CacheHeaderType;
+import corner.http.CacheHeader;
+import corner.http.CacheHeaderService;
+import corner.http.CacheHeaderType;
+import corner.http.impl.CacheHeaderWorker;
 
 /**
  * @author dong

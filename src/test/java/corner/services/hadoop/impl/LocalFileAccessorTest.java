@@ -9,6 +9,8 @@ import java.io.IOException;
 
 import org.testng.annotations.Test;
 
+import corner.hadoop.impl.LocalFileAccessorProxy;
+
 public class LocalFileAccessorTest {
 	@Test
 	public void test_local() throws FileNotFoundException, IOException {

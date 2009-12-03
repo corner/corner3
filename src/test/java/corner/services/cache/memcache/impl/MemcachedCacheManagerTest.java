@@ -28,8 +28,11 @@ import org.apache.tapestry5.json.JSONObject;
 import org.hibernate.annotations.Type;
 import org.testng.annotations.Test;
 
-import corner.services.cache.Cache;
-import corner.services.config.impl.JAXBUtil;
+import corner.cache.Cache;
+import corner.cache.memcache.impl.ErrorHandlerImpl;
+import corner.cache.memcache.impl.MemcacheConfig;
+import corner.cache.memcache.impl.MemcachedCacheManager;
+import corner.config.impl.JAXBUtil;
 
 
 /**

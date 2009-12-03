@@ -27,9 +27,9 @@ import org.easymock.EasyMock;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import corner.services.bindings.formatter.FormatBindingFactory;
-import corner.services.bindings.formatter.FormatterSource;
-import corner.services.bindings.formatter.FormatterSourceImpl;
+import corner.tapestry.bindings.formatter.FormatBindingFactory;
+import corner.tapestry.bindings.formatter.FormatterSource;
+import corner.tapestry.bindings.formatter.FormatterSourceImpl;
 
 /**
  * 

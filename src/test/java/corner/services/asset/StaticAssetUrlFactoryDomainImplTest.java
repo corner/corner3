@@ -19,6 +19,9 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
+import corner.asset.StaticAssetUrlDomainSequenceHash;
+import corner.asset.StaticAssetUrlFactoryDomainImpl;
+
 /**
  * @author dong
  * @version $Revision$

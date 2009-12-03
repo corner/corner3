@@ -6,7 +6,7 @@ package corner.integration.app1.services;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import corner.services.converter.ConverterVersion;
+import corner.converter.ConverterVersion;
 
 
 /**

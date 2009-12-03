@@ -20,7 +20,7 @@ import java.text.Format;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import corner.services.bindings.BindingModule;
+import corner.tapestry.bindings.BindingModule;
 
 /**
  * 
