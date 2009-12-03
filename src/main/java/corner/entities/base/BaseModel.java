@@ -21,7 +21,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
-import org.hibernate.annotations.Cache;
 
 /**
  * 基础模型类。
@@ -30,7 +29,6 @@ import org.hibernate.annotations.Cache;
  * @since 0.0.1
  */
 @MappedSuperclass
-@Cache(usage=org.hibernate.annotations.CacheConcurrencyStrategy.READ_ONLY)
 public class BaseModel implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
