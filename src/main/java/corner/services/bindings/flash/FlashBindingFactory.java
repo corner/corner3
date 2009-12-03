@@ -21,7 +21,6 @@ import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.ioc.Location;
 import org.apache.tapestry5.services.BindingFactory;
 
-import corner.services.FlashFacade;
 
 /**
  * 提供前端的flash的展示bing

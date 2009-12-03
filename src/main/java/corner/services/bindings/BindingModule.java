@@ -27,8 +27,8 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.BindingFactory;
 
-import corner.services.FlashFacade;
 import corner.services.bindings.flash.FlashBindingFactory;
+import corner.services.bindings.flash.FlashFacade;
 import corner.services.bindings.flash.FlashFacadeImpl;
 import corner.services.bindings.formatter.FormatBindingFactory;
 import corner.services.bindings.formatter.FormatterConstants;

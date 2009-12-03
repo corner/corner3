@@ -13,36 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.exceptions;
+package corner.services;
 
 /**
  * @author dong
  * @version $Revision$
  * @since 0.0.2
  */
-public class NoSuchResourceException extends RuntimeException {
+public class AclException extends RuntimeException {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public NoSuchResourceException() {
-		super();
-
+	/**
+	 * 
+	 */
+	public AclException() {
 	}
 
-	public NoSuchResourceException(String message, Throwable cause) {
-		super(message, cause);
-
-	}
-
-	public NoSuchResourceException(String message) {
+	/**
+	 * @param message
+	 */
+	public AclException(String message) {
 		super(message);
 
 	}
 
-	public NoSuchResourceException(Throwable cause) {
+	/**
+	 * @param cause
+	 */
+	public AclException(Throwable cause) {
 		super(cause);
+
+	}
+
+	/**
+	 * @param message
+	 * @param cause
+	 */
+	public AclException(String message, Throwable cause) {
+		super(message, cause);
 
 	}
 

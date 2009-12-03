@@ -9,7 +9,6 @@ package corner.services.bindings.flash;
 import org.apache.tapestry5.internal.bindings.AbstractBinding;
 import org.apache.tapestry5.ioc.Location;
 
-import corner.services.FlashFacade;
 
 /**
  * flash binding

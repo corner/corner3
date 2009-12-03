@@ -23,7 +23,6 @@ import java.net.URLEncoder;
 import org.apache.tapestry5.services.Cookies;
 import org.slf4j.Logger;
 
-import corner.services.FlashFacade;
 
 /**
  * 实现flash消息机制
