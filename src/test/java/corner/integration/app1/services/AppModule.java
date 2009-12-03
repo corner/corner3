@@ -15,8 +15,6 @@
  */
 package corner.integration.app1.services;
 
-import java.security.Principal;
-
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
@@ -31,7 +29,6 @@ import corner.converter.impl.ConverterServiceImpl;
 import corner.converter.impl.ConverterVersionServiceImpl;
 import corner.http.HttpModule;
 import corner.security.SecurityConstants;
-import corner.security.SecurityPrincipalService;
 
 /**
  * 
@@ -41,24 +38,9 @@ import corner.security.SecurityPrincipalService;
 @SubModule( {  CoreModule.class,HttpModule.class })
 public class AppModule {
 
-	public static class SecurityPrincipalServiceImpl implements
-			SecurityPrincipalService {
-
-		@Override
-		public Principal getCurrentPrincipal() {
-			return null;
-		}
-
-		@Override
-		public String[] getPrincipalRoles(Principal princiapl) {
-			return null;
-		}
-
-	}
+	
 
 	public static void bind(ServiceBinder binder) {
-		binder.bind(SecurityPrincipalService.class,
-				SecurityPrincipalServiceImpl.class);
 		binder.bind(ConverterSource.class, ConverterServiceImpl.class);
 		binder.bind(ConverterVersionSource.class, ConverterVersionServiceImpl.class);
 	}

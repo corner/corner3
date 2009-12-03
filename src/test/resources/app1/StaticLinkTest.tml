@@ -10,6 +10,7 @@
 <title>StaticLinkTest</title>
 </head>
 <body>
+<img t:type="corner/staticlink"  src="img/src.jpg"/>
 <a href="/test/a.jpg" t:type="corner/StaticLink" version="true">a.jpg version</a>
 <a href="/test/a.jpg" t:type="corner/StaticLink" >a.jpg no version</a>
 </body>

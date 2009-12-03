@@ -28,6 +28,7 @@ import corner.config.ConfigruationSource;
  * @version $Revision: 4355 $
  * @since 0.0.1
  */
+
 public class ConfigruationSourceImpl implements ConfigruationSource {
 
 	private final StrategyRegistry<Resource> registry;

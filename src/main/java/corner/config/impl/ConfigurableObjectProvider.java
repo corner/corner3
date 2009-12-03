@@ -18,9 +18,10 @@ package corner.config.impl;
 import org.apache.tapestry5.ioc.AnnotationProvider;
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.ObjectProvider;
+import org.apache.tapestry5.ioc.services.Builtin;
 
-import corner.config.Configurable;
 import corner.config.ConfigruationSource;
+import corner.config.Configurable;
 
 /**
  * 获取配置类实例
@@ -32,7 +33,7 @@ public class ConfigurableObjectProvider implements ObjectProvider{
 	
 	private ConfigruationSource configurationSource;
 
-	public ConfigurableObjectProvider(ConfigruationSource configurationSource){
+	public ConfigurableObjectProvider(@Builtin ConfigruationSource configurationSource){
 		this.configurationSource = configurationSource;
 		
 	}

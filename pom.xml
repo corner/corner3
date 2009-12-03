@@ -243,6 +243,12 @@ limitations under the License.
       <artifactId>tapestry-upload</artifactId>
       <version>${tapestry-release-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.tapestry</groupId>
+      <artifactId>tapestry-test</artifactId>
+      <version>${tapestry-release-version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <repositories>
     <repository>

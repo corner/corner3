@@ -11,6 +11,7 @@
 </head>
 <body>
 <t:pagelink page="testformat">test format</t:pagelink>
+<t:pagelink page="StaticAssetTest">test static asset</t:pagelink>
 <t:pagelink page="testajaxloader">test ajax loader</t:pagelink>
 <t:pagelink page="paymenttest">test payment</t:pagelink>
 </body>

@@ -10,9 +10,10 @@ package corner.config;
 import org.apache.tapestry5.ioc.ObjectProvider;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.services.Builtin;
 
-import corner.config.impl.ConfigurableObjectProvider;
 import corner.config.impl.ConfigruationSourceImpl;
+import corner.config.impl.ConfigurableObjectProvider;
 
 /**
  * ServiceConfig的配置Module
@@ -24,7 +25,7 @@ import corner.config.impl.ConfigruationSourceImpl;
 public class ConfigruationModule {
 
 	public static void bind(ServiceBinder binder) {
-		binder.bind(ConfigruationSource.class, ConfigruationSourceImpl.class);
+		binder.bind(ConfigruationSource.class, ConfigruationSourceImpl.class).withMarker(Builtin.class);
 	}
 
 	public static void contributeMasterObjectProvider(

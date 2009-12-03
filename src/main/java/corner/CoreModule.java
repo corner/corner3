@@ -25,8 +25,6 @@ import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.ServiceLifecycle;
-import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.SubModule;
@@ -146,16 +144,6 @@ public class CoreModule {
 
 	}
 
-	/**
-	 * Contributes the "remote" scope.
-	 */
-	public void contributeServiceLifecycleSource(
-			MappedConfiguration<String, ServiceLifecycle> configuration,
-            @Local
-            ServiceLifecycle serviceLifecycle
-			) {
-		configuration.add(CornerConstants.REMOTE_SCOPE,serviceLifecycle);
-	}
 
 	/**
 	 * 对一些基础配置进行了初步的设置
