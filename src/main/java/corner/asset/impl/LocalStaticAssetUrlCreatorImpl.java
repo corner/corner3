@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset;
+package corner.asset.impl;
 
 import java.util.Stack;
 import java.util.regex.Pattern;
 
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.slf4j.Logger;
+
+import corner.asset.AssetConstants;
+import corner.asset.StaticAssetUrlCreator;
 
 /**
  * 构造位于本地的静态资源的URL
@@ -28,20 +31,24 @@ import org.slf4j.Logger;
  * @version $Revision: 2088 $
  * @since 0.0.2
  */
-public class StaticAssetUrlFactoryLocalImpl implements StaticAsseUrlFactory {
+public class LocalStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
 	private final Pattern SLASH_PATTERN = Pattern.compile("/+");
 	private final Logger logger;
 
-	public StaticAssetUrlFactoryLocalImpl(Logger logger) {
+	public LocalStaticAssetUrlCreatorImpl(Logger logger) {
 		this.logger = logger;
 	}
 
 	/**
-	 * @see corner.asset.StaticAsseUrlFactory#getUrl(java.lang.String,
+	 * @see corner.asset.impl.StaticAsseUrlFactory#getUrl(java.lang.String,
 	 *      java.lang.String)
 	 */
 	@Override
-	public String getUrl(String context, String path, String referPath) {
+	public String createUrl(String context,String protocol,String path,String referPath) {
+		//仅仅针对default类型的资源
+		if(!AssetConstants.DEFAULT_ASSET_TYPE.equals(protocol)){
+			return null;
+		}
 		if (logger.isDebugEnabled()) {
 			logger.debug(String.format("context:%s,path:%s,referPath:%s",
 					context, path, referPath));

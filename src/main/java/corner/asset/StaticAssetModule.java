@@ -15,14 +15,23 @@
  */
 package corner.asset;
 
+import java.util.List;
+
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.ioc.services.ChainBuilder;
 import org.apache.tapestry5.services.AssetFactory;
-import org.apache.tapestry5.services.Request;
+
+import corner.asset.impl.DomainStaticAssetUrlCreatorImpl;
+import corner.asset.impl.HadoopStaticAssetUrlCreatorImpl;
+import corner.asset.impl.LocalStaticAssetUrlCreatorImpl;
+import corner.asset.impl.StaticAssetFactory;
+import corner.asset.impl.StaticAssetUrlDomainHash;
+import corner.asset.impl.StaticAssetUrlDomainSequenceHash;
 
 /**
  * StaticModule用于提供默认的配置
@@ -35,20 +44,17 @@ public class StaticAssetModule {
 	private static final String LOCAL = "local";
 	private static final String DOMAIN = "domain";
 	private static final String LICHEN_STATICASSET_URLFACTORY_TYPE = "corner.staticasset.urlfactory.type";
-	private final Request request;
+	
 
-	public StaticAssetModule(Request request) {
-		this.request = request;
-	}
-
-	public static void bind(ServiceBinder binder) {
-		binder.bind(StaticAsseUrlFactory.class,
-				StaticAssetUrlFactoryAdapter.class).withId(
-				"StaticAssetUrlFactoryAdapter");
-		binder.bind(StaticAssetUrlDomainHash.class,
+	public static void bind(ServiceBinder binder) { binder.bind(StaticAssetUrlDomainHash.class,
 				StaticAssetUrlDomainSequenceHash.class);
+		binder.bind(AssetFactory.class,StaticAssetFactory.class);
 
 	}
+	public StaticAssetUrlCreator buildStaticAssetUrlCreator(List<StaticAssetUrlCreator> configuration,ChainBuilder chainBuilder)
+    {
+		 return chainBuilder.build(StaticAssetUrlCreator.class, configuration);
+    }
 
 	public static void contributeFactoryDefaults(
 			MappedConfiguration<String, String> configuration) {
@@ -56,7 +62,7 @@ public class StaticAssetModule {
 		// 默认配置为不支持泛域名解析
 		configuration
 				.add(
-						StaticAssetUrlFactoryDomainImpl.LICHEN_STATICASSET_DOMAINFACTORY_SUPPORT_MUTIL,
+						DomainStaticAssetUrlCreatorImpl.LICHEN_STATICASSET_DOMAINFACTORY_SUPPORT_MUTIL,
 						"false");
 		// 配置默认的域名散列个数为3个
 		configuration
@@ -65,18 +71,7 @@ public class StaticAssetModule {
 						"3");
 	}
 
-	/**
-	 * 建立StaticAssetFactory的实例
-	 * 
-	 * @param type
-	 * @param domainFactory
-	 * @return
-	 */
-	@Marker(StaticProvider.class)
-	public AssetFactory buildStaticAssetFactory(
-			StaticAsseUrlFactory domainFactory) {
-		return new StaticAssetFactory(this.request, domainFactory);
-	}
+	
 
 	/**
 	 * 为Asset增加一种新的类型:static,使用样例:<code>@IncludeStylesheet({ "static:css/style2.css"})</code>
@@ -86,7 +81,7 @@ public class StaticAssetModule {
 	 */
 	public void contributeAssetSource(
 			MappedConfiguration<String, AssetFactory> configuration,
-			@StaticProvider
+			@StaticAssetProvider
 			AssetFactory staticAssetFactory) {
 		configuration.add("static", staticAssetFactory);
 	}
@@ -100,23 +95,19 @@ public class StaticAssetModule {
 	 * @param factoryType
 	 *            urlFactory的类型
 	 */
-	public void contributeStaticAssetUrlFactoryAdapter(
-			MappedConfiguration<String, StaticAsseUrlFactory> configuration,
+	public void contributeStaticAssetUrlCreator(
+			OrderedConfiguration<StaticAssetUrlCreator> configuration,
 			ObjectLocator locator, @Inject
 			@Symbol(LICHEN_STATICASSET_URLFACTORY_TYPE)
 			String factoryType) {
-		configuration.add("hdfs", locator
-				.autobuild(StaticAssetUrlFactoryHadoopImpl.class));
+		configuration.add("hdfs",locator
+				.autobuild(HadoopStaticAssetUrlCreatorImpl.class));
 		if (LOCAL.equals(factoryType)) {
-			configuration.add("file", locator
-					.autobuild(StaticAssetUrlFactoryLocalImpl.class));
 			configuration.add("default", locator
-					.autobuild(StaticAssetUrlFactoryLocalImpl.class));
+					.autobuild(LocalStaticAssetUrlCreatorImpl.class));
 		} else if (DOMAIN.equals(factoryType)) {
-			configuration.add("file", locator
-					.autobuild(StaticAssetUrlFactoryDomainImpl.class));
 			configuration.add("default", locator
-					.autobuild(StaticAssetUrlFactoryDomainImpl.class));
+					.autobuild(DomainStaticAssetUrlCreatorImpl.class));
 		}
 	}
 }

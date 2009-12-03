@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset;
+package corner.asset.impl;
 
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.ioc.Resource;
+import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.services.AssetFactory;
 import org.apache.tapestry5.services.Request;
+
+import corner.asset.StaticAssetUrlCreator;
+import corner.asset.StaticAssetProvider;
 
 /**
  * 提供static类型的Asset工厂实现
@@ -27,9 +31,10 @@ import org.apache.tapestry5.services.Request;
  * @version $Revision: 3031 $
  * @since 0.0.1
  */
+@Marker(StaticAssetProvider.class)
 public class StaticAssetFactory implements AssetFactory {
 	private final String context;
-	private final StaticAsseUrlFactory urlFactory;
+	private final StaticAssetUrlCreator urlCreator;
 
 	/**
 	 * 构建StaticAssetFactory实例
@@ -40,21 +45,30 @@ public class StaticAssetFactory implements AssetFactory {
 	 * @param urlFactory
 	 *            静态资源的Url工厂实现,必须的
 	 */
-	public StaticAssetFactory(Request request, StaticAsseUrlFactory urlFactory) {
-		if (request == null || urlFactory == null) {
-			throw new IllegalArgumentException(
-					"The request and urlFactory are both excepted.");
-		}
+	public StaticAssetFactory(Request request, StaticAssetUrlCreator urlCreator) {
 		this.context = request.getContextPath();
-		this.urlFactory = urlFactory;
+		this.urlCreator = urlCreator;
 	}
 
 	/**
 	 * @see org.apache.tapestry5.services.AssetFactory#createAsset(org.apache.tapestry5.ioc.Resource)
 	 */
 	public Asset createAsset(final Resource resource) {
+		String path = resource.getPath();
+		String _protocol= null;
+		String _path = null;
+		{
+			int i = path.indexOf(":");
+			if (i > 0) {
+				_protocol = path.substring(0, i);
+				_path = path.substring(i + 1);
+			} else {
+				_path = path;
+			}
+		}
+		
 		//getUrl的referPath参数为空,因为对于asset来说,它们的资源总是相对于应用的context路径,与请求的页面无关
-		final String url = this.urlFactory.getUrl(context, resource.getPath(),"");
+		final String url = this.urlCreator.createUrl(context,_protocol, _path,"");
 		return new Asset() {
 			public Resource getResource() {
 				return resource;

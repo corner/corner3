@@ -15,23 +15,15 @@
  */
 package corner.asset;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
 /**
- * 使用T5注入时用于标识StaticAssetFactory的类型
- * @author dong
- * @version $Revision: 718 $
- * @since 0.0.1
+ * const varibles
+ * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
+ * @version $Revision$
+ * @since 0.1
  */
-@Target( { PARAMETER, FIELD })
-@Retention(RUNTIME)
-@Documented
-public @interface StaticProvider {
-
+public class AssetConstants {
+	//默认的资源类型
+	public static final String DEFAULT_ASSET_TYPE="default";
+	//hdfs类型的资源
+	public static final String HDFS_ASSET_TYPE = "hdfs";
 }

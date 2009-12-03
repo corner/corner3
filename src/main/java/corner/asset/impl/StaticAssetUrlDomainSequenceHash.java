@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset;
+package corner.asset.impl;
 
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Scope;
@@ -51,7 +51,7 @@ public class StaticAssetUrlDomainSequenceHash implements
 	}
 
 	/**
-	 * @see corner.asset.StaticAssetUrlDomainHash#hash(java.lang.String)
+	 * @see corner.asset.impl.impl.StaticAssetUrlDomainHash#hash(java.lang.String)
 	 */
 	@Override
 	public String hash(String domain) {

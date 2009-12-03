@@ -14,21 +14,24 @@
  * limitations under the License.
  */
 package corner.asset;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
 /**
- *  静态资源域名选择的工厂类接口
- *  
+ * 使用T5注入时用于标识StaticAssetFactory的类型
  * @author dong
- * @version $Revision: 1488 $
+ * @version $Revision: 718 $
  * @since 0.0.1
  */
-public interface StaticAsseUrlFactory {
-	/**
-	 * 根据context和path选择取得path所代表的资源的实际地址
-	 * @param context 应用的根路径
-	 * @param path 请求的资源路径
-	 * @param referPath 请求来自的页面
-	 * @return
-	 * @since 0.0.2
-	 */
-	public String getUrl(String context,String path,String referPath);
+@Target( { PARAMETER, FIELD })
+@Retention(RUNTIME)
+@Documented
+public @interface StaticAssetProvider {
+
 }

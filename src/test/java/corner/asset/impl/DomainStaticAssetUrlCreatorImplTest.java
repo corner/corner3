@@ -13,35 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.services.asset;
+package corner.asset.impl;
 
 import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-import corner.asset.StaticAssetUrlDomainSequenceHash;
-import corner.asset.StaticAssetUrlFactoryDomainImpl;
+import corner.asset.AssetConstants;
+import corner.asset.impl.StaticAssetUrlDomainSequenceHash;
+import corner.asset.impl.DomainStaticAssetUrlCreatorImpl;
 
 /**
  * @author dong
  * @version $Revision$
  * @since 0.0.2
  */
-public class StaticAssetUrlFactoryDomainImplTest {
+public class DomainStaticAssetUrlCreatorImplTest {
 	@Test
 	public void test_domain_index() {
-		StaticAssetUrlFactoryDomainImpl _factory = new StaticAssetUrlFactoryDomainImpl(
+		DomainStaticAssetUrlCreatorImpl _factory = new DomainStaticAssetUrlCreatorImpl(
 				"img.eweb", false,null);
-		String _url = _factory.getUrl(null, "../images/a.gif", null);
+		String _url = _factory.createUrl(null,AssetConstants.DEFAULT_ASSET_TYPE, "../images/a.gif", null);
 		assertEquals(_url, "http://img.eweb/images/a.gif");
 
 		// 测试泛域名的解析支持
-		_factory = new StaticAssetUrlFactoryDomainImpl("img.eweb", true,new StaticAssetUrlDomainSequenceHash(10));
-		_url = _factory.getUrl(null, "../images/a.gif", null);
+		_factory = new DomainStaticAssetUrlCreatorImpl("img.eweb", true,new StaticAssetUrlDomainSequenceHash(10));
+		_url = _factory.createUrl(null,AssetConstants.DEFAULT_ASSET_TYPE, "../images/a.gif", null);
 		System.out.println(_url);
-		_factory = new StaticAssetUrlFactoryDomainImpl("img.eweb:8081", true,new StaticAssetUrlDomainSequenceHash(10));
+		_factory = new DomainStaticAssetUrlCreatorImpl("img.eweb:8081", true,new StaticAssetUrlDomainSequenceHash(10));
 		for (int i = 0; i < 10; i++) {
-			_url = _factory.getUrl(null, "../images/a.gif", null);
+			_url = _factory.createUrl(null,AssetConstants.DEFAULT_ASSET_TYPE, "../images/a.gif", null);
 			assertEquals(_url, String.format("http://img%s.eweb:8081/images/a.gif", i));
 		}
 	}

@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset;
+package corner.asset.impl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
+
+import corner.asset.AssetConstants;
+import corner.asset.StaticAssetUrlCreator;
 
 /**
  * 从指定的域名构造静态资源的URL
@@ -29,7 +32,7 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
  * @version $Revision: 4906 $
  * @since 0.0.2
  */
-public class StaticAssetUrlFactoryDomainImpl implements StaticAsseUrlFactory {
+public class DomainStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
 	/** 配置domain * */
 	public static final String LICHEN_STATICASSET_DOMAINFACTORY_DOMAIN = "corner.staticasset.domainfactory.domain";
 	/** 配置是否使用泛域名解析 * */
@@ -46,7 +49,7 @@ public class StaticAssetUrlFactoryDomainImpl implements StaticAsseUrlFactory {
 	 * @param supportMutil
 	 *            是否使用泛域名解析
 	 */
-	public StaticAssetUrlFactoryDomainImpl(@Inject
+	public DomainStaticAssetUrlCreatorImpl(@Inject
 	@Symbol(LICHEN_STATICASSET_DOMAINFACTORY_DOMAIN)
 	String domain, @Inject
 	@Symbol(LICHEN_STATICASSET_DOMAINFACTORY_SUPPORT_MUTIL)
@@ -67,11 +70,15 @@ public class StaticAssetUrlFactoryDomainImpl implements StaticAsseUrlFactory {
 	}
 
 	/**
-	 * @see corner.asset.StaticAsseUrlFactory#getUrl(java.lang.String,
+	 * @see corner.asset.impl.StaticAsseUrlFactory#getUrl(java.lang.String,
 	 *      java.lang.String)
 	 */
 	@Override
-	public String getUrl(String context, String path, String referPath) {
+	public String createUrl(String context,String protocol,String path,String referPath) {
+		//仅仅针对default类型的资源
+		if(!AssetConstants.DEFAULT_ASSET_TYPE.equals(protocol)){
+			return null;
+		}
 		String _path = path.replaceFirst("^\\.+", "");
 		_path = _path.replaceFirst("^/+", "");
 		String _host = this.host;

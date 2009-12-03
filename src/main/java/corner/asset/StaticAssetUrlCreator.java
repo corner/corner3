@@ -16,17 +16,21 @@
 package corner.asset;
 
 /**
- * 对域名进行Hash处理,分布域名
- * @author dong
+ * 创建静态资源的URL创建者
+ * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
- * @since 0.0.2
+ * @since 0.1
  */
-public interface StaticAssetUrlDomainHash {
+public interface StaticAssetUrlCreator {
+
 	/**
-	 * 
-	 * @param domain
-	 * @return
+	 * 创建URL
+	 * @param context http context 
+	 * @param protocol 协议，通常为缩写，譬如： hdfs:/xxx
+	 * @param path 请求的路径
+	 * @param referPath 来自的页面
+	 * @return 转换后的值
 	 * @since 0.0.2
 	 */
-	public String hash(String domain);
+	public String createUrl(String context,String protocol,String path,String referPath);
 }
