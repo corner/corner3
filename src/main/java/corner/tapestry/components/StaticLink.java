@@ -20,8 +20,6 @@ import corner.asset.StaticAssetConstants;
 import corner.asset.StaticAssetUrlCreator;
 import corner.converter.Converter;
 import corner.converter.ConverterSource;
-import corner.converter.ConverterVersion;
-import corner.converter.ConverterVersionSource;
 
 /**
  * 用于img,link,script静态资源的路径选择,具体的路径由locator决定;根据配置增加资源的版本号
@@ -48,11 +46,10 @@ public class StaticLink {
 	@Inject
 	private StaticAssetUrlCreator locator;
 
-	@Inject
-	private ConverterSource converterSource;
+	
 
 	@Inject
-	private ConverterVersionSource converterVersionSource;
+	private ConverterSource converterSource;
 
 	void beginRender(MarkupWriter writer) {
 		if (elementName != null) {
@@ -90,20 +87,20 @@ public class StaticLink {
 					_value = this.locator.createUrl(request.getContextPath(),StaticAssetConstants.DEFAULT_ASSET_TYPE,
 							_value, resources.getPageName());
 
-					// 是否需要判断文件的版本号
-					boolean _version = resources.isBound("version") ? this.version
-							: false;
-					if (_version) {
-						ConverterVersion _converterVersion = this.converterVersionSource
-								.getConvertVersion(_value);
-						if (_converterVersion != null) {
-							String _versionValue = _converterVersion
-									.convert(_value);
-							if (_versionValue != null) {
-								_value = _versionValue;
-							}
-						}
-					}
+//					// 是否需要判断文件的版本号
+//					boolean _version = resources.isBound("version") ? this.version
+//							: false;
+//					if (_version) {
+//						ConverterVersion _converterVersion = this.converterVersionSource
+//								.getConvertVersion(_value);
+//						if (_converterVersion != null) {
+//							String _versionValue = _converterVersion
+//									.convert(_value);
+//							if (_versionValue != null) {
+//								_value = _versionValue;
+//							}
+//						}
+//					}
 					writer.attributes(_attribute, _value);
 				}
 			}

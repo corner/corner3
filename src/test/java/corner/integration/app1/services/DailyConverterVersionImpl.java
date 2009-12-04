@@ -6,7 +6,7 @@ package corner.integration.app1.services;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import corner.converter.ConverterVersion;
+import corner.converter.Converter;
 
 
 /**
@@ -15,10 +15,7 @@ import corner.converter.ConverterVersion;
  * @author dong
  * 
  */
-public class DailyConverterVersionImpl implements ConverterVersion {
-
-	public DailyConverterVersionImpl() {
-	}
+public class DailyConverterVersionImpl implements Converter{
 
 	@Override
 	public String convert(String value) {
@@ -33,5 +30,4 @@ public class DailyConverterVersionImpl implements ConverterVersion {
 		}
 		return value;
 	}
-
 }

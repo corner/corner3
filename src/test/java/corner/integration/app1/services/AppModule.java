@@ -17,16 +17,12 @@ package corner.integration.app1.services;
 
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 
 import corner.CoreModule;
 import corner.converter.ConverterSource;
-import corner.converter.ConverterVersion;
-import corner.converter.ConverterVersionSource;
 import corner.converter.impl.ConverterServiceImpl;
-import corner.converter.impl.ConverterVersionServiceImpl;
 import corner.http.HttpModule;
 import corner.security.SecurityConstants;
 
@@ -42,7 +38,6 @@ public class AppModule {
 
 	public static void bind(ServiceBinder binder) {
 		binder.bind(ConverterSource.class, ConverterServiceImpl.class);
-		binder.bind(ConverterVersionSource.class, ConverterVersionServiceImpl.class);
 	}
 
 	public static void contributeApplicationDefaults(
@@ -71,13 +66,5 @@ public class AppModule {
 				SymbolConstants.SUPPRESS_REDIRECT_FROM_ACTION_REQUESTS, "true");
 
 		configuration.add(SecurityConstants.ENABLE_SECURITY, "false");
-	}
-
-	public static void contributeConverterVersionSource(
-			MappedConfiguration<String, ConverterVersion> configuration,
-			ObjectLocator objectLocator) {
-		configuration.add("test", objectLocator
-				.autobuild(DailyConverterVersionImpl.class));
-
 	}
 }

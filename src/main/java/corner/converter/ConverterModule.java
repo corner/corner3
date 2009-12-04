@@ -19,7 +19,6 @@ package corner.converter;
 import org.apache.tapestry5.ioc.ServiceBinder;
 
 import corner.converter.impl.ConverterServiceImpl;
-import corner.converter.impl.ConverterVersionServiceImpl;
 
 /**
  * Conver模块的配置
@@ -31,8 +30,5 @@ import corner.converter.impl.ConverterVersionServiceImpl;
 public class ConverterModule {
 	public static void bind(ServiceBinder binder) {
 		binder.bind(ConverterSource.class, ConverterServiceImpl.class);
-		binder.bind(ConverterVersionSource.class,
-				ConverterVersionServiceImpl.class);
 	}
-
 }
