@@ -316,7 +316,7 @@ limitations under the License.
         <groupId>org.apache.tapestry</groupId>
         <artifactId>tapestry-component-report</artifactId>
         <configuration>
-          <rootPackage>corner</rootPackage>
+          <rootPackage>corner.tapestry</rootPackage>
         </configuration>
       </plugin>
       <plugin>
