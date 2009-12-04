@@ -35,11 +35,15 @@ public class DomainStaticAssetUrlCreatorImplTest {
 				"img.eweb", false,null);
 		String _url = _factory.createUrl(null,StaticAssetConstants.DEFAULT_ASSET_TYPE, "../images/a.gif", null);
 		assertEquals(_url, "http://img.eweb/images/a.gif");
+		_factory = new DomainStaticAssetUrlCreatorImpl(
+				"http://img.web.server", false,null);
+		_url = _factory.createUrl(null,StaticAssetConstants.DEFAULT_ASSET_TYPE, "../images/a.gif", null);
+		assertEquals(_url, "http://img.web.server/images/a.gif");
 
 		// 测试泛域名的解析支持
 		_factory = new DomainStaticAssetUrlCreatorImpl("img.eweb", true,new StaticAssetUrlDomainSequenceHash(10));
 		_url = _factory.createUrl(null,StaticAssetConstants.DEFAULT_ASSET_TYPE, "../images/a.gif", null);
-		System.out.println(_url);
+		assertEquals(_url,"http://img0.eweb/images/a.gif");
 		_factory = new DomainStaticAssetUrlCreatorImpl("img.eweb:8081", true,new StaticAssetUrlDomainSequenceHash(10));
 		for (int i = 0; i < 10; i++) {
 			_url = _factory.createUrl(null,StaticAssetConstants.DEFAULT_ASSET_TYPE, "../images/a.gif", null);

@@ -16,9 +16,14 @@
 package corner.tapestry.components;
 
 import org.apache.tapestry5.dom.Document;
+import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.test.PageTester;
 import org.apache.tapestry5.test.TapestryTestCase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+
+import corner.asset.StaticAssetSymbols;
 
 /**
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
@@ -26,12 +31,31 @@ import org.testng.annotations.Test;
  * @since 0.1
  */
 public class StaticLinkTest extends TapestryTestCase{
+	private Logger logger = LoggerFactory.getLogger(StaticLinkTest.class);
 	@Test
 	public void test_render(){
 		PageTester tester = new PageTester("corner.integration.app1","App","src/test/app1");
 		Document doc = tester.renderPage("StaticLinkDemo");
+		logger.debug(doc.toString());
 		assertEquals("/foo/img/src.jpg",doc.getElementById("link1").getAttribute("src"));
+		assertEquals("/foo/test/a.jpg",doc.getElementById("link3").getAttribute("href"));
+		tester.shutdown();
+		
+	}
+	@Test
+	public void test_render_domain_static(){
+		PageTester tester = new PageTester("corner.integration.app1","App","src/test/app1",DomainAssetModule.class);
+		Document doc = tester.renderPage("StaticLinkDemo");
+		assertEquals("http://test.web.server/img/src.jpg",doc.getElementById("link1").getAttribute("src"));
+		tester.shutdown();
 	}
 	
+	public static class DomainAssetModule{
+		public static void contributeApplicationDefaults(
+				MappedConfiguration<String, String> configuration) {
+			configuration.add(StaticAssetSymbols.DOMAIN_ASSET_MODE, "true");
+			configuration.add(StaticAssetSymbols.DOMAIN_NAME, "http://test.web.server");
+		}
+	}
 
 }

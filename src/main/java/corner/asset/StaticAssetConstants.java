@@ -21,7 +21,7 @@ package corner.asset;
  * @version $Revision$
  * @since 0.1
  */
-public class StaticAssetConstants {
+public final class StaticAssetConstants {
 	//默认的资源类型
 	public static final String DEFAULT_ASSET_TYPE="default";
 	//hdfs类型的资源

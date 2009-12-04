@@ -41,15 +41,9 @@ import corner.asset.impl.StaticAssetUrlDomainSequenceHash;
  * @since 0.0.1
  */
 public class StaticAssetModule {
-	private static final String LOCAL = "local";
-	private static final String DOMAIN = "domain";
-	private static final String LICHEN_STATICASSET_URLFACTORY_TYPE = "corner.staticasset.urlfactory.type";
-	
-
 	public static void bind(ServiceBinder binder) { binder.bind(StaticAssetUrlDomainHash.class,
 				StaticAssetUrlDomainSequenceHash.class);
 		binder.bind(AssetFactory.class,StaticAssetFactory.class);
-
 	}
 	public StaticAssetUrlCreator buildStaticAssetUrlCreator(List<StaticAssetUrlCreator> configuration,ChainBuilder chainBuilder)
     {
@@ -58,7 +52,8 @@ public class StaticAssetModule {
 
 	public static void contributeFactoryDefaults(
 			MappedConfiguration<String, String> configuration) {
-		configuration.add(LICHEN_STATICASSET_URLFACTORY_TYPE, LOCAL);
+		//是否为domain访问
+		configuration.add(StaticAssetSymbols.DOMAIN_ASSET_MODE, "false");
 		// 默认配置为不支持泛域名解析
 		configuration.add(StaticAssetSymbols.DOMAIN_SUPPORT_MUTIL,"false");
 		// 配置默认的域名散列个数为3个
@@ -92,16 +87,16 @@ public class StaticAssetModule {
 	public void contributeStaticAssetUrlCreator(
 			OrderedConfiguration<StaticAssetUrlCreator> configuration,
 			ObjectLocator locator, @Inject
-			@Symbol(LICHEN_STATICASSET_URLFACTORY_TYPE)
-			String factoryType) {
+			@Symbol(StaticAssetSymbols.DOMAIN_ASSET_MODE)
+			boolean isDomain) {
 		configuration.add("hdfs",locator
 				.autobuild(HadoopStaticAssetUrlCreatorImpl.class));
-		if (LOCAL.equals(factoryType)) {
-			configuration.add("default", locator
-					.autobuild(LocalStaticAssetUrlCreatorImpl.class));
-		} else if (DOMAIN.equals(factoryType)) {
+		if (isDomain) {
 			configuration.add("default", locator
 					.autobuild(DomainStaticAssetUrlCreatorImpl.class));
+		}else{
+			configuration.add("default", locator
+					.autobuild(LocalStaticAssetUrlCreatorImpl.class));
 		}
 	}
 }
