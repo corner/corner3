@@ -38,5 +38,6 @@ public class ConfigruationSourceImplTest extends TapestryTestCase{
 		assertNotNull(model);
 		assertEquals(model.getTestElement1(),"test e1 content");
 		assertEquals(model.getTestElement2(),12345);
+		assertEquals(model.getInitValue(),"initValue");
 	}
 }
