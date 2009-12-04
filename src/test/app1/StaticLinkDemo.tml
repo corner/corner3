@@ -1,0 +1,5 @@
+<t:border xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<img t:type="corner/staticlink" id="link1" src="img/src.jpg"/>
+<a href="/test/a.jpg" id="link2" t:type="corner/StaticLink" version="true">a.jpg version</a>
+<a href="/test/a.jpg" id="link3" t:type="corner/StaticLink" >a.jpg no version</a>
+</t:border>

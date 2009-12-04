@@ -1,0 +1,15 @@
+<html t:type="Border" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+    <h1>Corner集成测试应用1</h1>
+
+    <p>所有的测试页面</p>
+
+    <ul>
+        <li >
+            <t:pagelink page="StaticLinkDemo">静态链接测试页</t:pagelink>
+        </li>
+    </ul>
+
+
+</html>
+
