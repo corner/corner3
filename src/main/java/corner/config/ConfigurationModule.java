@@ -1,7 +1,7 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
  * site: http://ganshane.net
- * file: $Id: ConfigruationModule.java 2424 2008-10-31 17:13:57Z d0ng $
+ * file: $Id: ConfigurationModule.java 2424 2008-10-31 17:13:57Z d0ng $
  * created at:2008-10-08
  */
 
@@ -22,7 +22,7 @@ import corner.config.impl.ConfigurableObjectProvider;
  * @version $Revision: 2424 $
  * @since 0.0.1
  */
-public class ConfigruationModule {
+public class ConfigurationModule {
 
 	public static void bind(ServiceBinder binder) {
 		binder.bind(ConfigruationSource.class, ConfigruationSourceImpl.class).withMarker(Builtin.class);

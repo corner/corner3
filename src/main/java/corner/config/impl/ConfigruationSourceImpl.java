@@ -13,9 +13,14 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Map;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
 import org.apache.tapestry5.ioc.internal.util.Defense;
+import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.ioc.util.StrategyRegistry;
 
 import corner.config.ConfigInitable;
@@ -72,12 +77,33 @@ public class ConfigruationSourceImpl implements ConfigruationSource {
 					+ "] can't be found.");
 		}
 		Reader reader = new InputStreamReader(in);
-		T result = JAXBUtil.load(reader, type);
+		T result = load(reader, type);
 		if (result instanceof ConfigInitable) {
 			((ConfigInitable) result).init();
 		}
 		return result;
 
+	}
+	/**
+	 * 从一个输入流里加载clazz类型的对象
+	 * 
+	 * @param <T>
+	 * @param in 操作完成后,会被关闭
+	 * @param clazz
+	 * @return
+	 * @throws RuntimeException
+	 *             在加载的过程出现异常,将抛出此异常
+	 */
+	private static <T> T load(Reader in, Class<T> clazz) {
+		try {
+			JAXBContext context = JAXBContext.newInstance(clazz);
+			Unmarshaller um = context.createUnmarshaller();
+			return (T) um.unmarshal(in);
+		} catch (JAXBException e) {
+			throw new RuntimeException(e);
+		} finally {
+			InternalUtils.close(in);
+		}
 	}
 
 }

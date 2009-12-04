@@ -48,7 +48,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import corner.asset.StaticAssetModule;
-import corner.config.ConfigruationModule;
+import corner.config.ConfigurationModule;
 import corner.hadoop.HadoopModule;
 import corner.livevalidator.ValidationModule;
 import corner.migration.MigrationModule;
@@ -79,7 +79,7 @@ import corner.tree.TreeModule;
 @SubModule( { ValidationModule.class, StaticAssetModule.class,
 		TreeModule.class, SecurityModule.class, ProtocolBuffersModule.class,
 		FckeditorModule.class, PaymentModule.class, MigrationModule.class,
-		HadoopModule.class, ConfigruationModule.class,BindingModule.class ,SpringTransactionModule.class})
+		HadoopModule.class, ConfigurationModule.class,BindingModule.class ,SpringTransactionModule.class})
 public class CoreModule {
 
 	/**

@@ -35,7 +35,6 @@ public class ConfigurableObjectProvider implements ObjectProvider{
 
 	public ConfigurableObjectProvider(@Builtin ConfigruationSource configurationSource){
 		this.configurationSource = configurationSource;
-		
 	}
 
 	@Override
