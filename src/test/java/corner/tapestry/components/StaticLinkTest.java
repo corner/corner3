@@ -38,7 +38,7 @@ public class StaticLinkTest extends TapestryTestCase{
 		Document doc = tester.renderPage("StaticLinkDemo");
 		logger.debug(doc.toString());
 		assertEquals("/foo/img/src.jpg",doc.getElementById("link1").getAttribute("src"));
-		assertEquals("/foo/test/a.jpg",doc.getElementById("link3").getAttribute("href"));
+		assertEquals("/foo/test/has_version.jpg",doc.getElementById("link2").getAttribute("href"));
 		tester.shutdown();
 		
 	}

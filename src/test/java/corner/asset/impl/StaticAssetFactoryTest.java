@@ -8,6 +8,7 @@ import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.testng.annotations.Test;
 
+import corner.asset.StaticAssetConstants;
 import corner.asset.StaticAssetUrlCreator;
 
 public class StaticAssetFactoryTest extends TapestryTestCase{
@@ -17,7 +18,7 @@ public class StaticAssetFactoryTest extends TapestryTestCase{
 		Request request = this.mockRequest();
         Context context = mockContext();
         expect(request.getContextPath()).andReturn("/context");
-        expect(urlCreator.createUrl("/context", null, "foo/Bar.txt", "")).andReturn("/context/foo/Bar.txt");
+        expect(urlCreator.createUrl("/context",StaticAssetConstants.DEFAULT_ASSET_TYPE , "foo/Bar.txt", "")).andReturn("/context/foo/Bar.txt");
         replay();
         
 		StaticAssetFactory factory = new StaticAssetFactory(request,urlCreator);

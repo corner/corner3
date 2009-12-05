@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2009 The Fepss Pty Ltd. 
+	site: http://www.fepss.com
+	file: $Id: persistence.xml 5915 2009-09-22 04:56:54Z jcai $
+	created at:2009-09-22
+-->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+  	<persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
+  	<class>corner.orm.gae.impl.TestAEntity</class>
+  	</persistence-unit>
+</persistence>

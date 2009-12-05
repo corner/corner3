@@ -217,6 +217,24 @@ limitations under the License.
 			<version>1.0.3</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-stubs</artifactId>
+			<version>1.2.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-runtime</artifactId>
+			<version>1.2.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-tools-sdk</artifactId>
+			<version>1.2.5</version>
+			<scope>test</scope>
+		</dependency>
     <!--  alipay inc memcache client -->
     <dependency>
       <groupId>com.fepss.3rd</groupId>
