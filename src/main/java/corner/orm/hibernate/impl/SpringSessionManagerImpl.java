@@ -4,7 +4,7 @@
  * file: $Id$
  * created at:2009-5-14
  */
-package corner.transaction;
+package corner.orm.hibernate.impl;
 
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.hibernate.HibernateSessionSource;

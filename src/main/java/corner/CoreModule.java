@@ -62,7 +62,7 @@ import corner.tapestry.persistent.CookiePersistentFieldStrategy;
 import corner.tapestry.services.HtmlTemplateProvider;
 import corner.tapestry.services.override.PageTemplateLocatorWithHtml;
 import corner.tapestry.transform.PageRedirectWorker;
-import corner.transaction.SpringTransactionModule;
+import corner.transaction.TransactionModule;
 import corner.tree.TreeModule;
 
 /**
@@ -75,7 +75,7 @@ import corner.tree.TreeModule;
 @SubModule( { ValidationModule.class, StaticAssetModule.class,
 		TreeModule.class, SecurityModule.class, ProtocolBuffersModule.class,
 		FckeditorModule.class, PaymentModule.class, MigrationModule.class,
-		HadoopModule.class, ConfigurationModule.class,BindingModule.class,SpringTransactionModule.class,
+		HadoopModule.class, ConfigurationModule.class,BindingModule.class,TransactionModule.class,
 		EncryptModule.class})
 public class CoreModule {
 

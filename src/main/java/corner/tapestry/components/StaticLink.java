@@ -8,7 +8,6 @@
 package corner.tapestry.components;
 
 
-import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.Parameter;
@@ -33,9 +32,6 @@ import corner.converter.ConverterSource;
 public class StaticLink {
 	@Parameter("componentResources.elementName")
 	private String elementName;
-
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private boolean version;
 
 	@Inject
 	private ComponentResources resources;

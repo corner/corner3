@@ -17,6 +17,8 @@ package corner.orm.services;
 
 import java.util.Iterator;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
 
@@ -32,18 +34,21 @@ public interface EntityService {
 	 * @param entity 实体对象
 	 * @since 3.1
 	 */
+	@Transactional
 	public void save(Object entity);
 	/**
 	 * 删除一个实体
 	 * @param entity 实体对象
 	 * @since 3.1
 	 */
+	@Transactional
 	public void delete(Object entity);
 	/**
 	 * 更新一个实体
 	 * @param entity 实体对象
 	 * @since 3.1
 	 */
+	@Transactional
 	public void update(Object entity);
 	/**
 	 * 加载一个实体
