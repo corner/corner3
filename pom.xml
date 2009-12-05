@@ -96,6 +96,7 @@ limitations under the License.
       <groupId>org.apache.tapestry</groupId>
       <artifactId>tapestry-hibernate</artifactId>
       <version>${tapestry-release-version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -173,6 +174,49 @@ limitations under the License.
       <version>0.9.1.2</version>
       <scope>runtime</scope>
     </dependency>
+    <!--  for gae -->
+    <dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-jpa</artifactId>
+			<version>1.1.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>1.1.5</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.transaction</groupId>
+					<artifactId>transaction-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo2-api</artifactId>
+			<version>2.3-eb</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<version>1.2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-labs</artifactId>
+			<version>1.2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine.orm</groupId>
+			<artifactId>datanucleus-appengine</artifactId>
+			<version>1.0.3</version>
+			<scope>provided</scope>
+		</dependency>
     <!--  alipay inc memcache client -->
     <dependency>
       <groupId>com.fepss.3rd</groupId>

@@ -11,6 +11,7 @@ import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Scope;
+import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.PerthreadManager;
 import org.apache.tapestry5.services.AliasContribution;
 import org.apache.tapestry5.services.Request;
@@ -23,7 +24,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 import corner.orm.hibernate.impl.EntityServiceImpl;
 import corner.orm.hibernate.impl.HibernateEntityServiceImpl;
 import corner.orm.hibernate.impl.SpringSessionManagerImpl;
+import corner.orm.hibernate.impl.TapestryHibernateTransactionDecorterImpl;
 import corner.orm.services.EntityService;
+import corner.transaction.services.TransactionDecorator;
+import corner.tree.TreeModule;
 
 /**
  * hibernate 操作的模块
@@ -31,10 +35,12 @@ import corner.orm.services.EntityService;
  * @version $Revision$
  * @since 3.1
  */
+@SubModule(TreeModule.class)
 public class HibernateModule {
 	public static void bind(ServiceBinder binder){
 		binder.bind(EntityService.class,EntityServiceImpl.class);
 		binder.bind(HibernateEntityService.class,HibernateEntityServiceImpl.class);
+		binder.bind(TransactionDecorator.class,TapestryHibernateTransactionDecorterImpl.class);
 	}
 	/**
 	 * 替换由HibernateModule提供的HibernateSessionManager

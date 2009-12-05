@@ -13,24 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.orm;
+package corner.template;
 
-import org.apache.tapestry5.ioc.annotations.Match;
+import org.apache.tapestry5.ioc.ServiceBinder;
 
-import corner.transaction.services.TransactionDecorator;
-
+import corner.template.services.TemplateService;
+import corner.template.services.impl.GroovyTemplateServiceImpl;
 
 /**
- * orm module
+ * template system
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
-public class OrmModule {
-	@Match("EntityService")
-	public static <T> T decorateTransactionally(
-			TransactionDecorator decorator, Class<T> serviceInterface,
-			T delegate, String serviceId) {
-		return decorator.build(serviceInterface, delegate, serviceId);
+public class TemplateModule {
+	public static void bind(ServiceBinder binder){
+		binder.bind(TemplateService.class,GroovyTemplateServiceImpl.class);
 	}
+
 }

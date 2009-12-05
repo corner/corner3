@@ -51,6 +51,7 @@ import corner.encrypt.EncryptModule;
 import corner.hadoop.HadoopModule;
 import corner.livevalidator.ValidationModule;
 import corner.migration.MigrationModule;
+import corner.orm.OrmModule;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
 import corner.payment.PaymentModule;
@@ -62,8 +63,8 @@ import corner.tapestry.persistent.CookiePersistentFieldStrategy;
 import corner.tapestry.services.HtmlTemplateProvider;
 import corner.tapestry.services.override.PageTemplateLocatorWithHtml;
 import corner.tapestry.transform.PageRedirectWorker;
+import corner.template.TemplateModule;
 import corner.transaction.TransactionModule;
-import corner.tree.TreeModule;
 
 /**
  * 定义了Corner的核心module
@@ -73,10 +74,10 @@ import corner.tree.TreeModule;
  * @since 0.0.1
  */
 @SubModule( { ValidationModule.class, StaticAssetModule.class,
-		TreeModule.class, SecurityModule.class, ProtocolBuffersModule.class,
+		SecurityModule.class, ProtocolBuffersModule.class,
 		FckeditorModule.class, PaymentModule.class, MigrationModule.class,
 		HadoopModule.class, ConfigurationModule.class,BindingModule.class,TransactionModule.class,
-		EncryptModule.class})
+		EncryptModule.class,TemplateModule.class,OrmModule.class})
 public class CoreModule {
 
 	/**

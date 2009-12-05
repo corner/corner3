@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.encrypt.impl;
+package corner.encrypt.services.impl;
 
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import corner.encrypt.EncryptService;
 import corner.encrypt.annotation.Md5;
+import corner.encrypt.services.EncryptService;
 
 /**
  * md5的加密方式

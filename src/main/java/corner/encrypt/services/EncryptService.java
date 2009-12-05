@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.encrypt;
+package corner.encrypt.services;
 
 /**
  *  加密的接口

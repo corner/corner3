@@ -16,9 +16,14 @@
 package corner.encrypt;
 
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.annotations.Symbol;
 
-import corner.encrypt.impl.DESedeEncryptServiceImpl;
-import corner.encrypt.impl.MD5EncryptServiceImpl;
+import corner.encrypt.annotation.Des;
+import corner.encrypt.services.EncryptService;
+import corner.encrypt.services.impl.DESedeEncryptServiceImpl;
+import corner.encrypt.services.impl.MD5EncryptServiceImpl;
+import corner.tapestry.captcha.CipherKey;
 
 /**
  * 用于加密的模块
@@ -32,4 +37,13 @@ public class EncryptModule {
 		binder.bind(EncryptService.class,MD5EncryptServiceImpl.class);
 		binder.bind(EncryptService.class,DESedeEncryptServiceImpl.class);
 	}
+
+
+	@Des
+	public EncryptService buildDESedeEncryptService(
+			@Inject @Symbol(EncryptSymbols.CIPHER_FILE) String cipherKeyPath) {
+		return new DESedeEncryptServiceImpl(new CipherKey(cipherKeyPath, 24));
+	}
+
+
 }

@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.orm;
+package corner.orm.hibernate.impl;
 
-import org.apache.tapestry5.ioc.annotations.Match;
+import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
+import org.apache.tapestry5.internal.hibernate.HibernateTransactionDecoratorImpl;
+import org.apache.tapestry5.ioc.services.AspectDecorator;
 
 import corner.transaction.services.TransactionDecorator;
 
-
 /**
- * orm module
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
-public class OrmModule {
-	@Match("EntityService")
-	public static <T> T decorateTransactionally(
-			TransactionDecorator decorator, Class<T> serviceInterface,
-			T delegate, String serviceId) {
-		return decorator.build(serviceInterface, delegate, serviceId);
+public class TapestryHibernateTransactionDecorterImpl extends HibernateTransactionDecoratorImpl implements TransactionDecorator{
+
+	public TapestryHibernateTransactionDecorterImpl(
+			AspectDecorator aspectDecorator, HibernateTransactionAdvisor advisor) {
+		super(aspectDecorator, advisor);
 	}
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.encrypt.impl;
+package corner.encrypt.services.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Security;
@@ -24,8 +24,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
 
-import corner.encrypt.EncryptService;
 import corner.encrypt.annotation.Des;
+import corner.encrypt.services.EncryptService;
 import corner.tapestry.captcha.CipherKey;
 
 /**
