@@ -18,6 +18,8 @@ import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -43,6 +45,13 @@ public class HibernateModule {
 		binder.bind(HibernateEntityService.class,HibernateEntityServiceImpl.class);
 		binder.bind(TransactionDecorator.class,TapestryHibernateTransactionDecorterImpl.class);
 	}
+	public static HibernateTemplate buildHibernateTemplate(
+			SessionFactory sessionFactory) {
+		HibernateTemplate template = new HibernateTemplate(sessionFactory);
+		return template;
+
+	}
+	
 	/**
 	 * 替换由HibernateModule提供的HibernateSessionManager
 	 * 

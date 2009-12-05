@@ -7,11 +7,13 @@
 package corner.transaction;
 
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.annotations.Match;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.AnnotationTransactionAttributeSource;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 import corner.transaction.services.TransactionAdvisor;
+import corner.transaction.services.TransactionDecorator;
 import corner.transaction.services.impl.SpringTransactionAdvisor;
 
 /**
@@ -36,5 +38,10 @@ public class TransactionModule {
     	return new TransactionInterceptor(transactionManager,attributeSource);
 	}
 
-
+	@Match("EntityService")
+	public static <T> T decorateTransactionally(
+			TransactionDecorator decorator, Class<T> serviceInterface,
+			T delegate, String serviceId) {
+		return decorator.build(serviceInterface, delegate, serviceId);
+	}
 }

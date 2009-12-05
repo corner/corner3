@@ -17,7 +17,6 @@ package corner;
 
 import java.util.Iterator;
 
-import org.apache.tapestry5.hibernate.HibernateTransactionDecorator;
 import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.internal.services.PageTemplateLocator;
 import org.apache.tapestry5.ioc.Configuration;
@@ -26,7 +25,6 @@ import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Marker;
-import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.Builtin;
@@ -42,8 +40,6 @@ import org.apache.tapestry5.services.ContextProvider;
 import org.apache.tapestry5.services.LibraryMapping;
 import org.apache.tapestry5.services.PersistentFieldStrategy;
 import org.apache.tapestry5.services.Request;
-import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import corner.asset.StaticAssetModule;
 import corner.config.ConfigurationModule;
@@ -117,12 +113,7 @@ public class CoreModule {
 				linkFactory));
 	}
 
-	public static HibernateTemplate buildHibernateTemplate(
-			SessionFactory sessionFactory) {
-		HibernateTemplate template = new HibernateTemplate(sessionFactory);
-		return template;
-
-	}
+	
 
 	// 扩展一个flash前缀的binding
 	public static void contributeBindingSource(
@@ -167,12 +158,7 @@ public class CoreModule {
 	
 
 
-	@Match("EntityService")
-	public static <T> T decorateTransactionally(
-			HibernateTransactionDecorator decorator, Class<T> serviceInterface,
-			T delegate, String serviceId) {
-		return decorator.build(serviceInterface, delegate, serviceId);
-	}
+	
 
 	/**
 	 * 构建基于HTML的PageTemplateLocator.

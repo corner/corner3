@@ -15,14 +15,9 @@
  */
 package corner.integration.app1.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import corner.jpa.BaseModel;
 
 
-@Entity
-@Table(name="table_a")
 public class TestA extends BaseModel{
 	private String userName;
 
