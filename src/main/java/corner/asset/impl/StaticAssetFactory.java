@@ -21,8 +21,9 @@ import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.services.AssetFactory;
 import org.apache.tapestry5.services.Request;
 
-import corner.asset.StaticAssetUrlCreator;
+import corner.asset.StaticAssetConstants;
 import corner.asset.StaticAssetProvider;
+import corner.asset.StaticAssetUrlCreator;
 
 /**
  * 提供static类型的Asset工厂实现
@@ -65,6 +66,10 @@ public class StaticAssetFactory implements AssetFactory {
 			} else {
 				_path = path;
 			}
+		}
+		
+		if(_protocol == null){
+			_protocol = StaticAssetConstants.DEFAULT_ASSET_TYPE;
 		}
 		
 		//getUrl的referPath参数为空,因为对于asset来说,它们的资源总是相对于应用的context路径,与请求的页面无关

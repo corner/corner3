@@ -24,7 +24,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
 
-import corner.encrypt.annotation.Des;
 import corner.encrypt.services.EncryptService;
 import corner.tapestry.captcha.CipherKey;
 
@@ -35,7 +34,6 @@ import corner.tapestry.captcha.CipherKey;
  * @version $Revision: 3050 $
  * @since 0.2
  */
-@Des
 public class DESedeEncryptServiceImpl implements EncryptService {
 	private static final String CHIPERH_CHARSET = "UTF-8";
 	public final static String Algorithm = "DESede";

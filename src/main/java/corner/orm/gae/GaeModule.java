@@ -60,8 +60,6 @@ import org.springframework.orm.jpa.JpaTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.AnnotationTransactionAttributeSource;
-import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
@@ -245,19 +243,6 @@ public class GaeModule {
 		return platformTransactionManager;
 	}
 
-	/**
-	 * build spring transaction interceptor
-	 * 
-	 * @param transactionManager
-	 *            transaction manager
-	 * @return transaction manager instance
-	 * @since 0.0.2
-	 */
-	public static TransactionInterceptor buildTransactionInterceptor(
-			PlatformTransactionManager transactionManager) {
-		AnnotationTransactionAttributeSource attributeSource = new AnnotationTransactionAttributeSource();
-		return new TransactionInterceptor(transactionManager, attributeSource);
-	}
 
 	// Open EntityManager In View
 	public void contributeRequestHandler(

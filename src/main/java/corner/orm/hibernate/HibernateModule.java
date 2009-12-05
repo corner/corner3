@@ -21,6 +21,7 @@ import org.apache.tapestry5.services.Response;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import corner.migration.MigrationModule;
 import corner.orm.hibernate.impl.EntityServiceImpl;
 import corner.orm.hibernate.impl.HibernateEntityServiceImpl;
 import corner.orm.hibernate.impl.SpringSessionManagerImpl;
@@ -35,7 +36,7 @@ import corner.tree.TreeModule;
  * @version $Revision$
  * @since 3.1
  */
-@SubModule(TreeModule.class)
+@SubModule({MigrationModule.class,TreeModule.class})
 public class HibernateModule {
 	public static void bind(ServiceBinder binder){
 		binder.bind(EntityService.class,EntityServiceImpl.class);

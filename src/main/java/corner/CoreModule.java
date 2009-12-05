@@ -50,7 +50,6 @@ import corner.config.ConfigurationModule;
 import corner.encrypt.EncryptModule;
 import corner.hadoop.HadoopModule;
 import corner.livevalidator.ValidationModule;
-import corner.migration.MigrationModule;
 import corner.orm.OrmModule;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
@@ -75,7 +74,7 @@ import corner.transaction.TransactionModule;
  */
 @SubModule( { ValidationModule.class, StaticAssetModule.class,
 		SecurityModule.class, ProtocolBuffersModule.class,
-		FckeditorModule.class, PaymentModule.class, MigrationModule.class,
+		FckeditorModule.class, PaymentModule.class,
 		HadoopModule.class, ConfigurationModule.class,BindingModule.class,TransactionModule.class,
 		EncryptModule.class,TemplateModule.class,OrmModule.class})
 public class CoreModule {

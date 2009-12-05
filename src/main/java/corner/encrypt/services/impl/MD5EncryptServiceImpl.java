@@ -17,6 +17,7 @@ package corner.encrypt.services.impl;
 
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.tapestry5.ioc.annotations.Marker;
 
 import corner.encrypt.annotation.Md5;
 import corner.encrypt.services.EncryptService;
@@ -27,7 +28,7 @@ import corner.encrypt.services.EncryptService;
  * @version $Revision$
  * @since 0.1
  */
-@Md5
+@Marker(Md5.class)
 public class MD5EncryptServiceImpl implements EncryptService {
 
 	/**

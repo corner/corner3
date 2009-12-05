@@ -17,6 +17,7 @@ package corner.encrypt;
 
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 
 import corner.encrypt.annotation.Des;
@@ -35,11 +36,10 @@ public class EncryptModule {
 
 	public static void bind(ServiceBinder binder){
 		binder.bind(EncryptService.class,MD5EncryptServiceImpl.class);
-		binder.bind(EncryptService.class,DESedeEncryptServiceImpl.class);
 	}
 
 
-	@Des
+	@Marker(Des.class)
 	public EncryptService buildDESedeEncryptService(
 			@Inject @Symbol(EncryptSymbols.CIPHER_FILE) String cipherKeyPath) {
 		return new DESedeEncryptServiceImpl(new CipherKey(cipherKeyPath, 24));
