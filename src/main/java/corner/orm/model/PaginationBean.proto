@@ -1,0 +1,15 @@
+package corner.orm.model;
+
+option java_package = "corner.orm.model";
+option java_outer_classname = "PaginationProtoBuffer";
+option optimize_for = SPEED;
+message Pagination{
+    optional int64 totalRecord=1 [default=0];
+    optional int32 page =2 [default=1];
+    optional int32 perPage=3 [default=10];
+    repeated Parameter parameters=4;
+}
+message Parameter{
+    required string key=1;
+    required string value=2;
+}

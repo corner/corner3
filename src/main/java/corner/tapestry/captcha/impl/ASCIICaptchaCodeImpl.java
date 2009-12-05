@@ -17,7 +17,7 @@ package corner.tapestry.captcha.impl;
 
 import java.util.Random;
 
-import corner.services.EncryptService;
+import corner.encrypt.EncryptService;
 import corner.tapestry.captcha.CaptchaCode;
 
 

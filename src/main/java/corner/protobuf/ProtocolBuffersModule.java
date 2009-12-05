@@ -28,7 +28,7 @@ import org.apache.tapestry5.ioc.services.ClassNameLocator;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.services.ValueEncoderFactory;
 
-import corner.model.PaginationOptions;
+import corner.orm.model.PaginationOptions;
 
 /**
  * 配置<a href="http://code.google.com/p/protobuf/">Google protocol buffer</a>的Value Encoder.

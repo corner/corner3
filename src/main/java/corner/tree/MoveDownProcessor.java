@@ -98,7 +98,7 @@ class MoveDownProcessor extends AbstractMoveTreeNodeProcessor
 		}
 		rootNode.setLeft(0);
 
-		long rowCount = (Long) getEntityService().find("select count(*) from " + getTreeClassName()).next();
+		long rowCount = getEntityService().count(getTreeClass(),null);
 		rootNode.setRight((int) (rowCount * 2 + 1));
 
 		return rootNode;

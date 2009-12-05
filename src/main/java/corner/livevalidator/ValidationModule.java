@@ -60,8 +60,6 @@ public class ValidationModule {
 		configuration.add("pegnum", locator.autobuild(PegNum.class));
 		configuration.add("mustnum", locator.autobuild(MustNum.class));
 		configuration.add("liveregexp", locator.autobuild(Regexp.class));
-		configuration.add("multiplePresence", locator
-				.autobuild(MultiplePresence.class));
 		configuration.add("liveuploadregexp", locator
 				.autobuild(UploadRegexp.class));
 		configuration.add("fckeditor", locator.autobuild(Fckeditor.class));

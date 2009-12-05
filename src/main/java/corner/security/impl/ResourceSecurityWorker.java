@@ -173,7 +173,7 @@ public class ResourceSecurityWorker implements ComponentClassTransformWorker {
 		BodyBuilder builder = new BodyBuilder();
 		builder
 				.addln(
-						"try{if(!%s.%s(%s)){throw new corner.exceptions.AclException(\"%s\");}}catch(Throwable te){throw new RuntimeException(te);}",
+						"try{if(!%s.%s(%s)){throw new corner.security.AclException(\"%s\");}}catch(Throwable te){throw new RuntimeException(te);}",
 						checker, checkMethod, params, "Can't access");
 		transformation.extendMethod(method, builder.toString());
 	}

@@ -28,8 +28,8 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
-import corner.model.PaginationList;
-import corner.model.PaginationOptions;
+import corner.orm.model.PaginationList;
+import corner.orm.model.PaginationOptions;
 
 
 /**

@@ -1,4 +1,4 @@
-package corner.model;
+package corner.orm.model;
 
 option java_package = "corner.protobuf";
 option java_outer_classname = "AreaQueryProtocol";

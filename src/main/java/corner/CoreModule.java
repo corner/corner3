@@ -38,33 +38,29 @@ import org.apache.tapestry5.services.AssetFactory;
 import org.apache.tapestry5.services.BindingFactory;
 import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.ComponentClassTransformWorker;
-import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.ContextProvider;
 import org.apache.tapestry5.services.LibraryMapping;
 import org.apache.tapestry5.services.PersistentFieldStrategy;
 import org.apache.tapestry5.services.Request;
-import org.apache.tapestry5.services.RequestFilter;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import corner.asset.StaticAssetModule;
 import corner.config.ConfigurationModule;
+import corner.encrypt.EncryptModule;
 import corner.hadoop.HadoopModule;
 import corner.livevalidator.ValidationModule;
 import corner.migration.MigrationModule;
-import corner.model.PaginationList;
-import corner.model.PaginationOptions;
+import corner.orm.model.PaginationList;
+import corner.orm.model.PaginationOptions;
 import corner.payment.PaymentModule;
 import corner.protobuf.ProtocolBuffersModule;
 import corner.security.SecurityModule;
-import corner.services.EntityService;
-import corner.services.HtmlTemplateProvider;
-import corner.services.impl.EntityServiceImpl;
-import corner.services.impl.ForbidViewHtmlTemplate;
-import corner.services.impl.PageTemplateLocatorWithHtml;
-import corner.services.tapestry.impl.CookiePersistentFieldStrategy;
 import corner.tapestry.bindings.BindingModule;
 import corner.tapestry.fckeditor.FckeditorModule;
+import corner.tapestry.persistent.CookiePersistentFieldStrategy;
+import corner.tapestry.services.HtmlTemplateProvider;
+import corner.tapestry.services.override.PageTemplateLocatorWithHtml;
 import corner.tapestry.transform.PageRedirectWorker;
 import corner.transaction.SpringTransactionModule;
 import corner.tree.TreeModule;
@@ -79,7 +75,8 @@ import corner.tree.TreeModule;
 @SubModule( { ValidationModule.class, StaticAssetModule.class,
 		TreeModule.class, SecurityModule.class, ProtocolBuffersModule.class,
 		FckeditorModule.class, PaymentModule.class, MigrationModule.class,
-		HadoopModule.class, ConfigurationModule.class,BindingModule.class ,SpringTransactionModule.class})
+		HadoopModule.class, ConfigurationModule.class,BindingModule.class,SpringTransactionModule.class,
+		EncryptModule.class})
 public class CoreModule {
 
 	/**
@@ -90,7 +87,6 @@ public class CoreModule {
 	 * @see ServiceBinder
 	 */
 	public static void bind(ServiceBinder binder) {
-		binder.bind(EntityService.class, EntityServiceImpl.class);
 	}
 
 	/**
@@ -191,30 +187,6 @@ public class CoreModule {
 			boolean enableHtmlTemplate) {
 		return new PageTemplateLocatorWithHtml(contextAssetFactory
 				.getRootResource(), componentClassResolver, enableHtmlTemplate);
-	}
-
-	/**
-	 * 静止浏览静态模板资源
-	 * 
-	 * @param configuration
-	 *            RequestFilter Configuration
-	 * @param context
-	 *            webapp context
-	 * @param enableHtmlTemplate
-	 *            是否打开html模板
-	 * @since 0.0.2
-	 */
-	public void contributeRequestHandler(
-			OrderedConfiguration<RequestFilter> configuration, Context context,
-
-			@Symbol(CornerConstants.ENABLE_HTML_TEMPLATE)
-			boolean enableHtmlTemplate,@Symbol(CornerConstants.ENABLE_HTML_ACCESS) boolean enableHtmlAccess) {
-		if (enableHtmlTemplate && !enableHtmlAccess) {
-			RequestFilter foridViewHtmlTempalteFilter = new ForbidViewHtmlTemplate(
-					context);
-			configuration.add("ForidViewHtmlTempalteFilter",
-					foridViewHtmlTempalteFilter, "before:StaticFiles");
-		}
 	}
 
 	/**

@@ -27,7 +27,7 @@ import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.PageRenderLinkSource;
 
-import corner.model.PaginationOptions;
+import corner.orm.model.PaginationOptions;
 
 /**
  * 用来分页使用的组件

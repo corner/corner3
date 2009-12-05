@@ -26,7 +26,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
 import corner.jpa.TreeAdapter;
-import corner.services.EntityService;
+import corner.orm.hibernate.HibernateEntityService;
+import corner.orm.services.EntityService;
 import corner.utils.EntityUtil;
 
 /**
@@ -54,6 +55,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 
 	// 对应的节点类的名字
 	private String treeClassName;
+	private HibernateEntityService hibernateEntityService;
 
 	/**
 	 * 构造跟节点对象
@@ -78,6 +80,13 @@ abstract class AbstractMoveTreeNodeProcessor {
 	 */
 	protected String getTreeClassName() {
 		return this.treeClassName;
+	}
+	protected Class getTreeClass() {
+		try {
+			return Class.forName(treeClassName);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	protected EntityService getEntityService(){
@@ -104,11 +113,12 @@ abstract class AbstractMoveTreeNodeProcessor {
 	protected abstract void fetchMoveBlockInfo(List<? extends TreeAdapter> list);
 
 	@SuppressWarnings("unchecked")
-	public void execute(TreeAdapter node, EntityService service, int n, Class<? extends TreeAdapter> clazz) {
+	public void execute(TreeAdapter node, EntityService service,HibernateEntityService hibernateEntityService, int n, Class<? extends TreeAdapter> clazz) {
 
 		this.node = node;
 //		this.ht = ht;
 		this.service = service;
+		this.hibernateEntityService = hibernateEntityService;
 
 		if (clazz != null) {
 			treeClassName = clazz.getName();
@@ -135,7 +145,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 		service.refresh(node);
 
 		if (list.size() > 0) {
-			service.evict(list.get(0));
+			hibernateEntityService.evict(list.get(0));
 		}
 
 	}
@@ -148,7 +158,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 	 * @return 抓取的对象列表
 	 */
 	private List<?> fetchReplaceNode(final int n) {
-		return this.service.executeFind(new HibernateCallback(){
+		return this.hibernateEntityService.executeFind(new HibernateCallback(){
 
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
@@ -166,7 +176,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 
 	// 孤立当前节点以及子节点
 	private void insulateCurrentNodeAndChildren() {
-		service.bulkUpdate(String.format(ISOLATE_NODE_HQL, treeClassName),
+		hibernateEntityService.bulkUpdate(String.format(ISOLATE_NODE_HQL, treeClassName),
 				new Object[] { node.getLeft(), node.getRight()});
 	}
 
@@ -175,7 +185,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 
 		String updateNodesAffectedHQL = String.format(UPDATE_NODES_AFFECTED,
 				treeClassName, getUpdateWidth(), getUpdateWidth());
-		service.bulkUpdate(updateNodesAffectedHQL, new Object[] {
+		hibernateEntityService.bulkUpdate(updateNodesAffectedHQL, new Object[] {
 				getMoveBlockLeftStart(), getMoveBlockLeftEnd()});
 
 	}
@@ -185,7 +195,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 
 		String updateCurrentNodeHQL = String.format(UPDATE_CURRENT_NODE_HQL,
 				treeClassName, getOffset());
-		service.bulkUpdate(updateCurrentNodeHQL,
+		hibernateEntityService.bulkUpdate(updateCurrentNodeHQL,
 				new Object[] {0});
 	}
 
@@ -200,7 +210,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 		}
 		if (node.getDepth() > 1) {// 不为第一级的节点,则从库中获取
 			
-			List<?> list = service.executeFind(new HibernateCallback(){
+			List<?> list = hibernateEntityService.executeFind(new HibernateCallback(){
 
 				public Object doInHibernate(Session session)
 						throws HibernateException, SQLException {

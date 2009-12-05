@@ -26,7 +26,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
 import corner.jpa.TreeAdapter;
-import corner.services.EntityService;
+import corner.orm.hibernate.HibernateEntityService;
+import corner.orm.services.EntityService;
 import corner.utils.EntityUtil;
 
 /**
@@ -39,8 +40,7 @@ import corner.utils.EntityUtil;
  */
 public class TreeServiceImpl implements TreeService {
 
-	//查询所有节点数量
-	private static final String COUNT_ALL_NODE_HSQL="select count(*) from %s";
+	
 	//删除节点
 	private static final String DELETE_NODE_HSQL="delete %s n where (n."+TreeAdapter.LEFT_PRO_NAME+" between ? and ? )";
 	//更新左边节点
@@ -48,9 +48,11 @@ public class TreeServiceImpl implements TreeService {
 	//更新右边节点
 	private static final String UPDATE_RIGHT_HSQL="update %s n set n."+TreeAdapter.RIGHT_PRO_NAME+"=n."+TreeAdapter.RIGHT_PRO_NAME+"+%d where n."+TreeAdapter.RIGHT_PRO_NAME+">?";
 	private EntityService entityService;
+	private HibernateEntityService hibernateEntityService;
 	
-	public TreeServiceImpl(EntityService service){
+	public TreeServiceImpl(EntityService service,HibernateEntityService hibernateEntityService){
 		this.entityService = service;
+		this.hibernateEntityService = hibernateEntityService;
 	}
 
 	
@@ -69,7 +71,12 @@ public class TreeServiceImpl implements TreeService {
 			currentParentNode = (TreeAdapter) BeanUtils.instantiateClass(EntityUtil.getEntityClass(node));
 			currentParentNode.setLeft(0);
 			currentParentNode.setDepth(0);
-			long rowCount = (Long) this.entityService.find(String.format(COUNT_ALL_NODE_HSQL, treeClassName)).next();
+			long rowCount;
+			try {
+				rowCount = this.entityService.count(Class.forName(treeClassName), null);
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
 			currentParentNode.setRight((int) (rowCount * 2 + 1));
 		} else { // reload parent object
 			entityService.refresh(currentParentNode);
@@ -84,10 +91,10 @@ public class TreeServiceImpl implements TreeService {
 
 		String updateLeftHQL = String.format(UPDATE_LEFT_HSQL,treeClassName,2);
 		
-		entityService.bulkUpdate(updateLeftHQL, new Object[] { parentRight});
+		hibernateEntityService.bulkUpdate(updateLeftHQL, new Object[] { parentRight});
 
 		String updateRightHQL = String.format(UPDATE_RIGHT_HSQL,treeClassName,2);
-		entityService.bulkUpdate(updateRightHQL, new Object[] { parentRight - 1});
+		hibernateEntityService.bulkUpdate(updateRightHQL, new Object[] { parentRight - 1});
 
 		// 更新当前节点的值
 		node.setLeft(parentRight);
@@ -95,7 +102,7 @@ public class TreeServiceImpl implements TreeService {
 		node.setDepth(currentParentNode.getDepth() + 1);
 
 		// 保存当前的实体
-		entityService.saveOrUpdate(node);
+		hibernateEntityService.saveOrUpdate(node);
 //		if (parentNode.getId() != null) {
 //			entityService.refresh(parentNode);
 //		}
@@ -109,7 +116,7 @@ public class TreeServiceImpl implements TreeService {
 	@SuppressWarnings("unchecked")
 	public List<? extends TreeAdapter> getTree(
 			final Class<? extends TreeAdapter> clazz) {
-		return entityService.executeFind(new HibernateCallback(){
+		return hibernateEntityService.executeFind(new HibernateCallback(){
 			@Override
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
@@ -132,7 +139,7 @@ public class TreeServiceImpl implements TreeService {
 
 		MoveTreeNodeProcessor processor=createSubProcessor(node,n);
 		
-		processor.execute(node,this.entityService,n,clazz);
+		processor.execute(node,this.entityService,this.hibernateEntityService,n,clazz);
 		
 		
 	}
@@ -169,12 +176,12 @@ public class TreeServiceImpl implements TreeService {
 		int width = left-right - 1;
 
 		// 删除该节点，以及节点下面所属的字节点
-		entityService.bulkUpdate(String.format(DELETE_NODE_HSQL,treeClassName),
+		hibernateEntityService.bulkUpdate(String.format(DELETE_NODE_HSQL,treeClassName),
 				new Object[] { left, right});
 
 		// 更新其他节点的左右值
-		entityService.bulkUpdate(String.format(UPDATE_LEFT_HSQL,treeClassName,width), new Object[] {right});
-		entityService.bulkUpdate(String.format(UPDATE_RIGHT_HSQL,treeClassName,width), new Object[] {right});
+		hibernateEntityService.bulkUpdate(String.format(UPDATE_LEFT_HSQL,treeClassName,width), new Object[] {right});
+		hibernateEntityService.bulkUpdate(String.format(UPDATE_RIGHT_HSQL,treeClassName,width), new Object[] {right});
 
 	}
 }

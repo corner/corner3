@@ -16,7 +16,8 @@
 package corner.tree;
 
 import corner.jpa.TreeAdapter;
-import corner.services.EntityService;
+import corner.orm.hibernate.HibernateEntityService;
+import corner.orm.services.EntityService;
 
 /**
  * 对树进行处理的字处理程序
@@ -32,6 +33,6 @@ public interface MoveTreeNodeProcessor {
 	 * @param n 需要移动的距离,n>0 时候 向上移动，n<0的时候向下移动
 	 * @param clazz 给定的查询类，如果给定的为空，则从node中获取对应的类.
 	 */
-	public void execute(TreeAdapter node,EntityService service,int n, Class<? extends TreeAdapter> clazz);
+	public void execute(TreeAdapter node,EntityService service,HibernateEntityService hibernateEntityService,int n, Class<? extends TreeAdapter> clazz);
 
 }
