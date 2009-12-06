@@ -7,9 +7,11 @@
 package corner.tapestry.base;
 
 import org.apache.tapestry5.PropertyConduit;
+import org.apache.tapestry5.annotations.PageAttached;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.PropertyConduitSource;
+import org.springframework.beans.BeanUtils;
 
 /**
  * entity page class
@@ -37,5 +39,11 @@ public class EntityPage<T> {
 	public void setEntity(T entity) {
 		this.entity = entity;
 	}
-
+	@PageAttached
+	void initEntity(){
+		if(this.getEntity()==null){
+			this.setEntity((T) BeanUtils.instantiateClass(entityClass));
+		}
+	}
+		
 }
