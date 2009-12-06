@@ -20,7 +20,7 @@ import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.ObjectProvider;
 import org.apache.tapestry5.ioc.services.Builtin;
 
-import corner.config.ConfigruationSource;
+import corner.config.ConfigurationSource;
 import corner.config.Configurable;
 
 /**
@@ -31,9 +31,9 @@ import corner.config.Configurable;
  */
 public class ConfigurableObjectProvider implements ObjectProvider{
 	
-	private ConfigruationSource configurationSource;
+	private ConfigurationSource configurationSource;
 
-	public ConfigurableObjectProvider(@Builtin ConfigruationSource configurationSource){
+	public ConfigurableObjectProvider(@Builtin ConfigurationSource configurationSource){
 		this.configurationSource = configurationSource;
 	}
 

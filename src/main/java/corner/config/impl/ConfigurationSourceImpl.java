@@ -1,7 +1,7 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
  * site: http://ganshane.net
- * file: $Id: ConfigruationSourceImpl.java 4355 2008-12-05 02:39:02Z d0ng $
+ * file: $Id: ConfigurationSourceImpl.java 4355 2008-12-05 02:39:02Z d0ng $
  * created at:2008-10-08
  */
 
@@ -24,7 +24,7 @@ import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.ioc.util.StrategyRegistry;
 
 import corner.config.ConfigInitable;
-import corner.config.ConfigruationSource;
+import corner.config.ConfigurationSource;
 
 /**
  * 实现服务配置工厂类.
@@ -34,20 +34,20 @@ import corner.config.ConfigruationSource;
  * @since 0.0.1
  */
 
-public class ConfigruationSourceImpl implements ConfigruationSource {
+public class ConfigurationSourceImpl implements ConfigurationSource {
 
 	private final StrategyRegistry<Resource> registry;
 
 	private final Map<Class, Object> cache = CollectionFactory
 			.newConcurrentMap();
 
-	public ConfigruationSourceImpl(Map<Class, Resource> configuration) {
+	public ConfigurationSourceImpl(Map<Class, Resource> configuration) {
 		registry = StrategyRegistry.newInstance(Resource.class, configuration);
 	}
 
 	/**
 	 * 
-	 * @see corner.config.ConfigruationSource#getServiceConfig(java.lang.Class)
+	 * @see corner.config.ConfigurationSource#getServiceConfig(java.lang.Class)
 	 */
 	@Override
 	public <T> T getServiceConfig(Class<T> type) {

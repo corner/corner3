@@ -12,7 +12,7 @@ import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.services.Builtin;
 
-import corner.config.impl.ConfigruationSourceImpl;
+import corner.config.impl.ConfigurationSourceImpl;
 import corner.config.impl.ConfigurableObjectProvider;
 
 /**
@@ -25,7 +25,7 @@ import corner.config.impl.ConfigurableObjectProvider;
 public class ConfigurationModule {
 
 	public static void bind(ServiceBinder binder) {
-		binder.bind(ConfigruationSource.class, ConfigruationSourceImpl.class).withMarker(Builtin.class);
+		binder.bind(ConfigurationSource.class, ConfigurationSourceImpl.class).withMarker(Builtin.class);
 	}
 
 	public static void contributeMasterObjectProvider(

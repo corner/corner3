@@ -33,7 +33,7 @@ public class ConfigruationSourceImplTest extends TapestryTestCase{
 	public void testConfig(){
 		Map<Class, Resource> configuration = new HashMap<Class,Resource>();
 		configuration.put(TestConfigModel.class, new ClasspathResource("corner/config/impl/test-config.xml"));
-		ConfigruationSourceImpl source = new ConfigruationSourceImpl(configuration);
+		ConfigurationSourceImpl source = new ConfigurationSourceImpl(configuration);
 		TestConfigModel model = source.getServiceConfig(TestConfigModel.class);
 		assertNotNull(model);
 		assertEquals(model.getTestElement1(),"test e1 content");
