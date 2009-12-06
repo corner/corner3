@@ -16,7 +16,6 @@
 package corner.encrypt.services.impl;
 
 import java.io.UnsupportedEncodingException;
-import java.security.Security;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -38,9 +37,9 @@ public class DESedeEncryptServiceImpl implements EncryptService {
 	private static final String CHIPERH_CHARSET = "UTF-8";
 	public final static String Algorithm = "DESede";
 
-	static {
-		Security.addProvider(new com.sun.crypto.provider.SunJCE());
-	}
+//	static {
+//		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+//	}
 
 	private final CipherKey cipher;
 

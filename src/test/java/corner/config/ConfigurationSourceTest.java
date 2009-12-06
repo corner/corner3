@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import corner.config.impl.TestConfigModel;
 
-public class ConfigruationSourceTest extends IOCTestCase{
+public class ConfigurationSourceTest extends IOCTestCase{
 
 	@Test
 	public void test_configobject(){
@@ -44,7 +44,7 @@ public class ConfigruationSourceTest extends IOCTestCase{
 			binder.bind(TestService.class);
 			
 		}
-		public static void contributeConfigruationSource(MappedConfiguration<Class, Resource> configuration){
+		public static void contributeConfigurationSource(MappedConfiguration<Class, Resource> configuration){
 			configuration.add(TestConfigModel.class, new ClasspathResource("corner/config/impl/test-config.xml"));
 		}
 	}
