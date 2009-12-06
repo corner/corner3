@@ -80,4 +80,6 @@ public interface HibernateEntityService {
 	 * @since 3.1
 	 */
 	public void evict(Object entity);
+
+	public Object execute(HibernateCallback hibernateCallback);
 }

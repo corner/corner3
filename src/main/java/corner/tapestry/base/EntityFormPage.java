@@ -8,12 +8,12 @@ package corner.tapestry.base;
 
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.EventContext;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
+import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.slf4j.Logger;
 
-import corner.orm.EntityConstants;
 import corner.orm.services.EntityService;
 import corner.tapestry.ComponentConstants;
 
@@ -29,9 +29,9 @@ public class EntityFormPage<T> extends EntityPage<T>{
 	@Inject
 	private EntityService entityService;
 	@Inject
-	private PropertyAccess propertyAccess;
-	@Inject
 	private Logger logger;
+	@InjectComponent
+	private Form entityForm;
 	public void onActivate(EventContext context){
 		try{
 			if(context.getCount()==1){
@@ -53,14 +53,15 @@ public class EntityFormPage<T> extends EntityPage<T>{
 		//return 
 		return getReturnObject();
 	}
+	@OnEvent(component = ComponentConstants.ENTITY_FORM, value = EventConstants.VALIDATE_FORM)
+	public void validateForm(){
+		validateEntityForm(entityForm,this.getEntity()) ;
+	}
+	protected void validateEntityForm(Form entityForm, T entity){
+		//do nothing
+	}
 	protected void saveEntity(){
-		if(propertyAccess.get(getEntity(), EntityConstants.ID_PROPERTY_NAME)==null){
-			//new entity,so persist
-			entityService.save(getEntity());
-		}else{
-			//old entity,so modify 
-			entityService.update(getEntity());
-		}
+		this.entityService.saveOrUpdate(getEntity());
 	}
 	protected Object getReturnObject(){
 		return null;

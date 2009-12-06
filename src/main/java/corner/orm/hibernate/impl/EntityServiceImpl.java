@@ -108,4 +108,9 @@ public class EntityServiceImpl  implements EntityService{
 		template.refresh(entity);
 	}
 
+	@Override
+	public void saveOrUpdate(Object entity) {
+		template.saveOrUpdate(entity);
+	}
+
 }

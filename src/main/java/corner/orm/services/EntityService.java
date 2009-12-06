@@ -51,6 +51,13 @@ public interface EntityService {
 	@Transactional
 	public void update(Object entity);
 	/**
+	 * 保存或者更新一个实体
+	 * @param entity 实体对象
+	 * @since 3.1
+	 */
+	@Transactional
+	public void saveOrUpdate(Object entity);
+	/**
 	 * 加载一个实体
 	 * @param <T> 加载实体对象
 	 * @param clazz 类
@@ -104,5 +111,4 @@ public interface EntityService {
 	 * @since 3.1
 	 */
 	public void refresh(Object entity);
-
 }

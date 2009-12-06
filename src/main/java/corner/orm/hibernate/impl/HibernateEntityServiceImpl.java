@@ -84,5 +84,9 @@ public class HibernateEntityServiceImpl implements HibernateEntityService{
 	public void evict(Object entity) {
 		template.evict(entity);
 	}
+	@Override
+	public Object execute(HibernateCallback hibernateCallback) {
+		return template.execute(hibernateCallback);
+	}
 
 }

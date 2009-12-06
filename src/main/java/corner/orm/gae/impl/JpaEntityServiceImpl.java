@@ -9,10 +9,12 @@ package corner.orm.gae.impl;
 
 import java.util.Iterator;
 
+import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.jpa.JpaTemplate;
 
+import corner.orm.EntityConstants;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
 import corner.orm.services.EntityService;
@@ -26,9 +28,11 @@ import corner.orm.services.EntityService;
 public class JpaEntityServiceImpl  implements EntityService{
 	private JpaTemplate jpaTemplate;
 	private PaginatedJapEntityService paginatedJpaEntityService;
-	public JpaEntityServiceImpl(JpaTemplate jpaTemplate,final TypeCoercer typeCoercer){
+	private PropertyAccess propertyAccess;
+	public JpaEntityServiceImpl(JpaTemplate jpaTemplate,final TypeCoercer typeCoercer,PropertyAccess propertyAccess){
 		this.jpaTemplate = jpaTemplate;
 		paginatedJpaEntityService = new PaginatedJapEntityService(jpaTemplate,typeCoercer);
+		this.propertyAccess = propertyAccess;
 	}
 	
 	public Iterator find(Class<?> persistClass, Object conditions,
@@ -74,5 +78,16 @@ public class JpaEntityServiceImpl  implements EntityService{
 	
 	public void delete(Object entity) throws DataAccessException {
 		this.jpaTemplate.remove(entity);
+	}
+
+	@Override
+	public void saveOrUpdate(Object entity) {
+		if(propertyAccess.get(entity, EntityConstants.ID_PROPERTY_NAME)==null){
+			//new entity,so persist
+			save(entity);
+		}else{
+			//old entity,so modify 
+			update(entity);
+		}
 	}
 }

@@ -94,7 +94,7 @@ public class ConfigruationSourceImpl implements ConfigruationSource {
 	 * @throws RuntimeException
 	 *             在加载的过程出现异常,将抛出此异常
 	 */
-	private static <T> T load(Reader in, Class<T> clazz) {
+	public static <T> T load(Reader in, Class<T> clazz) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(clazz);
 			Unmarshaller um = context.createUnmarshaller();
