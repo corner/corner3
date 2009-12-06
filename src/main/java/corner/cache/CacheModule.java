@@ -96,7 +96,7 @@ public class CacheModule {
 	 * @param configuration
 	 * @since 0.0.2
 	 */
-	public void contributeConfigruationSource(
+	public void contributeConfigurationSource(
 			MappedConfiguration<Class<?>, Resource> configuration) {
 		// 增加Memcache的配置文件
 		configuration.add(MemcacheConfig.class, new ClasspathResource(
