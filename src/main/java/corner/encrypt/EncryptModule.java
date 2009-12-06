@@ -15,6 +15,7 @@
  */
 package corner.encrypt;
 
+import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Marker;
@@ -43,6 +44,11 @@ public class EncryptModule {
 	public EncryptService buildDESedeEncryptService(
 			@Inject @Symbol(EncryptSymbols.CIPHER_FILE) String cipherKeyPath) {
 		return new DESedeEncryptServiceImpl(new CipherKey(cipherKeyPath, 24));
+	}
+	public static void contributeFactoryDefaults(
+			MappedConfiguration<String, String> configuration) {
+		//配置key文件的路径
+		configuration.add(EncryptSymbols.CIPHER_FILE, "cipher");
 	}
 
 
