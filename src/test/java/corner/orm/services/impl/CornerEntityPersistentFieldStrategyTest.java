@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.orm.gae.impl;
-
-import javax.persistence.EntityManager;
+package corner.orm.services.impl;
 
 import org.apache.tapestry5.ioc.Registry;
 import org.apache.tapestry5.ioc.services.PropertyAccess;
@@ -25,11 +23,16 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import corner.orm.gae.impl.TestAEntity;
+import corner.orm.services.EntityService;
+import corner.orm.services.impl.CornerEntityPersistentFieldStrategy;
+import corner.orm.services.impl.PersistedEntity;
+
 /**
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @since 0.1
  */
-public class JpaEntityPersistentFieldStrategyTest extends  TapestryTestCase{
+public class CornerEntityPersistentFieldStrategyTest extends  TapestryTestCase{
 	private Registry registry;
 	private PropertyAccess access;
 	private TypeCoercer typeCoercer;
@@ -52,15 +55,15 @@ public class JpaEntityPersistentFieldStrategyTest extends  TapestryTestCase{
 	public void test_jpa_persistent_strategy(){
 		
 		TestAEntity testA = new TestAEntity();
-		EntityManager entityManager = newMock(EntityManager.class);
-		expect(entityManager.find(TestAEntity.class, 12L)).andReturn(testA);
-		GaeEntityPersistentFieldStrategy strategy = new GaeEntityPersistentFieldStrategy(entityManager,null, access);
+		EntityService entityService = newMock(EntityService.class);
+		expect(entityService.get(TestAEntity.class, 12L)).andReturn(testA);
+		CornerEntityPersistentFieldStrategy strategy = new CornerEntityPersistentFieldStrategy(entityService,null, access);
 		replay();
 		
 		testA.setId(12L);
-		JpaPersistedEntity obj = (JpaPersistedEntity) strategy.convertApplicationValueToPersisted(testA);
+		PersistedEntity obj = (PersistedEntity) strategy.convertApplicationValueToPersisted(testA);
 		assertEquals("<PersistedEntity: corner.orm.gae.impl.TestAEntity(12)>",obj.toString());
-		assertEquals(testA,obj.restore(entityManager));
+		assertEquals(testA,obj.restore(entityService));
 		
 		verify();
 	}

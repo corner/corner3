@@ -66,11 +66,11 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.apphosting.api.ApiProxy.Delegate;
 
 import corner.orm.gae.impl.EntityManagerSourceImpl;
-import corner.orm.gae.impl.GaeEntityPersistentFieldStrategy;
 import corner.orm.gae.impl.JpaEntityServiceImpl;
 import corner.orm.gae.impl.JpaEntityValueEncoder;
 import corner.orm.gae.impl.JpaTransactionDecoratorImpl;
 import corner.orm.services.EntityService;
+import corner.orm.services.impl.CornerEntityPersistentFieldStrategy;
 import corner.transaction.services.TransactionDecorator;
 
 /**
@@ -186,7 +186,7 @@ public class GaeModule {
     public static void contributePersistentFieldManager(
             MappedConfiguration<String, PersistentFieldStrategy> configuration)
     {
-        configuration.addInstance("entity", GaeEntityPersistentFieldStrategy.class);
+        configuration.addInstance("entity", CornerEntityPersistentFieldStrategy.class);
     }
 	public static JpaTemplate buildJpaTemplate(
 			@Local EntityManager entityManager) {

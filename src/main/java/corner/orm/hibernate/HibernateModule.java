@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.hibernate.HibernateSessionSource;
-import org.apache.tapestry5.internal.hibernate.EntityPersistentFieldStrategy;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
@@ -32,6 +31,7 @@ import corner.orm.hibernate.impl.HibernateEntityServiceImpl;
 import corner.orm.hibernate.impl.SpringSessionManagerImpl;
 import corner.orm.hibernate.impl.TapestryHibernateTransactionDecorterImpl;
 import corner.orm.services.EntityService;
+import corner.orm.services.impl.CornerEntityPersistentFieldStrategy;
 import corner.transaction.services.TransactionDecorator;
 import corner.tree.TreeModule;
 
@@ -61,7 +61,7 @@ public class HibernateModule {
     public static void contributePersistentFieldManager(
             MappedConfiguration<String, PersistentFieldStrategy> configuration)
     {
-        configuration.addInstance("entity", EntityPersistentFieldStrategy.class);
+    	configuration.overrideInstance("entity", CornerEntityPersistentFieldStrategy.class);
     }
 	/**
 	 * 替换由HibernateModule提供的HibernateSessionManager

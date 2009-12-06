@@ -1,21 +1,20 @@
 /*		
  * Copyright 2009 The Fepss Pty Ltd. 
  * site: http://www.fepss.com
- * file: $Id: GaeEntityPersistentFieldStrategy.java 5922 2009-09-23 03:22:01Z jcai $
+ * file: $Id: CornerEntityPersistentFieldStrategy.java 5922 2009-09-23 03:22:01Z jcai $
  * created at:2009-09-22
  */
 
-package corner.orm.gae.impl;
+package corner.orm.services.impl;
 
 import java.io.Serializable;
-
-import javax.persistence.EntityManager;
 
 import org.apache.tapestry5.internal.services.AbstractSessionPersistentFieldStrategy;
 import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.services.Request;
 
 import corner.orm.EntityConstants;
+import corner.orm.services.EntityService;
 
 /**
  * entity persistence field starategy
@@ -23,16 +22,16 @@ import corner.orm.EntityConstants;
  * @version $Revision: 5922 $
  * @since 0.1
  */
-public class GaeEntityPersistentFieldStrategy extends AbstractSessionPersistentFieldStrategy{
+public class CornerEntityPersistentFieldStrategy extends AbstractSessionPersistentFieldStrategy{
 
-	    private EntityManager entityManager;
 		private PropertyAccess propertyAccess;
+		private EntityService entityService;
 
-		public GaeEntityPersistentFieldStrategy(EntityManager entityManager, Request request,PropertyAccess propertyAccess)
+		public CornerEntityPersistentFieldStrategy(EntityService entityService, Request request,PropertyAccess propertyAccess)
 	    {
 	        super("jpa:", request);
-	        this.entityManager = entityManager;
 	        this.propertyAccess = propertyAccess;
+	        this.entityService = entityService;
 	    }
 
 	    @Override
@@ -40,13 +39,13 @@ public class GaeEntityPersistentFieldStrategy extends AbstractSessionPersistentF
 	    {
 	        Serializable id = (Serializable) propertyAccess.get(newValue, EntityConstants.ID_PROPERTY_NAME);
             String entityName =  newValue.getClass().getName();
-            return new JpaPersistedEntity(entityName, id);
+            return new PersistedEntity(entityName, id);
 	    }
 
 	    @Override
 	    protected Object convertPersistedToApplicationValue(Object persistedValue)
 	    {
-	    	JpaPersistedEntity persisted = (JpaPersistedEntity) persistedValue;
-	        return persisted.restore(entityManager);
+	    	PersistedEntity persisted = (PersistedEntity) persistedValue;
+	        return persisted.restore(entityService);
 	    }
 }
