@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.hibernate.HibernateSessionSource;
-import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -80,11 +79,7 @@ public class HibernateModule {
 		configuration.add(AliasContribution.create(
 				HibernateSessionManager.class, manager));
 	}
-	public static void contributeAliasOverrides(
-			@Local HibernateTransactionAdvisor advisor,
-			Configuration<AliasContribution<HibernateTransactionAdvisor>> advisorConfiguration) {
-		advisorConfiguration.add(AliasContribution.create(HibernateTransactionAdvisor.class, advisor));
-	}
+	
 	/**
 	 * build spring platform transaction manager
 	 * @param sessionSource session source
