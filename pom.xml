@@ -208,7 +208,7 @@ limitations under the License.
 		<dependency>
 			<groupId>com.google.appengine.orm</groupId>
 			<artifactId>datanucleus-appengine</artifactId>
-			<version>1.0.4</version>
+			<version>1.0.3</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
