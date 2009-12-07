@@ -42,7 +42,7 @@ import corner.cache.services.impl.memcache.MemcachePoolConfig.Server;
  * @version $Revision$
  * @since 0.0.2
  */
-public class MemcachedCacheManager implements CacheManager {
+public class MemcachedCacheManager implements MemcacheManager {
 	private final MemcacheConfig config;
 	private final ErrorHandler errorHandler;
 	private final Logger logger;

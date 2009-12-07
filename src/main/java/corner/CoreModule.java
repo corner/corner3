@@ -42,6 +42,7 @@ import org.apache.tapestry5.services.PersistentFieldStrategy;
 import org.apache.tapestry5.services.Request;
 
 import corner.asset.StaticAssetModule;
+import corner.cache.CacheModule;
 import corner.config.ConfigurationModule;
 import corner.encrypt.EncryptModule;
 import corner.hadoop.HadoopModule;
@@ -72,7 +73,7 @@ import corner.transaction.TransactionModule;
 		SecurityModule.class, ProtocolBuffersModule.class,
 		FckeditorModule.class, PaymentModule.class,
 		HadoopModule.class, ConfigurationModule.class,BindingModule.class,TransactionModule.class,
-		EncryptModule.class,TemplateModule.class,OrmModule.class})
+		EncryptModule.class,TemplateModule.class,OrmModule.class,CacheModule.class})
 public class CoreModule {
 
 	/**
