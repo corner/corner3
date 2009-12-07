@@ -27,10 +27,13 @@ import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.Response;
 import org.slf4j.Logger;
 
-import corner.hadoop.impl.DistributedResourceComponentEventResultProcessor;
-import corner.hadoop.impl.DistributedResourceEventResultProcessorWrapper;
-import corner.hadoop.impl.GetFileServiceRegexClearImpl;
-import corner.hadoop.impl.HadoopAccessorImpl;
+import corner.hadoop.services.DistributedResource;
+import corner.hadoop.services.DistributedResourceAccessor;
+import corner.hadoop.services.GetFileService;
+import corner.hadoop.services.impl.DistributedResourceComponentEventResultProcessor;
+import corner.hadoop.services.impl.DistributedResourceEventResultProcessorWrapper;
+import corner.hadoop.services.impl.GetFileServiceRegexClearImpl;
+import corner.hadoop.services.impl.HadoopAccessorImpl;
 
 /**
  * 针对Hadoop支持的module.

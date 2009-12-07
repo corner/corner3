@@ -10,9 +10,9 @@ import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import corner.hadoop.DistributedResourceAccessor;
-import corner.hadoop.FileDesc;
-import corner.hadoop.impl.HadoopAccessorImpl;
+import corner.hadoop.services.DistributedResourceAccessor;
+import corner.hadoop.services.impl.FileDesc;
+import corner.hadoop.services.impl.HadoopAccessorImpl;
 
 public class HadoopAccessorTest {
 

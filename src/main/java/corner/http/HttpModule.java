@@ -21,8 +21,9 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.services.ComponentClassTransformWorker;
 import org.apache.tapestry5.services.Response;
 
-import corner.http.impl.CacheHeaderServiceImpl;
-import corner.http.impl.CacheHeaderWorker;
+import corner.http.services.CacheHeaderService;
+import corner.http.services.impl.CacheHeaderServiceImpl;
+import corner.http.services.impl.CacheHeaderWorker;
 
 /**
  * @author dong

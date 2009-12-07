@@ -24,11 +24,12 @@ import org.slf4j.Logger;
 
 import com.meetup.memcached.ErrorHandler;
 
-import corner.cache.local.impl.LocalCacheConfig;
-import corner.cache.local.impl.LocalCacheManagerImpl;
-import corner.cache.memcache.impl.ErrorHandlerImpl;
-import corner.cache.memcache.impl.MemcacheConfig;
-import corner.cache.memcache.impl.MemcachedCacheManager;
+import corner.cache.services.CacheManager;
+import corner.cache.services.impl.local.LocalCacheConfig;
+import corner.cache.services.impl.local.LocalCacheManagerImpl;
+import corner.cache.services.impl.memcache.ErrorHandlerImpl;
+import corner.cache.services.impl.memcache.MemcacheConfig;
+import corner.cache.services.impl.memcache.MemcachedCacheManager;
 import corner.config.services.ConfigurationSource;
 
 /**
