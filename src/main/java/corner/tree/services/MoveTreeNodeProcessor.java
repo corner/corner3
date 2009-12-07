@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.tree;
+package corner.tree.services;
 
-import corner.jpa.TreeAdapter;
 import corner.orm.hibernate.HibernateEntityService;
 import corner.orm.services.EntityService;
+import corner.tree.base.TreeAdapter;
 
 /**
  * 对树进行处理的字处理程序

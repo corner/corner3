@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.tree;
+package corner.tree.services;
 
 import java.util.List;
 
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 
-import corner.jpa.TreeAdapter;
+import corner.tree.base.TreeAdapter;
 
 /**
  * 用来操作树的服务类

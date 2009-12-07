@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.jpa;
+package corner.orm.base;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +29,7 @@ import org.apache.tapestry5.beaneditor.NonVisual;
  * @since 0.0.1
  */
 @MappedSuperclass
-public class BaseModel implements java.io.Serializable{
+public class BaseEntity implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	

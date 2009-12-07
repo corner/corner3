@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.jpa;
+package corner.tree.base;
 
 import javax.persistence.Column;
 import javax.persistence.Transient;

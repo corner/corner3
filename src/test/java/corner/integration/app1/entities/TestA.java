@@ -15,10 +15,10 @@
  */
 package corner.integration.app1.entities;
 
-import corner.jpa.BaseModel;
+import corner.orm.base.BaseEntity;
 
 
-public class TestA extends BaseModel{
+public class TestA extends BaseEntity{
 	private String userName;
 
 	/**

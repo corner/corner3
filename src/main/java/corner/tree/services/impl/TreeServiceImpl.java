@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.tree;
+package corner.tree.services.impl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -25,9 +25,11 @@ import org.hibernate.criterion.Order;
 import org.springframework.beans.BeanUtils;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
-import corner.jpa.TreeAdapter;
 import corner.orm.hibernate.HibernateEntityService;
 import corner.orm.services.EntityService;
+import corner.tree.base.TreeAdapter;
+import corner.tree.services.MoveTreeNodeProcessor;
+import corner.tree.services.TreeService;
 import corner.utils.EntityUtil;
 
 /**
@@ -61,7 +63,7 @@ public class TreeServiceImpl implements TreeService {
 	
 	
 	/**
-	 * @see com.ouriba.eweb.services.tree.TreeService#saveTreeChildNode(com.ouriba.eweb.entities.base.TreeAdapter, com.ouriba.eweb.entities.base.TreeAdapter, java.lang.Class)
+	 * @see corner.tree.services.ouriba.eweb.services.tree.TreeService#saveTreeChildNode(corner.tree.base.ouriba.eweb.entities.base.TreeAdapter, corner.tree.base.ouriba.eweb.entities.base.TreeAdapter, java.lang.Class)
 	 */
 	public void saveTreeChildNode(TreeAdapter node, TreeAdapter parentNode, Class<? extends TreeAdapter> clazz) {
 		String treeClassName = getTreeClassName(node,clazz);
@@ -111,7 +113,7 @@ public class TreeServiceImpl implements TreeService {
 	
 
 	/**
-	 * @see com.ouriba.eweb.services.tree.TreeService#getTree(java.lang.Class)
+	 * @see corner.tree.services.ouriba.eweb.services.tree.TreeService#getTree(java.lang.Class)
 	 */
 	@SuppressWarnings("unchecked")
 	public List<? extends TreeAdapter> getTree(
@@ -130,7 +132,7 @@ public class TreeServiceImpl implements TreeService {
 	}
 
 	/**
-	 * @see com.ouriba.eweb.services.tree.TreeService#moveNode(com.ouriba.eweb.entities.base.TreeAdapter, int, java.lang.Class)
+	 * @see corner.tree.services.ouriba.eweb.services.tree.TreeService#moveNode(corner.tree.base.ouriba.eweb.entities.base.TreeAdapter, int, java.lang.Class)
 	 */
 	public void moveNode(TreeAdapter node, int n, Class<? extends TreeAdapter> clazz) {
 		if (n == 0) {
@@ -165,7 +167,7 @@ public class TreeServiceImpl implements TreeService {
 	}
 
 	/**
-	 * @see com.ouriba.eweb.services.tree.TreeService#deleteTreeNode(com.ouriba.eweb.entities.base.TreeAdapter, java.lang.Class)
+	 * @see corner.tree.services.ouriba.eweb.services.tree.TreeService#deleteTreeNode(corner.tree.base.ouriba.eweb.entities.base.TreeAdapter, java.lang.Class)
 	 */
 	public void deleteTreeNode(TreeAdapter node, Class<? extends TreeAdapter> clazz) {
 		

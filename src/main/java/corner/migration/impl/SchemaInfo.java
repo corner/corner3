@@ -19,7 +19,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import corner.jpa.BaseModel;
+import corner.orm.base.BaseEntity;
 
 
 /**
@@ -30,7 +30,7 @@ import corner.jpa.BaseModel;
  */
 @Entity
 @Table(name=MigrationServiceImpl.SCHEMA_INFO_TABLE_NAME)
-public class SchemaInfo extends BaseModel{
+public class SchemaInfo extends BaseEntity{
 
 	/**
 	 * 

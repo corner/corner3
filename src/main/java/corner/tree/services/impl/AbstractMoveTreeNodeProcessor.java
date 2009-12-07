@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.tree;
+package corner.tree.services.impl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -25,9 +25,9 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
-import corner.jpa.TreeAdapter;
 import corner.orm.hibernate.HibernateEntityService;
 import corner.orm.services.EntityService;
+import corner.tree.base.TreeAdapter;
 import corner.utils.EntityUtil;
 
 /**

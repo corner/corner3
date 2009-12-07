@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.tree;
+package corner.tree.services.impl;
 
 import java.util.List;
 
@@ -23,7 +23,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.BeanUtils;
 
-import corner.jpa.TreeAdapter;
+import corner.tree.base.TreeAdapter;
+import corner.tree.services.MoveTreeNodeProcessor;
 
 /**
  * 向下移动的处理程序

@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.jpa;
+package corner.tree.base;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
+
+import corner.orm.base.BaseEntity;
 
 /**
  * 抽象的树的实现
@@ -26,7 +28,7 @@ import javax.persistence.Transient;
  * @since 0.0.1
  */
 @MappedSuperclass
-public class DatabaseTreeAdapterImpl extends BaseModel implements TreeAdapter {
+public class DatabaseTreeAdapterImpl extends BaseEntity implements TreeAdapter {
 	/**
 	 * 
 	 */
@@ -44,40 +46,40 @@ public class DatabaseTreeAdapterImpl extends BaseModel implements TreeAdapter {
 	 */
 	private int depth;
 	/**
-	 * @see com.ouriba.eweb.entities.base.TreeAdapter#getLeft()
+	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#getLeft()
 	 */
 	@Column(name="TREE_LEFT")
 	public int getLeft() {
 		return left;
 	}
 	/**
-	 * @see com.ouriba.eweb.entities.base.TreeAdapter#setLeft(int)
+	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#setLeft(int)
 	 */
 	public void setLeft(int left) {
 		this.left = left;
 	}
 	/**
-	 * @see com.ouriba.eweb.entities.base.TreeAdapter#getRight()
+	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#getRight()
 	 */
 	@Column(name="TREE_RIGHT")
 	public int getRight() {
 		return right;
 	}
 	/**
-	 * @see com.ouriba.eweb.entities.base.TreeAdapter#setRight(int)
+	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#setRight(int)
 	 */
 	public void setRight(int right) {
 		this.right = right;
 	}
 	/**
-	 * @see com.ouriba.eweb.entities.base.TreeAdapter#getDepth()
+	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#getDepth()
 	 */
 	@Column(name="TREE_DEPTH")
 	public int getDepth() {
 		return depth;
 	}
 	/**
-	 * @see com.ouriba.eweb.entities.base.TreeAdapter#setDepth(int)
+	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#setDepth(int)
 	 */
 	public void setDepth(int depth) {
 		this.depth = depth;
