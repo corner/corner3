@@ -3,7 +3,7 @@ package corner.config.impl;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import corner.config.ConfigInitable;
+import corner.config.services.ConfigInitable;
 
 @XmlRootElement(name="config")
 public class TestConfigModel implements ConfigInitable{

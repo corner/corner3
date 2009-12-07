@@ -19,7 +19,7 @@ package corner.encrypt.services.impl;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.tapestry5.ioc.annotations.Marker;
 
-import corner.encrypt.annotation.Md5;
+import corner.encrypt.annotations.Md5;
 import corner.encrypt.services.EncryptService;
 
 /**

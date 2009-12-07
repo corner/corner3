@@ -13,24 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset;
+package corner.asset.services.impl;
 
 /**
- * 创建静态资源的URL创建者
- * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
+ * 对域名进行Hash处理,分布域名
+ * @author dong
  * @version $Revision$
- * @since 0.1
+ * @since 0.0.2
  */
-public interface StaticAssetUrlCreator {
-
+public interface StaticAssetUrlDomainHash {
 	/**
-	 * 创建URL
-	 * @param context http context 
-	 * @param protocol 协议，通常为缩写，譬如： hdfs:/xxx
-	 * @param path 请求的路径
-	 * @param referPath 来自的页面
-	 * @return 转换后的值
+	 * 
+	 * @param domain
+	 * @return
 	 * @since 0.0.2
 	 */
-	public String createUrl(String context,String protocol,String path,String referPath);
+	public String hash(String domain);
 }

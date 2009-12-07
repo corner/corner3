@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset.impl;
+package corner.asset.services.impl;
 
 
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 
 import corner.asset.StaticAssetConstants;
-import corner.asset.StaticAssetUrlCreator;
+import corner.asset.services.StaticAssetUrlCreator;
 import corner.hadoop.HadoopModule;
 
 
@@ -39,7 +39,7 @@ public class HadoopStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
 	}
 
 	/**
-	 * @see corner.asset.impl.StaticAsseUrlFactory#getUrl(java.lang.String,
+	 * @see corner.asset.services.impl.StaticAsseUrlFactory#getUrl(java.lang.String,
 	 *      java.lang.String)
 	 */
 	@Override

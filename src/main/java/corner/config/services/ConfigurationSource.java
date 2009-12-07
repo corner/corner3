@@ -5,7 +5,7 @@
  * created at:2008-10-08
  */
 
-package corner.config;
+package corner.config.services;
 
 /**
  * 得到服务配置的工厂类

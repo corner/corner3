@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset.impl;
+package corner.asset.services.impl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,7 +23,7 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 
 import corner.asset.StaticAssetConstants;
 import corner.asset.StaticAssetSymbols;
-import corner.asset.StaticAssetUrlCreator;
+import corner.asset.services.StaticAssetUrlCreator;
 
 /**
  * 从指定的域名构造静态资源的URL
@@ -67,7 +67,7 @@ public class DomainStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
 	}
 
 	/**
-	 * @see corner.asset.impl.StaticAsseUrlFactory#getUrl(java.lang.String,
+	 * @see corner.asset.services.impl.StaticAsseUrlFactory#getUrl(java.lang.String,
 	 *      java.lang.String)
 	 */
 	@Override

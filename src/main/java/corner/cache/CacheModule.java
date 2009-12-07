@@ -29,7 +29,7 @@ import corner.cache.local.impl.LocalCacheManagerImpl;
 import corner.cache.memcache.impl.ErrorHandlerImpl;
 import corner.cache.memcache.impl.MemcacheConfig;
 import corner.cache.memcache.impl.MemcachedCacheManager;
-import corner.config.ConfigurationSource;
+import corner.config.services.ConfigurationSource;
 
 /**
  * Cache的配置,目前提供Memcache和LocalCache的配置:

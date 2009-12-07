@@ -26,12 +26,14 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.ChainBuilder;
 import org.apache.tapestry5.services.AssetFactory;
 
-import corner.asset.impl.DomainStaticAssetUrlCreatorImpl;
-import corner.asset.impl.HadoopStaticAssetUrlCreatorImpl;
-import corner.asset.impl.LocalStaticAssetUrlCreatorImpl;
-import corner.asset.impl.StaticAssetFactory;
-import corner.asset.impl.StaticAssetUrlDomainHash;
-import corner.asset.impl.StaticAssetUrlDomainSequenceHash;
+import corner.asset.annotations.StaticAssetProvider;
+import corner.asset.services.StaticAssetUrlCreator;
+import corner.asset.services.impl.DomainStaticAssetUrlCreatorImpl;
+import corner.asset.services.impl.HadoopStaticAssetUrlCreatorImpl;
+import corner.asset.services.impl.LocalStaticAssetUrlCreatorImpl;
+import corner.asset.services.impl.StaticAssetFactory;
+import corner.asset.services.impl.StaticAssetUrlDomainHash;
+import corner.asset.services.impl.StaticAssetUrlDomainSequenceHash;
 
 /**
  * StaticModule用于提供默认的配置

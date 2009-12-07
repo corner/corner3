@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.converter;
+package corner.asset.services;
 
 /**
- * 用于进行字符串值转换的接口
- * 
- * @author dong
+ * 创建静态资源的URL创建者
+ * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
- * @since 0.0.2
+ * @since 0.1
  */
-public interface Converter {
+public interface StaticAssetUrlCreator {
+
 	/**
-	 * 
-	 * @param value
-	 * @return 返回经过转换后的值
+	 * 创建URL
+	 * @param context http context 
+	 * @param protocol 协议，通常为缩写，譬如： hdfs:/xxx
+	 * @param path 请求的路径
+	 * @param referPath 来自的页面
+	 * @return 转换后的值
 	 * @since 0.0.2
 	 */
-	public String convert(String value);
-
+	public String createUrl(String context,String protocol,String path,String referPath);
 }

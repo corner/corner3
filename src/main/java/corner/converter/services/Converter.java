@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset.impl;
+package corner.converter.services;
 
 /**
- * 对域名进行Hash处理,分布域名
+ * 用于进行字符串值转换的接口
+ * 
  * @author dong
  * @version $Revision$
  * @since 0.0.2
  */
-public interface StaticAssetUrlDomainHash {
+public interface Converter {
 	/**
 	 * 
-	 * @param domain
-	 * @return
+	 * @param value
+	 * @return 返回经过转换后的值
 	 * @since 0.0.2
 	 */
-	public String hash(String domain);
+	public String convert(String value);
+
 }

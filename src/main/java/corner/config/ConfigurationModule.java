@@ -12,8 +12,9 @@ import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.services.Builtin;
 
-import corner.config.impl.ConfigurationSourceImpl;
-import corner.config.impl.ConfigurableObjectProvider;
+import corner.config.services.ConfigurationSource;
+import corner.config.services.impl.ConfigurableObjectProvider;
+import corner.config.services.impl.ConfigurationSourceImpl;
 
 /**
  * ServiceConfig的配置Module

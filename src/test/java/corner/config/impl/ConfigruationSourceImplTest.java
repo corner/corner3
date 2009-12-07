@@ -23,6 +23,8 @@ import org.apache.tapestry5.ioc.internal.util.ClasspathResource;
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.testng.annotations.Test;
 
+import corner.config.services.impl.ConfigurationSourceImpl;
+
 /**
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$

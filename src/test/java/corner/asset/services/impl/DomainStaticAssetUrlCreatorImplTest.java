@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset.impl;
+package corner.asset.services.impl;
 
 import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
 import corner.asset.StaticAssetConstants;
-import corner.asset.impl.StaticAssetUrlDomainSequenceHash;
-import corner.asset.impl.DomainStaticAssetUrlCreatorImpl;
 
 /**
  * @author dong

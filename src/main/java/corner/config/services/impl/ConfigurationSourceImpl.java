@@ -5,7 +5,7 @@
  * created at:2008-10-08
  */
 
-package corner.config.impl;
+package corner.config.services.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,8 +23,8 @@ import org.apache.tapestry5.ioc.internal.util.Defense;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.ioc.util.StrategyRegistry;
 
-import corner.config.ConfigInitable;
-import corner.config.ConfigurationSource;
+import corner.config.services.ConfigInitable;
+import corner.config.services.ConfigurationSource;
 
 /**
  * 实现服务配置工厂类.
@@ -47,7 +47,7 @@ public class ConfigurationSourceImpl implements ConfigurationSource {
 
 	/**
 	 * 
-	 * @see corner.config.ConfigurationSource#getServiceConfig(java.lang.Class)
+	 * @see corner.config.services.ConfigurationSource#getServiceConfig(java.lang.Class)
 	 */
 	@Override
 	public <T> T getServiceConfig(Class<T> type) {

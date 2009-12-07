@@ -8,6 +8,7 @@ import org.apache.tapestry5.ioc.internal.util.ClasspathResource;
 import org.apache.tapestry5.ioc.test.IOCTestCase;
 import org.testng.annotations.Test;
 
+import corner.config.annotations.Configurable;
 import corner.config.impl.TestConfigModel;
 
 public class ConfigurationSourceTest extends IOCTestCase{

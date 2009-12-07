@@ -18,7 +18,8 @@ package corner.converter;
 
 import org.apache.tapestry5.ioc.ServiceBinder;
 
-import corner.converter.impl.ConverterServiceImpl;
+import corner.converter.services.ConverterSource;
+import corner.converter.services.impl.ConverterServiceImpl;
 
 /**
  * Conver模块的配置

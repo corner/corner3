@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset.impl;
+package corner.asset.services.impl;
 
 import java.util.Stack;
 import java.util.regex.Pattern;
@@ -22,7 +22,7 @@ import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.slf4j.Logger;
 
 import corner.asset.StaticAssetConstants;
-import corner.asset.StaticAssetUrlCreator;
+import corner.asset.services.StaticAssetUrlCreator;
 
 /**
  * 构造位于本地的静态资源的URL
@@ -40,7 +40,7 @@ public class LocalStaticAssetUrlCreatorImpl implements StaticAssetUrlCreator {
 	}
 
 	/**
-	 * @see corner.asset.impl.StaticAsseUrlFactory#getUrl(java.lang.String,
+	 * @see corner.asset.services.impl.StaticAsseUrlFactory#getUrl(java.lang.String,
 	 *      java.lang.String)
 	 */
 	@Override

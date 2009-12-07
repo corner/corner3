@@ -13,25 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.encrypt.annotation;
+package corner.converter.services;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
 
 /**
- * 定义MD5加密的标记
- * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
+ * 得到Converter服务的工厂类
+ * 
+ * @author dong
  * @version $Revision$
- * @since 0.1
+ * @since 0.0.2
  */
-@Target( {PARAMETER, FIELD })
-@Retention(RUNTIME)
-@Documented
-public @interface Md5 {
-
+public interface ConverterSource {
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 * @since 0.0.2
+	 */
+	public Converter getConvert(String name);
 }

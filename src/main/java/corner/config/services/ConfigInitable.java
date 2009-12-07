@@ -1,4 +1,4 @@
-package corner.config;
+package corner.config.services;
 
 /**
  * 需要进行初始化的配置

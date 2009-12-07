@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.config.impl;
+package corner.config.services.impl;
 
 import org.apache.tapestry5.ioc.AnnotationProvider;
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.ObjectProvider;
 import org.apache.tapestry5.ioc.services.Builtin;
 
-import corner.config.ConfigurationSource;
-import corner.config.Configurable;
+import corner.config.annotations.Configurable;
+import corner.config.services.ConfigurationSource;
 
 /**
  * 获取配置类实例

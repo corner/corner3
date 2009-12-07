@@ -13,25 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset;
-
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+package corner.config.annotations;
 
 import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 使用T5注入时用于标识StaticAssetFactory的类型
- * @author dong
- * @version $Revision: 718 $
- * @since 0.0.1
+ * 指定某一个类为可配置的.
+ * 将自动读取对应的xml文件进行构建类
+ * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
+ * @version $Revision$
+ * @since 0.1
  */
-@Target( { PARAMETER, FIELD })
-@Retention(RUNTIME)
+@Target({ElementType.PARAMETER, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface StaticAssetProvider {
+public @interface Configurable {
 
 }

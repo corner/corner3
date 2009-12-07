@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset.impl;
+package corner.asset.services.impl;
 
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 import corner.asset.StaticAssetConstants;
-import corner.asset.impl.LocalStaticAssetUrlCreatorImpl;
 
 /**
  * @author dong

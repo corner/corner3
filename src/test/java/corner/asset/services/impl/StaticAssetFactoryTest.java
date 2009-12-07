@@ -1,4 +1,4 @@
-package corner.asset.impl;
+package corner.asset.services.impl;
 
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.internal.services.ContextResource;
@@ -9,7 +9,7 @@ import org.apache.tapestry5.test.TapestryTestCase;
 import org.testng.annotations.Test;
 
 import corner.asset.StaticAssetConstants;
-import corner.asset.StaticAssetUrlCreator;
+import corner.asset.services.StaticAssetUrlCreator;
 
 public class StaticAssetFactoryTest extends TapestryTestCase{
 	@Test

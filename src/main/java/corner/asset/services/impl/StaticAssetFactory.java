@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.asset.impl;
+package corner.asset.services.impl;
 
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.ioc.Resource;
@@ -22,8 +22,8 @@ import org.apache.tapestry5.services.AssetFactory;
 import org.apache.tapestry5.services.Request;
 
 import corner.asset.StaticAssetConstants;
-import corner.asset.StaticAssetProvider;
-import corner.asset.StaticAssetUrlCreator;
+import corner.asset.annotations.StaticAssetProvider;
+import corner.asset.services.StaticAssetUrlCreator;
 
 /**
  * 提供static类型的Asset工厂实现

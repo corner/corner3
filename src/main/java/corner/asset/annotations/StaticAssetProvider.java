@@ -13,21 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.converter;
+package corner.asset.annotations;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 /**
- * 得到Converter服务的工厂类
- * 
+ * 使用T5注入时用于标识StaticAssetFactory的类型
  * @author dong
- * @version $Revision$
- * @since 0.0.2
+ * @version $Revision: 718 $
+ * @since 0.0.1
  */
-public interface ConverterSource {
-	/**
-	 * 
-	 * @param name
-	 * @return
-	 * @since 0.0.2
-	 */
-	public Converter getConvert(String name);
+@Target( { PARAMETER, FIELD })
+@Retention(RUNTIME)
+@Documented
+public @interface StaticAssetProvider {
+
 }

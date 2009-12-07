@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.converter.impl;
+package corner.converter.services.impl;
 
 import java.util.Map;
 
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
 
-import corner.converter.Converter;
-import corner.converter.ConverterSource;
+import corner.converter.services.Converter;
+import corner.converter.services.ConverterSource;
 
 
 /**
@@ -42,7 +42,7 @@ public class ConverterServiceImpl implements ConverterSource {
 	}
 
 	/**
-	 * @see corner.converter.ConverterSource#getConvert(java.lang.String)
+	 * @see corner.converter.services.ConverterSource#getConvert(java.lang.String)
 	 */
 	@Override
 	public Converter getConvert(String name) {

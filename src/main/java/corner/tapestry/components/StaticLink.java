@@ -16,9 +16,9 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 
 import corner.asset.StaticAssetConstants;
-import corner.asset.StaticAssetUrlCreator;
-import corner.converter.Converter;
-import corner.converter.ConverterSource;
+import corner.asset.services.StaticAssetUrlCreator;
+import corner.converter.services.Converter;
+import corner.converter.services.ConverterSource;
 
 /**
  * 用于img,link,script静态资源的路径选择,具体的路径由locator决定;根据配置增加资源的版本号

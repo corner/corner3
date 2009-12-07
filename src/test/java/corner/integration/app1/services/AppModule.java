@@ -21,8 +21,8 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 
 import corner.CoreModule;
-import corner.converter.ConverterSource;
-import corner.converter.impl.ConverterServiceImpl;
+import corner.converter.services.ConverterSource;
+import corner.converter.services.impl.ConverterServiceImpl;
 import corner.http.HttpModule;
 import corner.security.SecurityConstants;
 

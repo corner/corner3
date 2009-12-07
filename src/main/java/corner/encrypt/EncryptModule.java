@@ -21,7 +21,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 
-import corner.encrypt.annotation.Des;
+import corner.encrypt.annotations.Des;
 import corner.encrypt.services.EncryptService;
 import corner.encrypt.services.impl.DESedeEncryptServiceImpl;
 import corner.encrypt.services.impl.MD5EncryptServiceImpl;

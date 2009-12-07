@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.encrypt.annotation;
+package corner.encrypt.annotations;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;
@@ -24,14 +24,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * 标记为DES算法加密方式
+ * 定义MD5加密的标记
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 0.1
  */
-@Target( {PARAMETER,FIELD })
+@Target( {PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
-public @interface Des {
+public @interface Md5 {
 
 }
