@@ -11,9 +11,9 @@ import org.apache.tapestry5.services.TransformMethodSignature;
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.testng.annotations.Test;
 
-import corner.security.ResourceSecurity;
-import corner.security.ResourceSecurityObject;
-import corner.security.impl.ResourceSecurityWorker;
+import corner.security.annotations.ResourceSecurity;
+import corner.security.annotations.ResourceSecurityObject;
+import corner.security.services.impl.ResourceSecurityWorker;
 
 
 public class ResourceSecurityWorkerTest extends TapestryTestCase {

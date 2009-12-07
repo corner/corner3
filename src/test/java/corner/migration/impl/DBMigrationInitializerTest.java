@@ -37,10 +37,10 @@ import org.testng.annotations.Test;
 
 
 import corner.integration.app1.entities.TestA;
-import corner.migration.MigrationService;
-import corner.migration.impl.DBMigrationInitializer;
-import corner.migration.impl.MigrationServiceImpl;
-import corner.migration.impl.SchemaInfo;
+import corner.migration.services.MigrationService;
+import corner.migration.services.impl.DBMigrationInitializer;
+import corner.migration.services.impl.MigrationServiceImpl;
+import corner.migration.services.impl.SchemaInfo;
 
 public class DBMigrationInitializerTest extends TapestryTestCase{
 	private AnnotationConfiguration cfg;

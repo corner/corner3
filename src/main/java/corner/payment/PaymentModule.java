@@ -19,8 +19,10 @@ import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.ServiceBinder;
 
-import corner.payment.impl.PaymentServiceSourceImpl;
-import corner.payment.impl.processor.AlipayProcessor;
+import corner.payment.services.PaymentProcessor;
+import corner.payment.services.PaymentServiceSource;
+import corner.payment.services.impl.PaymentServiceSourceImpl;
+import corner.payment.services.impl.processor.AlipayProcessor;
 
 /**
  * 支付模块

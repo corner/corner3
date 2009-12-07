@@ -37,12 +37,12 @@ import org.testng.annotations.Test;
 
 
 import corner.integration.app1.entities.TestA;
-import corner.migration.ConnectionAdapter;
-import corner.migration.ConnectionAdapterSource;
 import corner.migration.MigrationModule;
-import corner.migration.MigrationService;
-import corner.migration.impl.ConnectionAdapterSourceImpl;
-import corner.migration.impl.MigrationServiceImpl;
+import corner.migration.services.ConnectionAdapter;
+import corner.migration.services.ConnectionAdapterSource;
+import corner.migration.services.MigrationService;
+import corner.migration.services.impl.ConnectionAdapterSourceImpl;
+import corner.migration.services.impl.MigrationServiceImpl;
 
 public class MigrationServiceImplTest extends TapestryTestCase{
 	private AnnotationConfiguration cfg;
@@ -211,7 +211,7 @@ public class MigrationServiceImplTest extends TapestryTestCase{
 		MigrationService service = new MigrationServiceImpl(sessionSource, adapterSource,logger){
 
 			/**
-			 * @see corner.migration.impl.MigrationServiceImpl#executeSchemaScript(java.sql.Connection, java.lang.String[])
+			 * @see corner.migration.services.impl.MigrationServiceImpl#executeSchemaScript(java.sql.Connection, java.lang.String[])
 			 */
 			@Override
 			protected void executeSchemaScript(Connection con, String[] sql)

@@ -31,12 +31,15 @@ import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.MySQL5InnoDBDialect;
 import org.hibernate.dialect.MySQLInnoDBDialect;
 
-import corner.migration.impl.ConnectionAdapterSourceImpl;
-import corner.migration.impl.DBMigrationInitializer;
-import corner.migration.impl.MigrationServiceImpl;
-import corner.migration.impl.SchemaInfo;
-import corner.migration.impl.adapter.H2ConnectionAdapter;
-import corner.migration.impl.adapter.MySQLConnectionAdapter;
+import corner.migration.services.ConnectionAdapter;
+import corner.migration.services.ConnectionAdapterSource;
+import corner.migration.services.MigrationService;
+import corner.migration.services.impl.ConnectionAdapterSourceImpl;
+import corner.migration.services.impl.DBMigrationInitializer;
+import corner.migration.services.impl.MigrationServiceImpl;
+import corner.migration.services.impl.SchemaInfo;
+import corner.migration.services.impl.adapter.H2ConnectionAdapter;
+import corner.migration.services.impl.adapter.MySQLConnectionAdapter;
 
 /**
  * 数据库升级的module

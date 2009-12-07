@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.testng.annotations.Test;
 
-import corner.payment.impl.processor.AlipayProcessor;
+import corner.payment.services.impl.processor.AlipayProcessor;
 
 /**
  * @author dong

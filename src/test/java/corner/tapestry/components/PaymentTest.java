@@ -23,9 +23,9 @@ import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.testng.annotations.Test;
 
-import corner.payment.PaymentProcessor;
-import corner.payment.PaymentServiceSource;
-import corner.payment.ViewHelper;
+import corner.payment.services.PaymentProcessor;
+import corner.payment.services.PaymentServiceSource;
+import corner.payment.services.ViewHelper;
 import corner.tapestry.components.Payment;
 
 /**

@@ -29,11 +29,13 @@ import org.apache.tapestry5.services.ComponentClassTransformWorker;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestGlobals;
 
-import corner.security.impl.NonSecurityPrincipalService;
-import corner.security.impl.ResourceSecurityWorker;
-import corner.security.impl.SecurityCheckerImpl;
-import corner.security.impl.SecurityContextFilter;
-import corner.security.impl.SecurityWorker;
+import corner.security.services.SecurityChecker;
+import corner.security.services.SecurityPrincipalService;
+import corner.security.services.impl.NonSecurityPrincipalService;
+import corner.security.services.impl.ResourceSecurityWorker;
+import corner.security.services.impl.SecurityCheckerImpl;
+import corner.security.services.impl.SecurityContextFilter;
+import corner.security.services.impl.SecurityWorker;
 
 /**
  * 定义安全的module

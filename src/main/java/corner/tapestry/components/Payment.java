@@ -25,9 +25,9 @@ import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.json.JSONObject;
 
-import corner.payment.PaymentProcessor;
-import corner.payment.PaymentServiceSource;
-import corner.payment.ViewHelper;
+import corner.payment.services.PaymentProcessor;
+import corner.payment.services.PaymentServiceSource;
+import corner.payment.services.ViewHelper;
 
 /**
  * 支付系统帐号
