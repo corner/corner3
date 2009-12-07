@@ -15,17 +15,13 @@
  */
 package corner.tapestry.fckeditor;
 
-import org.apache.tapestry5.ioc.MappedConfiguration;
-
 /**
- * 实现Fckeditor的模块.
- * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2088 $
- * @since 0.0.2
+ * fckeditor symbols definition
+ * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
+ * @version $Revision$
+ * @since 3.1
  */
-public class FckeditorModule {
-	public static void contributeFactoryDefaults(
-			MappedConfiguration<String, String> configuration) {
-		configuration.add(FckeditorSymbols.FCKEDITOR_JS_PATH,"static:fckeditor");
-	}
+public class FckeditorSymbols {
+	public static final String FCKEDITOR_JS_PATH="fckeditor.path";
+
 }

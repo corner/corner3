@@ -27,6 +27,8 @@ import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import corner.tapestry.fckeditor.FckeditorSymbols;
+
 /**
  * 实现fckeditor一个Mixin.
  * 
@@ -61,7 +63,7 @@ public class Fckeditor {
 	private RenderSupport renderSupport;
 
 	@Inject
-	@Path("${fckeditor.path}")
+	@Path("${"+FckeditorSymbols.FCKEDITOR_JS_PATH+"}")
 	private Asset fckeditorPath;
 	
 	@Inject

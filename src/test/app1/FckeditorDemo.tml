@@ -1,0 +1,15 @@
+<t:border xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<h1>Fckeditor Demo</h1>
+
+	<t:form>
+		<t:errors />
+		<div class="t-beaneditor">
+
+			<div class="t-beaneditor-row">
+				<t:label for="fckContent" />
+				<t:textarea  t:mixins="corner/fckeditor"		t:id="fckContent"  t:value="content"/>
+			</div>
+		</div>
+
+	</t:form>
+</t:border>
