@@ -1,0 +1,9 @@
+package lichen.common.services.impl;
+option java_package = "corner.cache.services.impl";
+option java_outer_classname = "CacheableDefine";
+option optimize_for = SPEED;
+
+message Definition{
+//	required string cache_key = 1;
+	repeated int32 parameter_index=2;
+}

@@ -68,7 +68,7 @@ import corner.transaction.TransactionModule;
  * @version $Revision: 3041 $
  * @since 0.0.1
  */
-@SubModule( { ValidationModule.class, StaticAssetModule.class,
+@SubModule( {ValidationModule.class, StaticAssetModule.class,
 		SecurityModule.class, ProtocolBuffersModule.class,
 		FckeditorModule.class, PaymentModule.class,
 		HadoopModule.class, ConfigurationModule.class,BindingModule.class,TransactionModule.class,

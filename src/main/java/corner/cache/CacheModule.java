@@ -19,12 +19,17 @@ package corner.cache;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.internal.util.ClasspathResource;
 import org.slf4j.Logger;
 
 import com.meetup.memcached.ErrorHandler;
 
+import corner.cache.annotations.LocalCache;
+import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
+import corner.cache.services.CacheableAdvisor;
+import corner.cache.services.impl.CacheableAdvisorImpl;
 import corner.cache.services.impl.local.LocalCacheConfig;
 import corner.cache.services.impl.local.LocalCacheManagerImpl;
 import corner.cache.services.impl.memcache.ErrorHandlerImpl;
@@ -46,6 +51,7 @@ import corner.config.services.ConfigurationSource;
 public class CacheModule {
 	public static void bind(ServiceBinder binder) {
 		binder.bind(ErrorHandler.class, ErrorHandlerImpl.class);
+		binder.bind(CacheableAdvisor.class,CacheableAdvisorImpl.class);
 	}
 
 	/**
@@ -60,6 +66,7 @@ public class CacheModule {
 	 * @return
 	 * @since 0.0.2
 	 */
+	@Marker(Memcache.class)
 	public CacheManager buildMemcachedCacheManager(
 			ConfigurationSource configSource, Logger logger,
 			ErrorHandler errorHandler) {
@@ -78,6 +85,7 @@ public class CacheModule {
 	 * @return
 	 * @since 0.0.2
 	 */
+	@Marker(LocalCache.class)
 	public CacheManager buildLocalCacheManager(ConfigurationSource configSource) {
 		LocalCacheConfig _config = configSource
 				.getServiceConfig(LocalCacheConfig.class);
