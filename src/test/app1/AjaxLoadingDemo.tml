@@ -1,0 +1,8 @@
+<t:border xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<h1>Ajax Loading Demo</h1>
+
+<t:actionlink t:id="testAjax" zone="ajaxContent">test</t:actionlink>
+<div t:type="zone" t:id="ajaxContent"></div>
+<t:block t:id="blockContent">haha</t:block>
+<span t:type="corner/AjaxLoader"/>
+</t:border>

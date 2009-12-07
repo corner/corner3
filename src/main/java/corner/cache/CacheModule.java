@@ -21,12 +21,10 @@ import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.internal.util.ClasspathResource;
-import org.slf4j.Logger;
 
 import com.meetup.memcached.ErrorHandler;
 
 import corner.cache.annotations.LocalCache;
-import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheableAdvisor;
 import corner.cache.services.impl.CacheableAdvisorImpl;
@@ -34,7 +32,6 @@ import corner.cache.services.impl.local.LocalCacheConfig;
 import corner.cache.services.impl.local.LocalCacheManagerImpl;
 import corner.cache.services.impl.memcache.ErrorHandlerImpl;
 import corner.cache.services.impl.memcache.MemcacheConfig;
-import corner.cache.services.impl.memcache.MemcachedCacheManager;
 import corner.config.services.ConfigurationSource;
 
 /**
@@ -54,29 +51,7 @@ public class CacheModule {
 		binder.bind(CacheableAdvisor.class,CacheableAdvisorImpl.class);
 	}
 
-	/**
-	 * 构造基于Memcached的CacheManager,并启动该manager
-	 * 
-	 * @param configSource
-	 *            配置源
-	 * @param logger
-	 *            日志实例
-	 * @param errorHandler
-	 *            访问Memcache时的异常处理器
-	 * @return
-	 * @since 0.0.2
-	 */
-	@Marker(Memcache.class)
-	public CacheManager buildMemcachedCacheManager(
-			ConfigurationSource configSource, Logger logger,
-			ErrorHandler errorHandler) {
-		MemcacheConfig _config = configSource
-				.getServiceConfig(MemcacheConfig.class);
-		CacheManager _manager = new MemcachedCacheManager(_config, logger,
-				errorHandler);
-		_manager.start();
-		return _manager;
-	}
+
 
 	/**
 	 * 构造基于JVM本机内存的CacheManager,并启动该Manager

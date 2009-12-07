@@ -1,3 +1,4 @@
+/***** Ajax indicator ******/
 #ajax-indicator {
 position: absolute; /* fixed not supported by IE */
 background-color:#eee;

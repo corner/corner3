@@ -1,4 +1,3 @@
-﻿// Copyright 2008 The OurIBA Develope Team.
 // 一个展示覆盖层的一个js
 var BlackCover = Class.create();
 BlackCover.prototype = {
