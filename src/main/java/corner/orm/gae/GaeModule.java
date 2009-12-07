@@ -65,7 +65,9 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.apphosting.api.ApiProxy.Delegate;
 
+import corner.cache.services.CacheManager;
 import corner.orm.gae.impl.EntityManagerSourceImpl;
+import corner.orm.gae.impl.JavaCacheManagerImpl;
 import corner.orm.gae.impl.JpaEntityServiceImpl;
 import corner.orm.gae.impl.JpaEntityValueEncoder;
 import corner.orm.gae.impl.JpaTransactionDecoratorImpl;
@@ -85,6 +87,7 @@ public class GaeModule {
 	public static void bind(ServiceBinder binder) {
 		binder.bind(EntityService.class, JpaEntityServiceImpl.class);
 		binder.bind(TransactionDecorator.class,JpaTransactionDecoratorImpl.class);
+		binder.bind(CacheManager.class,JavaCacheManagerImpl.class);
 	}
 
 	/**
