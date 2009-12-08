@@ -18,8 +18,6 @@ package corner.livevalidator;
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.RenderSupport;
 import org.apache.tapestry5.annotations.Path;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.json.JSONArray;
 import org.apache.tapestry5.json.JSONObject;
 
@@ -35,23 +33,33 @@ import org.apache.tapestry5.json.JSONObject;
 public class ValidatorRenderSupportImpl implements ValidatorRenderSupport {
 	protected RenderSupport renderSupport;
 	protected Asset validatorCss;
-	private final String lv4t5JavaScript;
+	private Asset validatorJs;
+	private Asset prototypeJs;
+	private Asset lv4t5Js;
 
-	public ValidatorRenderSupportImpl(RenderSupport renderSupport,
-			@Path("/corner/validator/validator.css")
-			Asset validatorCss,@Inject @Symbol(ValidationModule.LV4T5_JS_VERSION) String lv4t5JavaScript) {
+	public ValidatorRenderSupportImpl(
+			RenderSupport renderSupport,
+			@Path("static:/corner/validator/validator.css")
+			Asset validatorCss,
+			@Path("static:/corner/validator/livevalidation_prototype.compressed.js")
+			Asset validatorJs,
+			@Path("${tapestry.scriptaculous}/prototype.js")
+			Asset prototypeJs,
+			@Path("static:/corner/validator/lv4t5.js")
+			Asset lv4t5Js 
+			) {
 		this.renderSupport = renderSupport;
 		this.validatorCss = validatorCss;
-		this.lv4t5JavaScript = lv4t5JavaScript;
+		this.validatorJs = validatorJs;
+		this.prototypeJs = prototypeJs;
+		this.lv4t5Js = lv4t5Js;
 	}
 
 	public void renderAssetFiles() {
 		renderSupport.addStylesheetLink(validatorCss, null);
-		renderSupport
-				.addClasspathScriptLink("${tapestry.scriptaculous}/prototype.js");
-		renderSupport
-				.addClasspathScriptLink("/corner/validator/livevalidation_prototype.compressed.js");
-		renderSupport.addClasspathScriptLink("/corner/validator/"+lv4t5JavaScript);
+		renderSupport.addScriptLink(prototypeJs);
+		renderSupport.addScriptLink(validatorJs);
+		renderSupport.addScriptLink(lv4t5Js);
 
 	}
 
