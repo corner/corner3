@@ -17,11 +17,13 @@ package corner.asset.services.impl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.RequestConstants;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
 import org.apache.tapestry5.services.AssetPathConverter;
 
 import corner.asset.StaticAssetSymbols;
@@ -40,6 +42,8 @@ public class CDNAssetPathConverterImpl implements AssetPathConverter {
 	private StaticAssetUrlDomainHash hash;
 	private String contextPrefix;
 	private String applicationVersion;
+	private String classPathPrefix;
+	private Map<String,String> resources=CollectionFactory.newMap();
 
 	public CDNAssetPathConverterImpl(@Inject
 			@Symbol(StaticAssetSymbols.DOMAIN_NAME)
@@ -66,23 +70,35 @@ public class CDNAssetPathConverterImpl implements AssetPathConverter {
 		this.applicationVersion = applicationVersion;
 		this.contextPrefix = RequestConstants.ASSET_PATH_PREFIX + RequestConstants.CONTEXT_FOLDER
         + applicationVersion + "/";
+		this.classPathPrefix = RequestConstants.ASSET_PATH_PREFIX;
 	}
 	/**
 	 * @see org.apache.tapestry5.services.AssetPathConverter#convertAssetPath(java.lang.String)
 	 */
 	@Override
 	public String convertAssetPath(String assetPath) {
+		if(resources.containsKey(assetPath)){
+			return resources.get(assetPath);
+		}
+		String result = assetPath;
 		if(assetPath.startsWith(contextPrefix)){//context path
 			String _path=assetPath.substring(contextPrefix.length());
-			_path = _path.replaceFirst("^\\.+", "");
-			_path = _path.replaceFirst("^/+", "");
-			String _host = this.host;
-			if (this.supportMutil) {
-				_host = this.hash.hash(this.host);
-			}
-			return String.format("http://%s%s/%s?v=%s", _host, this.port, _path,this.applicationVersion);
+			result = convertToCDN(_path);
+		}else if(assetPath.startsWith(classPathPrefix)){//classpath resource
+			String _path=assetPath.substring(classPathPrefix.length());
+			result = convertToCDN(_path);
 		}
-		return assetPath;
+		resources.put(assetPath,result);
+		return result;
+	}
+	private String convertToCDN(String path) {
+		String _path = path.replaceFirst("^\\.+", "");
+		_path = _path.replaceFirst("^/+", "");
+		String _host = this.host;
+		if (this.supportMutil) {
+			_host = this.hash.hash(this.host);
+		}
+		return String.format("http://%s%s/%s?v=%s", _host, this.port, _path,this.applicationVersion);
 	}
 
 	/**

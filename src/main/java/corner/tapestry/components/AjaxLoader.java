@@ -29,8 +29,8 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  * @version $Revision$
  * @since 0.0.2
  */
-@IncludeJavaScriptLibrary({"static:/corner/BlackCover.js","static:/corner/AjaxLoader.js"})
-@IncludeStylesheet("static:/corner/AjaxLoader.css")
+@IncludeJavaScriptLibrary({"context:/corner/BlackCover.js","context:/corner/AjaxLoader.js"})
+@IncludeStylesheet("context:/corner/AjaxLoader.css")
 public class AjaxLoader {
 	@Environmental
 	private RenderSupport renderSupport;

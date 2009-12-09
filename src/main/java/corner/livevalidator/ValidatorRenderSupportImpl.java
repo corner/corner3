@@ -39,13 +39,13 @@ public class ValidatorRenderSupportImpl implements ValidatorRenderSupport {
 
 	public ValidatorRenderSupportImpl(
 			RenderSupport renderSupport,
-			@Path("static:/corner/validator/validator.css")
+			@Path("context:/corner/validator/validator.css")
 			Asset validatorCss,
-			@Path("static:/corner/validator/livevalidation_prototype.compressed.js")
+			@Path("context:/corner/validator/livevalidation_prototype.compressed.js")
 			Asset validatorJs,
 			@Path("${tapestry.scriptaculous}/prototype.js")
 			Asset prototypeJs,
-			@Path("static:/corner/validator/lv4t5.js")
+			@Path("context:/corner/validator/lv4t5.js")
 			Asset lv4t5Js 
 			) {
 		this.renderSupport = renderSupport;

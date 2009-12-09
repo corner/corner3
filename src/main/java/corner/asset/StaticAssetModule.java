@@ -51,6 +51,21 @@ public class StaticAssetModule {
     {
 		 return chainBuilder.build(StaticAssetUrlCreator.class, configuration);
     }
+	/*
+	public static AssetPathConverter buildCDNAssetPathConverter(ObjectLocator locator){
+		return locator.autobuild(CDNAssetPathConverterImpl.class);
+	}
+	public static void contributeServiceOverride(MappedConfiguration<Class,Object> configuration,
+			@Local AssetPathConverter converter,
+			@Inject
+			@Symbol(StaticAssetSymbols.DOMAIN_ASSET_MODE)
+			boolean assetModel)
+	  {
+		if(assetModel){
+			configuration.add(AssetPathConverter.class,converter);
+		}
+	  }
+	  */
 
 	public static void contributeFactoryDefaults(
 			MappedConfiguration<String, String> configuration) {

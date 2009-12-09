@@ -26,6 +26,6 @@ import org.apache.tapestry5.ioc.MappedConfiguration;
 public class FckeditorModule {
 	public static void contributeFactoryDefaults(
 			MappedConfiguration<String, String> configuration) {
-		configuration.add(FckeditorSymbols.FCKEDITOR_JS_PATH,"static:fckeditor");
+		configuration.add(FckeditorSymbols.FCKEDITOR_JS_PATH,"context:fckeditor");
 	}
 }

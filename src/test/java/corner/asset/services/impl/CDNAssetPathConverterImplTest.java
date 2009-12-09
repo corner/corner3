@@ -34,5 +34,15 @@ public class CDNAssetPathConverterImplTest extends TapestryTestCase{
 		String path = "/assets/ctx/1.2/images/test.jpg";
 		assertEquals("http://assets0.ganshane.com/images/test.jpg?v=1.2",convert.convertAssetPath(path));
 	}
+	@Test
+	public void test_convert_classpath(){
+		String domain="assets.ganshane.com";
+		boolean supportMutil=true;
+		String applicationVersion="1.2";
+		StaticAssetUrlDomainHash hash=new StaticAssetUrlDomainSequenceHash(3);;
+		CDNAssetPathConverterImpl convert = new CDNAssetPathConverterImpl(domain,supportMutil,applicationVersion,hash);
+		String path = "/assets/xxx/images/test.jpg";
+		assertEquals("http://assets0.ganshane.com/xxx/images/test.jpg?v=1.2",convert.convertAssetPath(path));
+	}
 
 }
