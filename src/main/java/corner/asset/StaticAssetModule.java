@@ -17,17 +17,21 @@ package corner.asset;
 
 import java.util.List;
 
+import org.apache.tapestry5.internal.services.IdentityAssetPathConverter;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.ChainBuilder;
 import org.apache.tapestry5.services.AssetFactory;
+import org.apache.tapestry5.services.AssetPathConverter;
 
 import corner.asset.annotations.StaticAssetProvider;
 import corner.asset.services.StaticAssetUrlCreator;
+import corner.asset.services.impl.CDNAssetPathConverterImpl;
 import corner.asset.services.impl.DomainStaticAssetUrlCreatorImpl;
 import corner.asset.services.impl.HadoopStaticAssetUrlCreatorImpl;
 import corner.asset.services.impl.LocalStaticAssetUrlCreatorImpl;
@@ -51,21 +55,24 @@ public class StaticAssetModule {
     {
 		 return chainBuilder.build(StaticAssetUrlCreator.class, configuration);
     }
-	/*
-	public static AssetPathConverter buildCDNAssetPathConverter(ObjectLocator locator){
-		return locator.autobuild(CDNAssetPathConverterImpl.class);
+	public static AssetPathConverter buildCDNAssetPathConverter(ObjectLocator locator,
+			@Inject
+			@Symbol(StaticAssetSymbols.DOMAIN_ASSET_MODE)
+			boolean assetModel
+			){
+		if(assetModel){
+			return locator.autobuild(CDNAssetPathConverterImpl.class);
+		}else{
+			return locator.autobuild(IdentityAssetPathConverter.class);
+		}
 	}
 	public static void contributeServiceOverride(MappedConfiguration<Class,Object> configuration,
 			@Local AssetPathConverter converter,
-			@Inject
-			@Symbol(StaticAssetSymbols.DOMAIN_ASSET_MODE)
-			boolean assetModel)
+			ObjectLocator locator
+			)
 	  {
-		if(assetModel){
 			configuration.add(AssetPathConverter.class,converter);
-		}
 	  }
-	  */
 
 	public static void contributeFactoryDefaults(
 			MappedConfiguration<String, String> configuration) {
