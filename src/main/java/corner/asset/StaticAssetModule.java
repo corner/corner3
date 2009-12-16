@@ -87,7 +87,7 @@ public class StaticAssetModule {
 	
 
 	/**
-	 * 为Asset增加一种新的类型:static,使用样例:<code>@IncludeStylesheet({ "static:css/style2.css"})</code>
+	 * 为Asset增加一种新的类型:static,使用样例:<code>@IncludeStylesheet({ "context:css/style2.css"})</code>
 	 * 
 	 * @param configuration
 	 * @param staticAssetFactory
