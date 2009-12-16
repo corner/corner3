@@ -90,4 +90,9 @@ public class JpaEntityServiceImpl  implements EntityService{
 			update(entity);
 		}
 	}
+
+	@Override
+	public Class getEntityClass(Object entity) {
+		return entity.getClass();
+	}
 }

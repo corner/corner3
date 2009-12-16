@@ -111,4 +111,11 @@ public interface EntityService {
 	 * @since 3.1
 	 */
 	public void refresh(Object entity);
+	/**
+	 * 通过给定的值来得到实体的类名
+	 * @param entity  实体实例
+	 * @return 实体类名
+	 * @since 3.1
+	 */
+	public Class getEntityClass(Object entity);
 }

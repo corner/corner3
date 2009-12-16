@@ -113,4 +113,8 @@ public class EntityServiceImpl  implements EntityService{
 		template.saveOrUpdate(entity);
 	}
 
+	@Override
+	public Class getEntityClass(Object entity) {
+		return org.hibernate.Hibernate.getClass(entity);
+	}
 }

@@ -25,8 +25,6 @@ import org.testng.annotations.Test;
 
 import corner.orm.gae.impl.TestAEntity;
 import corner.orm.services.EntityService;
-import corner.orm.services.impl.CornerEntityPersistentFieldStrategy;
-import corner.orm.services.impl.PersistedEntity;
 
 /**
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>

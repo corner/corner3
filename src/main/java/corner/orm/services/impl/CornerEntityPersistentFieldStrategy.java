@@ -38,7 +38,8 @@ public class CornerEntityPersistentFieldStrategy extends AbstractSessionPersiste
 	    protected Object convertApplicationValueToPersisted(Object newValue)
 	    {
 	        Serializable id = (Serializable) propertyAccess.get(newValue, EntityConstants.ID_PROPERTY_NAME);
-            String entityName =  newValue.getClass().getName();
+	        Class  clazz = entityService.getEntityClass(newValue);
+            String entityName =  clazz.getName();
             return new PersistedEntity(entityName, id);
 	    }
 
