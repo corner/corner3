@@ -18,12 +18,15 @@ package corner.asset;
 import org.apache.tapestry5.internal.services.IdentityAssetPathConverter;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
+import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.AssetPathConverter;
 
 import corner.asset.services.impl.CDNAssetPathConverterImpl;
+import corner.asset.services.impl.StaticAssetUrlDomainHash;
+import corner.asset.services.impl.StaticAssetUrlDomainSequenceHash;
 
 /**
  * StaticModule用于提供默认的配置
@@ -33,6 +36,10 @@ import corner.asset.services.impl.CDNAssetPathConverterImpl;
  * @since 0.0.1
  */
 public class StaticAssetModule {
+	public static void bind(ServiceBinder binder){
+		binder.bind(StaticAssetUrlDomainHash.class,StaticAssetUrlDomainSequenceHash.class);
+		
+	}
 	public static AssetPathConverter buildCDNAssetPathConverter(ObjectLocator locator,
 			@Inject
 			@Symbol(StaticAssetSymbols.DOMAIN_ASSET_MODE)
