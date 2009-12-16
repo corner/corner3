@@ -176,16 +176,19 @@
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 			<version>1.2.8</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-labs</artifactId>
 			<version>1.2.8</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.appengine.orm</groupId>
 			<artifactId>datanucleus-appengine</artifactId>
 			<version>1.0.4</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.datanucleus</groupId>
