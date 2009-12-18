@@ -31,4 +31,7 @@ public class PaginationList <T>{
     public PaginationOptions options(){
         return this.options;
     }
+    public void overrideCollectionObject(Object it){
+    	this.it = it;
+    }
 }

@@ -72,8 +72,8 @@ import com.google.apphosting.api.ApiProxy.Delegate;
 
 import corner.cache.services.CacheManager;
 import corner.orm.gae.impl.EntityManagerSourceImpl;
+import corner.orm.gae.impl.GaeCachedEntityServiceImpl;
 import corner.orm.gae.impl.JavaCacheManagerImpl;
-import corner.orm.gae.impl.JpaEntityServiceImpl;
 import corner.orm.gae.impl.JpaEntityValueEncoder;
 import corner.orm.gae.impl.JpaTransactionDecoratorImpl;
 import corner.orm.gae.impl.TestEnvironment;
@@ -92,7 +92,7 @@ public class GaeModule {
 	private static final String STATIC_REGEX_PATTERN = "^[^$]+\\.(jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|doc|xls|exe|pdf|ppt|txt|tar|mid|midi|wav|bmp|rtf|js|mov)$";
 
 	public static void bind(ServiceBinder binder) {
-		binder.bind(EntityService.class, JpaEntityServiceImpl.class);
+		binder.bind(EntityService.class, GaeCachedEntityServiceImpl.class);
 		binder.bind(TransactionDecorator.class,
 				JpaTransactionDecoratorImpl.class);
 		binder.bind(CacheManager.class, JavaCacheManagerImpl.class);

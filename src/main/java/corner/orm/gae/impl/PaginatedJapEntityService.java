@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.JpaTemplate;
 
+import corner.orm.EntityConstants;
 import corner.orm.hibernate.impl.PaginatedEntityService;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
@@ -82,7 +83,7 @@ public class PaginatedJapEntityService {
 	                //query list
 	                final StringBuffer queryJPQL= new StringBuffer(conditionJPQL);
 	                appendOrder(queryJPQL, order);
-	                queryJPQL.insert(0, "select root ");
+	                queryJPQL.insert(0, "select root."+EntityConstants.ID_PROPERTY_NAME);
 	                Query query = entityManager.createQuery(queryJPQL.toString());
 
 	                //count query
@@ -129,7 +130,7 @@ public class PaginatedJapEntityService {
 		               final Iterator it = con==null?null:con.iterator();
 		               final StringBuffer sb = buildConditionJPQL(persistClass, it);
 		               appendOrder(sb, order);
-		               sb.insert(0, "select root ");
+		               sb.insert(0, "select root."+EntityConstants.ID_PROPERTY_NAME);
 		               Query query = entityManager.createQuery(sb.toString());
 		               if(it!=null){
 		                  int i=0;
@@ -176,7 +177,7 @@ public class PaginatedJapEntityService {
 
 	    private StringBuffer buildConditionJPQL(Class<?> persistClass, Iterator conditions) {
 	        final StringBuffer sb = new StringBuffer();
-	        sb.append("from ").append(persistClass.getName()).append(" as root ");
+	        sb.append(" from ").append(persistClass.getName()).append(" as root ");
 	        if(conditions !=null&& conditions.hasNext()){
 	            String where = String.valueOf(conditions.next()).trim();
 	            

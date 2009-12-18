@@ -15,8 +15,17 @@
  */
 package corner.orm;
 
-import org.apache.tapestry5.ioc.annotations.Match;
+import java.util.Iterator;
 
+import org.apache.tapestry5.ioc.Configuration;
+import org.apache.tapestry5.ioc.annotations.Match;
+import org.apache.tapestry5.ioc.services.Builtin;
+import org.apache.tapestry5.ioc.services.Coercion;
+import org.apache.tapestry5.ioc.services.CoercionTuple;
+import org.apache.tapestry5.ioc.services.TypeCoercer;
+
+import corner.orm.model.PaginationList;
+import corner.orm.model.PaginationOptions;
 import corner.transaction.services.TransactionDecorator;
 
 
@@ -33,4 +42,50 @@ public class OrmModule {
 			T delegate, String serviceId) {
 		return decorator.build(serviceInterface, delegate, serviceId);
 	}
+    public static void contributeTypeCoercer(Configuration<CoercionTuple> configuration,
+                                             @Builtin final
+                                             TypeCoercer coercer)
+
+    {
+    	//PaginationList -> PaginationOptions
+    	 add(configuration, PaginationList.class, PaginationOptions.class,
+                 new Coercion<PaginationList, PaginationOptions>()
+                 {
+                     public PaginationOptions coerce(PaginationList input)
+                     {
+                         return input.options();
+                     }
+                 });
+    	 //Iterator -> Iterable
+    	 add(configuration,Iterator.class,Iterable.class,
+                 new Coercion<Iterator, Iterable>()
+                 {
+                     public Iterable coerce(final Iterator input)
+                     {
+                         return new Iterable(){
+
+							@Override
+							public Iterator iterator() {
+								return input;
+							}};
+                     }
+                 });
+    	 //PaginationList -> Iterable
+         add(configuration, PaginationList.class, Iterable.class,
+                new Coercion<PaginationList, Iterable>()
+                {
+                    public Iterable coerce(PaginationList input)
+                    {
+                        return coercer.coerce(input.collectionObject(),Iterable.class);
+                    }
+                });
+    }
+    private static <S, T> void add(Configuration<CoercionTuple> configuration, Class<S> sourceType, Class<T> targetType,
+                                   Coercion<S, T> coercion)
+    {
+        CoercionTuple<S, T> tuple = new CoercionTuple<S, T>(sourceType, targetType, coercion);
+
+        configuration.add(tuple);
+    }
+
 }
