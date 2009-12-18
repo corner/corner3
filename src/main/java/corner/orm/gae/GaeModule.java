@@ -24,6 +24,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.internal.InternalConstants;
 import org.apache.tapestry5.ioc.Configuration;
@@ -46,6 +47,9 @@ import org.apache.tapestry5.ioc.services.PerthreadManager;
 import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.ioc.services.PropertyShadowBuilder;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
+import org.apache.tapestry5.services.ApplicationInitializer;
+import org.apache.tapestry5.services.ApplicationInitializerFilter;
+import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.PersistentFieldStrategy;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
@@ -63,6 +67,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.apphosting.api.ApiProxy;
 import com.google.apphosting.api.ApiProxy.Delegate;
 
 import corner.cache.services.CacheManager;
@@ -71,12 +76,14 @@ import corner.orm.gae.impl.JavaCacheManagerImpl;
 import corner.orm.gae.impl.JpaEntityServiceImpl;
 import corner.orm.gae.impl.JpaEntityValueEncoder;
 import corner.orm.gae.impl.JpaTransactionDecoratorImpl;
+import corner.orm.gae.impl.TestEnvironment;
 import corner.orm.services.EntityService;
 import corner.orm.services.impl.CornerEntityPersistentFieldStrategy;
 import corner.transaction.services.TransactionDecorator;
 
 /**
  * Google App Engine 相关的module
+ * 
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
@@ -86,8 +93,9 @@ public class GaeModule {
 
 	public static void bind(ServiceBinder binder) {
 		binder.bind(EntityService.class, JpaEntityServiceImpl.class);
-		binder.bind(TransactionDecorator.class,JpaTransactionDecoratorImpl.class);
-		binder.bind(CacheManager.class,JavaCacheManagerImpl.class);
+		binder.bind(TransactionDecorator.class,
+				JpaTransactionDecoratorImpl.class);
+		binder.bind(CacheManager.class, JavaCacheManagerImpl.class);
 	}
 
 	/**
@@ -110,36 +118,33 @@ public class GaeModule {
 			}
 		};
 	}
-	
-	public static void contributeTypeCoercer(Configuration<CoercionTuple> configuration,
-			@Builtin final
-			TypeCoercer coercer)
-	
+
+	public static void contributeTypeCoercer(
+			Configuration<CoercionTuple> configuration,
+			@Builtin final TypeCoercer coercer)
+
 	{
-		//from Key => String
+		// from Key => String
 		add(configuration, Key.class, String.class,
-				new Coercion<Key, String>()
-				{
-			public String coerce(Key input)
-			{
-				return KeyFactory.keyToString(input);
-			}
+				new Coercion<Key, String>() {
+					public String coerce(Key input) {
+						return KeyFactory.keyToString(input);
+					}
 				});
-		//from String=>Key
+		// from String=>Key
 		add(configuration, String.class, Key.class,
-				new Coercion<String,Key>()
-				{
-			public Key coerce(String input)
-			{
-				return KeyFactory.stringToKey(input);
-			}
+				new Coercion<String, Key>() {
+					public Key coerce(String input) {
+						return KeyFactory.stringToKey(input);
+					}
 				});
 	}
-	private static <S, T> void add(Configuration<CoercionTuple> configuration, Class<S> sourceType, Class<T> targetType,
-			Coercion<S, T> coercion)
-	{
-		CoercionTuple<S, T> tuple = new CoercionTuple<S, T>(sourceType, targetType, coercion);
-		
+
+	private static <S, T> void add(Configuration<CoercionTuple> configuration,
+			Class<S> sourceType, Class<T> targetType, Coercion<S, T> coercion) {
+		CoercionTuple<S, T> tuple = new CoercionTuple<S, T>(sourceType,
+				targetType, coercion);
+
 		configuration.add(tuple);
 	}
 
@@ -182,15 +187,21 @@ public class GaeModule {
 		}
 
 	}
-	 /**
-     * Contributes the following: <dl> <dt>entity</dt> <dd>Stores the id of the entity and reloads from the {@link
-     * EntityManager}</dd> </dl>
-     */
-    public static void contributePersistentFieldManager(
-            MappedConfiguration<String, PersistentFieldStrategy> configuration)
-    {
-        configuration.addInstance("entity", CornerEntityPersistentFieldStrategy.class);
-    }
+
+	/**
+	 * Contributes the following:
+	 * <dl>
+	 * <dt>entity</dt>
+	 * <dd>Stores the id of the entity and reloads from the
+	 * {@link EntityManager}</dd>
+	 * </dl>
+	 */
+	public static void contributePersistentFieldManager(
+			MappedConfiguration<String, PersistentFieldStrategy> configuration) {
+		configuration.addInstance("entity",
+				CornerEntityPersistentFieldStrategy.class);
+	}
+
 	public static JpaTemplate buildJpaTemplate(
 			@Local EntityManager entityManager) {
 		JpaTemplate template = new JpaTemplate(entityManager);
@@ -223,13 +234,18 @@ public class GaeModule {
 		return entityManagerSource;
 	}
 
-	public static Delegate buildDelegate(@Builtin ClassFactory classFactory) throws Throwable{
+	public static Delegate buildDelegate(@Builtin ClassFactory classFactory)
+			throws Throwable {
 		String className = "com.google.appengine.tools.development.ApiProxyLocalImpl";
-		ClassFab classFab = classFactory.newClass("MyApiLocalEnvir", Class.forName(className));
-		classFab.addConstructor(new Class[]{File.class}, new Class[]{}, "super($1);");
+		ClassFab classFab = classFactory.newClass("MyApiLocalEnvir", Class
+				.forName(className));
+		classFab.addConstructor(new Class[] { File.class }, new Class[] {},
+				"super($1);");
 		Class clazz = classFab.createClass();
-		return (Delegate) clazz.getConstructor(File.class).newInstance(new File("target"));
+		return (Delegate) clazz.getConstructor(File.class).newInstance(
+				new File("target"));
 	}
+
 	public static EntityManager buildEntityManager(
 			@Local EntityManagerSource entityManagerSource,
 			PropertyShadowBuilder propertyShadowBuilder) {
@@ -246,6 +262,25 @@ public class GaeModule {
 		return platformTransactionManager;
 	}
 
+	// initialize  dev thread
+	public static void contributeApplicationInitializer(
+			OrderedConfiguration<ApplicationInitializerFilter> configuration,
+			@Inject @Symbol(SymbolConstants.PRODUCTION_MODE) final boolean product,
+			final Delegate delegate) {
+		configuration.add("init-gae-dev", new ApplicationInitializerFilter() {
+
+			@Override
+			public void initializeApplication(Context context,
+					ApplicationInitializer initializer) {
+				if (!product) {
+					ApiProxy
+							.setEnvironmentForCurrentThread(new TestEnvironment());
+					ApiProxy.setDelegate(delegate);
+				}
+				initializer.initializeApplication(context);
+			}
+		}, "before:*");
+	}
 
 	// Open EntityManager In View
 	public void contributeRequestHandler(
@@ -256,13 +291,14 @@ public class GaeModule {
 			public boolean service(Request request, Response response,
 					RequestHandler handler) throws IOException {
 				String path = request.getPath();
-				//except for dynamic content
-				if(path.matches(STATIC_REGEX_PATTERN)){
+				// except for dynamic content
+				if (path.matches(STATIC_REGEX_PATTERN)) {
 					return handler.service(request, response);
 				}
-				
-				//get entity manager
-				//because EntityManagerSource manage the EntityManager lifecycle.
+
+				// get entity manager
+				// because EntityManagerSource manage the EntityManager
+				// lifecycle.
 				entityManagerSource.getEntityManager();
 				return handler.service(request, response);
 			}
@@ -272,5 +308,4 @@ public class GaeModule {
 				"after:StoreIntoGlobals", "before:EndOfRequest");
 	}
 
-	
 }
