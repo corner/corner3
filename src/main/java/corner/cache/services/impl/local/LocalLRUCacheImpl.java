@@ -17,8 +17,9 @@ package corner.cache.services.impl.local;
 
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import corner.cache.services.Cache;
 
@@ -80,54 +81,46 @@ public class LocalLRUCacheImpl implements Cache<String, Object> {
 		return "[LRU] " + this.name;
 	}
 
-	private static final class LRUMap extends LinkedHashMap implements
+	public static final class LRUMap<K,V> extends LinkedHashMap<K,V> implements
 			java.io.Serializable {
 		private static final long serialVersionUID = 1L;
-		private final Lock lock = new ReentrantLock();
 		private int maxSize = 0;
+		private ReentrantReadWriteLock globalLock;
+		private ReadLock readLock;
+		private WriteLock writeLock;
 
 		public LRUMap(int maxSize) {
 			super(maxSize / 5, 0.75f, true);
 			this.maxSize = maxSize;
+			globalLock = new ReentrantReadWriteLock();
+			readLock = globalLock.readLock();
+			writeLock = globalLock.writeLock();
 		}
 
-		/**
-		 * @see java.util.LinkedHashMap#clear()
-		 */
-		@Override
-		public void clear() {
-			try {
-				lock.lock();
-				super.clear();
-			} finally {
-				lock.unlock();
-			}
-		}
 
 		/**
 		 * @see java.util.LinkedHashMap#get(java.lang.Object)
 		 */
 		@Override
-		public Object get(Object key) {
+		public V get(Object key) {
 			try {
-				lock.lock();
+				readLock.lock();
 				return super.get(key);
 			} finally {
-				lock.unlock();
+				readLock.unlock();
 			}
 		}
 
 		/**
 		 * @see java.util.HashMap#put(java.lang.Object, java.lang.Object)
 		 */
-		@SuppressWarnings("unchecked")
 		@Override
-		public Object put(Object key, Object value) {
+		public V put(K key, V value) {
 			try {
-				lock.lock();
+				writeLock.lock();
 				return super.put(key, value);
 			} finally {
-				lock.unlock();
+				writeLock.unlock();
 			}
 		}
 
@@ -135,12 +128,12 @@ public class LocalLRUCacheImpl implements Cache<String, Object> {
 		 * @see java.util.HashMap#remove(java.lang.Object)
 		 */
 		@Override
-		public Object remove(Object key) {
+		public V remove(Object key) {
 			try {
-				lock.lock();
+				writeLock.lock();
 				return super.remove(key);
 			} finally {
-				lock.unlock();
+				writeLock.unlock();
 			}
 		}
 
@@ -152,6 +145,18 @@ public class LocalLRUCacheImpl implements Cache<String, Object> {
 			return this.size() > this.maxSize;
 		}
 
-	}
 
+		/**
+		 * @see java.util.LinkedHashMap#clear()
+		 */
+		@Override
+		public void clear() {
+			try{
+				writeLock.lock();
+				super.clear();
+			}finally{
+				writeLock.unlock();
+			}
+		}
+	}
 }
