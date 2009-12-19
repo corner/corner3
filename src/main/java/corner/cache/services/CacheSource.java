@@ -15,6 +15,8 @@
  */
 package corner.cache.services;
 
+import corner.cache.model.CacheEvent;
+
 /**
  * 所有缓存的处理器，针对缓存事件的发生作出对应的处理
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
@@ -30,5 +32,12 @@ public interface CacheSource {
 	 * @return
 	 * @since 3.1
 	 */
-	public <T> CacheStrategy<T> getSecondCacheStrategy(Class<T> clazz,String key);
+	public <T> CacheStrategy<T> getSecondCacheStrategy(Class<T> clazz);
+	/**
+	 * 捕获缓存事件
+	 * @param <T> 操作的实体对象
+	 * @param event event
+	 * @since 3.1
+	 */
+	public <T>void catchEvent(CacheEvent<T> event,Object ... args);
 }

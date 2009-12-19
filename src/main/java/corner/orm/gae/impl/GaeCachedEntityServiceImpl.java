@@ -16,8 +16,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.jpa.JpaTemplate;
 
 import corner.cache.annotations.Memcache;
+import corner.cache.model.CacheEvent;
+import corner.cache.model.Operation;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
+import corner.cache.services.CacheSource;
 import corner.orm.EntityConstants;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
@@ -37,13 +40,19 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 	private PropertyAccess propertyAccess;
 	private Logger logger = LoggerFactory.getLogger(GaeCachedEntityServiceImpl.class);
 	private TypeCoercer typeCoercer;
+	private CacheSource cacheSource;
 
-	public GaeCachedEntityServiceImpl(JpaTemplate jpaTemplate,
-			TypeCoercer typeCoercer, PropertyAccess propertyAccess,@Memcache CacheManager cacheManager) {
+	public GaeCachedEntityServiceImpl(
+			JpaTemplate jpaTemplate,
+			TypeCoercer typeCoercer,
+			PropertyAccess propertyAccess,
+			@Memcache CacheManager cacheManager,
+			CacheSource cacheSource) {
 		super(jpaTemplate, typeCoercer, propertyAccess);
 		this.cache = cacheManager.getCache("entity");
 		this.propertyAccess = propertyAccess;
 		this.typeCoercer = typeCoercer;
+		this.cacheSource= cacheSource;
 	}
 
 	
@@ -61,8 +70,8 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 			}
 			cache.remove(cacheKey);
 		}
-//		CacheEvent event = new CacheEvent(getEntityClass(entity),entity,Operation.DELETE);
-		
+		CacheEvent<T> event = new CacheEvent<T>((Class<T>) getEntityClass(entity),entity,Operation.DELETE);
+		cacheSource.catchEvent(event);
 	}
 
 	/**
@@ -97,6 +106,8 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 	@Override
 	public <T>void save(T entity) throws DataAccessException {
 		super.save(entity);
+		CacheEvent<T> event = new CacheEvent<T>((Class<T>) getEntityClass(entity),entity,Operation.INSERT);
+		cacheSource.catchEvent(event);
 	}
 
 
@@ -107,6 +118,8 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 	public <T>void update(T entity) throws DataAccessException {
 		super.update(entity);
 		updateEntityCache(entity);
+		CacheEvent<T> event = new CacheEvent<T>((Class<T>) getEntityClass(entity),entity,Operation.UPDATE);
+		cacheSource.catchEvent(event);
 	}
 	//根据entity实例对象，更新缓存对象
 	private void updateEntityCache(Object entity){

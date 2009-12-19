@@ -69,7 +69,7 @@ public class CacheableAdvice implements MethodAdvice {
         cache = cacheManager.getCache("entity");
 //        cache.clear();
         this.propertyAccess = propertyAccess;
-
+       
 	}
 
 	@SuppressWarnings("unchecked")
@@ -86,6 +86,7 @@ public class CacheableAdvice implements MethodAdvice {
 			if (object == null) {
 				logger.debug("cache object is null,so execute origion method");
 				executeAndCache(invocation, cacheKey, cache);
+			
 			} else {
 				restoreObjectFromCache(invocation, object);
 			}
@@ -256,6 +257,42 @@ public class CacheableAdvice implements MethodAdvice {
 
 		}
 		return defaultType;
+	}
+
+	public String  generateCacheStrategy(Invocation invocation) {
+		Definition define = null;//(Definition) cache.get(methodDefineKey);
+
+		//if (define == null) { // 如果没定义，则进行分析
+			Builder defineBuilder = CacheableDefine.Definition.newBuilder();
+			Annotation[][] parametersAnnotations = method
+					.getParameterAnnotations();
+			for (int i = 0; i < parametersAnnotations.length; i++) {
+				Annotation[] pa = parametersAnnotations[i];
+				for (Annotation a : pa) {
+					if (a instanceof CacheKeyParameter) {
+						defineBuilder.addParameterIndex(i);
+					}
+				}
+			}
+			define = defineBuilder.build();
+			// 缓存定义
+//			cache.put(methodDefineKey, define);
+		//}
+		// 构造真正的缓存Key
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < define.getParameterIndexCount(); i++) {
+			int pIndex = define.getParameterIndex(i);
+			ValueEncoder encoder = valueEncoderSource.getValueEncoder(method
+					.getParameterTypes()[pIndex]);
+			sb.append(encoder.toClient(invocation.getParameter(pIndex))).append(",");
+		}
+		sb.append(method.toString());
+		String cacheKey = DigestUtils.shaHex(sb.toString());
+		if (logger.isDebugEnabled()) {
+			logger.debug("before sha key:[" + sb.toString() + "]");
+			logger.debug("cache key:[" + cacheKey + "]");
+		}
+		return cacheKey;
 	}
 
 }

@@ -36,14 +36,14 @@ public class CacheSourceImpl implements CacheSource{
 	private CacheManager cacheManager;
 
 	@Override
-	public <T> CacheStrategy<T> getSecondCacheStrategy(Class<T> clazz,String key) {
+	public <T> CacheStrategy<T> getSecondCacheStrategy(Class<T> clazz) {
 		CacheStrategy<T> strategy= strategies.get(clazz);
 		if(strategy== null){
 			strategy = new SecondListCacheStrategyImpl<T>();
 		}
 		return strategy;
 	}
-	public <T>void receiveCacheEvent(CacheEvent<T> event,Object ... args){
+	public <T>void catchEvent(CacheEvent<T> event,Object ... args){
 		Class<? extends CacheEvent> clazz = event.getClass();
 		CacheStrategy strategy = strategies.get(clazz);
 		if(strategy != null){
@@ -53,4 +53,5 @@ public class CacheSourceImpl implements CacheSource{
 			}
 		}
 	}
+	
 }
