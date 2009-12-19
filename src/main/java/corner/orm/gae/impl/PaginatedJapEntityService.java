@@ -117,9 +117,7 @@ public class PaginatedJapEntityService {
 				}
 	        });
 	    }
-	    public Iterator find(final Class<?> persistClass,final Object conditions,final String order){
-	    	return find(persistClass,conditions,order,0,Integer.MAX_VALUE);
-		}
+
 
 	    public Iterator find(final Class<?> persistClass,final Object conditions,final String order,final int start,final int offset){
 		       return (Iterator) this.template.execute(new JpaCallback(){

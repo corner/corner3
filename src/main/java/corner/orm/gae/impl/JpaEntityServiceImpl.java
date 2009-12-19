@@ -46,7 +46,7 @@ public class JpaEntityServiceImpl  implements EntityService{
 	}
 
 	public Iterator find(Class<?> persistClass, Object conditions, String order) {
-		return paginatedJpaEntityService.find(persistClass, conditions, order);
+		return find(persistClass, conditions, order,0,Integer.MAX_VALUE);
 	}
 
 	public PaginationList paginate(Class<?> persistClass, Object conditions,
