@@ -35,28 +35,28 @@ public interface EntityService {
 	 * @since 3.1
 	 */
 	@Transactional
-	public void save(Object entity);
+	public<T> void save(T entity);
 	/**
 	 * 删除一个实体
 	 * @param entity 实体对象
 	 * @since 3.1
 	 */
 	@Transactional
-	public void delete(Object entity);
+	public<T> void delete(T entity);
 	/**
 	 * 更新一个实体
 	 * @param entity 实体对象
 	 * @since 3.1
 	 */
 	@Transactional
-	public void update(Object entity);
+	public <T> void update(T entity);
 	/**
 	 * 保存或者更新一个实体
 	 * @param entity 实体对象
 	 * @since 3.1
 	 */
 	@Transactional
-	public void saveOrUpdate(Object entity);
+	public <T>void saveOrUpdate(T entity);
 	/**
 	 * 加载一个实体
 	 * @param <T> 加载实体对象
@@ -82,7 +82,7 @@ public interface EntityService {
 	 * @return query result
 	 * @since 3.1
 	 */
-	public Iterator find(Class<?> entityClass, Object conditions, String order);
+	public <T> Iterator<T> find(Class<T> entityClass, Object conditions, String order);
 	/**
 	 * 根据给定的实体类，和条件以及排序进行查询
 	 * @param entityClass persistence class
@@ -93,7 +93,7 @@ public interface EntityService {
 	 * @return query result
 	 * @since 3.1
 	 */
-	public Iterator find(Class<?> entityClass, Object conditions,String order, int start, int offset) ;
+	public <T> Iterator<T> find(Class<T> entityClass, Object conditions,String order, int start, int offset) ;
 
 	/**
 	 * 根据给定的实体类、条件、分页参数以及排序进行查询
@@ -104,18 +104,18 @@ public interface EntityService {
 	 * @return 查询结果集，同时包含了分页使用的参数
 	 * @since 3.1
 	 */
-	public PaginationList paginate(Class<?> entityClass, Object conditions,String order, PaginationOptions options) ;
+	public <T> PaginationList<T> paginate(Class<T> entityClass, Object conditions,String order, PaginationOptions options) ;
 	/**
 	 * 重新load一下实体，通常为了从数据库中再次获取数据
 	 * @param entity 实体
 	 * @since 3.1
 	 */
-	public void refresh(Object entity);
+	public <T> void refresh(T entity);
 	/**
 	 * 通过给定的值来得到实体的类名
 	 * @param entity  实体实例
 	 * @return 实体类名
 	 * @since 3.1
 	 */
-	public Class getEntityClass(Object entity);
+	public Class<?>getEntityClass(Object  entity) ;
 }

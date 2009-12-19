@@ -19,7 +19,6 @@ import corner.cache.annotations.Memcache;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
 import corner.orm.EntityConstants;
-import corner.orm.gae.impl.JpaEntityServiceImpl;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
 import corner.orm.services.EntityService;
@@ -52,7 +51,7 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 	 * @see corner.orm.gae.impl.JpaEntityServiceImpl#delete(java.lang.Object)
 	 */
 	@Override
-	public void delete(Object entity) throws DataAccessException {
+	public <T> void delete(T entity) throws DataAccessException {
 		super.delete(entity);
 		//删除缓存
 		String cacheKey = makeEntityCacheKey(entity);
@@ -62,6 +61,8 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 			}
 			cache.remove(cacheKey);
 		}
+//		CacheEvent event = new CacheEvent(getEntityClass(entity),entity,Operation.DELETE);
+		
 	}
 
 	/**
@@ -94,25 +95,16 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 	 * @see corner.orm.gae.impl.JpaEntityServiceImpl#save(java.lang.Object)
 	 */
 	@Override
-	public void save(Object entity) throws DataAccessException {
+	public <T>void save(T entity) throws DataAccessException {
 		super.save(entity);
-		updateEntityCache(entity);
 	}
 
-	/**
-	 * @see corner.orm.gae.impl.JpaEntityServiceImpl#saveOrUpdate(java.lang.Object)
-	 */
-	@Override
-	public void saveOrUpdate(Object entity) {
-		super.saveOrUpdate(entity);
-		updateEntityCache(entity);
-	}
 
 	/**
 	 * @see corner.orm.gae.impl.JpaEntityServiceImpl#update(java.lang.Object)
 	 */
 	@Override
-	public void update(Object entity) throws DataAccessException {
+	public <T>void update(T entity) throws DataAccessException {
 		super.update(entity);
 		updateEntityCache(entity);
 	}
@@ -147,7 +139,7 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 	 * @see corner.orm.gae.impl.JpaEntityServiceImpl#find(java.lang.Class, java.lang.Object, java.lang.String, int, int)
 	 */
 	@Override
-	public Iterator find(final Class<?> persistClass, Object conditions,
+	public<T> Iterator<T> find(final Class<T> persistClass, Object conditions,
 			String order, int start, int offset) {
 		//父类返回的结果为ID的集合
 		final Iterator ids =  super.find(persistClass, conditions, order,start,offset);
@@ -173,7 +165,7 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 	 * @see corner.orm.gae.impl.JpaEntityServiceImpl#paginate(java.lang.Class, java.lang.Object, java.lang.String, corner.orm.model.PaginationOptions)
 	 */
 	@Override
-	public PaginationList paginate(final Class<?> persistClass, Object conditions,
+	public <T>PaginationList<T> paginate(final Class<T> persistClass, Object conditions,
 			String order, PaginationOptions options) {
 		PaginationList paginationList = super.paginate(persistClass, conditions, order, options);
 		Object collectionObject = paginationList.collectionObject();

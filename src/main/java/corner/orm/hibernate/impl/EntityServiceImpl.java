@@ -67,17 +67,17 @@ public class EntityServiceImpl  implements EntityService{
 	}
 
 	@Override
-	public void delete(Object object) {
+	public <T>void delete(T object) {
 		this.template.delete(object);
 	}
 
 	@Override
-	public Iterator find(Class<?> persistClass, Object conditions, String order) {
+	public <T>Iterator<T> find(Class<T> persistClass, Object conditions, String order) {
 		return paginatedService.find(persistClass, conditions,order);
 	}
 
 	@Override
-	public Iterator find(Class<?> persistClass, Object conditions,
+	public<T> Iterator<T> find(Class<T> persistClass, Object conditions,
 			String order, int start, int offset) {
 		return paginatedService.find(persistClass, conditions, order,start,offset);
 	}
@@ -88,28 +88,28 @@ public class EntityServiceImpl  implements EntityService{
 	}
 
 	@Override
-	public PaginationList paginate(Class<?> persistClass, Object conditions,
+	public <T>PaginationList<T> paginate(Class<T> persistClass, Object conditions,
 			String order, PaginationOptions options) {
 		return paginatedService.paginate(persistClass, conditions, order, options);
 	}
 
 	@Override
-	public void save(Object object) {
+	public<T> void save(T object) {
 		this.template.save(object);
 	}
 
 	@Override
-	public void update(Object object) {
+	public <T>void update(T object) {
 		template.update(object);
 	}
 
 	@Override
-	public void refresh(Object entity) {
+	public <T>void refresh(T entity) {
 		template.refresh(entity);
 	}
 
 	@Override
-	public void saveOrUpdate(Object entity) {
+	public <T>void saveOrUpdate(T entity) {
 		template.saveOrUpdate(entity);
 	}
 

@@ -35,7 +35,7 @@ public class JpaEntityServiceImpl  implements EntityService{
 		this.propertyAccess = propertyAccess;
 	}
 	
-	public Iterator find(Class<?> persistClass, Object conditions,
+	public <T> Iterator<T> find(Class<T> persistClass, Object conditions,
 			String order, int start, int offset) {
 		return paginatedJpaEntityService.find(persistClass, conditions, order,
 				start, offset);
@@ -45,11 +45,11 @@ public class JpaEntityServiceImpl  implements EntityService{
 		return paginatedJpaEntityService.count(persistClass, conditions);
 	}
 
-	public Iterator find(Class<?> persistClass, Object conditions, String order) {
+	public <T>Iterator<T> find(Class<T> persistClass, Object conditions, String order) {
 		return find(persistClass, conditions, order,0,Integer.MAX_VALUE);
 	}
 
-	public PaginationList paginate(Class<?> persistClass, Object conditions,
+	public<T> PaginationList<T> paginate(Class<T> persistClass, Object conditions,
 			String order, PaginationOptions options) {
 		return paginatedJpaEntityService.paginate(persistClass, conditions,
 				order, options);
@@ -64,24 +64,24 @@ public class JpaEntityServiceImpl  implements EntityService{
 	}
 
 	
-	public void update(Object entity) throws DataAccessException {
+	public <T>void update(T entity) throws DataAccessException {
 		this.jpaTemplate.merge(entity);
 	}
 	
-	public void save(Object entity) throws DataAccessException {
+	public<T> void save(T entity) throws DataAccessException {
 		this.jpaTemplate.persist(entity);
 	}
 	
-	public void refresh(Object entity) throws DataAccessException {
+	public <T>void refresh(T entity) throws DataAccessException {
 		this.jpaTemplate.refresh(entity);
 	}
 	
-	public void delete(Object entity) throws DataAccessException {
+	public <T> void delete(T entity) throws DataAccessException {
 		this.jpaTemplate.remove(entity);
 	}
 
 	@Override
-	public void saveOrUpdate(Object entity) {
+	public <T>void saveOrUpdate(T entity) {
 		if(propertyAccess.get(entity, EntityConstants.ID_PROPERTY_NAME)==null){
 			//new entity,so persist
 			save(entity);
@@ -92,7 +92,7 @@ public class JpaEntityServiceImpl  implements EntityService{
 	}
 
 	@Override
-	public Class getEntityClass(Object entity) {
-		return entity.getClass();
+	public Class<?>getEntityClass(Object  entity) {
+		return  entity.getClass();
 	}
 }

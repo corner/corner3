@@ -25,6 +25,12 @@ public class CacheEvent<T> {
 	private Class<T> targetClass;
 	private T targetObject;
 	private Operation operation;
+	public CacheEvent(Class<T> targetClass, T targetObject, Operation operation) {
+		super();
+		this.targetClass = targetClass;
+		this.targetObject = targetObject;
+		this.operation = operation;
+	}
 	/**
 	 * @return the targetClass
 	 */
