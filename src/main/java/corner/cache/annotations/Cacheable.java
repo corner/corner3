@@ -53,11 +53,11 @@ public @interface Cacheable {
 	public Class<?> clazz() default Object.class;
 	
 	/**
-	 * 针对key是否匹配的策略类,这个类针对一个实体通常
+	 * 针对key是否匹配的策略类,针对一种类型的缓存通常一个实例即可
 	 * @return
 	 * @since 3.1
 	 */
-	public Class<? extends KeyMatcher> KeyMatcherClass() default DefaultKeyMatcher.class;
+	public Class<? extends KeyMatcher> keyMatcherClass() default DefaultKeyMatcher.class;
 	/**
 	 * 缓存使用的key.
 	 * 这是一个数组key，意味着可以多个key组成，
@@ -65,4 +65,11 @@ public @interface Cacheable {
 	 * @since 3.1
 	 */
 	public String[]  keyFormats() default "";
+	
+	/**
+	 * ttl 时间，单位为秒数
+	 * @return
+	 * @since 3.1
+	 */
+	public long ttl() default -1;
 }
