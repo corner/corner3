@@ -17,15 +17,19 @@ package corner.cache.services.impl;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.Invocation;
 import org.apache.tapestry5.services.ValueEncoderSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 
 import corner.cache.annotations.CacheKeyParameter;
+import corner.cache.annotations.Cacheable;
+import corner.cache.services.CacheManager;
+import corner.cache.services.CacheStrategy;
 import corner.cache.services.impl.CacheableDefine.Definition;
 import corner.cache.services.impl.CacheableDefine.Definition.Builder;
 
@@ -38,15 +42,17 @@ import corner.cache.services.impl.CacheableDefine.Definition.Builder;
 public class CacheableDefinitionParser {
 
 	private ValueEncoderSource valueEncoderSource;
-	private Logger logger = LoggerFactory.getLogger(CacheableDefinitionParser.class);
 
 	public CacheableDefinitionParser(ValueEncoderSource valueEncoderSource) {
 		this.valueEncoderSource = valueEncoderSource;
 	}
 
-	public String  parse(Invocation invocation,Method method){
-		Definition define = null;//(Definition) cache.get(methodDefineKey);
-
+	String[]  parseKeys(Invocation invocation,Method method){
+		Cacheable cacheable = method.getAnnotation(Cacheable.class);
+		if(cacheable == null){
+			return null;
+		}
+		Definition define = null;
 		//if (define == null) { // 如果没定义，则进行分析
 			Builder defineBuilder = CacheableDefine.Definition.newBuilder();
 			Annotation[][] parametersAnnotations = method
@@ -60,23 +66,38 @@ public class CacheableDefinitionParser {
 				}
 			}
 			define = defineBuilder.build();
-			// 缓存定义
-//			cache.put(methodDefineKey, define);
-		//}
+			
 		// 构造真正的缓存Key
-		StringBuffer sb = new StringBuffer();
+		List<String> keyParameter=new ArrayList<String>();
 		for (int i = 0; i < define.getParameterIndexCount(); i++) {
 			int pIndex = define.getParameterIndex(i);
 			ValueEncoder encoder = valueEncoderSource.getValueEncoder(method
 					.getParameterTypes()[pIndex]);
-			sb.append(encoder.toClient(invocation.getParameter(pIndex))).append(",");
+			keyParameter.add(encoder.toClient(invocation.getParameter(pIndex)));
 		}
-		sb.append(method.toString());
-		String cacheKey = DigestUtils.shaHex(sb.toString());
-		if (logger.isDebugEnabled()) {
-			logger.debug("before sha key:[" + sb.toString() + "]");
-			logger.debug("cache key:[" + cacheKey + "]");
+		String [] keyFormats = cacheable.keyFormats();
+		if(keyFormats.length == 0){
+			keyFormats = new String[] {DigestUtils.shaHex(method.toString())};
 		}
-		return cacheKey;
+		//进行格式化输出
+		if(keyParameter.size() == 0){
+			return keyFormats;
+		}
+		
+		for(int i=0;i<keyFormats.length;i++){
+			keyFormats[i]=String.format(String.valueOf(keyFormats[i]), keyParameter.toArray(new Object[0]));
+		}
+		return keyFormats;
 	}
+	public String  parseAsKey(Invocation invocation,Method method,CacheManager cacheManager){
+		String[] keys = parseKeys(invocation,method);
+		if(keys == null){
+			return null;
+		}
+		Cacheable cacheDefine = method.getAnnotation(Cacheable.class);
+		Class<? extends CacheStrategy> strategyClass = cacheDefine.cacheStrategy();
+		CacheStrategy strategy = (CacheStrategy) BeanUtils.instantiateClass(strategyClass);
+		return strategy.appendNamespace(cacheManager, cacheDefine, keys);
+	}
+	
 }

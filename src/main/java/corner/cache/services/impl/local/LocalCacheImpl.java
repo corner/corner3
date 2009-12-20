@@ -94,7 +94,15 @@ public class LocalCacheImpl implements Cache<String, Object> {
 			return null;
 		}
 	}
-
+	@Override
+	public Long increment(String key, long delta) {
+		Object obj = get(key);
+		if(obj==null){
+			return null;
+		}else{
+			return Long.parseLong(String.valueOf(key))+delta;
+		}
+	}
 	public Set<String> keySet() {
 		checkAll();
 		return expiryCache.keySet();
@@ -229,5 +237,9 @@ public class LocalCacheImpl implements Cache<String, Object> {
 	public String toString() {
 		return this._toString;
 	}
+
+
+
+	
 
 }

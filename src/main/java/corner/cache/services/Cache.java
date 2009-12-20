@@ -63,4 +63,12 @@ public interface Cache<K, V> {
 	 * @since 0.0.2
 	 */
 	boolean clear();
+	/**
+	 * 根据某一个键值进行递增操作
+	 * @param key 键
+	 * @param delta 需要递增
+	 * @return
+	 * @since 3.1
+	 */
+	Long	 increment(String key, long delta) ;
 }

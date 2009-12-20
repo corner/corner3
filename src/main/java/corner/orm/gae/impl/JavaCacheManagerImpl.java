@@ -12,6 +12,9 @@ import javax.cache.CacheException;
 
 import org.apache.tapestry5.ioc.annotations.Marker;
 
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
+
 import corner.cache.annotations.Memcache;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
@@ -27,12 +30,23 @@ import corner.cache.services.CacheManager;
 public class JavaCacheManagerImpl implements CacheManager {
 
 	private JavaCacheImpl<String, Object> cache;
+	private MemcacheService memcacheService;
 
 	public JavaCacheManagerImpl(){
 		javax.cache.Cache delegateCache;
 		try {
 			delegateCache = javax.cache.CacheManager.getInstance().getCacheFactory().createCache(Collections.emptyMap());
-			this.cache = new JavaCacheImpl<String,Object>(delegateCache,"entity");
+			memcacheService = MemcacheServiceFactory.getMemcacheService();
+			this.cache = new JavaCacheImpl<String,Object>(delegateCache,"entity"){
+
+				/**
+				 * @see corner.cache.services.Cache#increment(java.lang.String, long)
+				 */
+				@Override
+				public Long increment(String key, long delta) {
+					return memcacheService.increment(key, delta);
+				}
+			};
 		} catch (CacheException e) {
 			throw new RuntimeException(e);
 		}

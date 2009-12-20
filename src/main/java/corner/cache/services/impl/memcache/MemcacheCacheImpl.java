@@ -96,4 +96,9 @@ public class MemcacheCacheImpl<V> implements Cache<String, V> {
 		return false;
 	}
 
+	@Override
+	public Long increment(String key, long delta) {
+		return client.incr(key, delta);
+	}
+
 }

@@ -20,7 +20,7 @@ import corner.cache.model.CacheEvent;
 import corner.cache.model.Operation;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
-import corner.cache.services.CacheSource;
+import corner.cache.services.CacheStrategySource;
 import corner.orm.EntityConstants;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
@@ -40,14 +40,14 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 	private PropertyAccess propertyAccess;
 	private Logger logger = LoggerFactory.getLogger(GaeCachedEntityServiceImpl.class);
 	private TypeCoercer typeCoercer;
-	private CacheSource cacheSource;
+	private CacheStrategySource cacheSource;
 
 	public GaeCachedEntityServiceImpl(
 			JpaTemplate jpaTemplate,
 			TypeCoercer typeCoercer,
 			PropertyAccess propertyAccess,
 			@Memcache CacheManager cacheManager,
-			CacheSource cacheSource) {
+			CacheStrategySource cacheSource) {
 		super(jpaTemplate, typeCoercer, propertyAccess);
 		this.cache = cacheManager.getCache("entity");
 		this.propertyAccess = propertyAccess;

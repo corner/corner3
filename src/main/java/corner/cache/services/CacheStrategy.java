@@ -15,6 +15,7 @@
  */
 package corner.cache.services;
 
+import corner.cache.annotations.Cacheable;
 import corner.cache.model.CacheEvent;
 
 /**
@@ -25,6 +26,14 @@ import corner.cache.model.CacheEvent;
  */
 public interface CacheStrategy<T> {
 	/**
+	 * 加上namspace的标记
+	 * @param key 键值
+	 * @return 加上标记的键值
+	 * @since 3.1
+	 */
+	String appendNamespace(CacheManager cacheManager, Cacheable cacheDefine,
+			String[] keys);
+	/**
 	 * 处理缓存事件
 	 * @param event 事件
 	 * @param cacheManager cacheManager instance
@@ -32,5 +41,5 @@ public interface CacheStrategy<T> {
 	 * @return 是否本身要在策略容器中删除，true:删除;false:不删除
 	 * @since 3.1
 	 */
-	public boolean dealCacheEvent(CacheEvent<T> event,CacheManager cacheManager,Object ... args);
+	public boolean dealCacheEvent(CacheEvent<T> event,CacheManager cacheManager,Cacheable cacheDefine);
 }

@@ -13,16 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.cache.services.impl;
+package corner.cache.services;
 
-import corner.cache.services.KeyMatcher;
+import corner.cache.model.CacheEvent;
 
 /**
- * 默认的键值匹配类
+ * 所有缓存的处理器，针对缓存事件的发生作出对应的处理
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
-public class DefaultKeyMatcher implements KeyMatcher {
-
+public interface CacheStrategySource {
+	/**
+	 * 捕获缓存事件
+	 * @param <T> 操作的实体对象
+	 * @param event event
+	 * @since 3.1
+	 */
+	public <T>void catchEvent(CacheEvent<T> event,Object ... args);
 }

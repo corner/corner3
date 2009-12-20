@@ -26,9 +26,7 @@ import com.meetup.memcached.ErrorHandler;
 
 import corner.cache.annotations.LocalCache;
 import corner.cache.services.CacheManager;
-import corner.cache.services.CacheSource;
 import corner.cache.services.CacheableAdvisor;
-import corner.cache.services.impl.CacheSourceImpl;
 import corner.cache.services.impl.CacheableAdvisorImpl;
 import corner.cache.services.impl.local.LocalCacheConfig;
 import corner.cache.services.impl.local.LocalCacheManagerImpl;
@@ -51,7 +49,6 @@ public class CacheModule {
 	public static void bind(ServiceBinder binder) {
 		binder.bind(ErrorHandler.class, ErrorHandlerImpl.class);
 		binder.bind(CacheableAdvisor.class,CacheableAdvisorImpl.class);
-		binder.bind(CacheSource.class,CacheSourceImpl.class);
 	}
 
 

@@ -14,8 +14,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import corner.cache.services.KeyMatcher;
-import corner.cache.services.impl.DefaultKeyMatcher;
+import corner.cache.services.CacheStrategy;
+import corner.cache.services.impl.DefaultListCacheStrategyImpl;
 
 /**
  * 缓存的注释类
@@ -57,14 +57,14 @@ public @interface Cacheable {
 	 * @return
 	 * @since 3.1
 	 */
-	public Class<? extends KeyMatcher> keyMatcherClass() default DefaultKeyMatcher.class;
+	public Class<? extends CacheStrategy> cacheStrategy() default DefaultListCacheStrategyImpl.class;
 	/**
 	 * 缓存使用的key.
 	 * 这是一个数组key，意味着可以多个key组成，
 	 * @return
 	 * @since 3.1
 	 */
-	public String[]  keyFormats() default "";
+	public String[]  keyFormats() default {};
 	
 	/**
 	 * ttl 时间，单位为秒数

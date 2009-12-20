@@ -14,7 +14,7 @@ import corner.cache.services.Cache;
  * @version $Revision$
  * @since 0.1
  */
-public class JavaCacheImpl<K,V> implements Cache<K,V>{
+public abstract class JavaCacheImpl<K,V> implements Cache<K,V>{
 	private javax.cache.Cache delegateCache;
 	private String name;
 

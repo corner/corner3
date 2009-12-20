@@ -159,4 +159,14 @@ public class LocalLRUCacheImpl implements Cache<String, Object> {
 			}
 		}
 	}
+
+	@Override
+	public Long increment(String key, long delta) {
+		Object obj = get(key);
+		if(obj==null){
+			return null;
+		}else{
+			return Long.parseLong(String.valueOf(key))+delta;
+		}
+	}
 }
