@@ -166,7 +166,9 @@ public class LocalLRUCacheImpl implements Cache<String, Object> {
 		if(obj==null){
 			return null;
 		}else{
-			return Long.parseLong(String.valueOf(key))+delta;
+			long v = Long.parseLong(String.valueOf(obj))+delta;
+			put(key,v);
+			return v;
 		}
 	}
 }

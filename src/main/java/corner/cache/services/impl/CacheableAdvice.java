@@ -7,7 +7,6 @@
 
 package corner.cache.services.impl;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -17,7 +16,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.Invocation;
 import org.apache.tapestry5.ioc.MethodAdvice;
@@ -28,11 +26,9 @@ import org.apache.tapestry5.services.ValueEncoderSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import corner.cache.annotations.CacheKeyParameter;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
-import corner.cache.services.impl.CacheableDefine.Definition;
-import corner.cache.services.impl.CacheableDefine.Definition.Builder;
+import corner.cache.services.CacheableDefinitionParser;
 import corner.orm.EntityConstants;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
@@ -55,13 +51,15 @@ public class CacheableAdvice implements MethodAdvice {
 	private Cache cache;
 	private EntityService  entityService;
 	private PropertyAccess propertyAccess;
+	private CacheableDefinitionParser parser;
 
 	public CacheableAdvice(
 			 Method m, TypeCoercer coercer,
 			 EntityService entityService, 
 			ValueEncoderSource valueEncoderSource,
 			PropertyAccess propertyAccess,
-			CacheManager cacheManager) {
+			CacheManager cacheManager,
+			CacheableDefinitionParser parser) {
 		this.method = m;
 		this.coercer = coercer;
 		this.entityService = entityService;
@@ -69,7 +67,7 @@ public class CacheableAdvice implements MethodAdvice {
         cache = cacheManager.getCache("entity");
 //        cache.clear();
         this.propertyAccess = propertyAccess;
-       
+        this.parser = parser;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -77,7 +75,7 @@ public class CacheableAdvice implements MethodAdvice {
 	public void advise(Invocation invocation) {
 		try {
 			// 先得到缓存的KEY
-			String cacheKey = generateCacheKey(invocation);
+			String cacheKey = this.parser.parseAsKey(invocation,method);
 
 			// 从缓存中读取
 			Object object = cache.get(cacheKey);
@@ -201,50 +199,7 @@ public class CacheableAdvice implements MethodAdvice {
 		cache.put(cacheKey, list);
 	}
 
-	/**
-	 * 得到缓存的Key
-	 * 
-	 * @param invocation
-	 *            invocation object
-	 * @return cache key
-	 * @since 0.0.2
-	 */
-	private String generateCacheKey(Invocation invocation) {
-		// 先通过method来的到对应的缓存定义
-		Definition define = null;//(Definition) cache.get(methodDefineKey);
-
-		//if (define == null) { // 如果没定义，则进行分析
-			Builder defineBuilder = CacheableDefine.Definition.newBuilder();
-			Annotation[][] parametersAnnotations = method
-					.getParameterAnnotations();
-			for (int i = 0; i < parametersAnnotations.length; i++) {
-				Annotation[] pa = parametersAnnotations[i];
-				for (Annotation a : pa) {
-					if (a instanceof CacheKeyParameter) {
-						defineBuilder.addParameterIndex(i);
-					}
-				}
-			}
-			define = defineBuilder.build();
-			// 缓存定义
-//			cache.put(methodDefineKey, define);
-		//}
-		// 构造真正的缓存Key
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < define.getParameterIndexCount(); i++) {
-			int pIndex = define.getParameterIndex(i);
-			ValueEncoder encoder = valueEncoderSource.getValueEncoder(method
-					.getParameterTypes()[pIndex]);
-			sb.append(encoder.toClient(invocation.getParameter(pIndex))).append(",");
-		}
-		sb.append(method.toString());
-		String cacheKey = DigestUtils.shaHex(sb.toString());
-		if (logger.isDebugEnabled()) {
-			logger.debug("before sha key:[" + sb.toString() + "]");
-			logger.debug("cache key:[" + cacheKey + "]");
-		}
-		return cacheKey;
-	}
+	
 
 	//通过分析方法的返回值来得到范性的值,
 	//譬如： PaginationList<Member> 得到的结果是Member
@@ -259,40 +214,5 @@ public class CacheableAdvice implements MethodAdvice {
 		return defaultType;
 	}
 
-	public String  generateCacheStrategy(Invocation invocation) {
-		Definition define = null;//(Definition) cache.get(methodDefineKey);
-
-		//if (define == null) { // 如果没定义，则进行分析
-			Builder defineBuilder = CacheableDefine.Definition.newBuilder();
-			Annotation[][] parametersAnnotations = method
-					.getParameterAnnotations();
-			for (int i = 0; i < parametersAnnotations.length; i++) {
-				Annotation[] pa = parametersAnnotations[i];
-				for (Annotation a : pa) {
-					if (a instanceof CacheKeyParameter) {
-						defineBuilder.addParameterIndex(i);
-					}
-				}
-			}
-			define = defineBuilder.build();
-			// 缓存定义
-//			cache.put(methodDefineKey, define);
-		//}
-		// 构造真正的缓存Key
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < define.getParameterIndexCount(); i++) {
-			int pIndex = define.getParameterIndex(i);
-			ValueEncoder encoder = valueEncoderSource.getValueEncoder(method
-					.getParameterTypes()[pIndex]);
-			sb.append(encoder.toClient(invocation.getParameter(pIndex))).append(",");
-		}
-		sb.append(method.toString());
-		String cacheKey = DigestUtils.shaHex(sb.toString());
-		if (logger.isDebugEnabled()) {
-			logger.debug("before sha key:[" + sb.toString() + "]");
-			logger.debug("cache key:[" + cacheKey + "]");
-		}
-		return cacheKey;
-	}
 
 }

@@ -18,6 +18,7 @@ import corner.cache.annotations.Cacheable;
 import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheableAdvisor;
+import corner.cache.services.CacheableDefinitionParser;
 import corner.orm.services.EntityService;
 
 /**
@@ -34,18 +35,21 @@ public class CacheableAdvisorImpl implements CacheableAdvisor {
 	private EntityService entityService;
 	private PropertyAccess propertyAccess;
 	private CacheManager cacheManager;
+	private CacheableDefinitionParser parser;
 
 	public CacheableAdvisorImpl(
 			TypeCoercer typeCoercer, 
 			EntityService entityService,
 			ValueEncoderSource valueEncoderSource,
 			PropertyAccess propertyAccess,
-			@Memcache CacheManager cacheManager) {
+			@Memcache CacheManager cacheManager,
+			CacheableDefinitionParser parser) {
 		this.typeCoercer = typeCoercer;
 		this.valueEncoderSource = valueEncoderSource;
 		this.entityService = entityService;
 		this.propertyAccess = propertyAccess;
 		this.cacheManager = cacheManager;
+		this.parser = parser;
 	}
 
 	@Override
@@ -54,7 +58,7 @@ public class CacheableAdvisorImpl implements CacheableAdvisor {
 			Cacheable c = m.getAnnotation(Cacheable.class);
 			if (c != null) {
 					receiver.adviseMethod(m, new CacheableAdvice(m,
-							typeCoercer,  entityService, valueEncoderSource,propertyAccess,cacheManager));
+							typeCoercer,  entityService, valueEncoderSource,propertyAccess,cacheManager,parser));
 				
 			}
 		}

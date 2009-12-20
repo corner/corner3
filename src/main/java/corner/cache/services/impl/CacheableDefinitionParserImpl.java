@@ -30,6 +30,8 @@ import corner.cache.annotations.CacheKeyParameter;
 import corner.cache.annotations.Cacheable;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheStrategy;
+import corner.cache.services.CacheStrategySource;
+import corner.cache.services.CacheableDefinitionParser;
 import corner.cache.services.impl.CacheableDefine.Definition;
 import corner.cache.services.impl.CacheableDefine.Definition.Builder;
 
@@ -39,12 +41,19 @@ import corner.cache.services.impl.CacheableDefine.Definition.Builder;
  * @version $Revision$
  * @since 3.1
  */
-public class CacheableDefinitionParser {
+public class CacheableDefinitionParserImpl implements CacheableDefinitionParser {
 
 	private ValueEncoderSource valueEncoderSource;
+	private CacheManager cacheManager;
+	private CacheStrategySource source;
 
-	public CacheableDefinitionParser(ValueEncoderSource valueEncoderSource) {
+	public CacheableDefinitionParserImpl (ValueEncoderSource valueEncoderSource,
+			CacheManager cacheManager,
+			CacheStrategySource source
+			) {
 		this.valueEncoderSource = valueEncoderSource;
+		this.cacheManager = cacheManager;
+		this.source = source;
 	}
 
 	String[]  parseKeys(Invocation invocation,Method method){
@@ -89,13 +98,17 @@ public class CacheableDefinitionParser {
 		}
 		return keyFormats;
 	}
-	public String  parseAsKey(Invocation invocation,Method method,CacheManager cacheManager){
+	/**
+	 * @see corner.cache.services.CacheableDefinitionParser#parseAsKey(org.apache.tapestry5.ioc.Invocation, java.lang.reflect.Method, corner.cache.services.CacheManager)
+	 */
+	public String  parseAsKey(Invocation invocation,Method method){
 		String[] keys = parseKeys(invocation,method);
 		if(keys == null){
 			return null;
 		}
 		Cacheable cacheDefine = method.getAnnotation(Cacheable.class);
 		Class<? extends CacheStrategy> strategyClass = cacheDefine.cacheStrategy();
+		source.registerStrategyClass(strategyClass);
 		CacheStrategy strategy = (CacheStrategy) BeanUtils.instantiateClass(strategyClass);
 		return strategy.appendNamespace(cacheManager, cacheDefine, keys);
 	}

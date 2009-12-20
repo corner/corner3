@@ -41,5 +41,5 @@ public interface CacheStrategy<T> {
 	 * @return 是否本身要在策略容器中删除，true:删除;false:不删除
 	 * @since 3.1
 	 */
-	public boolean dealCacheEvent(CacheEvent<T> event,CacheManager cacheManager,Cacheable cacheDefine);
+	public boolean dealCacheEvent(CacheEvent<T> event,CacheManager cacheManager);
 }

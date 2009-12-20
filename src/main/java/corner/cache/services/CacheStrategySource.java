@@ -31,4 +31,12 @@ public interface CacheStrategySource {
 	 * @since 3.1
 	 */
 	public <T>void catchEvent(CacheEvent<T> event,Object ... args);
+
+	/**
+	 * 注册策略类
+	 * @param strategyClass 缓存策略类
+	 * @since 3.1
+	 */
+	public void registerStrategyClass(
+			Class<? extends CacheStrategy> strategyClass);
 }

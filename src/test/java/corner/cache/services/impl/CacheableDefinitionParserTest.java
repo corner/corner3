@@ -13,6 +13,7 @@ import corner.cache.annotations.CacheKeyParameter;
 import corner.cache.annotations.Cacheable;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
+import corner.cache.services.CacheStrategySource;
 import corner.cache.services.impl.local.LocalCacheImpl;
 import corner.integration.app1.entities.TestA;
 
@@ -30,7 +31,9 @@ public class CacheableDefinitionParserTest extends TapestryTestCase{
 	public void test_parse() throws SecurityException, NoSuchMethodException{
 		ValueEncoderSource valueEncoderSource=newMock(ValueEncoderSource.class);
 		Invocation invocation = newMock(Invocation.class);
-		CacheableDefinitionParser parser = new CacheableDefinitionParser(valueEncoderSource);
+		CacheManager cacheManager = newMock(CacheManager.class);
+		CacheStrategySource source = newMock(CacheStrategySource.class);
+		CacheableDefinitionParserImpl parser = new CacheableDefinitionParserImpl(valueEncoderSource,cacheManager,source);
 		replay();
 		Method method = CacheableDefinitionParserTest.class.getMethod("getMember");
 		String [] cacheKeys = parser.parseKeys(invocation, method);
@@ -49,7 +52,10 @@ public class CacheableDefinitionParserTest extends TapestryTestCase{
 		Invocation invocation = newMock(Invocation.class);
 		expect(invocation.getParameter(0)).andReturn(12);//start =12
 		expect(invocation.getParameter(1)).andReturn(30);//offset =30
-		CacheableDefinitionParser parser = new CacheableDefinitionParser(valueEncoderSource);
+		
+		CacheManager cacheManager = newMock(CacheManager.class);
+		CacheStrategySource source = newMock(CacheStrategySource.class);
+		CacheableDefinitionParserImpl parser = new CacheableDefinitionParserImpl(valueEncoderSource,cacheManager,source);
 		replay();
 		Method method = CacheableDefinitionParserTest.class.getMethod("getMember",int.class,int.class,String.class);
 		String [] cacheKeys = parser.parseKeys(invocation, method);
@@ -68,15 +74,18 @@ public class CacheableDefinitionParserTest extends TapestryTestCase{
 		Invocation invocation = newMock(Invocation.class);
 		expect(invocation.getParameter(0)).andReturn(12);//start =12
 		expect(invocation.getParameter(1)).andReturn(30);//offset =30
-		CacheableDefinitionParser parser = new CacheableDefinitionParser(valueEncoderSource);
 		
 		CacheManager cacheManager = newMock(CacheManager.class);
+		CacheStrategySource source = newMock(CacheStrategySource.class);
+		source.registerStrategyClass(DefaultListCacheStrategyImpl.class);
+		CacheableDefinitionParserImpl parser = new CacheableDefinitionParserImpl(valueEncoderSource,cacheManager,source);
+		
 		Cache cache = new LocalCacheImpl("ns");
 		expect(cacheManager.getCache("ns")).andReturn(cache);
 				
 		replay();
 		Method method = CacheableDefinitionParserTest.class.getMethod("getMember",int.class,int.class,String.class);
-		String cacheKey = parser.parseAsKey(invocation, method,cacheManager);
+		String cacheKey = parser.parseAsKey(invocation, method);
 		assertEquals(cacheKey,"corner.integration.app1.entities.TestA_c_l_ns_0_limit:12,30#");
 		verify();
 	}

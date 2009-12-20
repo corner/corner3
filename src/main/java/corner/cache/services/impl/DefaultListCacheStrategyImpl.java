@@ -38,12 +38,13 @@ public class DefaultListCacheStrategyImpl<T> implements CacheStrategy<T>{
 	private Logger logger = LoggerFactory.getLogger(DefaultListCacheStrategyImpl.class);
 
 	@Override
-	public boolean dealCacheEvent(CacheEvent<T> event, CacheManager cacheManager,Cacheable cacheDefine) {
+	public boolean dealCacheEvent(CacheEvent<T> event, CacheManager cacheManager) {
 			//增加或者删除
 			if(event.getOperation() == Operation.INSERT||event.getOperation() == Operation.DELETE){
         		//得到namespace的版本
-				String namespace=String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_FORMATE, cacheDefine.clazz().getName());
-				getNamespaceValue(cacheManager,cacheDefine);
+				String targetClassName = event.getTargetClass().getName();
+				String namespace=String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_FORMATE, targetClassName);
+				getNamespaceValue(cacheManager,targetClassName);
         		Cache nsCache = cacheManager.getCache("ns");
         		nsCache.increment(namespace, 1);
 				return true;
@@ -51,8 +52,8 @@ public class DefaultListCacheStrategyImpl<T> implements CacheStrategy<T>{
 		return false;
 	}
 	private Object getNamespaceValue(CacheManager cacheManager,
-			Cacheable cacheDefine) {
-		String namespace=String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_FORMATE, cacheDefine.clazz().getName());
+			String targetClassName) {
+		String namespace=String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_FORMATE, targetClassName);
 		//得到namespace的版本
 		Cache nsCache = cacheManager.getCache("ns");
 		Object obj = nsCache.get(namespace);
@@ -64,7 +65,7 @@ public class DefaultListCacheStrategyImpl<T> implements CacheStrategy<T>{
 	}
 	@Override
 	public String appendNamespace( CacheManager cacheManager,Cacheable cacheDefine,String[] keys) {
-		Object version = getNamespaceValue(cacheManager,cacheDefine);
+		Object version = getNamespaceValue(cacheManager,cacheDefine.clazz().getName());
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_VERSION_FORMATE, cacheDefine.clazz().getName(),version));
 		for(String key:keys){
