@@ -65,7 +65,7 @@ public class DefaultListCacheStrategyImpl  extends AbstractCacheStrategy{
 		return obj;
 	}
 	@Override
-	public String appendNamespace( CacheManager cacheManager,Cacheable cacheDefine,String[] keys) {
+	public String appendNamespace( CacheManager cacheManager,Cacheable cacheDefine,String[] keys,Object ... args) {
 		//把要处理的类加入到定一种
 		add(cacheDefine.clazz());
 		Object version = getNamespaceValue(cacheManager,cacheDefine.clazz().getName());

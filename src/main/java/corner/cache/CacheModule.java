@@ -58,7 +58,11 @@ public class CacheModule {
 		binder.bind(CacheableDefinitionParser.class,CacheableDefinitionParserImpl.class);
 		binder.bind(CacheStrategySource.class,CacheStrategySourceImpl.class);
 	}
-
+	public static void contributeFactoryDefaults(
+			MappedConfiguration<String, String> configuration) {
+		//默认不开启缓存
+		configuration.add(CacheSymbols.ENABLE_CACHE,"false");
+	}
 	public static void contributeCacheStrategySource(MappedConfiguration<String,CacheStrategy> configuration){
 		configuration.addInstance(CacheConstants.COMMON_LIST_STRATEGY, DefaultListCacheStrategyImpl.class);
 	}

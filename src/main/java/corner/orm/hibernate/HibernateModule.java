@@ -7,12 +7,14 @@ import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.hibernate.HibernateSessionSource;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.ioc.annotations.SubModule;
+import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.PerthreadManager;
 import org.apache.tapestry5.services.AliasContribution;
 import org.apache.tapestry5.services.PersistentFieldStrategy;
@@ -29,12 +31,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import com.meetup.memcached.ErrorHandler;
 
+import corner.cache.CacheSymbols;
 import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
 import corner.cache.services.impl.memcache.MemcacheConfig;
 import corner.cache.services.impl.memcache.MemcachedCacheManager;
 import corner.config.services.ConfigurationSource;
 import corner.migration.MigrationModule;
+import corner.orm.hibernate.impl.CacheHibernateEntityServiceImpl;
 import corner.orm.hibernate.impl.EntityServiceImpl;
 import corner.orm.hibernate.impl.HibernateEntityServiceImpl;
 import corner.orm.hibernate.impl.SpringSessionManagerImpl;
@@ -53,15 +57,20 @@ import corner.tree.TreeModule;
 @SubModule({MigrationModule.class,TreeModule.class})
 public class HibernateModule {
 	public static void bind(ServiceBinder binder){
-		binder.bind(EntityService.class,EntityServiceImpl.class);
 		binder.bind(HibernateEntityService.class,HibernateEntityServiceImpl.class);
 		binder.bind(TransactionDecorator.class,TapestryHibernateTransactionDecorterImpl.class);
+	}
+	public static EntityService buildEntityService(@Symbol(CacheSymbols.ENABLE_CACHE) boolean enableCache,ObjectLocator locator){
+		if(enableCache){
+			return locator.autobuild(CacheHibernateEntityServiceImpl.class);
+		}else{
+			return locator.autobuild(EntityServiceImpl.class);
+		}
 	}
 	public static HibernateTemplate buildHibernateTemplate(
 			SessionFactory sessionFactory) {
 		HibernateTemplate template = new HibernateTemplate(sessionFactory);
 		return template;
-
 	}
 	/**
 	 * 构造基于Memcached的CacheManager,并启动该manager

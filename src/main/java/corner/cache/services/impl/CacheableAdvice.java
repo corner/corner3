@@ -180,7 +180,7 @@ public class CacheableAdvice implements MethodAdvice {
 		while (it.hasNext()) {
 			Object obj = it.next();
 			//is persistence object
-			if (obj.getClass().isAnnotationPresent(Entity.class)){
+			if (entityService.getEntityClass(obj).isAnnotationPresent(Entity.class)){
 				list.add(propertyAccess.get(obj, EntityConstants.ID_PROPERTY_NAME));
 			}else{
 				list.add(obj);

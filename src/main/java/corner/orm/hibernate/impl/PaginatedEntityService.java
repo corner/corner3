@@ -110,24 +110,6 @@ public class PaginatedEntityService {
             }
         });
     }
-    public Iterator find(final Class<?> persistClass,final Object conditions,final String order){
-       return (Iterator) this.template.execute(new HibernateCallback(){
-           public Object doInHibernate(Session session) throws HibernateException, SQLException {
-               Iterable con = typeCoercer.coerce(conditions, Iterable.class);
-               final Iterator it = con==null?null:con.iterator();
-               final StringBuffer sb = buildConditionHQL(persistClass, it);
-               appendOrder(sb, order);
-               Query query = session.createQuery(sb.toString());
-               if(it!=null){
-                   int i=0;
-                  while(it.hasNext()) {
-                      query.setParameter(i++,it.next());
-                  }
-               }
-               return query.iterate();
-           }
-       });
-    }
 
     void appendOrder(StringBuffer sb, String order) {
         if(order!=null){

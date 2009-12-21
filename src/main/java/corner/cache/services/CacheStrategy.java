@@ -27,12 +27,13 @@ import corner.cache.model.CacheEvent;
 public interface CacheStrategy {
 	/**
 	 * 加上namspace的标记
+	 * @param objects 
 	 * @param key 键值
 	 * @return 加上标记的键值
 	 * @since 3.1
 	 */
 	String appendNamespace(CacheManager cacheManager, Cacheable cacheDefine,
-			String[] keys);
+			String[] keys, Object... objects);
 	/**
 	 * 处理缓存事件
 	 * @param event 事件

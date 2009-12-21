@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.cache.services.impl.memcache;
-
-import corner.cache.services.CacheManager;
+package corner.cache;
 
 /**
- * 针对memcachemanager重新构造一个manager,便于来处理对应的缓存
+ * 和cache相关的设置参数
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
-public interface MemcacheManager extends CacheManager {
-
+public class CacheSymbols {
+	/**
+	 * 是否开启缓存
+	 */
+	public static final String ENABLE_CACHE="corner.enable-cache";
 }

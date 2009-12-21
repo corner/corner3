@@ -34,12 +34,14 @@ public class CacheableDefinitionParserTest extends TapestryTestCase{
 		Invocation invocation = newMock(Invocation.class);
 		CacheManager cacheManager = newMock(CacheManager.class);
 		CacheStrategySource source = newMock(CacheStrategySource.class);
+		expect(source.findStrategy(CacheConstants.COMMON_LIST_STRATEGY)).andReturn(new DefaultListCacheStrategyImpl());
+		Cache cache = new LocalCacheImpl("ns");
+		expect(cacheManager.getCache("ns")).andReturn(cache);
 		CacheableDefinitionParserImpl parser = new CacheableDefinitionParserImpl(valueEncoderSource,cacheManager,source);
 		replay();
 		Method method = CacheableDefinitionParserTest.class.getMethod("getMember");
-		String [] cacheKeys = parser.parseKeys(invocation, method);
-		assertEquals(cacheKeys.length,1);
-		assertArraysEqual(cacheKeys, new String[]{"b2c2618674e9030156177a6d0f63b3945bc9f968"});
+		String cacheKey = parser.parseAsKey(invocation, method);
+		assertEquals(cacheKey,"corner.integration.app1.entities.TestA_c_l_ns_0_1fd3341c38c13f3713fcf47fcfd5d30a8f84c7ad#");
 		verify();
 	}
 	@Test
@@ -55,13 +57,16 @@ public class CacheableDefinitionParserTest extends TapestryTestCase{
 		expect(invocation.getParameter(1)).andReturn(30);//offset =30
 		
 		CacheManager cacheManager = newMock(CacheManager.class);
+		
 		CacheStrategySource source = newMock(CacheStrategySource.class);
+		expect(source.findStrategy(CacheConstants.COMMON_LIST_STRATEGY)).andReturn(new DefaultListCacheStrategyImpl());
+		Cache cache = new LocalCacheImpl("ns");
+		expect(cacheManager.getCache("ns")).andReturn(cache);
 		CacheableDefinitionParserImpl parser = new CacheableDefinitionParserImpl(valueEncoderSource,cacheManager,source);
 		replay();
 		Method method = CacheableDefinitionParserTest.class.getMethod("getMember",int.class,int.class,String.class);
-		String [] cacheKeys = parser.parseKeys(invocation, method);
-		assertEquals(cacheKeys.length,1);
-		assertArraysEqual(cacheKeys, new String[]{"limit:12,30"});
+		String  cacheKey = parser.parseAsKey(invocation, method);
+		assertEquals(cacheKey,"corner.integration.app1.entities.TestA_c_l_ns_0_limit:12,30#");
 		verify();
 	}
 	@Test

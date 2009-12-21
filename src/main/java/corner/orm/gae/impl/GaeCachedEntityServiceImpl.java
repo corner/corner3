@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.jpa.JpaTemplate;
 
+import corner.cache.CacheConstants;
 import corner.cache.annotations.Memcache;
 import corner.cache.model.CacheEvent;
 import corner.cache.model.Operation;
@@ -36,7 +37,7 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 		EntityService {
 
 	private Cache<String, Object> cache;
-	private String ENTITY_CACHE_KEY_FORMAT= "%s{%s}";
+	
 	private PropertyAccess propertyAccess;
 	private Logger logger = LoggerFactory.getLogger(GaeCachedEntityServiceImpl.class);
 	private TypeCoercer typeCoercer;
@@ -142,7 +143,7 @@ public class GaeCachedEntityServiceImpl extends JpaEntityServiceImpl implements
 	}
 	private String makeEntityCacheKey(Class<?> entityClass,Object id){
 		if(id!=null){
-			return String.format(ENTITY_CACHE_KEY_FORMAT, entityClass.getName(),String.valueOf(id));
+			return String.format(CacheConstants.ENTITY_CACHE_KEY_FORMAT, entityClass.getName(),String.valueOf(id));
 		}
 		logger.warn("fail to make cache key ,beacause id is null!");
 		return null;

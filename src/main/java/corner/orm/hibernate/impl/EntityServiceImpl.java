@@ -42,7 +42,11 @@ public class EntityServiceImpl  implements EntityService{
 	private final HibernateTemplate template;
     private PaginatedEntityService paginatedService;
 
-    public EntityServiceImpl(final Session session,final TypeCoercer typeCoercer){
+	
+    public EntityServiceImpl(
+    		final Session session,
+    		final TypeCoercer typeCoercer
+    		){
 		this.template = new HibernateTemplate(){
 			/**
 			 * @see org.springframework.orm.hibernate3.HibernateTemplate#execute(org.springframework.orm.hibernate3.HibernateCallback, boolean)
@@ -59,6 +63,7 @@ public class EntityServiceImpl  implements EntityService{
 			}
 		};
         this.paginatedService = new PaginatedEntityService(template,typeCoercer);
+       
 	}
 
 	@Override
@@ -73,7 +78,7 @@ public class EntityServiceImpl  implements EntityService{
 
 	@Override
 	public <T>Iterator<T> find(Class<T> persistClass, Object conditions, String order) {
-		return paginatedService.find(persistClass, conditions,order);
+		return this.find(persistClass, conditions,order,0,Integer.MAX_VALUE);
 	}
 
 	@Override
@@ -96,11 +101,13 @@ public class EntityServiceImpl  implements EntityService{
 	@Override
 	public<T> void save(T object) {
 		this.template.save(object);
+		
 	}
 
 	@Override
 	public <T>void update(T object) {
 		template.update(object);
+		
 	}
 
 	@Override
@@ -117,4 +124,6 @@ public class EntityServiceImpl  implements EntityService{
 	public Class getEntityClass(Object entity) {
 		return org.hibernate.Hibernate.getClass(entity);
 	}
+	
+
 }

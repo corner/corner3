@@ -27,6 +27,7 @@ import org.apache.tapestry5.services.ValueEncoderSource;
 
 import corner.cache.annotations.CacheKeyParameter;
 import corner.cache.annotations.Cacheable;
+import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheStrategy;
 import corner.cache.services.CacheStrategySource;
@@ -47,7 +48,7 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 	private CacheStrategySource source;
 
 	public CacheableDefinitionParserImpl (ValueEncoderSource valueEncoderSource,
-			CacheManager cacheManager,
+			@Memcache CacheManager cacheManager,
 			CacheStrategySource source
 			) {
 		this.valueEncoderSource = valueEncoderSource;
@@ -55,7 +56,10 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 		this.source = source;
 	}
 
-	String[]  parseKeys(Invocation invocation,Method method){
+	/**
+	 * @see corner.cache.services.CacheableDefinitionParser#parseAsKey(org.apache.tapestry5.ioc.Invocation, java.lang.reflect.Method, corner.cache.services.CacheManager)
+	 */
+	public String  parseAsKey(Invocation invocation,Method method){
 		Cacheable cacheable = method.getAnnotation(Cacheable.class);
 		if(cacheable == null){
 			return null;
@@ -83,34 +87,21 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 					.getParameterTypes()[pIndex]);
 			keyParameter.add(encoder.toClient(invocation.getParameter(pIndex)));
 		}
-		String [] keyFormats = cacheable.keyFormats();
-		if(keyFormats.length == 0){
-			keyFormats = new String[] {DigestUtils.shaHex(method.toString()+keyParameter.toString())};
-		}
-		//进行格式化输出
-		if(keyParameter.size() == 0){
-			return keyFormats;
+		String [] keys= cacheable.keyFormats();
+		if(keys.length == 0){
+			keys = new String[] {DigestUtils.shaHex(method.toString()+keyParameter.toString())};
 		}
 		
-		for(int i=0;i<keyFormats.length;i++){
-			keyFormats[i]=String.format(String.valueOf(keyFormats[i]), keyParameter.toArray(new Object[0]));
+		for(int i=0;i<keys.length;i++){
+			keys[i]=String.format(String.valueOf(keys[i]), keyParameter.toArray(new Object[0]));
 		}
-		return keyFormats;
-	}
-	/**
-	 * @see corner.cache.services.CacheableDefinitionParser#parseAsKey(org.apache.tapestry5.ioc.Invocation, java.lang.reflect.Method, corner.cache.services.CacheManager)
-	 */
-	public String  parseAsKey(Invocation invocation,Method method){
-		String[] keys = parseKeys(invocation,method);
-		if(keys == null){
-			return null;
-		}
+
 		Cacheable cacheDefine = method.getAnnotation(Cacheable.class);
 		CacheStrategy strategy = this.source.findStrategy(cacheDefine.strategy());
 		if(strategy == null){
 			throw new RuntimeException("fail to find cache strategy instance!");
 		}
-		return strategy.appendNamespace(cacheManager, cacheDefine, keys);
+		return strategy.appendNamespace(cacheManager, cacheDefine, keys,keyParameter.toArray());
 	}
 	
 }
