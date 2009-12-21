@@ -107,6 +107,7 @@ public class CacheableAdvice implements MethodAdvice {
 		}
 		List list = (List) object;
 		Class<?> type = invocation.getResultType();
+		final Class clazz = getEntityClass(method);
 		if (type.isAnnotationPresent(Entity.class)){
 			//fetch id property class
 			Class<? extends PropertyAdapter> idClass = propertyAccess.getAdapter(type).
@@ -116,11 +117,33 @@ public class CacheableAdvice implements MethodAdvice {
 			//find object 
 			obj = entityService.get(type,obj);
 			invocation.overrideResult(obj);
+		} else if (Iterator.class.isAssignableFrom(type)) {
+			final Iterator it = list.iterator();
+			if(clazz.isAnnotationPresent(Entity.class)){
+    			Iterator wrapperIt = new Iterator() {
+    				@Override
+    				public boolean hasNext() {
+    					return it.hasNext();
+    				}
+    
+    				@Override
+    				public Object next() {
+    					return entityService.get(clazz, it.next());
+    				}
+    
+    				@Override
+    				public void remove() {
+    				}
+    			};
+    			invocation.overrideResult(wrapperIt);
+			}
+			else{
+				invocation.overrideResult(it);
+			}
 		} else if (PaginationList.class.isAssignableFrom(type)) {
 			/**
 			 * 通过范性类型来得到对应的参数
 			 */
-			final Class clazz = getEntityClass(method);
 			if (logger.isDebugEnabled()) {
 				logger.debug("get return type:[" + clazz + "]");
 			}
