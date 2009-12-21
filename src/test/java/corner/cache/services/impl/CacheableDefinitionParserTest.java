@@ -9,6 +9,7 @@ import org.apache.tapestry5.services.ValueEncoderSource;
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.testng.annotations.Test;
 
+import corner.cache.CacheConstants;
 import corner.cache.annotations.CacheKeyParameter;
 import corner.cache.annotations.Cacheable;
 import corner.cache.services.Cache;
@@ -19,11 +20,11 @@ import corner.integration.app1.entities.TestA;
 
 public class CacheableDefinitionParserTest extends TapestryTestCase{
 
-	@Cacheable(clazz=TestA.class,cacheStrategy=DefaultListCacheStrategyImpl.class)
+	@Cacheable(clazz=TestA.class)
 	public List<TestA> getMember(){
 		return null;
 	}
-	@Cacheable(clazz=TestA.class,cacheStrategy=DefaultListCacheStrategyImpl.class,keyFormats={"limit:%s,%s"})
+	@Cacheable(clazz=TestA.class,strategy=CacheConstants.COMMON_LIST_STRATEGY,keyFormats={"limit:%s,%s"})
 	public List<TestA> getMember(@CacheKeyParameter int start,@CacheKeyParameter int offset,String otherParemter){
 		return null;
 	}
@@ -77,7 +78,7 @@ public class CacheableDefinitionParserTest extends TapestryTestCase{
 		
 		CacheManager cacheManager = newMock(CacheManager.class);
 		CacheStrategySource source = newMock(CacheStrategySource.class);
-		source.registerStrategyClass(DefaultListCacheStrategyImpl.class);
+		expect(source.findStrategy(CacheConstants.COMMON_LIST_STRATEGY)).andReturn(new DefaultListCacheStrategyImpl());
 		CacheableDefinitionParserImpl parser = new CacheableDefinitionParserImpl(valueEncoderSource,cacheManager,source);
 		
 		Cache cache = new LocalCacheImpl("ns");

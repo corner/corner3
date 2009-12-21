@@ -26,12 +26,14 @@ import com.meetup.memcached.ErrorHandler;
 
 import corner.cache.annotations.LocalCache;
 import corner.cache.services.CacheManager;
+import corner.cache.services.CacheStrategy;
 import corner.cache.services.CacheStrategySource;
 import corner.cache.services.CacheableAdvisor;
 import corner.cache.services.CacheableDefinitionParser;
 import corner.cache.services.impl.CacheStrategySourceImpl;
 import corner.cache.services.impl.CacheableAdvisorImpl;
 import corner.cache.services.impl.CacheableDefinitionParserImpl;
+import corner.cache.services.impl.DefaultListCacheStrategyImpl;
 import corner.cache.services.impl.local.LocalCacheConfig;
 import corner.cache.services.impl.local.LocalCacheManagerImpl;
 import corner.cache.services.impl.memcache.ErrorHandlerImpl;
@@ -57,7 +59,9 @@ public class CacheModule {
 		binder.bind(CacheStrategySource.class,CacheStrategySourceImpl.class);
 	}
 
-
+	public static void contributeCacheStrategySource(MappedConfiguration<String,CacheStrategy> configuration){
+		configuration.addInstance(CacheConstants.COMMON_LIST_STRATEGY, DefaultListCacheStrategyImpl.class);
+	}
 
 	/**
 	 * 构造基于JVM本机内存的CacheManager,并启动该Manager

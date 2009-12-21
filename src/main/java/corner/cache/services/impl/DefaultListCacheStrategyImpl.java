@@ -24,7 +24,6 @@ import corner.cache.model.CacheEvent;
 import corner.cache.model.Operation;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
-import corner.cache.services.CacheStrategy;
 
 /**
  * 默认的列表缓存事件处理的实现.
@@ -34,11 +33,14 @@ import corner.cache.services.CacheStrategy;
  * @version $Revision$
  * @since 3.1
  */
-public class DefaultListCacheStrategyImpl<T> implements CacheStrategy<T>{
+public class DefaultListCacheStrategyImpl  extends AbstractCacheStrategy{
 	private Logger logger = LoggerFactory.getLogger(DefaultListCacheStrategyImpl.class);
 
 	@Override
-	public boolean dealCacheEvent(CacheEvent<T> event, CacheManager cacheManager) {
+	public <T> void dealCacheEvent(CacheEvent<T> event, CacheManager cacheManager) {
+		if(!contains(event.getTargetClass())){
+			return;
+		}
 			//增加或者删除
 			if(event.getOperation() == Operation.INSERT||event.getOperation() == Operation.DELETE){
         		//得到namespace的版本
@@ -47,10 +49,9 @@ public class DefaultListCacheStrategyImpl<T> implements CacheStrategy<T>{
 				getNamespaceValue(cacheManager,targetClassName);
         		Cache nsCache = cacheManager.getCache("ns");
         		nsCache.increment(namespace, 1);
-				return true;
 			}
-		return false;
 	}
+
 	private Object getNamespaceValue(CacheManager cacheManager,
 			String targetClassName) {
 		String namespace=String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_FORMATE, targetClassName);
@@ -65,6 +66,8 @@ public class DefaultListCacheStrategyImpl<T> implements CacheStrategy<T>{
 	}
 	@Override
 	public String appendNamespace( CacheManager cacheManager,Cacheable cacheDefine,String[] keys) {
+		//把要处理的类加入到定一种
+		add(cacheDefine.clazz());
 		Object version = getNamespaceValue(cacheManager,cacheDefine.clazz().getName());
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_VERSION_FORMATE, cacheDefine.clazz().getName(),version));

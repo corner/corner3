@@ -16,9 +16,7 @@
 package corner.cache.services.impl;
 
 import java.util.Iterator;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import org.springframework.beans.BeanUtils;
+import java.util.Map;
 
 import corner.cache.annotations.Memcache;
 import corner.cache.model.CacheEvent;
@@ -33,20 +31,19 @@ import corner.cache.services.CacheStrategySource;
  * @since 3.1
  */
 public class CacheStrategySourceImpl implements CacheStrategySource {
-	private CopyOnWriteArrayList<CacheStrategy> strategies=
-		new CopyOnWriteArrayList<CacheStrategy>();
-	private CopyOnWriteArrayList<Class> queueClass =
-		new CopyOnWriteArrayList<Class>();
-	private CacheManager cacheManager;
 
-	public CacheStrategySourceImpl(@Memcache CacheManager cacheManager) {
+	private CacheManager cacheManager;
+	private Map<String, CacheStrategy> strategies;
+
+	public CacheStrategySourceImpl(@Memcache CacheManager cacheManager,Map<String,CacheStrategy> configuration) {
 		this.cacheManager = cacheManager;
+		this.strategies = configuration;
 	}
 
 	@Override
 	public <T> void catchEvent(CacheEvent<T> event, Object... args) {
 		CacheStrategy strategy;
-		Iterator<CacheStrategy> it = strategies.iterator();
+		Iterator<CacheStrategy> it = strategies.values().iterator();
 		while(it.hasNext()){
 			strategy = it.next();
 			strategy.dealCacheEvent(event, cacheManager);
@@ -54,15 +51,7 @@ public class CacheStrategySourceImpl implements CacheStrategySource {
 	}
 
 	@Override
-	public void registerStrategyClass(
-			Class<? extends CacheStrategy> strategyClass) {
-		if(!queueClass.contains(strategyClass)){
-			synchronized(queueClass){
-				if(!queueClass.contains(strategyClass)){
-        			queueClass.add(strategyClass);
-        			strategies.add((CacheStrategy) BeanUtils.instantiateClass(strategyClass));
-				}
-			}
-		}
+	public CacheStrategy findStrategy(String strategy) {
+		return strategies.get(strategy);
 	}
 }

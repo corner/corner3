@@ -24,7 +24,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.Invocation;
 import org.apache.tapestry5.services.ValueEncoderSource;
-import org.springframework.beans.BeanUtils;
 
 import corner.cache.annotations.CacheKeyParameter;
 import corner.cache.annotations.Cacheable;
@@ -107,9 +106,10 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 			return null;
 		}
 		Cacheable cacheDefine = method.getAnnotation(Cacheable.class);
-		Class<? extends CacheStrategy> strategyClass = cacheDefine.cacheStrategy();
-		source.registerStrategyClass(strategyClass);
-		CacheStrategy strategy = (CacheStrategy) BeanUtils.instantiateClass(strategyClass);
+		CacheStrategy strategy = this.source.findStrategy(cacheDefine.strategy());
+		if(strategy == null){
+			throw new RuntimeException("fail to find cache strategy instance!");
+		}
 		return strategy.appendNamespace(cacheManager, cacheDefine, keys);
 	}
 	

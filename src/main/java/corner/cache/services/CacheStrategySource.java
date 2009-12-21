@@ -33,10 +33,9 @@ public interface CacheStrategySource {
 	public <T>void catchEvent(CacheEvent<T> event,Object ... args);
 
 	/**
-	 * 注册策略类
-	 * @param strategyClass 缓存策略类
+	 * 找到对应的缓存策略
+	 * @param strategy
 	 * @since 3.1
 	 */
-	public void registerStrategyClass(
-			Class<? extends CacheStrategy> strategyClass);
+	public CacheStrategy findStrategy(String strategy);
 }

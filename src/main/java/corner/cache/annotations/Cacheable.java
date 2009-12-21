@@ -14,8 +14,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import corner.cache.services.CacheStrategy;
-import corner.cache.services.impl.DefaultListCacheStrategyImpl;
+import corner.cache.CacheConstants;
 
 /**
  * 缓存的注释类
@@ -57,7 +56,7 @@ public @interface Cacheable {
 	 * @return
 	 * @since 3.1
 	 */
-	public Class<? extends CacheStrategy> cacheStrategy() default DefaultListCacheStrategyImpl.class;
+	public String strategy() default CacheConstants.COMMON_LIST_STRATEGY;
 	/**
 	 * 缓存使用的key.
 	 * 这是一个数组key，意味着可以多个key组成，

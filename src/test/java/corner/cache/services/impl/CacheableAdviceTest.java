@@ -2,8 +2,10 @@ package corner.cache.services.impl;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.Invocation;
@@ -15,11 +17,13 @@ import org.apache.tapestry5.test.TapestryTestCase;
 import org.easymock.EasyMock;
 import org.testng.annotations.Test;
 
+import corner.cache.CacheConstants;
 import corner.cache.annotations.Cacheable;
 import corner.cache.model.CacheEvent;
 import corner.cache.model.Operation;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
+import corner.cache.services.CacheStrategy;
 import corner.cache.services.CacheStrategySource;
 import corner.cache.services.impl.local.LocalCacheConfig;
 import corner.cache.services.impl.local.LocalCacheItemConfig;
@@ -71,7 +75,9 @@ public class CacheableAdviceTest extends TapestryTestCase{
 		final PaginationList<TestA> result = getList();
 		expect(invocation.getResult()).andReturn(result).times(2);
 		expect(invocation.getResultType()).andReturn(PaginationList.class).times(3);
-		CacheStrategySource source = new CacheStrategySourceImpl(cacheManager);
+		Map<String,CacheStrategy> configuration = new HashMap<String,CacheStrategy>();
+		configuration.put(CacheConstants.COMMON_LIST_STRATEGY, new DefaultListCacheStrategyImpl());
+		CacheStrategySource source = new CacheStrategySourceImpl(cacheManager,configuration);
 		CacheableDefinitionParserImpl parser = new CacheableDefinitionParserImpl(valueEncoderSource,cacheManager,source);
 		EntityService entityService = newMock(EntityService.class);
 		TypeCoercer coercer=newMock(TypeCoercer.class);
