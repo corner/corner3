@@ -16,6 +16,8 @@
 package corner.cache;
 
 
+import java.util.Iterator;
+
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -26,19 +28,25 @@ import com.meetup.memcached.ErrorHandler;
 
 import corner.cache.annotations.LocalCache;
 import corner.cache.services.CacheManager;
+import corner.cache.services.CacheProcessor;
+import corner.cache.services.CacheProcessorSource;
 import corner.cache.services.CacheStrategy;
 import corner.cache.services.CacheStrategySource;
 import corner.cache.services.CacheableAdvisor;
 import corner.cache.services.CacheableDefinitionParser;
+import corner.cache.services.impl.CacheProcessorSourceImpl;
 import corner.cache.services.impl.CacheStrategySourceImpl;
 import corner.cache.services.impl.CacheableAdvisorImpl;
 import corner.cache.services.impl.CacheableDefinitionParserImpl;
 import corner.cache.services.impl.DefaultListCacheStrategyImpl;
+import corner.cache.services.impl.IteratorCacheProcessor;
+import corner.cache.services.impl.PaginationListCacheProcessor;
 import corner.cache.services.impl.local.LocalCacheConfig;
 import corner.cache.services.impl.local.LocalCacheManagerImpl;
 import corner.cache.services.impl.memcache.ErrorHandlerImpl;
 import corner.cache.services.impl.memcache.MemcacheConfig;
 import corner.config.services.ConfigurationSource;
+import corner.orm.model.PaginationList;
 
 /**
  * Cache的配置,目前提供Memcache和LocalCache的配置:
@@ -57,6 +65,7 @@ public class CacheModule {
 		binder.bind(CacheableAdvisor.class,CacheableAdvisorImpl.class);
 		binder.bind(CacheableDefinitionParser.class,CacheableDefinitionParserImpl.class);
 		binder.bind(CacheStrategySource.class,CacheStrategySourceImpl.class);
+		binder.bind(CacheProcessorSource.class,CacheProcessorSourceImpl.class);
 	}
 	public static void contributeFactoryDefaults(
 			MappedConfiguration<String, String> configuration) {
@@ -66,7 +75,11 @@ public class CacheModule {
 	public static void contributeCacheStrategySource(MappedConfiguration<String,CacheStrategy> configuration){
 		configuration.addInstance(CacheConstants.COMMON_LIST_STRATEGY, DefaultListCacheStrategyImpl.class);
 	}
-
+	public void contributeCacheProcessorSource(MappedConfiguration<Class,CacheProcessor> configruation){
+		configruation.addInstance(PaginationList.class,PaginationListCacheProcessor.class);
+		configruation.addInstance(Iterator.class,IteratorCacheProcessor.class);
+	}
+	
 	/**
 	 * 构造基于JVM本机内存的CacheManager,并启动该Manager
 	 * 

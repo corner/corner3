@@ -23,6 +23,8 @@ import corner.cache.model.CacheEvent;
 import corner.cache.model.Operation;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
+import corner.cache.services.CacheProcessor;
+import corner.cache.services.CacheProcessorSource;
 import corner.cache.services.CacheStrategy;
 import corner.cache.services.CacheStrategySource;
 import corner.cache.services.impl.local.LocalCacheConfig;
@@ -80,6 +82,8 @@ public class CacheableAdviceTest extends TapestryTestCase{
 		CacheStrategySource source = new CacheStrategySourceImpl(cacheManager,configuration);
 		CacheableDefinitionParserImpl parser = new CacheableDefinitionParserImpl(valueEncoderSource,cacheManager,source);
 		EntityService entityService = newMock(EntityService.class);
+		Class clazz = TestA.class;
+		expect(entityService.getEntityClass(EasyMock.anyObject())).andReturn(clazz).anyTimes();
 		TypeCoercer coercer=newMock(TypeCoercer.class);
 		expect(coercer.coerce(result, Iterable.class)).andReturn(new Iterable(){
 
@@ -98,7 +102,11 @@ public class CacheableAdviceTest extends TapestryTestCase{
 		replay();
 		Method method = CacheableAdviceTest.class.getMethod("getList");
 		PropertyAccess propertyAccess = new PropertyAccessImpl();
-		CacheableAdvice advice  =new CacheableAdvice(method, coercer, entityService, valueEncoderSource, propertyAccess, cacheManager, parser);
+		Map<Class,CacheProcessor> sourceConfig = new HashMap<Class,CacheProcessor>();
+		sourceConfig.put(PaginationList.class,new PaginationListCacheProcessor(coercer, entityService, propertyAccess, valueEncoderSource));
+		sourceConfig.put(Iterator.class,new IteratorCacheProcessor(entityService, propertyAccess, coercer));
+		CacheProcessorSource cacheProcessorSource = new CacheProcessorSourceImpl(sourceConfig, propertyAccess, coercer, entityService);
+		CacheableAdvice advice  =new CacheableAdvice(method, cacheManager, parser,cacheProcessorSource);
 		
 		Cache<String, Object> entityCache = cacheManager.getCache("entity");
 		Cache<String, Object> nsCache = cacheManager.getCache("ns");
@@ -106,8 +114,8 @@ public class CacheableAdviceTest extends TapestryTestCase{
 		advice.advise(invocation);
 		//namespace 为 0
 		assertEquals(nsCache.get("corner.integration.app1.entities.TestA_c_l_ns"),0L);
-		assertNotNull(entityCache.get("corner.integration.app1.entities.TestA_c_l_ns_0_febc3463c9a869d48ec8f7ab586a0677a5787f76#"));
-		assertNull(entityCache.get("corner.integration.app1.entities.TestA_c_l_ns_1_febc3463c9a869d48ec8f7ab586a0677a5787f76#"));
+		assertNotNull(entityCache.get("corner.integration.app1.entities.TestA_c_l_ns_0_4557b623be2a2da3aa45856123e6e8163323bc45#"));
+		assertNull(entityCache.get("corner.integration.app1.entities.TestA_c_l_ns_1_4557b623be2a2da3aa45856123e6e8163323bc45#"));
 		//第二次从缓存读取
 		advice.advise(invocation);
 		//发生插入事件
@@ -117,7 +125,7 @@ public class CacheableAdviceTest extends TapestryTestCase{
 		//再次执行方法
 		advice.advise(invocation);
 		assertEquals(nsCache.get("corner.integration.app1.entities.TestA_c_l_ns"),1L);
-		assertNotNull(entityCache.get("corner.integration.app1.entities.TestA_c_l_ns_1_febc3463c9a869d48ec8f7ab586a0677a5787f76#"));
+		assertNotNull(entityCache.get("corner.integration.app1.entities.TestA_c_l_ns_1_4557b623be2a2da3aa45856123e6e8163323bc45#"));
 		verify();
 	}
 }

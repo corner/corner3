@@ -13,11 +13,14 @@ public class CacheConstants {
 	 * common list namespace
 	 */
 	public static final String COMMON_LIST_KEY_NAMESPACE_FORMATE = "%s_c_l_ns";
-	public static final String COMMON_LIST_KEY_NAMESPACE_VERSION_FORMATE = "%s_c_l_ns_%s_";
 	public static final String COMMON_LIST_STRATEGY = "c_l";
 	public static final String ENTITY_CACHE_KEY_FORMAT= "%s{%s}";
 	/**
 	 * 实体cache的定义key
 	 */
 	public static String ENTITY_CACHE_NAME="entity";
+	/**
+	 * 实体namespace缓存区名称
+	 */
+	public static String ENTITY_NS_CACHE_NAME="ns";
 }

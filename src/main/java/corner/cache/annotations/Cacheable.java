@@ -49,7 +49,7 @@ public @interface Cacheable {
 	 * @return 实体类
 	 * @since 3.1
 	 */
-	public Class<?> clazz() default Object.class;
+	public Class<?> clazz();
 	
 	/**
 	 * 针对key是否匹配的策略类,针对一种类型的缓存通常一个实例即可

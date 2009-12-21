@@ -22,7 +22,6 @@ import corner.cache.CacheConstants;
 import corner.cache.annotations.Cacheable;
 import corner.cache.model.CacheEvent;
 import corner.cache.model.Operation;
-import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
 
 /**
@@ -41,40 +40,39 @@ public class DefaultListCacheStrategyImpl  extends AbstractCacheStrategy{
 		if(!contains(event.getTargetClass())){
 			return;
 		}
-			//增加或者删除
-			if(event.getOperation() == Operation.INSERT||event.getOperation() == Operation.DELETE){
-        		//得到namespace的版本
-				String targetClassName = event.getTargetClass().getName();
-				String namespace=String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_FORMATE, targetClassName);
-				getNamespaceValue(cacheManager,targetClassName);
-        		Cache nsCache = cacheManager.getCache("ns");
-        		nsCache.increment(namespace, 1);
-			}
+		//增加或者删除
+		if(event.getOperation() == Operation.INSERT||event.getOperation() == Operation.DELETE){
+    		//得到namespace的版本
+			String targetClassName = event.getTargetClass().getName();
+			String namespace= getNamespaceName(event.getTargetClass());
+			getNamespaceValue(cacheManager,targetClassName);
+    		incrementNamespace(cacheManager, namespace);
+		}
 	}
 
-	private Object getNamespaceValue(CacheManager cacheManager,
-			String targetClassName) {
-		String namespace=String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_FORMATE, targetClassName);
-		//得到namespace的版本
-		Cache nsCache = cacheManager.getCache("ns");
-		Object obj = nsCache.get(namespace);
-		if(obj == null){
-			obj = new Long(0);
-			nsCache.put(namespace,obj,360000);
-		}
-		return obj;
-	}
+
+
+
+
+
+	
 	@Override
 	public String appendNamespace( CacheManager cacheManager,Cacheable cacheDefine,String[] keys,Object ... args) {
 		//把要处理的类加入到定一种
+		Class targetClass= cacheDefine.clazz();
 		add(cacheDefine.clazz());
-		Object version = getNamespaceValue(cacheManager,cacheDefine.clazz().getName());
+		String namespace = getNamespaceName(targetClass);
+		Object version = getNamespaceValue(cacheManager,namespace);
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_VERSION_FORMATE, cacheDefine.clazz().getName(),version));
+		sb.append(namespace).append("_").append(version).append("_");
 		for(String key:keys){
 			sb.append(key).append("#");
 		}
 		logger.debug("full cache key :{}" ,sb);
 		return sb.toString();
+	}
+	@Override
+	protected String getNamespaceName(Class<?> targetClass,Object ... args) {
+		return String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_FORMATE, targetClass.getName());
 	}
 }

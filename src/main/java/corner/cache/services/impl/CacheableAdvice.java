@@ -8,31 +8,19 @@
 package corner.cache.services.impl;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.Entity;
-
-import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.Invocation;
 import org.apache.tapestry5.ioc.MethodAdvice;
-import org.apache.tapestry5.ioc.services.PropertyAccess;
-import org.apache.tapestry5.ioc.services.PropertyAdapter;
-import org.apache.tapestry5.ioc.services.TypeCoercer;
-import org.apache.tapestry5.services.ValueEncoderSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import corner.cache.CacheConstants;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
+import corner.cache.services.CacheProcessor;
+import corner.cache.services.CacheProcessorSource;
 import corner.cache.services.CacheableDefinitionParser;
-import corner.orm.EntityConstants;
-import corner.orm.model.PaginationList;
-import corner.orm.model.PaginationOptions;
-import corner.orm.services.EntityService;
 
 /**
  * 针对Cacheable的Advice
@@ -46,28 +34,20 @@ public class CacheableAdvice implements MethodAdvice {
 	private Method method;
 	private final static Logger logger = LoggerFactory
 			.getLogger(CacheableAdvice.class);
-	private TypeCoercer coercer;
-	private ValueEncoderSource valueEncoderSource;
 	private Cache cache;
-	private EntityService  entityService;
-	private PropertyAccess propertyAccess;
 	private CacheableDefinitionParser parser;
+	private CacheProcessorSource cacheProcessorSource;
 
 	public CacheableAdvice(
-			 Method m, TypeCoercer coercer,
-			 EntityService entityService, 
-			ValueEncoderSource valueEncoderSource,
-			PropertyAccess propertyAccess,
+			Method method,
 			CacheManager cacheManager,
-			CacheableDefinitionParser parser) {
-		this.method = m;
-		this.coercer = coercer;
-		this.entityService = entityService;
-		this.valueEncoderSource = valueEncoderSource;
-        cache = cacheManager.getCache("entity");
-//        cache.clear();
-        this.propertyAccess = propertyAccess;
+			CacheableDefinitionParser parser,
+			CacheProcessorSource cacheProcessorSource
+			) {
+		this.method = method;
+        cache = cacheManager.getCache(CacheConstants.ENTITY_CACHE_NAME);
         this.parser = parser;
+        this.cacheProcessorSource = cacheProcessorSource;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -107,73 +87,9 @@ public class CacheableAdvice implements MethodAdvice {
 		}
 		List list = (List) object;
 		Class<?> type = invocation.getResultType();
-		final Class clazz = getEntityClass(method);
-		if (type.isAnnotationPresent(Entity.class)){
-			//fetch id property class
-			Class<? extends PropertyAdapter> idClass = propertyAccess.getAdapter(type).
-				getPropertyAdapter(EntityConstants.ID_PROPERTY_NAME).getClass();
-			//convert id value
-			Object obj = coercer.coerce(list, idClass);
-			//find object 
-			obj = entityService.get(type,obj);
-			invocation.overrideResult(obj);
-		} else if (Iterator.class.isAssignableFrom(type)) {
-			final Iterator it = list.iterator();
-			if(clazz.isAnnotationPresent(Entity.class)){
-    			Iterator wrapperIt = new Iterator() {
-    				@Override
-    				public boolean hasNext() {
-    					return it.hasNext();
-    				}
-    
-    				@Override
-    				public Object next() {
-    					return entityService.get(clazz, it.next());
-    				}
-    
-    				@Override
-    				public void remove() {
-    				}
-    			};
-    			invocation.overrideResult(wrapperIt);
-			}
-			else{
-				invocation.overrideResult(it);
-			}
-		} else if (PaginationList.class.isAssignableFrom(type)) {
-			/**
-			 * 通过范性类型来得到对应的参数
-			 */
-			if (logger.isDebugEnabled()) {
-				logger.debug("get return type:[" + clazz + "]");
-			}
-			final Iterator it = list.iterator();
-
-			ValueEncoder encoder = valueEncoderSource
-					.getValueEncoder(PaginationOptions.class);
-			PaginationOptions options = (PaginationOptions) encoder
-					.toValue((String) it.next());
-
-			Iterator wrapperIt = new Iterator() {
-
-				@Override
-				public boolean hasNext() {
-					return it.hasNext();
-				}
-
-				@Override
-				public Object next() {
-					return entityService.get(clazz, it.next());
-				}
-
-				@Override
-				public void remove() {
-				}
-			};
-			invocation.overrideResult(new PaginationList(wrapperIt, options));
-		}else{
-			invocation.overrideResult(coercer.coerce(object,invocation.getResultType()));
-		}
+		CacheProcessor<?> processor = this.cacheProcessorSource.getProcessor(type);
+		Object obj = processor.fromCache(list, method);
+		invocation.overrideResult(obj);
 	}
 
 	/**
@@ -193,49 +109,15 @@ public class CacheableAdvice implements MethodAdvice {
 		Object object;
 		invocation.proceed();
 		object = invocation.getResult();
-		if(object == null){
+		if(object == null){//NULL不进行缓存
 			return;
 		}
-		// 针对结果全部作为list处理
-		Iterable iterable = coercer.coerce(object, Iterable.class);
-		Iterator it = iterable.iterator();
-		List<Object> list = new ArrayList<Object>();
-		while (it.hasNext()) {
-			Object obj = it.next();
-			//is persistence object
-			if (entityService.getEntityClass(obj).isAnnotationPresent(Entity.class)){
-				list.add(propertyAccess.get(obj, EntityConstants.ID_PROPERTY_NAME));
-			}else{
-				list.add(obj);
-			}
-		}
-		if (object instanceof PaginationList) { // 分页使用对象
-			PaginationList pList = (PaginationList) object;
-			ValueEncoder<PaginationOptions> encoder = valueEncoderSource
-					.getValueEncoder(PaginationOptions.class);
-			String options = encoder.toClient(pList.options());
-			list.add(0, options);
-		}
+		Class<?> returnType = method.getReturnType();
+		CacheProcessor<Object> processor = (CacheProcessor<Object>) this.cacheProcessorSource.getProcessor(returnType);
+		List<Object> list = processor.toCache(object);
 		//重新读取对象
 		restoreObjectFromCache(invocation, list);
 		// 放入缓存
 		cache.put(cacheKey, list);
 	}
-
-	
-
-	//通过分析方法的返回值来得到范性的值,
-	//譬如： PaginationList<Member> 得到的结果是Member
-	private Class<?> getEntityClass(Method method) {
-		Class<?> defaultType = method.getReturnType();
-		Type genericType = method.getGenericReturnType();
-		if (genericType instanceof ParameterizedType) {
-			ParameterizedType pt = (ParameterizedType) genericType;
-			return (Class<?>) pt.getActualTypeArguments()[0];
-
-		}
-		return defaultType;
-	}
-
-
 }

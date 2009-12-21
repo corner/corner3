@@ -17,6 +17,9 @@ package corner.cache.services.impl;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import corner.cache.CacheConstants;
+import corner.cache.services.Cache;
+import corner.cache.services.CacheManager;
 import corner.cache.services.CacheStrategy;
 
 /**
@@ -50,5 +53,23 @@ public abstract class AbstractCacheStrategy implements CacheStrategy{
 		synchronized(targetClass){//锁定类,保证并发的时候，能够正确加入类
 			return contains(targetClass)?false:entitiesClassies.add(targetClass);
 		}
+	}
+	protected String  getNamespaceValue(CacheManager cacheManager,String namespace) {
+		//得到namespace的版本
+		Cache nsCache = cacheManager.getCache(CacheConstants.ENTITY_NS_CACHE_NAME);
+		Object obj = nsCache.get(namespace);
+		if(obj == null){
+			obj = new Long(0);
+			nsCache.put(namespace,obj,360000);
+		}
+		return String.valueOf(obj);
+	}
+	protected String getNamespaceName(Class<?> targetClass,Object ... args) {
+		//do nothing
+		throw new UnsupportedOperationException();
+	}
+	protected void incrementNamespace(CacheManager cacheManager, String namespace) {
+		Cache nsCache = cacheManager.getCache(CacheConstants.ENTITY_NS_CACHE_NAME);
+		nsCache.increment(namespace, 1);
 	}
 }
