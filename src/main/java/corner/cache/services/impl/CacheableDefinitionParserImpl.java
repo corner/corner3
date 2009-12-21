@@ -85,7 +85,7 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 		}
 		String [] keyFormats = cacheable.keyFormats();
 		if(keyFormats.length == 0){
-			keyFormats = new String[] {DigestUtils.shaHex(method.toString())};
+			keyFormats = new String[] {DigestUtils.shaHex(method.toString()+keyParameter.toString())};
 		}
 		//进行格式化输出
 		if(keyParameter.size() == 0){
