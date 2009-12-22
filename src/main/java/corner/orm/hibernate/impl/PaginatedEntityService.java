@@ -6,19 +6,23 @@
  */
 package corner.orm.hibernate.impl;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.transform.ResultTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
+import corner.orm.EntityConstants;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
 
@@ -29,7 +33,8 @@ import corner.orm.model.PaginationOptions;
  * @since 0.0.1
  */
 public class PaginatedEntityService {
-    private Logger logger = LoggerFactory.getLogger(PaginatedEntityService.class);
+    private static final String SELECT_ID_CLAUSE = "select "+EntityConstants.ID_PROPERTY_NAME+" ";
+	private Logger logger = LoggerFactory.getLogger(PaginatedEntityService.class);
     private TypeCoercer typeCoercer;
     private HibernateTemplate template;
 
@@ -77,6 +82,8 @@ public class PaginatedEntityService {
                 //query list
                 final StringBuffer queryHQL= new StringBuffer(conditionHQL);
                 appendOrder(queryHQL, order);
+                queryHQL.insert(0,SELECT_ID_CLAUSE);
+                
                 Query query = session.createQuery(queryHQL.toString());
 
                 //count query
@@ -101,10 +108,15 @@ public class PaginatedEntityService {
                 }
                 query.setFirstResult((page-1)*perPage);
                 query.setMaxResults(perPage);
-                PaginationList list = new PaginationList(query.iterate(),options);
-
                 //query total record number
                 options.setTotalRecord((Long) countQuery.iterate().next());
+                
+                ResultTransformer transformer = new LazyLoadEntityTransformer(session,persistClass);
+	            query.setResultTransformer(transformer);
+	               
+                PaginationList list = new PaginationList(query.list().iterator(),options);
+
+               
                 return list;
 
             }
@@ -159,11 +171,12 @@ public class PaginatedEntityService {
 	public Iterator find(final Class<?> persistClass, final Object conditions,
 			final String order, final int start, final int offset) {
 		return (Iterator) this.template.execute(new HibernateCallback(){
-	           public Object doInHibernate(Session session) throws HibernateException, SQLException {
+	           public Object doInHibernate(final Session session) throws HibernateException, SQLException {
 	               Iterable con = typeCoercer.coerce(conditions, Iterable.class);
 	               final Iterator it = con==null?null:con.iterator();
 	               final StringBuffer sb = buildConditionHQL(persistClass, it);
 	               appendOrder(sb, order);
+	               sb.insert(0,SELECT_ID_CLAUSE);
 	               Query query = session.createQuery(sb.toString());
 	               if(it!=null){
 	                   int i=0;
@@ -173,8 +186,38 @@ public class PaginatedEntityService {
 	               }
 	               query.setFirstResult(start);
 	               query.setMaxResults(offset);
-	               return query.iterate();
+	               
+	               ResultTransformer transformer = new LazyLoadEntityTransformer(session,persistClass);
+	               query.setResultTransformer(transformer);
+	               
+	               return query.list().iterator();
 	           }
 	       });
+	}
+	class LazyLoadEntityTransformer implements ResultTransformer
+	{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6259516575635282447L;
+		private Session session;
+		private Class persistClass;
+
+		public LazyLoadEntityTransformer(Session session, Class persistClass) {
+			this.session = session;
+			this.persistClass = persistClass;
+		}
+
+		@Override
+		public List transformList(List collection) {
+			return collection;
+		}
+
+		@Override
+		public Object transformTuple(Object[] tuple, String[] aliases) {
+			return session.get(persistClass, (Serializable) tuple[0]);
+		}
+		
 	}
 }
