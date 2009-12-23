@@ -73,7 +73,7 @@ public class NamespaceProcessorImpl implements NamespaceProcessor {
 			return  String.format("%s.%s.%s",targetClass.getSimpleName(),name,value);
 	}
 	private String getDefaultListNsName(Class targetClass){
-			return String.format("%s.%s",targetClass,CacheConstants.COMMON_LIST_NAMESPACE);
+			return String.format("%s.%s",targetClass.getName(),CacheConstants.COMMON_LIST_NAMESPACE);
 	}
 	protected String  getNamespaceValue(CacheManager cacheManager,String namespace) {
 		//得到namespace的版本
