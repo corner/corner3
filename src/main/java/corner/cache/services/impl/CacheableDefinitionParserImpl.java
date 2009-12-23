@@ -24,8 +24,10 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.Invocation;
 import org.apache.tapestry5.services.ValueEncoderSource;
+import org.springframework.util.StringUtils;
 
 import corner.cache.annotations.CacheKeyParameter;
+import corner.cache.annotations.CacheNsParameter;
 import corner.cache.annotations.Cacheable;
 import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
@@ -79,7 +81,7 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 			}
 			define = defineBuilder.build();
 			
-		// 构造真正的缓存Key
+		// 得到缓存的参数
 		List<String> keyParameter=new ArrayList<String>();
 		for (int i = 0; i < define.getParameterIndexCount(); i++) {
 			int pIndex = define.getParameterIndex(i);
@@ -87,21 +89,21 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 					.getParameterTypes()[pIndex]);
 			keyParameter.add(encoder.toClient(invocation.getParameter(pIndex)));
 		}
-		String [] keys= cacheable.keyFormats();
-		if(keys.length == 0){
-			keys = new String[] {DigestUtils.shaHex(method.toString()+keyParameter.toString())};
+		//得到缓存的真正key
+		String key=null;
+		String keyFormat= cacheable.keyFormat();
+		if(!StringUtils.hasText(keyFormat)){
+			key = DigestUtils.shaHex(method.toString()+keyParameter.toString());
+		}else{
+    		key =String.format(keyFormat, keyParameter.toArray(new Object[0]));
 		}
 		
-		for(int i=0;i<keys.length;i++){
-			keys[i]=String.format(String.valueOf(keys[i]), keyParameter.toArray(new Object[0]));
-		}
-
-		Cacheable cacheDefine = method.getAnnotation(Cacheable.class);
-		CacheStrategy strategy = this.source.findStrategy(cacheDefine.strategy());
+		CacheStrategy strategy = this.source.findStrategy(cacheable.strategy());
+		CacheNsParameter[] nses = cacheable.namespaces();
 		if(strategy == null){
 			throw new RuntimeException("fail to find cache strategy instance!");
 		}
-		return strategy.appendNamespace(cacheManager, cacheDefine, keys,keyParameter.toArray());
+		return strategy.appendNamespace(cacheManager,cacheable.clazz(),nses,key,keyParameter.toArray());
 	}
 	
 }

@@ -15,11 +15,12 @@
  */
 package corner.cache.services.impl;
 
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import corner.cache.CacheConstants;
-import corner.cache.services.Cache;
-import corner.cache.services.CacheManager;
+import corner.cache.annotations.CacheNsParameter;
 import corner.cache.services.CacheStrategy;
 
 /**
@@ -30,7 +31,7 @@ import corner.cache.services.CacheStrategy;
  */
 public abstract class AbstractCacheStrategy implements CacheStrategy{
 	/** 要处理的实体类**/
-	private CopyOnWriteArrayList<Class> entitiesClassies=new CopyOnWriteArrayList<Class>();
+	private ConcurrentHashMap <Class,CopyOnWriteArraySet<String>> cacheKeyDefines=new ConcurrentHashMap<Class,CopyOnWriteArraySet<String>>();
 	/**
 	 * 是否包含某一实体类
 	 * @param targetClass 实体类
@@ -38,38 +39,37 @@ public abstract class AbstractCacheStrategy implements CacheStrategy{
 	 * @since 3.1
 	 */
 	protected boolean contains(Class  targetClass) {
-		return entitiesClassies.contains(targetClass);
+		return cacheKeyDefines.containsKey(targetClass);
+	}
+	protected Iterator<String> getNamespaces(Class targetClass){
+		return cacheKeyDefines.get(targetClass).iterator();
 	}
 	/**
 	 * 增加一个处理的实体类
 	 * @param targetClass 实体类
+	 * @param nses 
 	 * @return 是否增加成功
 	 * @since 3.1
 	 */
-	protected boolean add(Class  targetClass) {
+	protected boolean add(Class  targetClass, CacheNsParameter[] nses) {
+		CopyOnWriteArraySet<String> keys = null;
 		if(contains(targetClass)){
-			return false;
+			keys = cacheKeyDefines.get(targetClass);
+		}else{
+    		synchronized(cacheKeyDefines){//锁定类,保证并发的时候，能够正确加入类
+    			if(!contains(targetClass)){
+    				keys = new CopyOnWriteArraySet<String>();
+    				cacheKeyDefines.put(targetClass, keys);
+    			}else{
+    				keys = cacheKeyDefines.get(targetClass);
+    			}
+    		}
 		}
-		synchronized(targetClass){//锁定类,保证并发的时候，能够正确加入类
-			return contains(targetClass)?false:entitiesClassies.add(targetClass);
+		//增加默认的缓存namespace
+		keys.add(CacheConstants.COMMON_LIST_NAMESPACE);
+		for(CacheNsParameter parameter:nses){
+			keys.add(parameter.name());
 		}
-	}
-	protected String  getNamespaceValue(CacheManager cacheManager,String namespace) {
-		//得到namespace的版本
-		Cache nsCache = cacheManager.getCache(CacheConstants.ENTITY_NS_CACHE_NAME);
-		Object obj = nsCache.get(namespace);
-		if(obj == null){
-			obj = new Long(0);
-			nsCache.put(namespace,obj,360000);
-		}
-		return String.valueOf(obj);
-	}
-	protected String getNamespaceName(Class<?> targetClass,Object ... args) {
-		//do nothing
-		throw new UnsupportedOperationException();
-	}
-	protected void incrementNamespace(CacheManager cacheManager, String namespace) {
-		Cache nsCache = cacheManager.getCache(CacheConstants.ENTITY_NS_CACHE_NAME);
-		nsCache.increment(namespace, 1);
+		return true;
 	}
 }

@@ -13,35 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.cache.services;
+package corner.cache.annotations;
 
-import corner.cache.annotations.CacheNsParameter;
-import corner.cache.model.CacheEvent;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * 缓存策略
+ * 缓存空间的参数
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
-public interface CacheStrategy {
+@Target({})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface CacheNsParameter {
 	/**
-	 * 加上namspace的标记
-	 * @param class1 
-	 * @param objects 
-	 * @param key 键值
-	 * @return 加上标记的键值
+	 * 参数名称，此名称必须为要缓存Clazz的属性名称,
+	 * 也就是说是缓存空间表的字段
+	 * @return
 	 * @since 3.1
 	 */
-	String appendNamespace(CacheManager cacheManager, Class<?> class1, CacheNsParameter[] nses,
-			String key, Object... objects);
+	String name();
 	/**
-	 * 处理缓存事件
-	 * @param event 事件
-	 * @param cacheManager cacheManager instance
-	 * @param args 事件额外的参数
-	 * @return 是否本身要在策略容器中删除，true:删除;false:不删除
+	 * 值
+	 * 执行方法上的缓存参数顺序值,顺序从 1 开始
+	 * @return
 	 * @since 3.1
 	 */
-	public <T>void dealCacheEvent(CacheEvent<T> event,CacheManager cacheManager);
+	int keyIndex();
 }

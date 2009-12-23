@@ -41,11 +41,8 @@ import org.testng.annotations.Test;
 import corner.cache.CacheModule;
 import corner.cache.CacheSymbols;
 import corner.cache.annotations.CacheKeyParameter;
+import corner.cache.annotations.CacheNsParameter;
 import corner.cache.annotations.Cacheable;
-import corner.cache.model.CacheEvent;
-import corner.cache.model.Operation;
-import corner.cache.services.CacheManager;
-import corner.cache.services.CacheStrategy;
 import corner.cache.services.CacheStrategySource;
 import corner.cache.services.CacheableAdvisor;
 import corner.config.ConfigurationModule;
@@ -125,7 +122,7 @@ public class CacheIntegrationTest extends TapestryTestCase {
 		assertEquals(r2+1,testVar2);
 	}
 	public static interface TestService{
-		@Cacheable(clazz=TestArticle.class,strategy="member_cache_strategy")
+		@Cacheable(clazz=TestArticle.class,namespaces={@CacheNsParameter(name="member",keyIndex=1)})
 		public List<TestArticle> getList(@CacheKeyParameter TestMember member);
 	}
 	public static class TestServiceImpl implements TestService{
@@ -149,9 +146,6 @@ public class CacheIntegrationTest extends TapestryTestCase {
 				CacheableAdvisor advisor, MethodAdviceReceiver receiver) {
 				advisor.addCacheableAdvice(receiver);
 		}
-	    public static void contributeCacheStrategySource(MappedConfiguration<String,CacheStrategy> configuration){
-	    	configuration.addInstance("member_cache_strategy", TestMemberCacheStrategy.class);
-	    }
 		public static EntityService buildEntityService(TypeCoercer typeCoercer,
 				PropertyAccess propertyAccess, 
 				CacheStrategySource cacheSource){
@@ -175,58 +169,8 @@ public class CacheIntegrationTest extends TapestryTestCase {
 			configuration.add(CacheSymbols.ENABLE_CACHE, "true");
 		}
 	}
-	public static class TestMemberCacheStrategy extends AbstractCacheStrategy {
-		private static final String UID_NS = "%s_uid_%s_ns";
-		/**
-		 * @see corner.cache.services.CacheStrategy#appendNamespace(corner.cache.services.CacheManager, corner.cache.annotations.Cacheable, java.lang.String[])
-		 */
-		@Override
-		public String appendNamespace(CacheManager cacheManager,
-				Cacheable cacheDefine, String[] keys,Object ... args) {
-			Class<?> targetClass = cacheDefine.clazz();
-			//加入缓存类
-			add(targetClass);
-			
-			//得到namespace的名字
-			String namespace=getNamespaceName(targetClass,args[0]);
-			//得到值
-			String namespaceValue  = getNamespaceValue(cacheManager,namespace);
-			
-			//组成一个复合的缓存key
-			StringBuilder sb = new StringBuilder();
-			sb.append(namespace).append("_");
-			sb.append(namespaceValue).append("_");
-			for(String key:keys){
-				sb.append(key).append("#");
-			}
-			return sb.toString();
-		}
-		/**
-		 * @see corner.cache.services.CacheStrategy#dealCacheEvent(corner.cache.model.CacheEvent, corner.cache.services.CacheManager)
-		 */
-		@Override
-		public <T> void dealCacheEvent(CacheEvent<T> event,
-				CacheManager cacheManager) {
-			if(!contains(event.getTargetClass())){
-				return;
-			}
-			//增加或者删除
-			if(event.getOperation() == Operation.INSERT||event.getOperation() == Operation.DELETE){
-	    		//得到namespace的版本
-				Class<T> targetClass = event.getTargetClass();
-				//得到namespace的名字
-				TestArticle ma = (TestArticle) event.getTargetObject();
-				String namespace=getNamespaceName(targetClass,ma.getMember().getId());
-				incrementNamespace(cacheManager,namespace);
-			}	
-		}
-		@Override
-		protected String getNamespaceName(Class<?>  targetClass,Object ... args) {
-			return String.format(UID_NS, targetClass.getName(),args[0]);
-		}
-	}
 	@Entity
-	class TestMember extends BaseEntity{
+	public static class TestMember extends BaseEntity{
 		/**
 		 * 
 		 */
@@ -252,7 +196,7 @@ public class CacheIntegrationTest extends TapestryTestCase {
 		}
 	};
 	@Entity
-	class TestArticle extends BaseEntity{
+	public static class TestArticle extends BaseEntity{
 		/**
 		 * 
 		 */

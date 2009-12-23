@@ -15,33 +15,35 @@
  */
 package corner.cache.services;
 
+import java.util.Iterator;
+
 import corner.cache.annotations.CacheNsParameter;
 import corner.cache.model.CacheEvent;
 
 /**
- * 缓存策略
+ * 名称处理
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
-public interface CacheStrategy {
+public interface NamespaceProcessor {
+
 	/**
-	 * 加上namspace的标记
-	 * @param class1 
-	 * @param objects 
-	 * @param key 键值
-	 * @return 加上标记的键值
-	 * @since 3.1
-	 */
-	String appendNamespace(CacheManager cacheManager, Class<?> class1, CacheNsParameter[] nses,
-			String key, Object... objects);
-	/**
-	 * 处理缓存事件
+	 * 更新namespace的值
 	 * @param event 事件
-	 * @param cacheManager cacheManager instance
-	 * @param args 事件额外的参数
-	 * @return 是否本身要在策略容器中删除，true:删除;false:不删除
+	 * @param cacheManager cache manager
+	 * @param propertyAccess propertyAccess
 	 * @since 3.1
 	 */
-	public <T>void dealCacheEvent(CacheEvent<T> event,CacheManager cacheManager);
+	void upgradeNamespaceVersion(CacheManager cacheManager,CacheEvent event,Iterator<String> namespaces);
+	/**
+	 * 根据namespace的定义和参数组成
+	 * @param targetClass
+	 * @param cacheManager
+	 * @param nses
+	 * @param objects
+	 * @return
+	 * @since 3.1
+	 */
+	String getNamespaceNameVersioned(CacheManager cacheManager,Class targetClass,CacheNsParameter[] nses,Object ... objects);
 }

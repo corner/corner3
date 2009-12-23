@@ -15,6 +15,8 @@ public class CacheConstants {
 	public static final String COMMON_LIST_KEY_NAMESPACE_FORMATE = "%s_c_l_ns";
 	public static final String COMMON_LIST_STRATEGY = "c_l";
 	public static final String ENTITY_CACHE_KEY_FORMAT= "%s{%s}";
+	
+	public static final String COMMON_LIST_NAMESPACE="_list";
 	/**
 	 * 实体cache的定义key
 	 */

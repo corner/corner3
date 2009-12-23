@@ -52,18 +52,23 @@ public @interface Cacheable {
 	public Class<?> clazz();
 	
 	/**
+	 * 缓存使用的namespace
+	 * @return 缓存空间对象集合
+	 * @since 3.1
+	 */
+	public CacheNsParameter [] namespaces() default {};
+	/**
 	 * 针对key是否匹配的策略类,针对一种类型的缓存通常一个实例即可
 	 * @return
 	 * @since 3.1
 	 */
 	public String strategy() default CacheConstants.COMMON_LIST_STRATEGY;
 	/**
-	 * 缓存使用的key.
-	 * 这是一个数组key，意味着可以多个key组成，
+	 * 缓存使用的自定义参数key，默认为方法名称和参数名称组成的字符串
 	 * @return
 	 * @since 3.1
 	 */
-	public String[]  keyFormats() default {};
+	public String  keyFormat() default ""; 
 	
 	/**
 	 * ttl 时间，单位为秒数

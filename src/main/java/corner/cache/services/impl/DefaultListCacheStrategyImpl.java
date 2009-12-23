@@ -18,11 +18,11 @@ package corner.cache.services.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import corner.cache.CacheConstants;
-import corner.cache.annotations.Cacheable;
+import corner.cache.annotations.CacheNsParameter;
 import corner.cache.model.CacheEvent;
 import corner.cache.model.Operation;
 import corner.cache.services.CacheManager;
+import corner.cache.services.NamespaceProcessor;
 
 /**
  * 默认的列表缓存事件处理的实现.
@@ -34,6 +34,11 @@ import corner.cache.services.CacheManager;
  */
 public class DefaultListCacheStrategyImpl  extends AbstractCacheStrategy{
 	private Logger logger = LoggerFactory.getLogger(DefaultListCacheStrategyImpl.class);
+	private NamespaceProcessor processor;
+	
+	public DefaultListCacheStrategyImpl(NamespaceProcessor processor) {
+		this.processor = processor;
+	}
 
 	@Override
 	public <T> void dealCacheEvent(CacheEvent<T> event, CacheManager cacheManager) {
@@ -43,36 +48,20 @@ public class DefaultListCacheStrategyImpl  extends AbstractCacheStrategy{
 		//增加或者删除
 		if(event.getOperation() == Operation.INSERT||event.getOperation() == Operation.DELETE){
     		//得到namespace的版本
-			String targetClassName = event.getTargetClass().getName();
-			String namespace= getNamespaceName(event.getTargetClass());
-			getNamespaceValue(cacheManager,targetClassName);
-    		incrementNamespace(cacheManager, namespace);
+			processor.upgradeNamespaceVersion(cacheManager,event,getNamespaces(event.getTargetClass()));
 		}
 	}
 
-
-
-
-
-
-	
 	@Override
-	public String appendNamespace( CacheManager cacheManager,Cacheable cacheDefine,String[] keys,Object ... args) {
-		//把要处理的类加入到定一种
-		Class targetClass= cacheDefine.clazz();
-		add(cacheDefine.clazz());
-		String namespace = getNamespaceName(targetClass);
-		Object version = getNamespaceValue(cacheManager,namespace);
+	public String appendNamespace(CacheManager cacheManager,Class targetClass,
+			CacheNsParameter[] nses, String key, Object... objects) {
+		add(targetClass,nses);
+		
+		String fullNamespaceValue = processor.getNamespaceNameVersioned(cacheManager,targetClass,nses,objects);
 		StringBuilder sb = new StringBuilder();
-		sb.append(namespace).append("_").append(version).append("_");
-		for(String key:keys){
-			sb.append(key).append("#");
-		}
+		sb.append(fullNamespaceValue);
+		sb.append(key);
 		logger.debug("full cache key :{}" ,sb);
 		return sb.toString();
-	}
-	@Override
-	protected String getNamespaceName(Class<?> targetClass,Object ... args) {
-		return String.format(CacheConstants.COMMON_LIST_KEY_NAMESPACE_FORMATE, targetClass.getName());
 	}
 }

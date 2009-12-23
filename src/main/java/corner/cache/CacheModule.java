@@ -34,12 +34,14 @@ import corner.cache.services.CacheStrategy;
 import corner.cache.services.CacheStrategySource;
 import corner.cache.services.CacheableAdvisor;
 import corner.cache.services.CacheableDefinitionParser;
+import corner.cache.services.NamespaceProcessor;
 import corner.cache.services.impl.CacheProcessorSourceImpl;
 import corner.cache.services.impl.CacheStrategySourceImpl;
 import corner.cache.services.impl.CacheableAdvisorImpl;
 import corner.cache.services.impl.CacheableDefinitionParserImpl;
 import corner.cache.services.impl.DefaultListCacheStrategyImpl;
 import corner.cache.services.impl.IteratorCacheProcessor;
+import corner.cache.services.impl.NamespaceProcessorImpl;
 import corner.cache.services.impl.PaginationListCacheProcessor;
 import corner.cache.services.impl.local.LocalCacheConfig;
 import corner.cache.services.impl.local.LocalCacheManagerImpl;
@@ -66,6 +68,7 @@ public class CacheModule {
 		binder.bind(CacheableDefinitionParser.class,CacheableDefinitionParserImpl.class);
 		binder.bind(CacheStrategySource.class,CacheStrategySourceImpl.class);
 		binder.bind(CacheProcessorSource.class,CacheProcessorSourceImpl.class);
+		binder.bind(NamespaceProcessor.class,NamespaceProcessorImpl.class);
 	}
 	public static void contributeFactoryDefaults(
 			MappedConfiguration<String, String> configuration) {
