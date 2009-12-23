@@ -30,7 +30,6 @@ import org.apache.tapestry5.internal.InternalConstants;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.LoggerSource;
 import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Autobuild;
@@ -71,12 +70,10 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.apphosting.api.ApiProxy;
 import com.google.apphosting.api.ApiProxy.Delegate;
 
-import corner.cache.CacheSymbols;
 import corner.cache.services.CacheManager;
 import corner.orm.gae.impl.EntityManagerSourceImpl;
 import corner.orm.gae.impl.GaeCachedEntityServiceImpl;
 import corner.orm.gae.impl.JavaCacheManagerImpl;
-import corner.orm.gae.impl.JpaEntityServiceImpl;
 import corner.orm.gae.impl.JpaEntityValueEncoder;
 import corner.orm.gae.impl.JpaTransactionDecoratorImpl;
 import corner.orm.gae.impl.TestEnvironment;
@@ -99,13 +96,6 @@ public class GaeModule {
 		binder.bind(TransactionDecorator.class,
 				JpaTransactionDecoratorImpl.class);
 		binder.bind(CacheManager.class, JavaCacheManagerImpl.class);
-	}
-	public static EntityService buildEntityService(@Symbol(CacheSymbols.ENABLE_CACHE) boolean enableCache,ObjectLocator locator){
-		if(enableCache){
-			return locator.autobuild(GaeCachedEntityServiceImpl.class);
-		}else{
-			return locator.autobuild(JpaEntityServiceImpl.class);
-		}
 	}
 
 	/**

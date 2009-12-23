@@ -36,7 +36,7 @@ import corner.orm.model.PaginationOptions;
  * @version $Revision: 447 $
  * @since 0.0.1
  */
-@IncludeStylesheet("Pagination.css")
+@IncludeStylesheet("context:/corner/Pagination.css")
 public class WillPagination {
 
     @Parameter(required=true)

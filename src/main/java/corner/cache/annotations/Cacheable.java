@@ -20,12 +20,12 @@ import corner.cache.CacheConstants;
  * 缓存的注释类
  * 譬如：缓存某一用户的博客，那么对应的声明如下：
  * <code>
- * @Cacheable(clazz=Blog.class,keyMatcher=xxx.KeyMatcher.class,keyFormats={"uid=%1$s","limit=%2$s,%3$s"})
+ * @Cacheable(clazz=Blog.class,strategy="xx",keyFormats={"uid=%1$s","limit=%2$s,%3$s"})
  * public List<Blog> findBlogs(@CacheKeyParameter User user,@CacheKeyParameter int start,@CacheKeyParameter int offset)
  * </code>
  * 1) clazz 			要缓存的实体类
- * 2) keyMatcher 	针对key是否匹配的策略类，此key是要和实体类有关系，通常是一种类型的缓存一个实例即可
- * 3) keyFormats	缓存的key的定义，可以定义成多个数组，也就是说能够使用散列方式
+ * 2) strategy 	    针对key是否匹配的策略类，此key是要和实体类有关系，通常是一种类型的缓存一个实例即可
+ * 3) keyFormats	缓存的key的定义，可以定义成多个数组，也就是说能够使用散列方式,同时给缓存加上namespace
  * 
  * a) 查找缓存
  *  先读取class=Blog.class,然后读取uid=xxx的缓存，然后再读取limit=xx,xx的缓存。
