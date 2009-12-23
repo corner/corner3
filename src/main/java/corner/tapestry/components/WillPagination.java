@@ -33,7 +33,7 @@ import corner.orm.model.PaginationOptions;
  * 用来分页使用的组件
  *
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 447 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @IncludeStylesheet("context:/corner/Pagination.css")

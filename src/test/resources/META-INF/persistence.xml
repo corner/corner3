@@ -2,7 +2,7 @@
 <!-- 
 	Copyright 2009 The Fepss Pty Ltd. 
 	site: http://www.fepss.com
-	file: $Id: persistence.xml 5915 2009-09-22 04:56:54Z jcai $
+	file: $Id$
 	created at:2009-09-22
 -->
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"

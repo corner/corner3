@@ -1,7 +1,7 @@
 /*		
  * Copyright 2009 The Fepss Pty Ltd. 
  * site: http://www.fepss.com
- * file: $Id: PaginatedJapEntityService.java 6101 2009-10-19 04:20:03Z jcai $
+ * file: $Id$
  * created at:2009-09-22
  */
 
@@ -28,7 +28,7 @@ import corner.orm.model.PaginationOptions;
 /**
  * paginated jpa entity service
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
- * @version $Revision: 6101 $
+ * @version $Revision$
  * @since 0.1
  */
 public class PaginatedJapEntityService {

@@ -27,7 +27,7 @@ import org.apache.tapestry5.validator.AbstractValidator;
  * 针对固定长度验证
  * 
  * @author msliu
- * @version $Revision: 158 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class PegLength extends AbstractValidator<Integer, String> {

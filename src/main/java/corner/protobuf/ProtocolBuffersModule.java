@@ -36,7 +36,7 @@ import corner.orm.model.PaginationOptions;
  * 
  * @author dong
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2956 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class ProtocolBuffersModule {
@@ -78,7 +78,7 @@ public class ProtocolBuffersModule {
 	 * 针对Protobuf类型的对象进行Encoder
 	 * @author dong
 	 * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
-	 * @version $Revision: 2956 $
+	 * @version $Revision$
 	 * @since 0.0.1
 	 */
 	public static class ProtoValueEncoder<T extends ProtocolBuffer> implements ValueEncoder<T> {
@@ -111,7 +111,7 @@ public class ProtocolBuffersModule {
 	 * 
 	 * @author dong
 	 * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
-	 * @version $Revision: 2956 $
+	 * @version $Revision$
 	 * @since 0.0.1
 	 */
 	static class ProtoString2ObjectCoercion<T extends ProtocolBuffer> implements Coercion<String, T> {
@@ -151,7 +151,7 @@ public class ProtocolBuffersModule {
 	 * 从对象到Protobuf的string的转换
 	 * @author dong
 	 * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
-	 * @version $Revision: 2956 $
+	 * @version $Revision$
 	 * @since 0.0.1
 	 */
 	static class Object2ProtoStringCoercion<T extends ProtocolBuffer> implements Coercion<T, String> {

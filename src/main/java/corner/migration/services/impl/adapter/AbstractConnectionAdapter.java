@@ -25,7 +25,7 @@ import corner.migration.services.ConnectionAdapter;
 /**
  * 抽象的连接适配器
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2095 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public abstract class AbstractConnectionAdapter implements ConnectionAdapter{

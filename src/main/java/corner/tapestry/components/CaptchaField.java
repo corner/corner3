@@ -43,7 +43,7 @@ import corner.tapestry.captcha.CaptchaImage;
  * 提供用于Form中的校验码组件
  * 
  * @author dong
- * @version $Revision: 3029 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class CaptchaField extends AbstractField {
@@ -219,7 +219,7 @@ public class CaptchaField extends AbstractField {
 	 * 简单的对StreamResponse的实现,用于返回流格式的数据
 	 * 
 	 * @author dong
-	 * @version $Revision: 3029 $
+	 * @version $Revision$
 	 * @since 0.0.1
 	 */
 	private final class ByteStreamResponse implements StreamResponse {

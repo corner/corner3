@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 /**
  * 文件操作的utils类.
  * 
- * @version $Revision: 2250 $
+ * @version $Revision$
  * @since 0.9.0
  */
 public class FileUtils {
@@ -65,7 +65,7 @@ public class FileUtils {
 	 * 对文件通过正则表达式进行过滤
 	 * 
 	 * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
-	 * @version $Revision: 2250 $
+	 * @version $Revision$
 	 * @since 0.9.0
 	 */
 	static class RegexpFileFilter implements FileFilter {
@@ -88,7 +88,7 @@ public class FileUtils {
 	 * 文件集合
 	 * 
 	 * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
-	 * @version $Revision: 2250 $
+	 * @version $Revision$
 	 * @since 0.9.0
 	 */
 	public static class FileCollection {
@@ -159,7 +159,7 @@ public class FileUtils {
 	 * 默认对文件进行排序的类
 	 * 
 	 * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
-	 * @version $Revision: 2250 $
+	 * @version $Revision$
 	 * @since 0.9.0
 	 */
 	static class DefaultSortCallback implements ISortCallback {
@@ -188,7 +188,7 @@ public class FileUtils {
 	 * 对排序进行回掉的类.
 	 * 
 	 * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
-	 * @version $Revision: 2250 $
+	 * @version $Revision$
 	 * @since 0.9.0
 	 */
 	public interface ISortCallback {

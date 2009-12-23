@@ -21,7 +21,7 @@ import java.security.Principal;
  * 用于Principal的服务类
  * 
  * @author dong
- * @version $Revision: 718 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public interface SecurityPrincipalService {

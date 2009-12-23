@@ -34,7 +34,7 @@ import corner.utils.EntityUtil;
  * 抽象对树的移动进行的处理
  * 
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 718 $
+ * @version $Revision$
  * @since 0.0.1 
  */
 abstract class AbstractMoveTreeNodeProcessor {

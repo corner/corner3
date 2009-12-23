@@ -27,7 +27,7 @@ import org.apache.tapestry5.ioc.internal.util.InternalUtils;
  *  create database OA_PUBLIC;
  *  </p>
  * @author Corner Team
- * @version $Revision: 2101 $
+ * @version $Revision$
  * @since 0.7.6
  */
 public class MySQLConnectionAdapter extends AbstractConnectionAdapter {

@@ -25,7 +25,7 @@ import org.apache.tapestry5.services.BindingFactory;
 /**
  * 针对格式化的binding工厂类
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 3018 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class FormatBindingFactory implements BindingFactory {

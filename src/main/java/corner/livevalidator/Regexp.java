@@ -30,7 +30,7 @@ import org.apache.tapestry5.validator.AbstractValidator;
  * 对T5的Regexp的改写,使用livevalidator方式进行校验
  * 
  * @author dong
- * @version $Revision: 2089 $
+ * @version $Revision$
  * @since 0.0.2
  */
 

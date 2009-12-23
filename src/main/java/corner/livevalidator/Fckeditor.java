@@ -31,7 +31,7 @@ import org.apache.tapestry5.validator.AbstractValidator;
  * 目前提供的校验方式是不能为空,与lv的Presence类似
  * 
  * @author dong
- * @version $Revision: $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class Fckeditor extends AbstractValidator<Void, Object> {

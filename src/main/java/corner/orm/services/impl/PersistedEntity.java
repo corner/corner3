@@ -1,7 +1,7 @@
 /*		
  * Copyright 2009 The Fepss Pty Ltd. 
  * site: http://www.fepss.com
- * file: $Id: PersistedEntity.java 6398 2009-11-19 05:30:06Z jcai $
+ * file: $Id$
  * created at:2009-09-22
  */
 
@@ -18,7 +18,7 @@ import corner.orm.services.EntityService;
  * jpa persistence entity
  * 
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
- * @version $Revision: 6398 $
+ * @version $Revision$
  * @since 0.1
  */
 @ImmutableSessionPersistedObject

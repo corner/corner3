@@ -18,7 +18,7 @@ package corner.migration.services.impl.console;
 /**
  * 颜色Console的接口
 
- * @version $Revision: 2089 $
+ * @version $Revision$
  * @since 0.9.0
  */
 public interface IConsole {

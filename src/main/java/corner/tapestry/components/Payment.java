@@ -32,7 +32,7 @@ import corner.payment.services.ViewHelper;
 /**
  * 支付系统帐号
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 3408 $
+ * @version $Revision$
  * @since 0.0.2
  */
 

@@ -21,7 +21,7 @@ import org.hibernate.dialect.Dialect;
 /**
  * 连接适配器的Source
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2100 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public interface ConnectionAdapterSource {

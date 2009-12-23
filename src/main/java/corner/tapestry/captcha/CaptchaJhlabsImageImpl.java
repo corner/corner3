@@ -39,7 +39,7 @@ import com.jhlabs.image.TwirlFilter;
 
 /**
  * @author dong
- * @version $Revision: 3033 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class CaptchaJhlabsImageImpl implements CaptchaImage {

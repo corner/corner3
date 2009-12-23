@@ -30,7 +30,7 @@ import corner.security.services.SecurityChecker;
  * 安全检查类
  * 
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 718 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class SecurityCheckerImpl implements SecurityChecker {

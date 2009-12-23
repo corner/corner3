@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * 
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
  * @author dong
- * @version $Revision: 718 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @Target( { ElementType.METHOD, ElementType.TYPE })

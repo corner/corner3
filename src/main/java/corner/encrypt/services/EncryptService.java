@@ -18,7 +18,7 @@ package corner.encrypt.services;
 /**
  *  加密的接口
  * @author dong
- * @version $Revision: 2089 $
+ * @version $Revision$
  * @since 0.2
  */
 public interface EncryptService {

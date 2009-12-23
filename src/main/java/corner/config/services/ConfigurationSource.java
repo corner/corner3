@@ -1,7 +1,7 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
  * site: http://ganshane.net
- * file: $Id: ConfigurationSource.java 2424 2008-10-31 17:13:57Z d0ng $
+ * file: $Id$
  * created at:2008-10-08
  */
 
@@ -10,7 +10,7 @@ package corner.config.services;
 /**
  * 得到服务配置的工厂类
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2424 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public interface ConfigurationSource {

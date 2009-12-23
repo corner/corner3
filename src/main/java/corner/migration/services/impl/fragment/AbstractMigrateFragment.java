@@ -29,7 +29,7 @@ import corner.migration.services.MigrateFragment;
 /**
  * 抽象的数据库升级碎片
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5182 $
+ * @version $Revision$
  * @since 0.0.2
  */
 abstract class AbstractMigrateFragment implements MigrateFragment{

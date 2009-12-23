@@ -21,7 +21,7 @@ import corner.migration.services.MigrationService;
 /**
  * 抽象的基础升级类
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 3143 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public abstract class BaseMigration implements Migration{

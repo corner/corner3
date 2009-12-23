@@ -33,7 +33,7 @@ import corner.security.services.SecurityChecker;
  * 对安全角色的增强器.
  * 
  * @author Jun Tsai
- * @version $Revision: 3408 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class SecurityWorker implements ComponentClassTransformWorker {

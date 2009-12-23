@@ -20,7 +20,7 @@ import org.apache.tapestry5.json.JSONObject;
 /**
  * 用来展示对视图进行展示的帮助类.
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2138 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public  interface ViewHelper {

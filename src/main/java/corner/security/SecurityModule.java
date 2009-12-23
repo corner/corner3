@@ -42,7 +42,7 @@ import corner.security.services.impl.SecurityWorker;
  *
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
  * @author dong
- * @version $Revision: 766 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class SecurityModule {

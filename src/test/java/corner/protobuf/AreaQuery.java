@@ -27,7 +27,7 @@ import corner.protobuf.AreaQueryProtocol.AreaQueryBuffer.Builder;
  * 用于地区查询的实体类
  * 
  * @author dong
- * @version $Revision: 2047 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class AreaQuery implements Serializable, ProtocolBuffer {

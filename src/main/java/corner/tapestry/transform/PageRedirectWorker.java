@@ -29,7 +29,7 @@ import org.apache.tapestry5.services.TransformMethodSignature;
  *  处理PageRedirect注释,目前只支持返回类型是String和Class和Link的Action
  * @author dong
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
- * @version $Revision: 5222 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class PageRedirectWorker implements ComponentClassTransformWorker {

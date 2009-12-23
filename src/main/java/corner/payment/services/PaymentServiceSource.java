@@ -19,7 +19,7 @@ package corner.payment.services;
 /**
  * 用来支付的服务器的集合
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2138 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public interface PaymentServiceSource {

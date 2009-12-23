@@ -23,7 +23,7 @@ import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 /**
  * 针对H2数据库的连接适配器
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2095 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class H2ConnectionAdapter extends AbstractConnectionAdapter {

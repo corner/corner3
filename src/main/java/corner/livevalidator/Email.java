@@ -27,7 +27,7 @@ import org.apache.tapestry5.validator.AbstractValidator;
 /**
  * 针对Email的校验
  * @author Jun Tsai
- * @version $Revision: 158 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class Email extends AbstractValidator<Void, Object> {

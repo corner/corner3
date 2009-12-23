@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * 用来标注用户访问某个资源时是否有权限 需要由ResourceSecurityWorker提供支持,
  * 
  * @author dong
- * @version $Revision: $
+ * @version $Revision$
  * @since 0.0.1
  */
 @Target( { ElementType.PARAMETER})

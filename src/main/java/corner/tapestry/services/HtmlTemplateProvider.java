@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 /**
  * 对HTML模板提供进行标记
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2088 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @Target(

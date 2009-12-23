@@ -38,7 +38,7 @@ import corner.security.annotations.ResourceSecurityObject;
  * 对ResourceSecurity增强器.
  * 
  * @author dong
- * @version $Revision: $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class ResourceSecurityWorker implements ComponentClassTransformWorker {

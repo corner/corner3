@@ -34,7 +34,7 @@ import corner.orm.services.EntityService;
 /**
  * 公用的实体服务类的实现.
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5477 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @Hibernate

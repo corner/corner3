@@ -30,7 +30,7 @@ import org.springframework.util.FileCopyUtils;
  * 密钥工具类
  * 
  * @author dong
- * @version $Revision: 2956 $
+ * @version $Revision$
  * @since 0.2
  */
 public class CipherKey implements Serializable {

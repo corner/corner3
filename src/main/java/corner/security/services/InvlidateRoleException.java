@@ -18,7 +18,7 @@ package corner.security.services;
 /**
  * 错误角色的异常
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 718 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class InvlidateRoleException extends Exception {

@@ -55,7 +55,7 @@ import corner.migration.services.impl.fragment.RenameColumnFragment;
  * 数据库升级服务的实现类
  * 
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5317 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class MigrationServiceImpl implements MigrationService {

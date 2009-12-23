@@ -19,7 +19,7 @@ package corner.tapestry.captcha;
  * 验证码的接口
  * 
  * @author dong
- * @version $Revision: 2089 $
+ * @version $Revision$
  * @since 0.2
  */
 public interface CaptchaCode {

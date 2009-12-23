@@ -22,7 +22,7 @@ import corner.security.annotations.Security;
 /**
  * 安全检查
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 718 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public interface SecurityChecker {

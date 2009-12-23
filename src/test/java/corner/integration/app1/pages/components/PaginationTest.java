@@ -17,7 +17,7 @@ package corner.integration.app1.pages.components;
 
 /**
  * 
- * @version $Revision: 158 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class PaginationTest {

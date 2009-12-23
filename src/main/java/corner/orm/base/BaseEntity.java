@@ -25,7 +25,7 @@ import org.apache.tapestry5.beaneditor.NonVisual;
 /**
  * 基础模型类。
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 4425 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @MappedSuperclass

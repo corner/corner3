@@ -18,7 +18,7 @@ package corner.security;
 /**
  * 定义用于安全校验的常量
  * @author dong
- * @version $Revision: 2088 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class SecurityConstants {

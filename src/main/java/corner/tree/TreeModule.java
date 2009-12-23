@@ -23,7 +23,7 @@ import corner.tree.services.impl.TreeServiceImpl;
 /**
  * 针对树的服务类
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 716 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class TreeModule {

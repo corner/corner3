@@ -19,7 +19,7 @@ package corner;
  * 一些常用量
  * 
  * @author <a href="mailto:jun.tsai@bjmaxinfo.com">Jun Tsai</a>
- * @version $Revision: 3041 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class CornerConstants {

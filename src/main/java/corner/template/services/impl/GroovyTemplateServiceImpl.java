@@ -1,7 +1,7 @@
 /*		
  * Copyright 2009 The Fepss Pty Ltd. 
  * site: http://www.fepss.com
- * file: $Id: GroovyTemplateServiceImpl.java 6030 2009-10-12 02:58:26Z jcai $
+ * file: $Id$
  * created at:2009-09-22
  */
 
@@ -27,7 +27,7 @@ import corner.template.services.TemplateService;
  * Groovy 实现的模板引擎
  * 
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
- * @version $Revision: 6030 $
+ * @version $Revision$
  * @since 0.1
  */
 public class GroovyTemplateServiceImpl implements TemplateService {

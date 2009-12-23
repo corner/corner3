@@ -25,7 +25,7 @@ import org.apache.tapestry5.services.BindingFactory;
 /**
  * 提供前端的flash的展示bing
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 158 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class FlashBindingFactory implements BindingFactory {

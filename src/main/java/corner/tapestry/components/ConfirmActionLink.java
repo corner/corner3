@@ -26,7 +26,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 /**
  * 能展示提示信息的一个组件
  * @author jcai
- * @version $Revision: 854 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @IncludeJavaScriptLibrary("ConfirmActionLink.js")

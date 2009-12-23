@@ -1,6 +1,6 @@
 #	Copyright 2008 The Ganshane Network Service Team.
 #	site:http://ganshane.net
-#	file : $Id: auto_fix_xml_header_by_svn.rb 719 2008-09-23 02:55:38Z jcai $
+#	file : $Id$
 #	created at:2008-05-21
 
 
@@ -59,7 +59,7 @@ Find.find(dir)  do |file|
 <!-- 
 	Copyright #{copyYears} The Ganshane Network Service Team. 
 	site: http://ganshane.net
-	file : $Id: auto_fix_xml_header_by_svn.rb 719 2008-09-23 02:55:38Z jcai $
+	file : $Id$
 	created at:#{date.strftime("%Y-%m-%d")}
 -->
 "

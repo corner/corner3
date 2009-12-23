@@ -35,7 +35,7 @@ import org.apache.tapestry5.services.PersistentFieldStrategy;
  * 用来保存数据到客户端的cooki中的处理
  * 
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 158 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class CookiePersistentFieldStrategy implements PersistentFieldStrategy {

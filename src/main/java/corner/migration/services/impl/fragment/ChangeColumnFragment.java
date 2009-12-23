@@ -34,7 +34,7 @@ import corner.migration.services.ConnectionAdapter;
 /**
  * 改变列的碎片
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5182 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class ChangeColumnFragment extends AbstractMigrateFragment {

@@ -38,7 +38,7 @@ import corner.tapestry.fckeditor.FckeditorSymbols;
  * </code>
  * 
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2817 $
+ * @version $Revision$
  * @since 0.0.2
  */
 @IncludeJavaScriptLibrary( { "${fckeditor.path}/fckeditor.js","FckEditorWrapper.js" })

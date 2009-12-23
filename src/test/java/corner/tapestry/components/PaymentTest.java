@@ -31,7 +31,7 @@ import corner.tapestry.components.Payment;
 /**
  * 
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5069 $
+ * @version $Revision$
  * @since 0.0.2
  */
 

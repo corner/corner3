@@ -27,7 +27,7 @@ import org.apache.tapestry5.validator.AbstractValidator;
  * 针对最小长度的校验
  * 
  * @author msliu
- * @version $Revision: 158 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public final class LessLength extends AbstractValidator<Integer, String> {

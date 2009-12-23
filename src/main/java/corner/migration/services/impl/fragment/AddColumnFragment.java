@@ -29,7 +29,7 @@ import corner.migration.services.ConnectionAdapter;
 /**
  * 增加列的片段
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5182 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class AddColumnFragment extends AbstractMigrateFragment {

@@ -1,7 +1,7 @@
 /*		
  * Copyright 2009 The Fepss Pty Ltd. 
  * site: http://www.fepss.com
- * file: $Id: CacheableAdvice.java 6733 2009-12-07 05:06:15Z jcai $
+ * file: $Id$
  * created at:2009-09-22
  */
 
@@ -26,7 +26,7 @@ import corner.cache.services.CacheableDefinitionParser;
  * 针对Cacheable的Advice
  * 
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
- * @version $Revision: 6733 $
+ * @version $Revision$
  * @since 0.1
  */
 public class CacheableAdvice implements MethodAdvice {

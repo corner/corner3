@@ -1,7 +1,7 @@
 /*		
  * Copyright 2008 The OurIBA Develope Team.
  * site: http://ganshane.net
- * file: $Id: ConfigurationModule.java 2424 2008-10-31 17:13:57Z d0ng $
+ * file: $Id$
  * created at:2008-10-08
  */
 
@@ -20,7 +20,7 @@ import corner.config.services.impl.ConfigurationSourceImpl;
  * ServiceConfig的配置Module
  * 
  * @author dong
- * @version $Revision: 2424 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class ConfigurationModule {

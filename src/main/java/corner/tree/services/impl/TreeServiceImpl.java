@@ -37,7 +37,7 @@ import corner.utils.EntityUtil;
  * 
  * 
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 3034 $
+ * @version $Revision$
  * @since 0.0.1 
  */
 public class TreeServiceImpl implements TreeService {

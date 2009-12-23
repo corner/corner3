@@ -27,7 +27,7 @@ import corner.migration.services.ConnectionAdapterSource;
  * 数据库连接适配器源的实现
  * 
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2100 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class ConnectionAdapterSourceImpl implements ConnectionAdapterSource {

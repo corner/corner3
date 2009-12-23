@@ -27,7 +27,7 @@ import org.apache.tapestry5.json.JSONObject;
  * 用来加载JavaScript,以及CSS文件
  * 
  * @author Jun Tsai
- * @version $Revision: 3355 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class ValidatorRenderSupportImpl implements ValidatorRenderSupport {

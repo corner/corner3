@@ -18,7 +18,7 @@ package corner.tapestry.bindings.flash;
 /**
  * 用来操作flash的前端展示类
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 158 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public interface FlashFacade {

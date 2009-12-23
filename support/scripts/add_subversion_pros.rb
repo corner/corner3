@@ -21,7 +21,7 @@ require "find"
 # 对java文件以及html，xml文件加上 subversion的属性
 # 
 # @author: Jun Tsai
-# @version $Revision: 158 $
+# @version $Revision$
 # @since 0.0.1
 # 
 

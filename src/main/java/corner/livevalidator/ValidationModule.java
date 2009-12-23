@@ -25,7 +25,7 @@ import org.apache.tapestry5.ioc.ServiceBinder;
  * 定义了所有校验的module
  * 
  * @author Jun Tsai
- * @version $Revision: 3408 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class ValidationModule {

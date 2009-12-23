@@ -24,7 +24,7 @@ import org.hibernate.tool.hbm2ddl.TableMetadata;
 /**
  * 针对数据库的适配器
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2088 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public interface ConnectionAdapter {

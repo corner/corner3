@@ -19,7 +19,7 @@ package corner.protobuf;
  * 对Google Protocl buffers 的封装接口
  * 
  * @author dong
- * @version $Revision: 2303 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public interface ProtocolBuffer {

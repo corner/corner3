@@ -34,7 +34,7 @@ import corner.migration.services.impl.FileUtils.ISortCallback;
  * <p>用户启动时候升级数据库结构
  * 
 
- * @version $Revision: 2089 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public abstract class AbstractDBMigrationInitializer implements ApplicationInitializerFilter {

@@ -30,7 +30,7 @@ import corner.tapestry.captcha.CipherKey;
  * 使用DEsede加密算法实现的EncryptService
  * 
  * @author dong
- * @version $Revision: 3050 $
+ * @version $Revision$
  * @since 0.2
  */
 public class DESedeEncryptServiceImpl implements EncryptService {

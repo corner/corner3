@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * 针对unix进行彩色输出
 
- * @version $Revision: 2956 $
+ * @version $Revision$
  * @since 0.9.0
  */
 public class UnixConsole implements IConsole{

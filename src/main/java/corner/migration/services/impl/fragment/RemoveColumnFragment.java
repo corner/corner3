@@ -27,7 +27,7 @@ import corner.migration.services.ConnectionAdapter;
 /**
  * 完成了删除列的碎片
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5182 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class RemoveColumnFragment extends AbstractMigrateFragment{

@@ -18,7 +18,7 @@ package corner.migration.services;
 /**
  * 用来数据库升级使用的接口
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 3143 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public interface Migration {

@@ -33,7 +33,7 @@ import corner.migration.services.impl.console.UnixConsole;
 /**
  * 对数据库的初始化操作.
 
- * @version $Revision: 5160 $
+ * @version $Revision$
  * @since 0.9.0
  */
 public class DBMigrationInitializer extends AbstractDBMigrationInitializer {

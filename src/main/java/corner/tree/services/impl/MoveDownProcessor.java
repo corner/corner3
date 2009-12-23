@@ -30,7 +30,7 @@ import corner.tree.services.MoveTreeNodeProcessor;
  * 向下移动的处理程序
  * 
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2956 $
+ * @version $Revision$
  * @since 0.0.1 
  */
 class MoveDownProcessor extends AbstractMoveTreeNodeProcessor

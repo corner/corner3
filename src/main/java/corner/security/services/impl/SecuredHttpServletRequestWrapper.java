@@ -37,7 +37,7 @@ import corner.security.services.SecurityPrincipalService;
  * {@link #isUserInRole(String)}.
  * 
  * @author Jun Tsai
- * @version $Revision: 2956 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class SecuredHttpServletRequestWrapper implements HttpServletRequest {

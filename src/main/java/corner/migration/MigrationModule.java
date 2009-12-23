@@ -46,7 +46,7 @@ import corner.migration.services.impl.adapter.MySQLConnectionAdapter;
  * 此模块依赖于HibernateModule
  * 
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5160 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class MigrationModule {

@@ -58,7 +58,7 @@ import corner.transaction.TransactionModule;
  * 定义了Corner的核心module
  * 
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 3041 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @SubModule( {ValidationModule.class, StaticAssetModule.class,

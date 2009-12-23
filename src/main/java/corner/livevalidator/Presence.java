@@ -28,7 +28,7 @@ import org.apache.tapestry5.validator.AbstractValidator;
  * 定义一个必填字段的校验
  * 
  * @author Jun Tsai
- * @version $Revision: 2956 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class Presence extends AbstractValidator<Void, Object> {

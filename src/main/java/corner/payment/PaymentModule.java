@@ -27,7 +27,7 @@ import corner.payment.services.impl.processor.AlipayProcessor;
 /**
  * 支付模块
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2139 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class PaymentModule {

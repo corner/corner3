@@ -24,7 +24,7 @@ import corner.payment.services.PaymentServiceSource;
 /**
  * 实现支付服务类
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2138 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class PaymentServiceSourceImpl implements PaymentServiceSource {

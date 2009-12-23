@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 /**
  * 实现flash消息机制
  * @author <a href="mailto:jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 158 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class FlashFacadeImpl implements FlashFacade {

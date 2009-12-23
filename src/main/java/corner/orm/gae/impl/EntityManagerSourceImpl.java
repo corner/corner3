@@ -1,7 +1,7 @@
 /*		
  * Copyright 2009 The Fepss Pty Ltd. 
  * site: http://www.fepss.com
- * file: $Id: EntityManagerSourceImpl.java 5939 2009-09-24 13:51:06Z jcai $
+ * file: $Id$
  * created at:2009-09-22
  */
 
@@ -28,7 +28,7 @@ import corner.orm.gae.EntityManagerSource;
  * entity manager source implemention
  * 
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
- * @version $Revision: 5939 $
+ * @version $Revision$
  * @since 0.1
  */
 public class EntityManagerSourceImpl implements EntityManagerSource,ThreadCleanupListener {

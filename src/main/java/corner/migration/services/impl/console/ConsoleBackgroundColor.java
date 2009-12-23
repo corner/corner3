@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 背景色
 
- * @version $Revision: 2956 $
+ * @version $Revision$
  * @since 0.9.0
  */
 public class ConsoleBackgroundColor {

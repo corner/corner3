@@ -28,7 +28,7 @@ import org.apache.tapestry5.validator.AbstractValidator;
  * 对两个字段是否相同进行校验
  * 
  * @author Jun Tsai
- * @version $Revision: 2956 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class Confirmation extends AbstractValidator<String, String> {

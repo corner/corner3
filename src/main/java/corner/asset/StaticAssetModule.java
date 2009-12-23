@@ -32,7 +32,7 @@ import corner.asset.services.impl.StaticAssetUrlDomainSequenceHash;
  * StaticModule用于提供默认的配置
  * 
  * @author dong
- * @version $Revision: 4906 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class StaticAssetModule {

@@ -28,7 +28,7 @@ import corner.security.SecurityConstants;
 
 /**
  * 
- * @version $Revision: 5021 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @SubModule( {  CoreModule.class,HttpModule.class })

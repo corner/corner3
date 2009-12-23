@@ -27,7 +27,7 @@ import corner.tapestry.captcha.CaptchaCode;
  * 用于生成ASCII码的验证码,生成内容为A-Z,0-9随机生成,为了便于识别,去掉了I和1,O和0
  * 
  * @author dong
- * @version $Revision: 2089 $
+ * @version $Revision$
  * @since 0.2
  */
 public class ASCIICaptchaCodeImpl implements CaptchaCode {

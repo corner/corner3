@@ -32,7 +32,7 @@ import corner.security.services.SecurityPrincipalService;
  * 
  * @author Jun Tsai
  * @author dong
- * @version $Revision: 2145 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class SecurityContextFilter implements RequestFilter {

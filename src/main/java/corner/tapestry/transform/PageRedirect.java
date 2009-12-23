@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * 用于标注一个action的返回重定向到Page
  * 
  * @author dong
- * @version $Revision: 718 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @Target( { ElementType.METHOD})

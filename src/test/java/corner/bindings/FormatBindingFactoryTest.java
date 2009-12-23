@@ -34,7 +34,7 @@ import corner.tapestry.bindings.formatter.FormatterSourceImpl;
 /**
  * 
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 3018 $
+ * @version $Revision$
  * @since 0.0.2
  */
 

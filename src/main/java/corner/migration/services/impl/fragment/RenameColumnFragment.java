@@ -27,7 +27,7 @@ import corner.migration.services.ConnectionAdapter;
 /**
  * 重新命名列的碎片
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5182 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class RenameColumnFragment extends AbstractMigrateFragment {

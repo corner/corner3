@@ -31,7 +31,7 @@ import javax.imageio.ImageIO;
 /**
  * 简单的验证码图片生成
  * @author dong
- * @version $Revision: 2956 $
+ * @version $Revision$
  * @since 0.2
  */
 public class CaptchaImageImpl implements CaptchaImage {

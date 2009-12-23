@@ -1,7 +1,7 @@
 /*		
  * Copyright 2009 The Fepss Pty Ltd. 
  * site: http://www.fepss.com
- * file: $Id: JpaEntityValueEncoder.java 5922 2009-09-23 03:22:01Z jcai $
+ * file: $Id$
  * created at:2009-09-22
  */
 
@@ -21,7 +21,7 @@ import corner.orm.EntityConstants;
 /**
  * jpa entity value encoder
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
- * @version $Revision: 5922 $
+ * @version $Revision$
  * @since 0.1
  */
 public class JpaEntityValueEncoder<E> implements ValueEncoder<E> {

@@ -27,7 +27,7 @@ import org.apache.tapestry5.validator.AbstractValidator;
  * 针对固定值的校验
  * 
  * @author msliu
- * @version $Revision: 1482 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public class PegNum extends AbstractValidator<Long, Number> {

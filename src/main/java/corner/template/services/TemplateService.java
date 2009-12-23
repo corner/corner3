@@ -1,7 +1,7 @@
 /*		
  * Copyright 2009 The Fepss Pty Ltd. 
  * site: http://www.fepss.com
- * file: $Id: TemplateService.java 5915 2009-09-22 04:56:54Z jcai $
+ * file: $Id$
  * created at:2009-09-22
  */
 
@@ -15,7 +15,7 @@ import org.apache.tapestry5.ioc.Resource;
 /**
  * 模板服务，提供一些模板产生，譬如在发送email的时候，可以录入一些模板.
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
- * @version $Revision: 5915 $
+ * @version $Revision$
  * @since 0.1
  */
 public interface TemplateService {

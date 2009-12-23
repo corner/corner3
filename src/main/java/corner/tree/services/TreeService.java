@@ -24,7 +24,7 @@ import corner.tree.base.TreeAdapter;
 /**
  * 用来操作树的服务类
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 718 $
+ * @version $Revision$
  * @since 0.0.1
  */
 public interface TreeService {

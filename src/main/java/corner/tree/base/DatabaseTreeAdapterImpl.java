@@ -24,7 +24,7 @@ import corner.orm.base.BaseEntity;
 /**
  * 抽象的树的实现
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5183 $
+ * @version $Revision$
  * @since 0.0.1
  */
 @MappedSuperclass

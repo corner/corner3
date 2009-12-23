@@ -23,7 +23,7 @@ import org.hibernate.tool.hbm2ddl.TableMetadata;
 /**
  * 升级片段
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 5182 $
+ * @version $Revision$
  * @since 0.0.2
  */
  public interface MigrateFragment {

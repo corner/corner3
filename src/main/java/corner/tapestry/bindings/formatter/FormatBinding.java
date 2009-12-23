@@ -23,7 +23,7 @@ import org.apache.tapestry5.ioc.Location;
 /**
  * 针对格式化的一些前缀
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
- * @version $Revision: 2088 $
+ * @version $Revision$
  * @since 0.0.2
  */
 public class FormatBinding extends AbstractBinding {

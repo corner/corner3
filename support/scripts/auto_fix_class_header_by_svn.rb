@@ -1,6 +1,6 @@
 #	Copyright 2008 The Ganshane Network Service Team.
 #	site:http://ganshane.net
-#	file : $Id: auto_fix_class_header_by_svn.rb 718 2008-09-23 02:54:49Z jcai $
+#	file : $Id$
 #	created at:2008-05-21
 
 
