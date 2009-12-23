@@ -12,7 +12,6 @@ import java.lang.reflect.Method;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 
 import corner.cache.annotations.Cacheable;
-import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheProcessorSource;
 import corner.cache.services.CacheableAdvisor;
@@ -32,7 +31,7 @@ public class CacheableAdvisorImpl implements CacheableAdvisor {
 
 	public CacheableAdvisorImpl(
 			CacheProcessorSource cacheProcessorSource,
-			@Memcache CacheManager cacheManager,
+			CacheManager cacheManager,
 			CacheableDefinitionParser parser) {
 		this.cacheManager = cacheManager;
 		this.parser = parser;
@@ -44,7 +43,6 @@ public class CacheableAdvisorImpl implements CacheableAdvisor {
 			Cacheable c = m.getAnnotation(Cacheable.class);
 			if (c != null) {
 					receiver.adviseMethod(m, new CacheableAdvice(m,cacheManager,parser,cacheProcessorSource));
-				
 			}
 		}
 	}

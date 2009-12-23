@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<localcache>
+    <cache name="entity" expiryInterval="100000"/>
+    <cache name="ns" expiryInterval="100000"/>
+</localcache>
