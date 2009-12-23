@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 
 import corner.orm.services.EntityService;
 import corner.tapestry.ComponentConstants;
+import corner.tapestry.transform.PageRedirect;
 
 /**
  * entity generic form page
@@ -42,7 +43,8 @@ public class EntityFormPage<T> extends EntityPage<T>{
 		}
 	}
 	@OnEvent(component = ComponentConstants.ENTITY_FORM, value = EventConstants.SUCCESS)
-	public Object doSaveEntityAction()  throws Throwable {
+	@PageRedirect
+	public Object doSaveEntityAction()  {
 		//execute prefix save action 
 		preSaveAction(getEntity());
 		//persist entity
@@ -72,7 +74,7 @@ public class EntityFormPage<T> extends EntityPage<T>{
 	 * @param entity 实体对象
 	 * @since 0.0.2
 	 */
-	protected void preSaveAction(T entity) throws Throwable{
+	protected void preSaveAction(T entity) {
 	}
 
 	/**
@@ -80,6 +82,6 @@ public class EntityFormPage<T> extends EntityPage<T>{
 	 * @param entity
 	 * @since 0.0.2
 	 */
-	protected void postSaveAction(T entity) throws Throwable{
+	protected void postSaveAction(T entity) {
 	}
 }

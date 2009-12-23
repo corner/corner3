@@ -26,8 +26,9 @@ import org.apache.tapestry5.services.ComponentMethodInvocation;
 import org.apache.tapestry5.services.TransformMethodSignature;
 
 /**
- *  处理PageRedirect注释,目前只支持返回类型是String和Class的Action
+ *  处理PageRedirect注释,目前只支持返回类型是String和Class和Link的Action
  * @author dong
+ * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision: 5222 $
  * @since 0.0.1
  */
@@ -38,7 +39,6 @@ public class PageRedirectWorker implements ComponentClassTransformWorker {
 
 	private final ComponentMethodAdvice advice = new ComponentMethodAdvice() {
 		public void advise(ComponentMethodInvocation invocation) {
-			try {
 				invocation.proceed();
 				Object result = invocation.getResult();
 				//返回类型是null,不做处理
@@ -50,7 +50,6 @@ public class PageRedirectWorker implements ComponentClassTransformWorker {
 				if (resultType == java.lang.Void.class) {
 					return;
 				}
-				
 				// 返回类型是Class或者String时，尝试查找result对应的Page
 				String pageName = null;
 				if (resultType == Class.class || resultType == String.class) {
@@ -65,9 +64,6 @@ public class PageRedirectWorker implements ComponentClassTransformWorker {
     				Link retLink = _linkFactory.createPageRenderLink(pageName, false,new Object[0]);
     				invocation.overrideResult(retLink);
 				}
-			} catch (RuntimeException ex) {
-				throw ex;
-			}
 		}
 	};
 

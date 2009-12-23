@@ -17,6 +17,7 @@ import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
 import corner.orm.services.EntityService;
 import corner.tapestry.ComponentConstants;
+import corner.tapestry.transform.PageRedirect;
 
 /**
  * entity list common page
@@ -53,6 +54,7 @@ public class EntityListPage<T> extends EntityPage<T>{
 	 * @since 0.0.2
 	 */
 	@OnEvent(component = ComponentConstants.DELETE_LINK, value = EventConstants.ACTION)
+	@PageRedirect
 	public void doDeleteEntityAction(T entity) {
 		//TODO because t5 couldn't recognize the generic type.so manully to convert string to entity
 		//but if you override the method,if some exception thrown ,you can ignore this.
