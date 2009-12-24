@@ -28,7 +28,6 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import corner.orm.hibernate.HibernateEntityService;
 import corner.orm.services.EntityService;
 import corner.tree.base.TreeAdapter;
-import corner.utils.EntityUtil;
 
 /**
  * 抽象对树的移动进行的处理
@@ -51,7 +50,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 	// 当前操作的节点
 	private TreeAdapter node;
 	
-	private EntityService service;
+	private EntityService entityService;
 
 	// 对应的节点类的名字
 	private String treeClassName;
@@ -90,7 +89,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 	}
 	
 	protected EntityService getEntityService(){
-		return this.service;
+		return this.entityService;
 	}
 
 	// 得到移动块的左边的起始位置,注意的是：查询的时候是 >=
@@ -117,13 +116,13 @@ abstract class AbstractMoveTreeNodeProcessor {
 
 		this.node = node;
 //		this.ht = ht;
-		this.service = service;
+		this.entityService = service;
 		this.hibernateEntityService = hibernateEntityService;
 
 		if (clazz != null) {
 			treeClassName = clazz.getName();
 		} else {
-			treeClassName = EntityUtil.getEntityClass(node).getName();
+			treeClassName = entityService.getEntityClass(node).getName();
 		}
 		// 对当前的node刷新
 		service.refresh(node);
@@ -162,7 +161,7 @@ abstract class AbstractMoveTreeNodeProcessor {
 
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
-				Criteria criteria = session.createCriteria(EntityUtil
+				Criteria criteria = session.createCriteria(entityService
 						.getEntityClass(node));
 				appendQueryReplaceNodeCriteria(criteria);
 				criteria.add(Restrictions.eq(TreeAdapter.DEPTH_PRO_NAME, node.getDepth()));

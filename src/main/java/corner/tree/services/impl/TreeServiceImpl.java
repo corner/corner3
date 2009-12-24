@@ -30,7 +30,6 @@ import corner.orm.services.EntityService;
 import corner.tree.base.TreeAdapter;
 import corner.tree.services.MoveTreeNodeProcessor;
 import corner.tree.services.TreeService;
-import corner.utils.EntityUtil;
 
 /**
  * 提供了对tee组件的操作服务类.
@@ -70,7 +69,7 @@ public class TreeServiceImpl implements TreeService {
 
 		TreeAdapter currentParentNode = parentNode;
 		if (currentParentNode == null) { // 插入顶级节点
-			currentParentNode = (TreeAdapter) BeanUtils.instantiateClass(EntityUtil.getEntityClass(node));
+			currentParentNode = (TreeAdapter) BeanUtils.instantiateClass(entityService.getEntityClass(node));
 			currentParentNode.setLeft(0);
 			currentParentNode.setDepth(0);
 			long rowCount;
@@ -161,7 +160,7 @@ public class TreeServiceImpl implements TreeService {
 		if(clazz!=null){
 			return clazz.getName();
 		}else{
-			return EntityUtil.getEntityClass(node).getName();
+			return entityService.getEntityClass(node).getName();
 		}
 		
 	}
