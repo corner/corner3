@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2009 The Ganshane Network Service Team. 
+	site: http://ganshane.net
+	file : $Id$
+	created at:2009-04-19
+-->
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
     <input t:id="checkCodeField"  max="6" type="text" class="${inputValueClass}" autoComplete="false" style="margin-bottom:0;padding-bottom:0"/>
     <div class="captcha-code">

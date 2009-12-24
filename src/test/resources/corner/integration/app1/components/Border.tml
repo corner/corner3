@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2009 The Ganshane Network Service Team. 
+	site: http://ganshane.net
+	file : $Id$
+	created at:2009-12-03
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
     <head>

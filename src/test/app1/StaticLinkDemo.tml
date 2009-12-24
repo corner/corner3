@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Copyright 2009 The Ganshane Network Service Team. 
+	site: http://ganshane.net
+	file : $Id$
+	created at:2009-12-03
+-->
 <t:border xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 <img t:type="corner/staticlink" id="link1" src="img/src.jpg"/>
 <a href="/test/has_version.jpg" id="link2" t:type="corner/StaticLink" version="true">a.jpg version</a>

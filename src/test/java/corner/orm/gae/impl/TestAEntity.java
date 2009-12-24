@@ -1,5 +1,5 @@
 /* 
- * Copyright 2009 The Tapestry-GAE team.
+ * Copyright 2009 The Corner Team.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
