@@ -28,6 +28,13 @@ import org.apache.tapestry5.ioc.Invocation;
  */
 public interface CacheableDefinitionParser {
 
+	/**
+	 * 针对cache定义来获取一个用于缓存的key
+	 * @param invocation 方法的执行invocation
+	 * @param method 方法对象
+	 * @return 缓存的key
+	 * @since 3.1
+	 */
 	public abstract String parseAsKey(Invocation invocation, Method method);
 
 }

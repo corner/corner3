@@ -19,28 +19,29 @@ import corner.cache.annotations.CacheNsParameter;
 import corner.cache.model.CacheEvent;
 
 /**
- * 缓存策略
+ * 缓存策略接口
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
 public interface CacheStrategy {
 	/**
-	 * 加上namspace的标记
-	 * @param class1 
-	 * @param objects 
-	 * @param key 键值
-	 * @return 加上标记的键值
+	 * 把缓存的key加上namespace标记，
+	 * 如果nses为空的，那么则使用默认的c_list标记
+	 * @param cacheManager 缓存管理器
+	 * @param clazz 缓存的类
+	 * @param nses 命名空间定义
+	 * @param key 缓存定义的key
+	 * @param objects 参数，通常为 {@link corner.cache.annotations.CacheKeyParameter} 定义的参数变量
+	 * @return 加上namespace后的完整key
 	 * @since 3.1
 	 */
-	String appendNamespace(CacheManager cacheManager, Class<?> class1, CacheNsParameter[] nses,
+	String appendNamespace(CacheManager cacheManager, Class<?> clazz, CacheNsParameter[] nses,
 			String key, Object... objects);
 	/**
 	 * 处理缓存事件
 	 * @param event 事件
 	 * @param cacheManager cacheManager instance
-	 * @param args 事件额外的参数
-	 * @return 是否本身要在策略容器中删除，true:删除;false:不删除
 	 * @since 3.1
 	 */
 	public <T>void dealCacheEvent(CacheEvent<T> event,CacheManager cacheManager);

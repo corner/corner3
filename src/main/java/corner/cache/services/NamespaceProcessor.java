@@ -29,7 +29,7 @@ import corner.cache.model.CacheEvent;
 public interface NamespaceProcessor {
 
 	/**
-	 * 更新namespace的值
+	 * 更新namespace的版本号
 	 * @param event 事件
 	 * @param cacheManager cache manager
 	 * @param propertyAccess propertyAccess

@@ -19,12 +19,25 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * 针对方法执行后的同处理
+ * 针对业务方法执行后的同处理
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
 public interface CacheProcessor<T> {
+	/**
+	 * 把执行的结果,转换成List
+	 * @param object 执行的方法结果
+	 * @return 一个List对象，此对象放入到缓存中
+	 * @since 3.1
+	 */
     List<Object> toCache(T object);
+    /**
+     * 把从cache中得到的结果转换成，方法期待的结果
+     * @param cacheObject 缓存的对象
+     * @param method 待执行的方法
+     * @return 方法返回结果
+     * @since 3.1
+     */
     T fromCache(List<Object> cacheObject, Method method);
 }

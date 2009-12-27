@@ -16,11 +16,18 @@
 package corner.cache.services;
 
 /**
- * 所有从缓存抓取回来的定义
+ * 所有 方法结果<-->缓存 相互转换的处理
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
 public interface CacheProcessorSource {
+	/**
+	 * 通过需要处理的类，来获取对象的处理器
+	 * @param <T> 方法结果
+	 * @param clazz 方法结果的类名
+	 * @return 处理器
+	 * @since 3.1
+	 */
 	public <T>CacheProcessor<T> getProcessor(Class<T> clazz);
 }

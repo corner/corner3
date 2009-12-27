@@ -28,21 +28,13 @@ import corner.cache.CacheConstants;
  * 缓存的注释类
  * 譬如：缓存某一用户的博客，那么对应的声明如下：
  * <code>
- * @Cacheable(clazz=Blog.class,strategy="xx",keyFormats={"uid=%1$s","limit=%2$s,%3$s"})
+ * @Cacheable(clazz=Blog.class,namespaces={@CacheNsParameter(name="user",keyIndex=1)})
  * public List<Blog> findBlogs(@CacheKeyParameter User user,@CacheKeyParameter int start,@CacheKeyParameter int offset)
  * </code>
  * 1) clazz 			要缓存的实体类
- * 2) strategy 	    针对key是否匹配的策略类，此key是要和实体类有关系，通常是一种类型的缓存一个实例即可
- * 3) keyFormats	缓存的key的定义，可以定义成多个数组，也就是说能够使用散列方式,同时给缓存加上namespace
- * 
- * a) 查找缓存
- *  先读取class=Blog.class,然后读取uid=xxx的缓存，然后再读取limit=xx,xx的缓存。
- * b) 更新缓存
- * 	譬如：增加Blog，那么先通过Blog.class,得到所有和Blog相关的KeyMatcher实例,遍历处理
- * 上述列子中keymatcher，直接通过uid=blog.userId构造一个key，然后删除所有的uid=blog.userId的缓存
+ * 2) namespaces 	 针对此缓存的namespace的定义,其中name="user" 必须为Blog实体的一个属性名称.
  * 
  * 
- *  能够提高缓存的命中率，同时加快了查找速度,更重要的方便了程序的可读性
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 0.1

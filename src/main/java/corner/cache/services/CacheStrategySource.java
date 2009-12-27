@@ -27,14 +27,22 @@ public interface CacheStrategySource {
 	/**
 	 * 捕获缓存事件
 	 * @param <T> 操作的实体对象
-	 * @param event event
+	 * @param event cache event
 	 * @since 3.1
 	 */
-	public <T>void catchEvent(CacheEvent<T> event,Object ... args);
+	public <T>void catchEvent(CacheEvent<T> event);
 
 	/**
 	 * 找到对应的缓存策略
-	 * @param strategy
+	 * 通常是缓存的定义的名称
+	 * 通过
+	 * <code>
+	 * 	public static void contributeCacheStrategySource(MappedConfiguration<String,CacheStrategy> configuration){
+	 *		configuration.addInstance(CacheConstants.COMMON_LIST_STRATEGY, DefaultListCacheStrategyImpl.class);
+	 *	}
+	 *</code>
+	 *方式来定义更多的策略类
+	 * @param strategy 缓存策略
 	 * @since 3.1
 	 */
 	public CacheStrategy findStrategy(String strategy);

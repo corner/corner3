@@ -41,7 +41,7 @@ public class CacheStrategySourceImpl implements CacheStrategySource {
 	}
 
 	@Override
-	public <T> void catchEvent(CacheEvent<T> event, Object... args) {
+	public <T> void catchEvent(CacheEvent<T> event) {
 		CacheStrategy strategy;
 		Iterator<CacheStrategy> it = strategies.values().iterator();
 		while(it.hasNext()){

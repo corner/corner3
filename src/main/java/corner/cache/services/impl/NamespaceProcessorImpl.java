@@ -47,13 +47,12 @@ public class NamespaceProcessorImpl implements NamespaceProcessor {
 	 */
 	@Override
 	public String getNamespaceNameVersioned(CacheManager cacheManager,Class targetClass,
-			CacheNsParameter[] nses,
-			Object... objects) {
+			CacheNsParameter[] nses,Object... objects) {
 		StringBuilder sb  = new StringBuilder();
 		String nsName = null;
 		String nsValue =null;
 		
-		//为默认的缓存列表
+		//如果没定义缓存的namespace，则使用默认的缓存列表
 		if(nses== null||nses.length == 0){
 			nsName= getDefaultListNsName(targetClass);
 			sb.append(nsName).append("_v");
@@ -61,6 +60,8 @@ public class NamespaceProcessorImpl implements NamespaceProcessor {
 			sb.append(nsValue).append(".");
 			return sb.toString();
 		}
+		
+		//遍历所有的命名空间定义
 		for(CacheNsParameter parameter:nses){
 			nsName= getNsName(targetClass,parameter.name(),objects[parameter.keyIndex()-1]);
 			sb.append(nsName).append("_v");
@@ -69,12 +70,7 @@ public class NamespaceProcessorImpl implements NamespaceProcessor {
 		}
 		return sb.toString();
 	}
-	private String getNsName(Class targetClass, String name,Object value){
-			return  String.format("%s.%s.%s",targetClass.getSimpleName(),name,value);
-	}
-	private String getDefaultListNsName(Class targetClass){
-			return String.format("%s.%s",targetClass.getName(),CacheConstants.COMMON_LIST_NAMESPACE);
-	}
+	
 	protected String  getNamespaceValue(CacheManager cacheManager,String namespace) {
 		//得到namespace的版本
 		Cache nsCache = cacheManager.getCache(CacheConstants.ENTITY_NS_CACHE_NAME);
@@ -85,6 +81,10 @@ public class NamespaceProcessorImpl implements NamespaceProcessor {
 		}
 		return String.valueOf(obj);
 	}
+	/**
+	 * 更新缓存列表的版本号
+	 * @see corner.cache.services.NamespaceProcessor#upgradeNamespaceVersion(corner.cache.services.CacheManager, corner.cache.model.CacheEvent, java.util.Iterator)
+	 */
 	@Override
 	public void upgradeNamespaceVersion(CacheManager cacheManager,
 			CacheEvent event, Iterator<String> namespaces) {
@@ -97,22 +97,32 @@ public class NamespaceProcessorImpl implements NamespaceProcessor {
 		//更新其他的缓存数据
 		while(namespaces.hasNext()){
 			String name = namespaces.next();
-			if(name.equals(CacheConstants.COMMON_LIST_NAMESPACE)){
+			if(name.equals(CacheConstants.COMMON_LIST_NAMESPACE)){ // 默认的列表定义
 				nsName= getDefaultListNsName(targetClass);
-			}else{
+			}else{ //	其他类型的
+				
+				//找到类属性
     			PropertyAdapter adapter = propertyAccess.getAdapter(targetObject).getPropertyAdapter(name);
     			if(adapter == null){
     				throw new RuntimeException(String.format("未能找到类%s有属性%s",event.getTargetClass(),name));
     			}
+    			//转换成string变量
     			String strValue = valueEncoderSource.getValueEncoder(adapter.getBeanType()).toClient(adapter.get(targetObject));
-    			//得到名字
+    			//得到namespace名字
     			nsName = getNsName(event.getTargetClass(),name,strValue);
 			}
+			//更新版本号码
 			incrementNamespace(cacheManager,nsName);
 		}
 	}
 	protected void incrementNamespace(CacheManager cacheManager, String namespace) {
 		Cache nsCache = cacheManager.getCache(CacheConstants.ENTITY_NS_CACHE_NAME);
 		nsCache.increment(namespace, 1);
+	}
+	protected String getNsName(Class targetClass, String name,Object value){
+			return  String.format("%s.%s.%s",targetClass.getSimpleName(),name,value);
+	}
+	protected String getDefaultListNsName(Class targetClass){
+			return String.format("%s.%s",targetClass.getName(),CacheConstants.COMMON_LIST_NAMESPACE);
 	}
 }

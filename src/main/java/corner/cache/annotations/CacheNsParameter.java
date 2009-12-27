@@ -31,14 +31,17 @@ public @interface CacheNsParameter {
 	/**
 	 * 参数名称，此名称必须为要缓存Clazz的属性名称,
 	 * 也就是说是缓存空间表的字段
-	 * @return
+	 * @return namespace的名字
 	 * @since 3.1
 	 */
 	String name();
 	/**
-	 * 值
+	 * namespace在方法的CacheKeyParameter定义参数上对应的顺序
 	 * 执行方法上的缓存参数顺序值,顺序从 1 开始
-	 * @return
+	 * <code>
+	 * @Cacheable(clazz=Test.class,namespaces={@CacheNsParameter(names="member",keyIndex=1)})
+	 * public List<Test> find(@CacheKeyParameter Member member);
+	 * @return CacheKeyParameter定义的顺序
 	 * @since 3.1
 	 */
 	int keyIndex();
