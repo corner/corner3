@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import corner.cache.CacheConstants;
+import corner.cache.annotations.Cacheable;
 import corner.cache.services.Cache;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheProcessor;
@@ -45,6 +46,7 @@ public class CacheableAdvice implements MethodAdvice {
 	private Cache cache;
 	private CacheableDefinitionParser parser;
 	private CacheProcessorSource cacheProcessorSource;
+	private Cacheable cacheable;
 
 	public CacheableAdvice(
 			Method method,
@@ -54,6 +56,7 @@ public class CacheableAdvice implements MethodAdvice {
 			) {
 		this.method = method;
         cache = cacheManager.getCache(CacheConstants.ENTITY_CACHE_NAME);
+        cacheable = method.getAnnotation(Cacheable.class);
         this.parser = parser;
         this.cacheProcessorSource = cacheProcessorSource;
 	}
@@ -126,6 +129,10 @@ public class CacheableAdvice implements MethodAdvice {
 		//重新读取对象
 		restoreObjectFromCache(invocation, list);
 		// 放入缓存
+		if(cacheable.ttl()>0){//有ttl的，则加入ttl
+		cache.put(cacheKey, list,cacheable.ttl());
+		}else{
 		cache.put(cacheKey, list);
+		}
 	}
 }

@@ -75,5 +75,5 @@ public @interface Cacheable {
 	 * @return
 	 * @since 3.1
 	 */
-	public long ttl() default -1;
+	public int ttl() default -1;
 }
