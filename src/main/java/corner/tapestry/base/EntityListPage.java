@@ -20,6 +20,7 @@ import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.ValueEncoderSource;
 
 import corner.orm.model.PaginationList;
@@ -44,6 +45,10 @@ public class EntityListPage<T> extends EntityPage<T>{
 	//the query parameter
 	public void onActivate(PaginationOptions options){
 		this.options = options;
+		extractParameter(options.getParameters());
+	}
+	//解析参数
+	protected void extractParameter(JSONObject parameters){
 	}
 	@Cached
 	public PaginationList<T> getEntities(){
@@ -57,6 +62,7 @@ public class EntityListPage<T> extends EntityPage<T>{
 	protected PaginationList<T> queryEntitis(PaginationOptions options) {
 		return entityService.paginate(getEntityClass(), null, null, options);
 	}
+	
 	/**
 	 * do delete entity action
 	 * @param entity entity object

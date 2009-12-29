@@ -25,5 +25,6 @@ public final class ComponentConstants {
 	//实体表单
 	public static final String ENTITY_FORM="entityForm";
 	public static final String DELETE_LINK = "delete";
+	public static final String SEARCH_FORM="searchForm";
 
 }
