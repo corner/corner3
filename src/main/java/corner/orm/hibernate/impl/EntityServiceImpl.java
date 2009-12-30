@@ -23,6 +23,7 @@ import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -124,6 +125,17 @@ public class EntityServiceImpl  implements EntityService{
 	public Class getEntityClass(Object entity) {
 		return org.hibernate.Hibernate.getClass(entity);
 	}
-	
 
+	@Override
+	public <T> T findUnique(Class<T> clazz, Object[] conditions) {
+		Iterator<T> it = this.find(clazz, conditions, null);
+		T result=null;
+		if(it.hasNext()){
+			result = it.next();
+		}
+		if(it.hasNext()){
+			throw new ObjectRetrievalFailureException("查询对象不唯一!,请检查查询条件.",null);
+		}
+		return result;
+	}
 }

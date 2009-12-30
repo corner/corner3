@@ -118,4 +118,11 @@ public interface EntityService {
 	 * @since 3.1
 	 */
 	public Class<?>getEntityClass(Object  entity) ;
+	/**
+	 * 通过给定的条件查询唯一实体
+	 * @param class entity Class
+	 * @param conditions 查询条件 
+	 * @since 3.1
+	 */
+	public <T> T findUnique(Class<T> clazz, Object[] conditions);
 }
