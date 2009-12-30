@@ -13,7 +13,7 @@
 
     <ul>
         <li >
-            <t:pagelink page="StaticLinkDemo">静态链接测试页</t:pagelink>
+            <t:pagelink page="FckeditorDemo">Fckeditor测试页</t:pagelink>
         </li>
     </ul>
 

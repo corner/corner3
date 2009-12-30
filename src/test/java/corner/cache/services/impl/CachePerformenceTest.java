@@ -37,7 +37,6 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Environment;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 import corner.cache.CacheModule;
 import corner.cache.CacheSymbols;
@@ -99,7 +98,7 @@ public class CachePerformenceTest extends TapestryTestCase {
 	 * @throws NoSuchMethodException
 	 * @since 3.1
 	 */
-	@Test(invocationCount=10000,threadPoolSize=100)
+//	@Test(invocationCount=10000,threadPoolSize=100)
 	public void test_cache() throws SecurityException, NoSuchMethodException {
 		testService.getList(m1);
 		//从缓存读取

@@ -63,7 +63,7 @@ public class PaginatedJpaEntityServiceTest extends IOCTestCase{
 	public void test_count(){
 		EntityManager entityManager = newMock(EntityManager.class);
 		Query query = newMock(Query.class);
-		expect(entityManager.createQuery("select count(root) from corner.orm.gae.impl.TestAEntity as root  where name=?")).andReturn(query);
+		expect(entityManager.createQuery("select count(root)  from corner.orm.gae.impl.TestAEntity as root  where name=?")).andReturn(query);
 		expect(query.setParameter(0, "acai")).andReturn(query);
 		expect(query.getSingleResult()).andReturn(new Integer(1234));
 		JpaTemplate jpaTemplate = GaeModule.buildJpaTemplate(entityManager);
@@ -77,8 +77,8 @@ public class PaginatedJpaEntityServiceTest extends IOCTestCase{
 		EntityManager entityManager = newMock(EntityManager.class);
 		Query query = newMock(Query.class);
 		Query query2 = newMock(Query.class);
-		expect(entityManager.createQuery("select root from corner.orm.gae.impl.TestAEntity as root  where name=:1")).andReturn(query);
-		expect(entityManager.createQuery("select count(root) from corner.orm.gae.impl.TestAEntity as root  where name=:1")).andReturn(query2);
+		expect(entityManager.createQuery("select root.id from corner.orm.gae.impl.TestAEntity as root  where name=:1")).andReturn(query);
+		expect(entityManager.createQuery("select count(root)  from corner.orm.gae.impl.TestAEntity as root  where name=:1")).andReturn(query2);
 		expect(query.setParameter("1", "acai")).andReturn(query);
 		expect(query2.setParameter("1", "acai")).andReturn(query2);
 		expect(query.setFirstResult(0)).andReturn(query);
@@ -102,8 +102,8 @@ public class PaginatedJpaEntityServiceTest extends IOCTestCase{
 		EntityManager entityManager = newMock(EntityManager.class);
 		Query query = newMock(Query.class);
 		Query query2 = newMock(Query.class);
-		expect(entityManager.createQuery("select root from corner.orm.gae.impl.TestAEntity as root  where name=:1 order by id desc")).andReturn(query);
-		expect(entityManager.createQuery("select count(root) from corner.orm.gae.impl.TestAEntity as root  where name=:1")).andReturn(query2);
+		expect(entityManager.createQuery("select root.id from corner.orm.gae.impl.TestAEntity as root  where name=:1 order by id desc")).andReturn(query);
+		expect(entityManager.createQuery("select count(root)  from corner.orm.gae.impl.TestAEntity as root  where name=:1")).andReturn(query2);
 		expect(query.setParameter("1", "acai")).andReturn(query);
 		expect(query2.setParameter("1", "acai")).andReturn(query2);
 		expect(query.setFirstResult(0)).andReturn(query);

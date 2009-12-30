@@ -54,7 +54,9 @@ public class CornerEntityPersistentFieldStrategyTest extends  TapestryTestCase{
 		
 		TestAEntity testA = new TestAEntity();
 		EntityService entityService = newMock(EntityService.class);
+		Class clazz= TestAEntity.class;
 		expect(entityService.get(TestAEntity.class, 12L)).andReturn(testA);
+		expect(entityService.getEntityClass(testA)).andReturn(clazz);
 		CornerEntityPersistentFieldStrategy strategy = new CornerEntityPersistentFieldStrategy(entityService,null, access);
 		replay();
 		
