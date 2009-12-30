@@ -16,18 +16,25 @@
 package corner.tapestry.components;
 
 
+import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
+import org.apache.tapestry5.MarkupConstants;
 import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.RenderSupport;
+import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.IncludeStylesheet;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.ClientBehaviorSupport;
 import org.apache.tapestry5.services.PageRenderLinkSource;
+import org.apache.tapestry5.services.Request;
 
 import corner.orm.model.PaginationOptions;
+import corner.tapestry.model.PaginationPage;
 
 /**
  * 用来分页使用的组件
@@ -39,8 +46,10 @@ import corner.orm.model.PaginationOptions;
 @IncludeStylesheet("context:/corner/Pagination.css")
 public class WillPagination {
 
-    @Parameter(required=true)
-    private PaginationOptions options;
+	  @Parameter(required=true)
+	    private PaginationOptions options;
+	  @Parameter(defaultPrefix = BindingConstants.LITERAL)
+	    private String zone;
 
     @Parameter("5")
     private int range;
@@ -49,7 +58,11 @@ public class WillPagination {
 	private int lastIndex;
 
 	private int maxPages;
+	  @Environmental
+	    private ClientBehaviorSupport clientBehaviorSupport;
 
+	    @Inject
+	    private Request request;
 
 
 	@Inject
@@ -59,7 +72,8 @@ public class WillPagination {
     private ComponentResources resources;
     @Inject
     private PageRenderLinkSource pageRenderLinkSource;
-
+    @Inject
+    private RenderSupport renderSupport;
 
     private int page;
     private long availableRows;
@@ -139,15 +153,33 @@ public class WillPagination {
         Link link = resources.createEventLink(EventConstants.ACTION,
                 context);
 
-
+     
 		writer.element("a", "href", link.toRedirectURI(), "title", messages.format("goto-page",
 				pageIndex));
+        
+		
+		   if (zone != null)
+	        {
+			   String  clientId = renderSupport.allocateClientId(resources);
 
+			   writer.attributes("id", clientId);
+			   
+	            if (!request.isXHR())
+	                writer.getElement().forceAttributes(MarkupConstants.ONCLICK, MarkupConstants.WAIT_FOR_PAGE);
+
+	            clientBehaviorSupport.linkZone(clientId, zone, link);
+	        }
 		writer.write(Integer.toString(pageIndex));
 		writer.end();
 
 	}
-    Link onAction(Object ... pageContext){
-        return pageRenderLinkSource.createPageRenderLinkWithContext(resources.getPageName(),pageContext);
+    Object onAction(PaginationOptions option){
+    	if(zone!=null){//ajax
+        	PaginationPage page = (PaginationPage) resources.getPage();
+        	page.setPaginationOptions(option);
+        	return resources.getPage().getComponentResources().getEmbeddedComponent(zone);
+    	}else{
+    		return pageRenderLinkSource.createPageRenderLinkWithContext(resources.getPageName(), option);
+    	}
     }
 }

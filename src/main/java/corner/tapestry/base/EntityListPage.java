@@ -27,6 +27,7 @@ import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
 import corner.orm.services.EntityService;
 import corner.tapestry.ComponentConstants;
+import corner.tapestry.model.PaginationPage;
 import corner.tapestry.transform.PageRedirect;
 
 /**
@@ -35,7 +36,7 @@ import corner.tapestry.transform.PageRedirect;
  * @version $Revision$
  * @since 0.1
  */
-public class EntityListPage<T> extends EntityPage<T>{
+public class EntityListPage<T> extends EntityPage<T>  implements PaginationPage{
 	@Inject
 	private EntityService entityService;
 	@Property
@@ -52,11 +53,15 @@ public class EntityListPage<T> extends EntityPage<T>{
 	}
 	@Cached
 	public PaginationList<T> getEntities(){
+		getPaginationOptions();
+		return queryEntitis(options);
+	}
+	public PaginationOptions getPaginationOptions(){
 		if(options == null){
 			options = new PaginationOptions();
 			options.setPerPage(30);
 		}
-		return queryEntitis(options);
+		return options;
 	}
 	
 	protected PaginationList<T> queryEntitis(PaginationOptions options) {
@@ -76,5 +81,9 @@ public class EntityListPage<T> extends EntityPage<T>{
 		Object obj = valueEncoderSource.getValueEncoder(getEntityClass()).toValue(String.valueOf(entity));
 		entityService.delete(obj);
 	}
-
+	@Override
+	public void setPaginationOptions(PaginationOptions option) {
+		this.options = option;
+		this.extractParameter(option.getParameters());
+	}
 }
