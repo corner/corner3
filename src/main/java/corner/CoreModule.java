@@ -15,12 +15,17 @@
  */
 package corner;
 
+import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.internal.services.ActionRenderResponseGenerator;
+import org.apache.tapestry5.internal.services.ActionRenderResponseGeneratorImpl;
+import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.internal.services.PageTemplateLocator;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.annotations.Symbol;
@@ -33,6 +38,7 @@ import org.apache.tapestry5.services.ContextProvider;
 import org.apache.tapestry5.services.LibraryMapping;
 import org.apache.tapestry5.services.PersistentFieldStrategy;
 import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.services.Response;
 
 import corner.asset.StaticAssetModule;
 import corner.cache.CacheModule;
@@ -49,6 +55,7 @@ import corner.tapestry.fckeditor.FckeditorModule;
 import corner.tapestry.persistent.CookiePersistentFieldStrategy;
 import corner.tapestry.services.HtmlTemplateProvider;
 import corner.tapestry.services.override.PageTemplateLocatorWithHtml;
+import corner.tapestry.services.override.RedirectMixedImmediateResponseGenerator;
 import corner.tapestry.transform.PageRedirectWorker;
 import corner.template.TemplateModule;
 import corner.transaction.TransactionModule;
@@ -183,6 +190,25 @@ public class CoreModule {
 				htmlTemplateLocator));
 	}
 
- 
+
+	//混合模式，支持@PageRedirect调用
+	public static ActionRenderResponseGenerator buildRedirectMixedImmediateResponseGenerator(LinkSource linkSource,
+			Request request, Response response){
+		RedirectMixedImmediateResponseGenerator generator = new RedirectMixedImmediateResponseGenerator(linkSource,request,response);
+		return generator;
+	}
+   
+	//复写内置的方式,采取复合的模式
+	public static void contributeServiceOverride(MappedConfiguration<Class,Object> configuration,
+			@Symbol(SymbolConstants.SUPPRESS_REDIRECT_FROM_ACTION_REQUESTS)
+		    boolean immediateMode,
+		    @Local ActionRenderResponseGenerator generator)
+	  {
+		 if (immediateMode){
+			 configuration.add(ActionRenderResponseGenerator.class, generator);
+		 } else{
+			 configuration.addInstance(ActionRenderResponseGenerator.class, ActionRenderResponseGeneratorImpl.class);
+		 }
+	  }
 
 }

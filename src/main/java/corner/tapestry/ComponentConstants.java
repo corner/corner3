@@ -26,5 +26,8 @@ public final class ComponentConstants {
 	public static final String ENTITY_FORM="entityForm";
 	public static final String DELETE_LINK = "delete";
 	public static final String SEARCH_FORM="searchForm";
+	
+	public static final String REQUIRED_REDIRECT="request-redirect";
+	
 
 }
