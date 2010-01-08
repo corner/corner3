@@ -15,7 +15,6 @@
  */
 package corner.tapestry.base;
 
-import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -43,8 +42,6 @@ public class EntityFormPage<T> extends EntityPage<T>{
 	private Logger logger;
 	@InjectComponent
 	private Form entityForm;
-	@Inject
-	private ComponentResources resources;
 	public void onActivate(EventContext context){
 		try{
 			if(context.getCount()==1){
