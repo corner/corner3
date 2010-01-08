@@ -75,11 +75,14 @@ public class EntityListPage<T> extends EntityPage<T>  implements PaginationPage{
 	 */
 	@OnEvent(component = ComponentConstants.DELETE_LINK, value = EventConstants.ACTION)
 	@PageRedirect
-	public void doDeleteEntityAction(T entity) {
+	void doDeleteEntityAction(T entity) {
 		//TODO because t5 couldn't recognize the generic type.so manully to convert string to entity
 		//but if you override the method,if some exception thrown ,you can ignore this.
-		Object obj = valueEncoderSource.getValueEncoder(getEntityClass()).toValue(String.valueOf(entity));
-		entityService.delete(obj);
+		T obj = valueEncoderSource.getValueEncoder(getEntityClass()).toValue(String.valueOf(entity));
+		deleteEntity(obj);
+	}
+	protected void deleteEntity(T entity){
+		entityService.delete(entity);
 	}
 	@Override
 	public void setPaginationOptions(PaginationOptions option) {

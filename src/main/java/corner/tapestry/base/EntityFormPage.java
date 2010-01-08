@@ -45,7 +45,7 @@ public class EntityFormPage<T> extends EntityPage<T>{
 	public void onActivate(EventContext context){
 		try{
 			if(context.getCount()==1){
-				this.setEntity((T) context.get(this.getEntityClass(), 0));
+				this.setEntity(context.get(this.getEntityClass(), 0));
 			}
 		}catch(Exception e){
 			logger.warn(e.toString());
@@ -53,7 +53,7 @@ public class EntityFormPage<T> extends EntityPage<T>{
 	}
 	@OnEvent(component = ComponentConstants.ENTITY_FORM, value = EventConstants.SUCCESS)
 	@PageRedirect
-	public Object doSaveEntityAction()  {
+	Object doSaveEntityAction()  {
 		//execute prefix save action 
 		preSaveAction(getEntity());
 		//persist entity

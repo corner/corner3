@@ -198,8 +198,8 @@ public class PaginatedEntityService {
 	               
 	               ResultTransformer transformer = new LazyLoadEntityTransformer(session,persistClass);
 	               query.setResultTransformer(transformer);
-	               
-	               return query.list().iterator();
+	               List list = query.list();
+	               return list.iterator();
 	           }
 	       });
 	}

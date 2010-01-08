@@ -33,13 +33,13 @@ public class EntityPage<T> {
 	private T entity;
 	@Inject
 	private PropertyConduitSource source;
-	private Class entityClass;
+	private Class<T> entityClass;
 	public EntityPage(){
 		PropertyConduit pc = source.create(this.getClass(), "entity");
 		entityClass = pc.getPropertyType();
 		assert entityClass!=null;
 	}
-	public Class getEntityClass() {
+	public Class<T> getEntityClass() {
 		return entityClass;
 	}
 	public T getEntity() {
