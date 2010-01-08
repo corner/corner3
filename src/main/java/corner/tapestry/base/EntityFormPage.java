@@ -63,8 +63,6 @@ public class EntityFormPage<T> extends EntityPage<T>{
 		saveEntity();
 		//post save action
 		postSaveAction(getEntity());
-		//去掉序列化的数据
-		resources.discardPersistentFieldChanges();
 		//return 
 		return getReturnObject();
 	}

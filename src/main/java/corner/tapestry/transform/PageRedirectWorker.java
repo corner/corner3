@@ -15,6 +15,8 @@
  */
 package corner.tapestry.transform;
 
+import java.io.IOException;
+
 import org.apache.tapestry5.Link;
 import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.model.MutableComponentModel;
@@ -23,6 +25,7 @@ import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.ComponentClassTransformWorker;
 import org.apache.tapestry5.services.ComponentMethodAdvice;
 import org.apache.tapestry5.services.ComponentMethodInvocation;
+import org.apache.tapestry5.services.Response;
 import org.apache.tapestry5.services.TransformMethodSignature;
 
 /**
@@ -36,33 +39,45 @@ public class PageRedirectWorker implements ComponentClassTransformWorker {
 
 	private final ComponentClassResolver _resolver;
 	private final LinkSource _linkFactory;
+	private Response response;
 
 	private final ComponentMethodAdvice advice = new ComponentMethodAdvice() {
 		public void advise(ComponentMethodInvocation invocation) {
 				invocation.proceed();
 				Object result = invocation.getResult();
-				//返回类型是null,不做处理
-				if(result == null){
-					return;
-				}
-				// 返回类型是void,不做处理
-				Class<?> resultType = result.getClass();
-				if (resultType == java.lang.Void.class) {
-					return;
-				}
-				// 返回类型是Class或者String时，尝试查找result对应的Page
+				// 返回类型是void,不k处理
 				String pageName = null;
-				if (resultType == Class.class || resultType == String.class) {
-					if (resultType == java.lang.Class.class) {
-						Class<?> clazz = (Class<?>)result;
-						pageName = _resolver.resolvePageClassNameToPageName(clazz.getName());
-					}else if(resultType == String.class){
-						pageName = (String)result;
-					}
+				
+				RESOLVE_PAGE_NAME:{
+					//find current page name
+    				if ( result == null) {
+    					pageName = invocation.getComponentResources().getPageName();
+    					break RESOLVE_PAGE_NAME;
+    				}
+    				Class<?> resultType = result.getClass();
+    				
+    				if(resultType == java.lang.Void.class){
+    					pageName = invocation.getComponentResources().getPageName();
+    					break RESOLVE_PAGE_NAME;
+    				}
+    					
+    				// 返回类型是Class或者String时，尝试查找result对应的Page
+    				if (resultType == Class.class || resultType == String.class) {
+    					if (resultType == java.lang.Class.class) {
+    						Class<?> clazz = (Class<?>)result;
+    						pageName = _resolver.resolvePageClassNameToPageName(clazz.getName());
+    					}else if(resultType == String.class){
+    						pageName = (String)result;
+    					}
+    				}
 				}
 				if (pageName != null) {
     				Link retLink = _linkFactory.createPageRenderLink(pageName, false,new Object[0]);
-    				invocation.overrideResult(retLink);
+					try {
+						response.sendRedirect(retLink);
+					} catch (IOException e) {
+						throw new RuntimeException(e);
+					}
 				}
 		}
 	};
@@ -72,9 +87,10 @@ public class PageRedirectWorker implements ComponentClassTransformWorker {
 	 * @param resolver
 	 * @param linkFactory
 	 */
-	public PageRedirectWorker(ComponentClassResolver resolver, LinkSource linkFactory) {
+	public PageRedirectWorker(ComponentClassResolver resolver, LinkSource linkFactory,Response response) {
 		this._resolver = resolver;
 		this._linkFactory = linkFactory;
+		this.response = response;
 	}
 
 	/**
