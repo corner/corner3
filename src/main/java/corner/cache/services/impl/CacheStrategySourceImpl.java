@@ -18,7 +18,6 @@ package corner.cache.services.impl;
 import java.util.Iterator;
 import java.util.Map;
 
-import corner.cache.annotations.Memcache;
 import corner.cache.model.CacheEvent;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheStrategy;
@@ -35,7 +34,7 @@ public class CacheStrategySourceImpl implements CacheStrategySource {
 	private CacheManager cacheManager;
 	private Map<String, CacheStrategy> strategies;
 
-	public CacheStrategySourceImpl(@Memcache CacheManager cacheManager,Map<String,CacheStrategy> configuration) {
+	public CacheStrategySourceImpl(CacheManager cacheManager,Map<String,CacheStrategy> configuration) {
 		this.cacheManager = cacheManager;
 		this.strategies = configuration;
 	}

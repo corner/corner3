@@ -26,4 +26,5 @@ public class CacheSymbols {
 	 * 是否开启缓存
 	 */
 	public static final String ENABLE_CACHE="corner.enable-cache";
+	public static final String ENABLE_MEMCACHED="corner.enable-memcached";
 }

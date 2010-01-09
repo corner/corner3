@@ -17,16 +17,22 @@ package corner.cache;
 
 
 import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Marker;
+import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.internal.util.ClasspathResource;
+import org.apache.tapestry5.services.ValueEncoderSource;
 
 import com.meetup.memcached.ErrorHandler;
 
 import corner.cache.annotations.LocalCache;
+import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheProcessor;
 import corner.cache.services.CacheProcessorSource;
@@ -41,6 +47,7 @@ import corner.cache.services.impl.CacheableAdvisorImpl;
 import corner.cache.services.impl.CacheableDefinitionParserImpl;
 import corner.cache.services.impl.DefaultListCacheStrategyImpl;
 import corner.cache.services.impl.IteratorCacheProcessor;
+import corner.cache.services.impl.MemcacheCacheableAdvisorImpl;
 import corner.cache.services.impl.NamespaceProcessorImpl;
 import corner.cache.services.impl.PaginationListCacheProcessor;
 import corner.cache.services.impl.local.LocalCacheConfig;
@@ -64,9 +71,6 @@ import corner.orm.model.PaginationList;
 public class CacheModule {
 	public static void bind(ServiceBinder binder) {
 		binder.bind(ErrorHandler.class, ErrorHandlerImpl.class);
-		binder.bind(CacheableAdvisor.class,CacheableAdvisorImpl.class);
-		binder.bind(CacheableDefinitionParser.class,CacheableDefinitionParserImpl.class);
-		binder.bind(CacheStrategySource.class,CacheStrategySourceImpl.class);
 		binder.bind(CacheProcessorSource.class,CacheProcessorSourceImpl.class);
 		binder.bind(NamespaceProcessor.class,NamespaceProcessorImpl.class);
 	}
@@ -74,6 +78,42 @@ public class CacheModule {
 			MappedConfiguration<String, String> configuration) {
 		//默认不开启缓存
 		configuration.add(CacheSymbols.ENABLE_CACHE,"false");
+		//默认不启动memcache
+		configuration.add(CacheSymbols.ENABLE_MEMCACHED,"false");
+	}
+	public static CacheStrategySource buildCacheStrategySource(
+			Map<String,CacheStrategy> configuration,
+			@Inject @Symbol(CacheSymbols.ENABLE_MEMCACHED) boolean enableMemcache,
+			@Memcache CacheManager memcacheManager,
+			@LocalCache CacheManager localcacheManager,
+			ObjectLocator locator){
+		CacheManager manager = localcacheManager;
+		if(enableMemcache){
+			manager = memcacheManager;
+		}
+		return new CacheStrategySourceImpl(manager, configuration);
+	}
+	public static CacheableDefinitionParser buildCacheableDefinitionParser(
+			@Inject @Symbol(CacheSymbols.ENABLE_MEMCACHED) boolean enableMemcache,
+			@Memcache CacheManager memcacheManager,
+			@LocalCache CacheManager localcacheManager,
+			ValueEncoderSource valueEncoderSource,
+			CacheStrategySource source,
+			ObjectLocator locator){
+		CacheManager manager = localcacheManager;
+		if(enableMemcache){
+			manager = memcacheManager;
+		}
+		return new CacheableDefinitionParserImpl(valueEncoderSource,manager,source);
+	}
+	public static CacheableAdvisor buildCacheableAdvisor(
+		@Inject @Symbol(CacheSymbols.ENABLE_MEMCACHED) boolean enableMemcache,
+		ObjectLocator locator
+		){
+		if(enableMemcache){
+			return locator.autobuild(MemcacheCacheableAdvisorImpl.class);
+		}
+		return locator.autobuild(CacheableAdvisorImpl.class);
 	}
 	public static void contributeCacheStrategySource(MappedConfiguration<String,CacheStrategy> configuration){
 		configuration.addInstance(CacheConstants.COMMON_LIST_STRATEGY, DefaultListCacheStrategyImpl.class);

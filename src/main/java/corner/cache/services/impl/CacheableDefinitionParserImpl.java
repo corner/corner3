@@ -29,7 +29,6 @@ import org.springframework.util.StringUtils;
 import corner.cache.annotations.CacheKeyParameter;
 import corner.cache.annotations.CacheNsParameter;
 import corner.cache.annotations.Cacheable;
-import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheStrategy;
 import corner.cache.services.CacheStrategySource;
@@ -50,7 +49,7 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 	private CacheStrategySource source;
 
 	public CacheableDefinitionParserImpl (ValueEncoderSource valueEncoderSource,
-			@Memcache CacheManager cacheManager,
+			 CacheManager cacheManager,
 			CacheStrategySource source
 			) {
 		this.valueEncoderSource = valueEncoderSource;

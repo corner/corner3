@@ -1,5 +1,5 @@
 /* 
- * Copyright 2009 The Corner Team.
+ * Copyright 2008 The Corner Team.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,27 +20,26 @@ import java.lang.reflect.Method;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 
 import corner.cache.annotations.Cacheable;
-import corner.cache.annotations.LocalCache;
+import corner.cache.annotations.Memcache;
 import corner.cache.services.CacheManager;
 import corner.cache.services.CacheProcessorSource;
 import corner.cache.services.CacheableAdvisor;
 import corner.cache.services.CacheableDefinitionParser;
 
 /**
- * implement cacheableAdvisor
- * 
+ * memcache advisor
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
- * @since 0.1
+ * @since 3.1
  */
-public class CacheableAdvisorImpl implements CacheableAdvisor {
+public class MemcacheCacheableAdvisorImpl  implements CacheableAdvisor {
 	private CacheManager cacheManager;
 	private CacheableDefinitionParser parser;
 	private CacheProcessorSource cacheProcessorSource;
 
-	public CacheableAdvisorImpl(
+	public MemcacheCacheableAdvisorImpl(
 			CacheProcessorSource cacheProcessorSource,
-			@LocalCache
+			@Memcache
 			CacheManager cacheManager,
 			CacheableDefinitionParser parser) {
 		this.cacheManager = cacheManager;
