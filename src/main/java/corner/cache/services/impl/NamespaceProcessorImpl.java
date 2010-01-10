@@ -117,9 +117,9 @@ public class NamespaceProcessorImpl implements NamespaceProcessor {
 	}
 	protected void incrementNamespace(CacheManager cacheManager, String namespace) {
 		Cache nsCache = cacheManager.getCache(CacheConstants.ENTITY_NS_CACHE_NAME);
-		long v= nsCache.increment(namespace, 1);
+		Long v= nsCache.increment(namespace, 1);
 		//避免值过大
-		if(v>1000){
+		if(v!=null&&v>1000){
 			nsCache.put(namespace, 1);
 		}
 	}
