@@ -50,7 +50,7 @@ public class AbstractEntityFormPage<T> extends EntityPage<T> {
 		return getReturnObject();
 	}
 	@OnEvent(component = ComponentConstants.ENTITY_FORM, value = EventConstants.VALIDATE_FORM)
-	public void validateForm(){
+	void validateForm(){
 		validateEntityForm(entityForm,this.getEntity()) ;
 	}
 	protected void validateEntityForm(Form entityForm, T entity){
