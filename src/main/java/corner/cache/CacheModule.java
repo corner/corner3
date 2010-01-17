@@ -56,6 +56,7 @@ import corner.cache.services.impl.memcache.ErrorHandlerImpl;
 import corner.cache.services.impl.memcache.MemcacheConfig;
 import corner.config.services.ConfigurationSource;
 import corner.orm.model.PaginationList;
+import corner.orm.services.EntityService;
 
 /**
  * Cache的配置,目前提供Memcache和LocalCache的配置:
@@ -98,13 +99,14 @@ public class CacheModule {
 			@Memcache CacheManager memcacheManager,
 			@LocalCache CacheManager localcacheManager,
 			ValueEncoderSource valueEncoderSource,
+			EntityService entityService,
 			CacheStrategySource source,
 			ObjectLocator locator){
 		CacheManager manager = localcacheManager;
 		if(enableMemcache){
 			manager = memcacheManager;
 		}
-		return new CacheableDefinitionParserImpl(valueEncoderSource,manager,source);
+		return new CacheableDefinitionParserImpl(valueEncoderSource,manager,source,entityService);
 	}
 	public static CacheableAdvisor buildCacheableAdvisor(
 		@Inject @Symbol(CacheSymbols.ENABLE_MEMCACHED) boolean enableMemcache,

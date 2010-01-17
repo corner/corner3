@@ -24,6 +24,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.Invocation;
 import org.apache.tapestry5.services.ValueEncoderSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import corner.cache.annotations.CacheKeyParameter;
@@ -35,6 +37,7 @@ import corner.cache.services.CacheStrategySource;
 import corner.cache.services.CacheableDefinitionParser;
 import corner.cache.services.impl.CacheableDefine.Definition;
 import corner.cache.services.impl.CacheableDefine.Definition.Builder;
+import corner.orm.services.EntityService;
 
 /**
  * 针对缓存定义的解析
@@ -47,14 +50,18 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 	private ValueEncoderSource valueEncoderSource;
 	private CacheManager cacheManager;
 	private CacheStrategySource source;
+	private Logger logger = LoggerFactory.getLogger(CacheableDefinitionParserImpl.class);
+	private EntityService entityService;
 
 	public CacheableDefinitionParserImpl (ValueEncoderSource valueEncoderSource,
 			 CacheManager cacheManager,
-			CacheStrategySource source
+			CacheStrategySource source,
+			EntityService entityService
 			) {
 		this.valueEncoderSource = valueEncoderSource;
 		this.cacheManager = cacheManager;
 		this.source = source;
+		this.entityService =entityService;
 	}
 
 	/**
@@ -82,15 +89,25 @@ public class CacheableDefinitionParserImpl implements CacheableDefinitionParser 
 			
 		// 得到缓存的参数
 		List<String> keyParameter=new ArrayList<String>();
+		Object pObj;
+		Class pType;
 		for (int i = 0; i < define.getParameterIndexCount(); i++) {
 			int pIndex = define.getParameterIndex(i);
-			ValueEncoder encoder = valueEncoderSource.getValueEncoder(method
-					.getParameterTypes()[pIndex]);
-			keyParameter.add(encoder.toClient(invocation.getParameter(pIndex)));
+			pObj = invocation.getParameter(pIndex);
+			pType = null;
+			if(pObj!=null){
+				pType = entityService.getEntityClass(pObj);
+			}
+			if(pType == null){
+				pType = method.getParameterTypes()[pIndex];
+			}
+			ValueEncoder encoder = valueEncoderSource.getValueEncoder(pType);
+			keyParameter.add(encoder.toClient(pObj));
 		}
 		//得到缓存的真正key
 		String key=null;
 		String keyFormat= cacheable.keyFormat();
+		logger.debug("key parameter:{}",keyParameter);
 		if(!StringUtils.hasText(keyFormat)){
 			key = DigestUtils.shaHex(method.toString()+keyParameter.toString());
 		}else{

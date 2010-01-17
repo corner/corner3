@@ -1,26 +1,11 @@
-/* 
- * Copyright 2009 The Corner Team.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package corner.cache.services.impl;
 
-import java.util.ArrayList;
+import java.lang.reflect.Method;
 import java.util.List;
 
-import javax.persistence.Entity;
-
+import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.internal.InternalSymbols;
+import org.apache.tapestry5.ioc.Invocation;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.Registry;
@@ -29,31 +14,29 @@ import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.services.TapestryModule;
+import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Environment;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import corner.cache.CacheModule;
 import corner.cache.CacheSymbols;
+import corner.cache.annotations.CacheKeyParameter;
 import corner.cache.annotations.Cacheable;
 import corner.cache.services.CacheStrategySource;
 import corner.cache.services.CacheableAdvisor;
+import corner.cache.services.CacheableDefinitionParser;
+import corner.cache.services.impl.CacheIntegration2Test.TestMember;
 import corner.config.ConfigurationModule;
-import corner.orm.base.BaseEntity;
 import corner.orm.hibernate.impl.CacheHibernateEntityServiceImpl;
 import corner.orm.services.EntityService;
 
-/**
- * 
- * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
- * @version $Revision$
- * @since 3.1
- */
-public class CacheIntegration2Test extends TapestryTestCase {
+public class CacheableDefinitionParserImplTest extends TapestryTestCase{
 	public static int testVar=0;
 	private Registry registry;
 	@BeforeClass
@@ -67,53 +50,46 @@ public class CacheIntegration2Test extends TapestryTestCase {
 	public void clearEnv(){
 		registry.shutdown();
 	}
-
 	@Test
-	public void test_cache() throws SecurityException, NoSuchMethodException {
-		
-		//获取测试服务类
-		TestService testService = registry.getService(TestService.class);
-		int r = testVar;
-		//第一次执行方法
-		testService.getList();
-		assertEquals(r+1,testVar);
-		//从缓存读取
-		testService.getList();
-		assertEquals(r+1,testVar);
-		testService.getList();
-		assertEquals(r+1,testVar);
-		
-		//当增加操作发生,缓存被清除
-		EntityService entityService = registry.getService(EntityService.class);
-		TestMember member = new TestMember();
-		entityService.save(member);
-		//,需要重新执行方法
-		testService.getList();
-		assertEquals(r+2,testVar);
-		
-		//当发生更新操作则不更新
-		entityService = registry.getService(EntityService.class);
-		entityService.update(member);
-		//,需要重新执行方法
-		testService.getList();
-		assertEquals(r+2,testVar);
-		
-		//当发生删除操作则更新缓存
-		entityService = registry.getService(EntityService.class);
-		entityService.delete(member);
-		//,需要重新执行方法
-		testService.getList();
-		assertEquals(r+3,testVar);
+	public void test_parse() throws SecurityException, NoSuchMethodException{
+		TestMember obj = new TestMember(); 
+		obj.setId(1L);
+		Invocation invocation = newMock(Invocation.class);
+		expect(invocation.getParameter(0)).andReturn(obj);
+		replay();
+		Method method = TestService.class.getMethod("getList", TestMember.class);
+		CacheableDefinitionParser parser = registry.getService(CacheableDefinitionParser.class);
+		String key = parser.parseAsKey(invocation, method);
+		Assert.assertEquals(key, "corner.cache.services.impl.CacheIntegration2Test$TestMember._list_v0.40b13e3aaf1bab85622efac215f0fc6220cff2d0");
+		verify();
+	}
+	@Test
+	public void test_parse_object_parameter() throws SecurityException, NoSuchMethodException{
+		TestMember obj = new TestMember(); 
+		obj.setId(1L);
+		Invocation invocation = newMock(Invocation.class);
+		expect(invocation.getParameter(0)).andReturn(obj);
+		replay();
+		Method method = TestService.class.getMethod("getMyList", Object.class);
+		CacheableDefinitionParser parser = registry.getService(CacheableDefinitionParser.class);
+		String key = parser.parseAsKey(invocation, method);
+		Assert.assertEquals(key, "corner.cache.services.impl.CacheIntegration2Test$TestMember._list_v0.48d8c64495f376ab8a58ac66331cad97ab1798a5");
+		verify();
 	}
 	public static interface TestService{
 		@Cacheable(clazz=TestMember.class)
-		public List<TestMember> getList();
+		public List<TestMember> getList(@CacheKeyParameter TestMember testMember);
+		@Cacheable(clazz=TestMember.class)
+		public List<TestMember> getMyList(@CacheKeyParameter Object testMember);
 	}
 	public static class TestServiceImpl implements TestService{
-		private List<TestMember> list= new ArrayList<TestMember>();
-		public List<TestMember> getList() {
-			testVar = testVar+1;
-			return list;
+		@Override
+		public List<TestMember> getList(TestMember testMember) {
+			return null;
+		}
+		@Override
+		public List<TestMember> getMyList(Object testMember) {
+			return null;
 		}
 	}
 	public static class TestModule{
@@ -125,6 +101,31 @@ public class CacheIntegration2Test extends TapestryTestCase {
 				CacheableAdvisor advisor, MethodAdviceReceiver receiver) {
 				advisor.addCacheableAdvice(receiver);
 		}
+		 public static void contributeValueEncoderSource(MappedConfiguration<Class, ValueEncoderFactory> configuration,final EntityService entityService){
+			 Class<TestMember> entityClass = TestMember.class;
+			 ValueEncoderFactory factory = new ValueEncoderFactory()
+	            {
+	                public ValueEncoder create(Class type)
+	                {
+	                    return new ValueEncoder<TestMember>(){
+
+							@Override
+							public String toClient(TestMember value) {
+								if(value.getId()!=null){
+									return value.getId().toString();
+								}
+								return String.valueOf(value);
+							}
+
+							@Override
+							public TestMember toValue(String clientValue) {
+								return entityService.get(TestMember.class,Long.parseLong(clientValue));
+							}};
+	                }
+	            };
+
+	            configuration.add(entityClass, factory);
+		 }
 		public static EntityService buildEntityService(TypeCoercer typeCoercer,
 				PropertyAccess propertyAccess, 
 				CacheStrategySource cacheSource){
@@ -147,28 +148,4 @@ public class CacheIntegration2Test extends TapestryTestCase {
 			configuration.add(CacheSymbols.ENABLE_CACHE, "true");
 		}
 	}
-	@Entity
-	static class TestMember extends BaseEntity{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 6257648766417644500L;
-		private String userName;
-
-		/**
-		 * @return the userName
-		 */
-		public String getUserName() {
-			return userName;
-		}
-
-		/**
-		 * @param userName the userName to set
-		 */
-		public void setUserName(String userName) {
-			this.userName = userName;
-		}
-		
-	};
-	
 }
