@@ -36,7 +36,7 @@ public class Email extends AbstractValidator<Void, Object> {
 
 
 	public Email(ValidatorRenderSupport delegate) {
-		super(null, Object.class, "email");
+		super(null, Object.class, ValidatorConstants.EMAIL);
 		this.delegate = delegate;
 	}
 
@@ -52,9 +52,9 @@ public class Email extends AbstractValidator<Void, Object> {
 		delegate.renderAssetFiles();
 
 		JSONObject options = new JSONObject();
-		options.put("failureMessage", buildMessage(formatter, field));
+		options.put(ValidatorConstants.FAIL_MESSAGE, buildMessage(formatter, field));
 
-		delegate.addValidatorScript(field.getClientId(),"email",  options);
+		delegate.addValidatorScript(field.getClientId(),ValidatorConstants.EMAIL,  options);
 
 	}
 

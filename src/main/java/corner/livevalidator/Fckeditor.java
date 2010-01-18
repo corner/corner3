@@ -39,7 +39,7 @@ public class Fckeditor extends AbstractValidator<Void, Object> {
 	private ValidatorRenderSupport delegate;
 
 	public Fckeditor(ValidatorRenderSupport delegate) {
-		super(null, Object.class, "fckeditor");
+		super(null, Object.class, ValidatorConstants.FCKEDITOR);
 		this.delegate = delegate;
 	}
 
@@ -55,8 +55,8 @@ public class Fckeditor extends AbstractValidator<Void, Object> {
 		delegate.renderAssetFiles();
 
 		JSONObject options = new JSONObject();
-		options.put("failureMessage", buildMessage(formatter, field));
-		delegate.addValidatorScript(field.getClientId(), "fckeditor", options);
+		options.put(ValidatorConstants.FAIL_MESSAGE, buildMessage(formatter, field));
+		delegate.addValidatorScript(field.getClientId(), ValidatorConstants.FCKEDITOR, options);
 	}
 
 	private String buildMessage(MessageFormatter formatter, Field field) {

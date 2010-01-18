@@ -36,7 +36,7 @@ public class Presence extends AbstractValidator<Void, Object> {
 	private ValidatorRenderSupport delegate;
 
 	public Presence(ValidatorRenderSupport delegate) {
-		super(null, Object.class, "presence");
+		super(null, Object.class, ValidatorConstants.PRESENCE);
 		this.delegate = delegate;
 	}
 
@@ -52,9 +52,9 @@ public class Presence extends AbstractValidator<Void, Object> {
 		delegate.renderAssetFiles();
 
 		JSONObject options = new JSONObject();
-		options.put("failureMessage", buildMessage(formatter, field));
+		options.put(ValidatorConstants.FAIL_MESSAGE, buildMessage(formatter, field));
 
-		delegate.addValidatorScript(field.getClientId(), "presence", options);
+		delegate.addValidatorScript(field.getClientId(), ValidatorConstants.PRESENCE, options);
 
 	}
 

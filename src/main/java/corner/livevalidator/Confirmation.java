@@ -38,7 +38,7 @@ public class Confirmation extends AbstractValidator<String, String> {
 	private final Request request;
 
 	public Confirmation(ValidatorRenderSupport delegate, Request request) {
-		super(String.class, String.class, "confirmation");
+		super(String.class, String.class, ValidatorConstants.CONFIRMATION);
 		this.delegate = delegate;
 		this.request = request;
 	}
@@ -51,10 +51,9 @@ public class Confirmation extends AbstractValidator<String, String> {
 
 		JSONObject options = new JSONObject();
 		options.put("match", constraintValue);
-		options.put("failureMessage", buildMessage(formatter, field));
+		options.put(ValidatorConstants.FAIL_MESSAGE, buildMessage(formatter, field));
 
-		delegate.addValidatorScript(field.getClientId(), "confirmation",
-				options);
+		delegate.addValidatorScript(field.getClientId(), ValidatorConstants.CONFIRMATION,	options);
 
 	}
 

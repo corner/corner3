@@ -34,7 +34,7 @@ public final class LessLength extends AbstractValidator<Integer, String> {
 	private ValidatorRenderSupport delegate;
 
 	public LessLength(ValidatorRenderSupport delegate) {
-		super(Integer.class, String.class, "lessLength");
+		super(Integer.class, String.class,ValidatorConstants.LESS_LENGTH );
 		this.delegate = delegate;
 	}
 
