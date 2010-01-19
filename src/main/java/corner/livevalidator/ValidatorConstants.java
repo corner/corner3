@@ -34,6 +34,8 @@ public class ValidatorConstants {
 	public static final String LESS_LENGTH = "lessLength";
 
 	public static final String PRESENCE = "presence";
+
+	public static final String CUSTOM = "custom";
 	
 	
 

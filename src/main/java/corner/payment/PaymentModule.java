@@ -18,7 +18,9 @@ package corner.payment;
 
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
+import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.internal.util.ClasspathResource;
 
 import corner.payment.services.PaymentProcessor;
 import corner.payment.services.PaymentServiceSource;
@@ -39,9 +41,14 @@ public class PaymentModule {
     public static void contributePaymentServiceSource(MappedConfiguration<String, PaymentProcessor> configuration,ObjectLocator locator){
     	configuration.add("alipay",locator.autobuild(AlipayProcessor.class));
     }
-    public static void contributeFactoryDefaults(
-			MappedConfiguration<String, String> configuration) {
-		configuration.add("alipay.partner","2088101091710060");
-		configuration.add("alipay.key","lmiqfj8c0xvehcaiuqk96i0jkbj907tu");
+    /**
+	 * 关于系统Service参数的配置
+	 *
+	 * @param configuration
+	 */
+	public static void contributeConfigurationSource(MappedConfiguration<Class, Resource> configuration){
+		// 增加支付宝的信息配置
+		configuration.add(corner.payment.services.impl.processor.AlipayConfig.class, new ClasspathResource(
+				"alipay-config.xml"));
 	}
 }

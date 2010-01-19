@@ -30,10 +30,9 @@ import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.tapestry5.MarkupWriter;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.json.JSONObject;
 
+import corner.config.annotations.Configurable;
 import corner.payment.services.PaymentProcessor;
 import corner.payment.services.ViewHelper;
 import corner.payment.services.impl.view.AlipayViewHelper;
@@ -53,14 +52,9 @@ public class AlipayProcessor implements PaymentProcessor {
 	private String key;
 	private String partner;
 
-	public AlipayProcessor(@Inject
-	@Symbol("alipay.partner")
-	String partner, @Inject
-	@Symbol("alipay.key")
-	String key) {
-		this.partner = partner;
-		this.key = key;
-
+	public AlipayProcessor(@Configurable AlipayConfig config) {
+		this.partner = config.getPartnerId();
+		this.key = config.getKey();
 	}
 
 	/**

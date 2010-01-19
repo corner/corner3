@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.testng.annotations.Test;
 
+import corner.payment.services.impl.processor.AlipayConfig;
 import corner.payment.services.impl.processor.AlipayProcessor;
 
 /**
@@ -42,8 +43,10 @@ public class AlipayProcessorTest {
 			String[] _p = param.split("=");
 			map.put(_p[0], _p[1]);
 		}
-		AlipayProcessor vp = new AlipayProcessor("2088101091710060",
-				"lmiqfj8c0xvehcaiuqk96i0jkbj907tu");
+		AlipayConfig config = new AlipayConfig();
+		config.setPartnerId("2088101091710060");
+		config.setKey("lmiqfj8c0xvehcaiuqk96i0jkbj907tu");
+		AlipayProcessor vp = new AlipayProcessor(config);
 		assertTrue(vp.verifyReturn(map));
 		map.remove("body");
 		assertFalse(vp.verifyReturn(map));
@@ -51,8 +54,10 @@ public class AlipayProcessorTest {
 	
 	@Test
 	public void test_verifynofity() throws Exception {
-		AlipayProcessor vp = new AlipayProcessor("2088101091710060",
-				"lmiqfj8c0xvehcaiuqk96i0jkbj907tu");
+		AlipayConfig config = new AlipayConfig();
+		config.setPartnerId("2088101091710060");
+		config.setKey("lmiqfj8c0xvehcaiuqk96i0jkbj907tu");
+		AlipayProcessor vp = new AlipayProcessor(config);
 		assertFalse(vp.verifyNotify("aaa"));
 	}
 }
