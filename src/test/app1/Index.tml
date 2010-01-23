@@ -15,6 +15,9 @@
         <li >
             <t:pagelink page="FckeditorDemo">Fckeditor测试页</t:pagelink>
         </li>
+        <li >
+            <t:pagelink page="DialogDemo">Dialog测试页面</t:pagelink>
+        </li>
     </ul>
 
 

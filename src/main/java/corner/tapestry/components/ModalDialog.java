@@ -1,5 +1,5 @@
 /* 
- * Copyright 2009 The Corner Team.
+ * Copyright 2008 The Corner Team.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package corner.integration.app1.pages;
+package corner.tapestry.components;
 
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.slf4j.Logger;
+import org.apache.tapestry5.annotations.IncludeJavaScriptLibrary;
+import org.apache.tapestry5.annotations.IncludeStylesheet;
 
-public class Index {
+/**
+ * show dialog
+ * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
+ * @version $Revision$
+ * @since 3.1
+ */
+@IncludeJavaScriptLibrary({"context:/corner/ModalBox.js"})
+@IncludeStylesheet("context:/corner/ModalBox.css")
+public class ModalDialog {
 
-	@Inject
-	private Logger logger;
-	void beginRender(){
-		logger.debug("begin render");
-	}
 }
