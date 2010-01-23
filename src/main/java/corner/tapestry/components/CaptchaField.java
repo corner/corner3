@@ -35,6 +35,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Heartbeat;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.Response;
+import org.apache.tapestry5.util.TextStreamResponse;
 
 import corner.tapestry.captcha.CaptchaCode;
 import corner.tapestry.captcha.CaptchaImage;
@@ -143,7 +144,11 @@ public class CaptchaField extends AbstractField {
 	 */
 	public Object onActionFromRefresh(String cid) {
 		this._clientId = cid;
-		return codeBlock;
+		if(request.isXHR()){
+			return codeBlock;
+		}else{//防止手工访问或者ajax请求错误
+			return new TextStreamResponse("text/plain","非法请求");
+		}
 	}
 
 	/**
