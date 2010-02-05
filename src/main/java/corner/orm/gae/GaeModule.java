@@ -75,11 +75,9 @@ import corner.orm.gae.impl.EntityManagerSourceImpl;
 import corner.orm.gae.impl.GaeCachedEntityServiceImpl;
 import corner.orm.gae.impl.JavaCacheManagerImpl;
 import corner.orm.gae.impl.JpaEntityValueEncoder;
-import corner.orm.gae.impl.JpaTransactionDecoratorImpl;
 import corner.orm.gae.impl.TestEnvironment;
 import corner.orm.services.EntityService;
 import corner.orm.services.impl.CornerEntityPersistentFieldStrategy;
-import corner.transaction.services.TransactionDecorator;
 
 /**
  * Google App Engine 相关的module
@@ -93,8 +91,6 @@ public class GaeModule {
 
 	public static void bind(ServiceBinder binder) {
 		binder.bind(EntityService.class, GaeCachedEntityServiceImpl.class);
-		binder.bind(TransactionDecorator.class,
-				JpaTransactionDecoratorImpl.class);
 		binder.bind(CacheManager.class, JavaCacheManagerImpl.class);
 	}
 

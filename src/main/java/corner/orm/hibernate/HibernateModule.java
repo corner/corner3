@@ -57,10 +57,8 @@ import corner.orm.hibernate.impl.CacheHibernateEntityServiceImpl;
 import corner.orm.hibernate.impl.EntityServiceImpl;
 import corner.orm.hibernate.impl.HibernateEntityServiceImpl;
 import corner.orm.hibernate.impl.SpringSessionManagerImpl;
-import corner.orm.hibernate.impl.TapestryHibernateTransactionDecorterImpl;
 import corner.orm.services.EntityService;
 import corner.orm.services.impl.CornerEntityPersistentFieldStrategy;
-import corner.transaction.services.TransactionDecorator;
 import corner.tree.TreeModule;
 
 /**
@@ -73,7 +71,6 @@ import corner.tree.TreeModule;
 public class HibernateModule {
 	public static void bind(ServiceBinder binder){
 		binder.bind(HibernateEntityService.class,HibernateEntityServiceImpl.class);
-		binder.bind(TransactionDecorator.class,TapestryHibernateTransactionDecorterImpl.class);
 	}
 	public static EntityService buildEntityService(@Symbol(CacheSymbols.ENABLE_CACHE) boolean enableCache,ObjectLocator locator){
 		if(enableCache){

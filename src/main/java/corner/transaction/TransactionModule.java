@@ -24,6 +24,7 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 import corner.transaction.services.TransactionAdvisor;
 import corner.transaction.services.TransactionDecorator;
 import corner.transaction.services.impl.SpringTransactionAdvisor;
+import corner.transaction.services.impl.TransactionDecoratorImpl;
 
 /**
  * spring transaction module
@@ -35,6 +36,7 @@ import corner.transaction.services.impl.SpringTransactionAdvisor;
 public class TransactionModule {
 	public static void bind(ServiceBinder binder){
 		binder.bind(TransactionAdvisor.class,SpringTransactionAdvisor.class);
+		binder.bind(TransactionDecorator.class,TransactionDecoratorImpl.class);
 	}
 	/**
 	 * build spring transaction interceptor

@@ -15,11 +15,15 @@
  */
 package corner.integration.app1.pages;
 
+import java.util.Date;
+
 import org.apache.tapestry5.annotations.Property;
 
 
 public class FckeditorDemo {
 	@Property
 	private String content;
+	@Property
+	private Date date;
 
 }

@@ -16,6 +16,7 @@
 				<t:label for="fckContent" />
 				<t:textarea  t:mixins="corner/fckeditor"		t:id="fckContent"  t:value="content"/>
 			</div>
+			<t:datefield value="date"/>
 		</div>
 
 	</t:form>

@@ -18,7 +18,6 @@ package corner.orm;
 import java.util.Iterator;
 
 import org.apache.tapestry5.ioc.Configuration;
-import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.Builtin;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.services.CoercionTuple;
@@ -26,7 +25,6 @@ import org.apache.tapestry5.ioc.services.TypeCoercer;
 
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
-import corner.transaction.services.TransactionDecorator;
 
 
 /**
@@ -36,12 +34,7 @@ import corner.transaction.services.TransactionDecorator;
  * @since 3.1
  */
 public class OrmModule {
-	@Match("EntityService")
-	public static <T> T decorateTransactionally(
-			TransactionDecorator decorator, Class<T> serviceInterface,
-			T delegate, String serviceId) {
-		return decorator.build(serviceInterface, delegate, serviceId);
-	}
+
     public static void contributeTypeCoercer(Configuration<CoercionTuple> configuration,
                                              @Builtin final
                                              TypeCoercer coercer)
