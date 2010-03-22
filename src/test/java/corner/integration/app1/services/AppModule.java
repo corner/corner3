@@ -24,6 +24,7 @@ import corner.CoreModule;
 import corner.converter.services.ConverterSource;
 import corner.converter.services.impl.ConverterServiceImpl;
 import corner.http.HttpModule;
+import corner.orm.hibernate.HibernateModule;
 import corner.security.SecurityConstants;
 
 /**
@@ -31,7 +32,7 @@ import corner.security.SecurityConstants;
  * @version $Revision$
  * @since 0.0.1
  */
-@SubModule( {  CoreModule.class,HttpModule.class })
+@SubModule( {  CoreModule.class,HttpModule.class ,HibernateModule.class})
 public class AppModule {
 
 	

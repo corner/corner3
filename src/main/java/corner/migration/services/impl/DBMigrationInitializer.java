@@ -83,7 +83,8 @@ public class DBMigrationInitializer extends AbstractDBMigrationInitializer {
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
-			throw new RuntimeException(e);
+			logger.debug(e.getMessage(),e);
+			//throw new RuntimeException(e);
 		}finally{
 			console.resetColors();
 		}
