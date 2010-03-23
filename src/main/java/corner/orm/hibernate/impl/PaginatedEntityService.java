@@ -15,7 +15,6 @@
  */
 package corner.orm.hibernate.impl;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -202,31 +201,5 @@ public class PaginatedEntityService {
 	               return list.iterator();
 	           }
 	       });
-	}
-	class LazyLoadEntityTransformer implements ResultTransformer
-	{
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 6259516575635282447L;
-		private Session session;
-		private Class persistClass;
-
-		public LazyLoadEntityTransformer(Session session, Class persistClass) {
-			this.session = session;
-			this.persistClass = persistClass;
-		}
-
-		@Override
-		public List transformList(List collection) {
-			return collection;
-		}
-
-		@Override
-		public Object transformTuple(Object[] tuple, String[] aliases) {
-			return session.get(persistClass, (Serializable) tuple[0]);
-		}
-		
 	}
 }
