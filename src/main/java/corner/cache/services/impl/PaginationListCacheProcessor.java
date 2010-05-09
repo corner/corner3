@@ -84,21 +84,14 @@ public class PaginationListCacheProcessor implements CacheProcessor<PaginationLi
 		PaginationOptions options = (PaginationOptions) encoder
 				.toValue((String) it.next());
 		final Class clazz = getEntityClass(method);
-		Iterator wrapperIt = new Iterator() {
-
-			@Override
-			public boolean hasNext() {
-				return it.hasNext();
-			}
-			@Override
-			public Object next() {
-				return entityService.get(clazz, it.next());
-			}
-			@Override
-			public void remove() {
-			}
-		};
-		return new PaginationList(wrapperIt, options);
+		List result = new ArrayList();
+		while(it.hasNext()){
+			Object obj = entityService.get(clazz,it.next());
+			if(obj!=null) // 如果发现已经为空，则不进行处理
+				result.add(obj);
+			
+		}
+		return new PaginationList(result.iterator(), options);
 	}
 	//通过分析方法的返回值来得到范性的值,
 	//譬如： PaginationList<Member> 得到的结果是Member

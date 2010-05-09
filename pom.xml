@@ -307,6 +307,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+        <!--
 	<repositories>
 		<repository>
 			<id>mvnsearch</id>
@@ -323,6 +324,7 @@
 			</url>
 		</repository>
 	</repositories>
+        -->
 	<distributionManagement>
 		<snapshotRepository>
 			<id>fepss.snapshots</id>
