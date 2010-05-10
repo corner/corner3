@@ -180,7 +180,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-labs</artifactId>
+			<artifactId>appengine-api-labs</artifactId>
 			<version>1.2.8</version>
 			<scope>provided</scope>
 		</dependency>
@@ -216,11 +216,19 @@
 		</dependency>
 		<dependency>
 			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-runtime
+			<artifactId>appengine-api-1.0-sdk
 			</artifactId>
 			<version>1.2.8</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-tools-sdk
+			</artifactId>
+			<version>1.2.8</version>
+			<scope>provided</scope>
+		</dependency>
+                <!--
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-stubs
@@ -228,6 +236,7 @@
 			<version>1.2.8</version>
 			<scope>provided</scope>
 		</dependency>
+                -->
 		<!--  alipay inc memcache client -->
 		<dependency>
 			<groupId>com.fepss.3rd</groupId>
@@ -329,7 +338,7 @@
 		<snapshotRepository>
 			<id>fepss.snapshots</id>
 			<url>
-				http://maven.fepss.com/nexus/content/repositories/fepss-snapshots/
+				http://maven.fepss.com/nexus/content/repositories/snapshots/
 			</url>
 		</snapshotRepository>
 		<repository>
