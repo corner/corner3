@@ -105,9 +105,42 @@ public class CacheIntegration2Test extends TapestryTestCase {
 		testService.getList();
 		assertEquals(r+3,testVar);
 	}
+	
+	@Test
+	public void test_no_cache_ns() throws SecurityException, NoSuchMethodException {
+		
+		//获取测试服务类
+		TestService testService = registry.getService(TestService.class);
+		int r = testVar;
+		//第一次执行方法
+		testService.getStickyList();
+		assertEquals(r+1,testVar);
+		//从缓存读取
+		testService.getStickyList();
+		assertEquals(r+1,testVar);
+		testService.getStickyList();
+		assertEquals(r+1,testVar);
+		
+		//当增加操作发生,缓存被清除
+		EntityService entityService = registry.getService(EntityService.class);
+		TestMember member = new TestMember();
+		entityService.save(member);
+		//,需要重新执行方法
+		testService.getList();
+		assertEquals(r+2,testVar);
+		
+		//当发生删除操作则更新缓存
+		entityService = registry.getService(EntityService.class);
+		entityService.delete(member);
+		//,需要重新执行方法
+		testService.getList();
+		assertEquals(r+3,testVar);
+	}
 	public static interface TestService{
 		@Cacheable(clazz=TestMember.class)
 		public List<TestMember> getList();
+		@Cacheable(clazz=TestMember.class,ttl=10000)
+		public List<TestMember> getStickyList();
 	}
 	public static class TestServiceImpl implements TestService{
 		private List<TestMember> list= new ArrayList<TestMember>();
@@ -115,6 +148,11 @@ public class CacheIntegration2Test extends TapestryTestCase {
 			testVar = testVar+1;
 			return list;
 		}
+        @Override
+        public List<TestMember> getStickyList() {
+            testVar = testVar+1;
+            return list;
+        }
 	}
 	public static class TestModule{
 		public static void bind(ServiceBinder binder){
