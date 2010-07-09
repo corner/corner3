@@ -309,12 +309,7 @@ public class MigrationServiceImpl implements MigrationService {
 	 */
 	protected void executeSchemaStatement(Statement stmt, String sql)
 			throws SQLException {
-
-		try {
-			stmt.executeUpdate(sql);
-		} catch (SQLException ex) {
-
-		}
+		stmt.executeUpdate(sql);
 	}
 
 	@Override
