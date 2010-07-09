@@ -278,8 +278,7 @@ public class MigrationServiceImpl implements MigrationService {
 							logger.info("[db-upgrade] " + sql[i]);
 							executeSchemaStatement(stmt, sql[i]);
 						} catch (SQLException se) {
-							logger.info("[db-upgrade] " + sql[i]+" error");
-							se.printStackTrace();
+                            logger.error("[db-upgrade]"+se.toString(),se);
 							throw se;
 						}
 					}
