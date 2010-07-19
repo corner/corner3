@@ -51,7 +51,11 @@ abstract class AbstractMigrateFragment implements MigrateFragment{
 
 	@Override
 	public boolean filteTable(Table table) {
-		return table.getName().equalsIgnoreCase(getTableName());
+	    String tableName =  getQualifiedTableName(table);
+		return tableName.equalsIgnoreCase(getTableName());
+	}
+	protected String getQualifiedTableName(Table table) {
+	    return table.getQualifiedName(dialect, defaultCatalog, defaultSchema);
 	}
 	/**
 	 * @return the dialect

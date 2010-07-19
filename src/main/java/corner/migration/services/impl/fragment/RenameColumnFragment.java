@@ -50,7 +50,7 @@ public class RenameColumnFragment extends AbstractMigrateFragment {
 	@Override
 	public List<String> generateMigrationFragments(Table table,
 			TableMetadata tableInfo) {
-		return  this.getConnectionAdapter().renameColumnSQL(getTableName(), oldColumnsNames, newColumnNames);
+		return  this.getConnectionAdapter().renameColumnSQL(getQualifiedTableName(table), oldColumnsNames, newColumnNames);
 
 	}
 }

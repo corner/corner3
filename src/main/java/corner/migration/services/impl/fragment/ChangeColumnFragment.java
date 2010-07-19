@@ -76,7 +76,7 @@ public class ChangeColumnFragment extends AbstractMigrateFragment {
 			Column column = (Column) iter.next();
 			ColumnMetadata columnInfo = tableInfo.getColumnMetadata(column.getName());
 			if (columnInfo != null && columnInfo.getName().toLowerCase().equals(columnName.toLowerCase())) {//列存在,且与给定的列的名字相同
-				alterSQL = this.getConnectionAdapter().changeColumnSQL(table.getName(), getSQLType(column)); 
+				alterSQL = this.getConnectionAdapter().changeColumnSQL(this.getQualifiedTableName(table), getSQLType(column)); 
 			} 
 
 		}

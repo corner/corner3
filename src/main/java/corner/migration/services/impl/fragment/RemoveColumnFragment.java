@@ -44,7 +44,7 @@ public class RemoveColumnFragment extends AbstractMigrateFragment{
 	@Override
 	public List<String> generateMigrationFragments(Table table,
 			TableMetadata tableInfo) {
-		List<String> script = getConnectionAdapter().removeColumnSQL(getTableName(), tableColumns);
+		List<String> script = getConnectionAdapter().removeColumnSQL(getQualifiedTableName(table), tableColumns);
 		return script; 
 		
 	}
