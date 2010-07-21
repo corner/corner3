@@ -25,8 +25,9 @@ import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Marker;
+import org.apache.tapestry5.ioc.annotations.ServiceId;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.AliasContribution;
@@ -192,22 +193,30 @@ public class CoreModule {
 
 
 	//混合模式，支持@PageRedirect调用
+	@ServiceId("RedirectMixedImmediateResponseGenerator")
 	public static ActionRenderResponseGenerator buildRedirectMixedImmediateResponseGenerator(LinkSource linkSource,
 			Request request, Response response){
 		RedirectMixedImmediateResponseGenerator generator = new RedirectMixedImmediateResponseGenerator(linkSource,request,response);
 		return generator;
 	}
+	@ServiceId("InternelActionRenderResponseGenerator")
+	public static ActionRenderResponseGenerator buildActionRenderResponseGeneratorImpl(ObjectLocator locator) {
+	    return locator.autobuild(ActionRenderResponseGeneratorImpl.class);
+	}
+	
    
 	//复写内置的方式,采取复合的模式
 	public static void contributeServiceOverride(MappedConfiguration<Class,Object> configuration,
 			@Symbol(SymbolConstants.SUPPRESS_REDIRECT_FROM_ACTION_REQUESTS)
 		    boolean immediateMode,
-		    @Local ActionRenderResponseGenerator generator)
+		    @InjectService("RedirectMixedImmediateResponseGenerator") ActionRenderResponseGenerator generator,
+		    @InjectService("InternelActionRenderResponseGenerator") ActionRenderResponseGenerator internelGenerator
+		    )
 	  {
 		 if (immediateMode){
 			 configuration.add(ActionRenderResponseGenerator.class, generator);
 		 } else{
-			 configuration.addInstance(ActionRenderResponseGenerator.class, ActionRenderResponseGeneratorImpl.class);
+			 configuration.add(ActionRenderResponseGenerator.class, internelGenerator);
 		 }
 	  }
 
