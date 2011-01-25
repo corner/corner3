@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<!--
-		Copyright 2008 The Corner Team. Licensed under the Apache License,
-		Version 2.0 (the "License"); you may not use this file except in
-		compliance with the License. You may obtain a copy of the License at
-
-		http://www.apache.org/licenses/LICENSE-2.0 Unless required by
-		applicable law or agreed to in writing, software distributed under the
-		License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-		CONDITIONS OF ANY KIND, either express or implied. See the License for
-		the specific language governing permissions and limitations under the
-		License.
-	-->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!-- Copyright 2008 The Corner Team. Licensed under the Apache License, Version 
+	2.0 (the "License"); you may not use this file except in compliance with 
+	the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>corner</groupId>
 	<artifactId>corner</artifactId>
@@ -80,11 +76,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	<!-- 
-  <repositories>
-
-  </repositories>
-  -->
+	<!-- <repositories> </repositories> -->
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
@@ -139,7 +131,7 @@
 			</exclusions>
 			<scope>provided</scope>
 		</dependency>
-		<!--  spring framework  -->
+		<!-- spring framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring</artifactId>
@@ -171,7 +163,7 @@
 			<version>0.9.1.2</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!--  for gae -->
+		<!-- for gae -->
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
@@ -221,16 +213,9 @@
 			<version>1.2.8</version>
 			<scope>provided</scope>
 		</dependency>
-                <!--
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-stubs
-			</artifactId>
-			<version>1.2.8</version>
-			<scope>provided</scope>
-		</dependency>
-                -->
-		<!--  alipay inc memcache client -->
+		<!-- <dependency> <groupId>com.google.appengine</groupId> <artifactId>appengine-api-1.0-stubs 
+			</artifactId> <version>1.2.8</version> <scope>provided</scope> </dependency> -->
+		<!-- alipay inc memcache client -->
 		<dependency>
 			<groupId>com.fepss.3rd</groupId>
 			<artifactId>alipay-memcache-client</artifactId>
@@ -309,24 +294,10 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-        <!--
-	<repositories>
-		<repository>
-			<id>mvnsearch</id>
-			<url>http://www.mvnsearch.org/maven2</url>
-		</repository>
-		<repository>
-			<id>fepss</id>
-			<url>http://maven.fepss.com/nexus/content/groups/public
-			</url>
-		</repository>
-		<repository>
-			<id>fepss.snapshots</id>
-			<url>http://maven.fepss.com/nexus/content/groups/public-snapshots
-			</url>
-		</repository>
-	</repositories>
-        -->
+	<!-- <repositories> <repository> <id>mvnsearch</id> <url>http://www.mvnsearch.org/maven2</url> 
+		</repository> <repository> <id>fepss</id> <url>http://maven.fepss.com/nexus/content/groups/public 
+		</url> </repository> <repository> <id>fepss.snapshots</id> <url>http://maven.fepss.com/nexus/content/groups/public-snapshots 
+		</url> </repository> </repositories> -->
 	<distributionManagement>
 		<snapshotRepository>
 			<id>fepss.snapshots</id>
@@ -366,12 +337,9 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
 					<linksource>true</linksource>
-					<!--
-						<links> <link> http://java.sun.com/j2se/1.5.0/docs/api/ </link>
-						<link> http://jakarta.apache.org/commons/logging/apidocs/ </link>
-						<link> http://tapestry.apache.org/tapestry5/tapestry-ioc/apidocs/
-						</link> </links>
-					-->
+					<!-- <links> <link> http://java.sun.com/j2se/1.5.0/docs/api/ </link> 
+						<link> http://jakarta.apache.org/commons/logging/apidocs/ </link> <link> 
+						http://tapestry.apache.org/tapestry5/tapestry-ioc/apidocs/ </link> </links> -->
 					<linksource>true</linksource>
 					<encoding>utf-8</encoding>
 					<charset>utf-8</charset>
