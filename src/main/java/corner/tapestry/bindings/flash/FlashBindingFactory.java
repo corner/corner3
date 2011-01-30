@@ -33,12 +33,13 @@ public class FlashBindingFactory implements BindingFactory {
 	public FlashBindingFactory(FlashFacade facade){
 		this.facade = facade;
 	}
+	
 	/**
 	 * @see org.apache.tapestry5.services.BindingFactory#newBinding(java.lang.String, org.apache.tapestry5.ComponentResources, org.apache.tapestry5.ComponentResources, java.lang.String, org.apache.tapestry5.ioc.Location)
 	 */
+	@Override
 	public Binding newBinding(String description, ComponentResources container,
 			ComponentResources component, String expression, Location location) {
 		return new FlashBinding(location, description,expression,facade);
 	}
-
 }

@@ -40,7 +40,9 @@ public class FlashFacadeImpl implements FlashFacade {
 	}
 
 	/**
+	 * @see corner.tapestry.bindings.flash.FlashFacade#get(java.lang.String)
 	 */
+    @Override
 	public String get(String key) {
 		String v = this.cookies.readCookieValue(key);
         try {
@@ -60,6 +62,7 @@ public class FlashFacadeImpl implements FlashFacade {
      * @param key key的键值
      * @param value 对应的消息值
      */
+    @Override
 	public void push(String key, String value) {
         try {
             cookies.writeCookieValue(key, URLEncoder.encode(value,"UTF-8"), 30);
@@ -67,16 +70,27 @@ public class FlashFacadeImpl implements FlashFacade {
             cookies.writeCookieValue(key, value, 30);
         }
 	}
+    /**
+     * @see corner.tapestry.bindings.flash.FlashFacade#notice(java.lang.String)
+     */
+    @Override
     public void notice(String message) {
         this.push(NOTICE_KEY,message);
     }
 
+    /**
+     * @see corner.tapestry.bindings.flash.FlashFacade#warn(java.lang.String)
+     */
+    @Override
     public void warn(String message) {
         this.push(WARN_KEY,message);
     }
 
+    /**
+     * @see corner.tapestry.bindings.flash.FlashFacade#error(java.lang.String)
+     */
+    @Override
     public void error(String message) {
         this.push(ERROR_KEY,message);
     }
-
 }

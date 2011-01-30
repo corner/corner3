@@ -82,8 +82,9 @@ public class PaginationOptions implements Serializable, ProtocolBuffer {
     }
 
     /**
-     * @see .ProtocolBuffer#getData()
+     * @see corner.protobuf.ProtocolBuffer#getData()
      */
+    @Override
     public byte[] getData() {
         //clear parameters
         this.builder.clearParameters();
@@ -102,8 +103,9 @@ public class PaginationOptions implements Serializable, ProtocolBuffer {
     }
 
     /**
-     * @see .ProtocolBuffer#mergeData(byte[])
+     * @see corner.protobuf.ProtocolBuffer#mergeData(byte[])
      */
+    @Override
     public void mergeData(byte[] byteData) {
         try {
             this.builder.mergeFrom(byteData);

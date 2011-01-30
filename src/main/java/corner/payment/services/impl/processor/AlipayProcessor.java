@@ -78,6 +78,7 @@ public class AlipayProcessor implements PaymentProcessor {
 	 * 
 	 * @see corner.payment.services.PaymentProcessor#verifyReturn(java.util.Map)
 	 */
+	@Override
 	public boolean verifyReturn(Map<String, String> params) {
 		if (params == null || params.isEmpty()) {
 			throw new IllegalArgumentException("No params.");

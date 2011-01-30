@@ -63,6 +63,10 @@ public class ProtocolBuffersModule {
             if (ProtocolBuffer.class.isAssignableFrom(protoClass)) {
                 final
                 ValueEncoderFactory factory = new ValueEncoderFactory() {
+                    /**
+                     * @see org.apache.tapestry5.services.ValueEncoderFactory#create(java.lang.Class)
+                     */
+                	@Override
                     @SuppressWarnings("unchecked")
 					public ValueEncoder create(Class type) {
                         return new ProtoValueEncoder(type);

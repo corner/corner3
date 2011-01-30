@@ -42,6 +42,7 @@ public class TransactionDecoratorImpl implements TransactionDecorator {
     /**
 	 * @see lichen.common.services.jpa.impl.JpaTransactionDecorder#build(java.lang.Class, T, java.lang.String)
 	 */
+    @Override
     public <T> T build(Class<T> serviceInterface, T delegate, String serviceId)
     {
         Defense.notNull(serviceInterface, "serviceInterface");

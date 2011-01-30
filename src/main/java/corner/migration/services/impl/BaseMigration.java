@@ -40,6 +40,7 @@ public abstract class BaseMigration implements Migration{
 	 * @param tableName
 	 * @see corner.migration.services.MigrationService#addColumn(java.lang.String)
 	 */
+	@Override
 	public void add_column(String tableName) {
 		service.addColumn(tableName);
 	}
@@ -50,6 +51,7 @@ public abstract class BaseMigration implements Migration{
 	 * @param columnName
 	 * @see corner.migration.services.MigrationService#changeColumn(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public void change_column(String tableName, String columnName) {
 		service.changeColumn(tableName, columnName);
 	}
@@ -59,6 +61,7 @@ public abstract class BaseMigration implements Migration{
 	 * @param tableName
 	 * @see corner.migration.services.MigrationService#createTable(java.lang.String)
 	 */
+	@Override
 	public void create_table(String tableName) {
 		service.createTable(tableName);
 	}
@@ -68,6 +71,7 @@ public abstract class BaseMigration implements Migration{
 	 * @param tableName
 	 * @see corner.migration.services.MigrationService#dropTable(java.lang.String)
 	 */
+	@Override
 	public void drop_table(String tableName) {
 		service.dropTable(tableName);
 	}
@@ -78,6 +82,7 @@ public abstract class BaseMigration implements Migration{
 	 * @param tableColumns
 	 * @see corner.migration.services.MigrationService#removeColumn(java.lang.String, java.lang.String[])
 	 */
+	@Override
 	public void remove_columns(String tableName, String... tableColumns) {
 		service.removeColumn(tableName, tableColumns);
 	}
@@ -89,6 +94,7 @@ public abstract class BaseMigration implements Migration{
 	 * @param newColumns
 	 * @see corner.migration.services.MigrationService#renameColumns(java.lang.String, java.lang.String[], java.lang.String[])
 	 */
+	@Override
 	public void rename_columns(String tableName, String[] oldColumns,
 			String[] newColumns) {
 		service.renameColumns(tableName, oldColumns, newColumns);

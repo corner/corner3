@@ -26,59 +26,74 @@ import org.apache.tapestry5.ioc.services.TypeCoercer;
 import corner.orm.model.PaginationList;
 import corner.orm.model.PaginationOptions;
 
-
 /**
  * orm module
+ * 
  * @author <a href="mailto:jun.tsai@gmail.com">Jun Tsai</a>
  * @version $Revision$
  * @since 3.1
  */
 public class OrmModule {
 
-    public static void contributeTypeCoercer(Configuration<CoercionTuple> configuration,
-                                             @Builtin final
-                                             TypeCoercer coercer)
+	public static void contributeTypeCoercer(
+			Configuration<CoercionTuple> configuration,
+			@Builtin final TypeCoercer coercer)
 
-    {
-    	//PaginationList -> PaginationOptions
-    	 add(configuration, PaginationList.class, PaginationOptions.class,
-                 new Coercion<PaginationList, PaginationOptions>()
-                 {
-                     public PaginationOptions coerce(PaginationList input)
-                     {
-                         return input.options();
-                     }
-                 });
-    	 //Iterator -> Iterable
-    	 add(configuration,Iterator.class,Iterable.class,
-                 new Coercion<Iterator, Iterable>()
-                 {
-                     public Iterable coerce(final Iterator input)
-                     {
-                         return new Iterable(){
+	{
+		// PaginationList -> PaginationOptions
+		add(configuration, PaginationList.class, PaginationOptions.class,
+				new Coercion<PaginationList, PaginationOptions>() {
+					/**
+					 * @param input
+					 * @return
+					 * @since 3.1
+					 */
+					@Override
+					public PaginationOptions coerce(PaginationList input) {
+						return input.options();
+					}
+				});
+		// Iterator -> Iterable
+		add(configuration, Iterator.class, Iterable.class,
+				new Coercion<Iterator, Iterable>() {
+					/**
+					 * @param input
+					 * @return
+					 * @since 3.1
+					 */
+					@Override
+					public Iterable coerce(final Iterator input) {
+						return new Iterable() {
 
 							@Override
 							public Iterator iterator() {
 								return input;
-							}};
-                     }
-                 });
-    	 //PaginationList -> Iterable
-         add(configuration, PaginationList.class, Iterable.class,
-                new Coercion<PaginationList, Iterable>()
-                {
-                    public Iterable coerce(PaginationList input)
-                    {
-                        return coercer.coerce(input.collectionObject(),Iterable.class);
-                    }
-                });
-    }
-    private static <S, T> void add(Configuration<CoercionTuple> configuration, Class<S> sourceType, Class<T> targetType,
-                                   Coercion<S, T> coercion)
-    {
-        CoercionTuple<S, T> tuple = new CoercionTuple<S, T>(sourceType, targetType, coercion);
+							}
+						};
+					}
+				});
+		// PaginationList -> Iterable
+		add(configuration, PaginationList.class, Iterable.class,
+				new Coercion<PaginationList, Iterable>() {
+					/**
+					 * @param input
+					 * @return
+					 * @since 3.1
+					 */
+					@Override
+					public Iterable coerce(PaginationList input) {
+						return coercer.coerce(input.collectionObject(),
+								Iterable.class);
+					}
+				});
+	}
 
-        configuration.add(tuple);
-    }
+	private static <S, T> void add(Configuration<CoercionTuple> configuration,
+			Class<S> sourceType, Class<T> targetType, Coercion<S, T> coercion) {
+		CoercionTuple<S, T> tuple = new CoercionTuple<S, T>(sourceType,
+				targetType, coercion);
+
+		configuration.add(tuple);
+	}
 
 }

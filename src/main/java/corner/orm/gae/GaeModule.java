@@ -109,6 +109,10 @@ public class GaeModule {
 	public static EntityPackageManager buildEntityPackageManager(
 			final Collection<String> packageNames) {
 		return new EntityPackageManager() {
+			/**
+			 * @see corner.orm.gae.EntityPackageManager#getPackageNames()
+			 */
+			@Override
 			public Collection<String> getPackageNames() {
 				return packageNames;
 			}
@@ -123,6 +127,12 @@ public class GaeModule {
 		// from Key => String
 		add(configuration, Key.class, String.class,
 				new Coercion<Key, String>() {
+					/**
+					 * @param input
+					 * @return
+					 * @since 3.1
+					 */
+					@Override
 					public String coerce(Key input) {
 						return KeyFactory.keyToString(input);
 					}
@@ -130,6 +140,12 @@ public class GaeModule {
 		// from String=>Key
 		add(configuration, String.class, Key.class,
 				new Coercion<String, Key>() {
+					/**
+					 * @param input
+					 * @return
+					 * @since 3.1
+					 */
+					@Override
 					public Key coerce(String input) {
 						return KeyFactory.stringToKey(input);
 					}
@@ -164,6 +180,10 @@ public class GaeModule {
 					if (entityClass.isAnnotationPresent(Entity.class)) {
 
 						ValueEncoderFactory factory = new ValueEncoderFactory() {
+							/**
+							 * @see org.apache.tapestry5.services.ValueEncoderFactory#create(java.lang.Class)
+							 */
+							@Override
 							public ValueEncoder create(Class type) {
 								return new JpaEntityValueEncoder(entityClass,
 										propertyAccess, typeCoercer,
@@ -233,8 +253,8 @@ public class GaeModule {
 	public static Delegate buildDelegate(@Builtin ClassFactory classFactory)
 			throws Throwable {
 		String className = "com.google.appengine.tools.development.ApiProxyLocalImpl";
-		ClassFab classFab = classFactory.newClass("MyApiLocalEnvir", Class
-				.forName(className));
+		ClassFab classFab = classFactory.newClass("MyApiLocalEnvir",
+				Class.forName(className));
 		classFab.addConstructor(new Class[] { File.class }, new Class[] {},
 				"super($1);");
 		Class clazz = classFab.createClass();
@@ -258,7 +278,7 @@ public class GaeModule {
 		return platformTransactionManager;
 	}
 
-	// initialize  dev thread
+	// initialize dev thread
 	public static void contributeApplicationInitializer(
 			OrderedConfiguration<ApplicationInitializerFilter> configuration,
 			@Inject @Symbol(SymbolConstants.PRODUCTION_MODE) final boolean product,
@@ -269,8 +289,7 @@ public class GaeModule {
 			public void initializeApplication(Context context,
 					ApplicationInitializer initializer) {
 				if (!product) {
-					ApiProxy
-							.setEnvironmentForCurrentThread(new TestEnvironment());
+					ApiProxy.setEnvironmentForCurrentThread(new TestEnvironment());
 					ApiProxy.setDelegate(delegate);
 				}
 				initializer.initializeApplication(context);
@@ -284,6 +303,12 @@ public class GaeModule {
 			@Local final EntityManagerSource entityManagerSource) {
 
 		RequestFilter openEntityManagerInView = new RequestFilter() {
+			/**
+			 * @see org.apache.tapestry5.services.RequestFilter#service(org.apache.tapestry5.services.Request,
+			 *      org.apache.tapestry5.services.Response,
+			 *      org.apache.tapestry5.services.RequestHandler)
+			 */
+			@Override
 			public boolean service(Request request, Response response,
 					RequestHandler handler) throws IOException {
 				String path = request.getPath();

@@ -73,6 +73,7 @@ public class ResourceSecurityWorker implements ComponentClassTransformWorker {
 	 *      org.apache.tapestry.model.MutableComponentModel)
 	 * @since 0.0.1
 	 */
+	@Override
 	public void transform(ClassTransformation transformation,
 			MutableComponentModel model) {
 		List<TransformMethodSignature> methods = transformation

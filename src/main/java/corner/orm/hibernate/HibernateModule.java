@@ -165,6 +165,10 @@ public class HibernateModule {
 
         RequestFilter openSessionInView = new RequestFilter()
         {
+            /**
+             * @see org.apache.tapestry5.services.RequestFilter#service(org.apache.tapestry5.services.Request, org.apache.tapestry5.services.Response, org.apache.tapestry5.services.RequestHandler)
+             */
+        	@Override
             public boolean service(Request request, Response response, RequestHandler handler)
                     throws IOException
             {

@@ -55,6 +55,7 @@ public class CookiePersistentFieldStrategy implements PersistentFieldStrategy {
 	/**
 	 * @see org.apache.tapestry5.services.PersistentFieldStrategy#discardChanges(java.lang.String)
 	 */
+	@Override
 	public void discardChanges(String pageName) {
 		String fullPrefix = prefix + pageName + ":";
 
@@ -74,6 +75,7 @@ public class CookiePersistentFieldStrategy implements PersistentFieldStrategy {
 	/**
 	 * @see org.apache.tapestry5.services.PersistentFieldStrategy#gatherFieldChanges(java.lang.String)
 	 */
+	@Override
 	public Collection<PersistentFieldChange> gatherFieldChanges(String pageName) {
 		List<PersistentFieldChange> result = newList();
 
@@ -120,6 +122,7 @@ public class CookiePersistentFieldStrategy implements PersistentFieldStrategy {
 	 * @see org.apache.tapestry5.services.PersistentFieldStrategy#postChange(java.lang.String,
 	 *      java.lang.String, java.lang.String, java.lang.Object)
 	 */
+	@Override
 	public void postChange(String pageName, String componentId,
 			String fieldName, Object newValue) {
 		notBlank(pageName, "pageName");

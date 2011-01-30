@@ -51,14 +51,26 @@ public class InlineStreamResponse implements StreamResponse {
         	this(new ByteArrayInputStream(fileData),fileName,contentType);
 		}
 
+		/**
+		 * @see org.apache.tapestry5.StreamResponse#getContentType()
+		 */
+        @Override
 		public String getContentType() {
                 return contentType;
         }
 
+        /**
+         * @see org.apache.tapestry5.StreamResponse#getStream()
+         */
+        @Override
         public InputStream getStream() throws IOException {
                 return is;
         }
 
+        /**
+         * @see org.apache.tapestry5.StreamResponse#prepareResponse(org.apache.tapestry5.services.Response)
+         */
+        @Override
         public void prepareResponse(Response response) {
                 response.setHeader("Content-Disposition", "inline; filename=" + filename);
         }

@@ -82,6 +82,10 @@ public class PaginatedEntityService {
         final Iterable con = typeCoercer.coerce(conditions, Iterable.class);
 
         return (PaginationList) this.template.execute(new HibernateCallback() {
+            /**
+             * @see org.springframework.orm.hibernate3.HibernateCallback#doInHibernate(org.hibernate.Session)
+             */
+        	@Override
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
                 final Iterator it = con==null?null:con.iterator();
 
@@ -142,6 +146,10 @@ public class PaginatedEntityService {
 
     public long count(final Class<?> persistClass,final Object conditions){
         return (Long) this.template.execute(new HibernateCallback(){
+            /**
+             * @see org.springframework.orm.hibernate3.HibernateCallback#doInHibernate(org.hibernate.Session)
+             */
+        	@Override
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
                 Iterable con = typeCoercer.coerce(conditions, Iterable.class);
                 final Iterator it = con==null?null:con.iterator();
@@ -179,7 +187,11 @@ public class PaginatedEntityService {
 	public Iterator find(final Class<?> persistClass, final Object conditions,
 			final String order, final int start, final int offset) {
 		return (Iterator) this.template.execute(new HibernateCallback(){
-	           public Object doInHibernate(final Session session) throws HibernateException, SQLException {
+	        /**
+	         * @see org.springframework.orm.hibernate3.HibernateCallback#doInHibernate(org.hibernate.Session)
+	         */
+			@Override
+	        public Object doInHibernate(final Session session) throws HibernateException, SQLException {
 	               Iterable con = typeCoercer.coerce(conditions, Iterable.class);
 	               final Iterator it = con==null?null:con.iterator();
 	               final StringBuffer sb = buildConditionHQL(persistClass, it);

@@ -37,16 +37,18 @@ import javax.imageio.ImageIO;
 public class CaptchaImageImpl implements CaptchaImage {
 	private static final String mimeType = "image/jpeg";
 
-	/* (non-Javadoc)
-	 * @see ganshane.services.challengecode.ChallengeImage#getMimeType()
+	/**
+	 * @see corner.tapestry.captcha.CaptchaImage#getMimeType()
 	 */
+	@Override
 	public String getMimeType() {
 		return mimeType;
 	}
 
-	/* (non-Javadoc)
-	 * @see ganshane.services.challengecode.ChallengeImage#converString2Image(java.lang.String)
+	/**
+	 * @see corner.tapestry.captcha.CaptchaImage#converString2Image(java.lang.String)
 	 */
+	@Override
 	public byte[] converString2Image(String content) {
 		final Random random = new Random();
 		final Font font = getRandFont(random, 15);

@@ -37,6 +37,10 @@ public class PageRedirectWorker implements ComponentClassTransformWorker {
 	private Request request;
 
 	private final ComponentMethodAdvice advice = new ComponentMethodAdvice() {
+		/**
+		 * @see org.apache.tapestry5.services.ComponentMethodAdvice#advise(org.apache.tapestry5.services.ComponentMethodInvocation)
+		 */
+		@Override
 		public void advise(ComponentMethodInvocation invocation) {
 				invocation.proceed();
 				invocation.getResult();
@@ -59,6 +63,7 @@ public class PageRedirectWorker implements ComponentClassTransformWorker {
 	 *      org.apache.tapestry.model.MutableComponentModel)
 	 * @since 0.0.1
 	 */
+	@Override
 	public void transform(ClassTransformation transformation, MutableComponentModel model) {
 		for (TransformMethodSignature sig : transformation.findMethodsWithAnnotation(PageRedirect.class)) {
 			transformation.advise(sig, advice);

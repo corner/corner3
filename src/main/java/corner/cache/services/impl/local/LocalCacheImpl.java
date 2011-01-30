@@ -99,6 +99,10 @@ public class LocalCacheImpl implements Cache<String, Object> {
 		}
 	}
 
+	/**
+	 * @see corner.cache.services.Cache#get(java.lang.Object)
+	 */
+	@Override
 	public Object get(String key) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("get key:" + key);
@@ -109,6 +113,10 @@ public class LocalCacheImpl implements Cache<String, Object> {
 			return null;
 		}
 	}
+	
+	/**
+	 * @see corner.cache.services.Cache#increment(java.lang.String, long)
+	 */
 	@Override
 	public Long increment(String key, long delta) {
 		Object obj = get(key);
@@ -125,6 +133,10 @@ public class LocalCacheImpl implements Cache<String, Object> {
 		return expiryCache.keySet();
 	}
 
+	/**
+	 * @see corner.cache.services.Cache#put(java.lang.Object, java.lang.Object)
+	 */
+	@Override
 	public boolean put(String key, Object value) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("put key:" + key);
@@ -134,6 +146,13 @@ public class LocalCacheImpl implements Cache<String, Object> {
 		return true;
 	}
 
+	/**
+	 * @param key
+	 * @param value
+	 * @param expiry
+	 * @return
+	 * @since 3.1
+	 */
 	public Object put(String key, Object value, Date expiry) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("put key:" + key);
@@ -144,6 +163,10 @@ public class LocalCacheImpl implements Cache<String, Object> {
 		return value;
 	}
 
+	/**
+	 * @see corner.cache.services.Cache#remove(java.lang.Object)
+	 */
+	@Override
 	public boolean remove(String key) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("remove key:" + key);
@@ -194,6 +217,10 @@ public class LocalCacheImpl implements Cache<String, Object> {
 			this.expiryCache = expiryCache;
 		}
 
+		/**
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
 		public void run() {
 			check();
 		}
@@ -222,6 +249,10 @@ public class LocalCacheImpl implements Cache<String, Object> {
 
 	}
 
+	/**
+	 * @see corner.cache.services.Cache#getName()
+	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -230,6 +261,10 @@ public class LocalCacheImpl implements Cache<String, Object> {
 		return expiryInterval;
 	}
 
+	/**
+	 * @see corner.cache.services.Cache#put(java.lang.Object, java.lang.Object, int)
+	 */
+	@Override
 	public boolean put(String key, Object value, int TTL) {
 		cache.put(key, value);
 		Calendar calendar = Calendar.getInstance();

@@ -137,14 +137,26 @@ public class UnixConsole implements IConsole{
         bcolors.put(ConsoleBackgroundColor.GREY, BACKGROUND_WHITE);
     }
 
+    /**
+     * @see corner.migration.services.impl.console.IConsole#setForegroundColor(corner.migration.services.impl.console.ConsoleForegroundColor)
+     */
+    @Override
     public void setForegroundColor(ConsoleForegroundColor color) {
         System.out.print(fcolors.get(color));
     }
 
+    /**
+     * @see corner.migration.services.impl.console.IConsole#setBackgroundColor(corner.migration.services.impl.console.ConsoleBackgroundColor)
+     */
+    @Override
     public void setBackgroundColor(ConsoleBackgroundColor color) {
         System.out.print(bcolors.get(color));
     }
 
+    /**
+     * @see corner.migration.services.impl.console.IConsole#resetColors()
+     */
+    @Override
     public void resetColors() {
         System.out.print(RESET);
     }

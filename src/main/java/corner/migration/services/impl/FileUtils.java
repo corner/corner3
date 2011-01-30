@@ -79,6 +79,7 @@ public class FileUtils {
 		 * 
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
+		@Override
 		public boolean accept(File pathname) {
 			return pathname.getName().matches(fileNamePattern);
 		}
@@ -114,6 +115,13 @@ public class FileUtils {
 		private FileCollection sort(final ISortCallback callback,
 				final boolean flag) {
 			Comparator<File> c = new Comparator<File>() {
+				/**
+				 * @param o1
+				 * @param o2
+				 * @return
+				 * @since 3.1
+				 */
+				@Override
 				public int compare(File o1, File o2) {
 					int obj1 = callback.getSortData(o1);
 					int obj2 = callback.getSortData(o2);
@@ -173,6 +181,7 @@ public class FileUtils {
 		/**
 		 * @see com.ouriba.piano.utils.FileUtils.ISortCallback#getSortData(java.io.File)
 		 */
+		@Override
 		public int getSortData(File file) {
 			Matcher matcher = Pattern.compile(filePattern).matcher(
 					file.getName());

@@ -107,6 +107,10 @@ public class MigrationServiceImpl implements MigrationService {
 				dialect, sessionFactory, tableName));
 	}
 
+	/**
+	 * @see corner.migration.services.MigrationService#addColumn(java.lang.String)
+	 */
+	@Override
 	public void addColumn(final String tableName) {
 		executeMigrateFragment(new AddColumnFragment(this.adapter, dialect,
 				sessionFactory, tableName));
@@ -119,7 +123,9 @@ public class MigrationServiceImpl implements MigrationService {
 	 *            表名
 	 * @param columnName
 	 *            列名
+	 * @see corner.migration.services.MigrationService#changeColumn(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public void changeColumn(final String tableName, final String columnName) {
 		executeMigrateFragment(new ChangeColumnFragment(this.adapter, dialect,
 				sessionFactory, tableName, columnName));
@@ -133,7 +139,9 @@ public class MigrationServiceImpl implements MigrationService {
 	 * @param tableColumns
 	 *            待删除的列名
 	 * @since 0.0.2
+	 * @see corner.migration.services.MigrationService#removeColumn(java.lang.String, java.lang.String[])
 	 */
+	@Override
 	public void removeColumn(String tableName, String... tableColumns) {
 		executeMigrateFragment(new RemoveColumnFragment(this.adapter, dialect,
 				sessionFactory, tableName, tableColumns));
@@ -149,7 +157,9 @@ public class MigrationServiceImpl implements MigrationService {
 	 * @param newColumns
 	 *            新的列名
 	 * @since 0.0.2
+	 * @see corner.migration.services.MigrationService#renameColumns(java.lang.String, java.lang.String[], java.lang.String[])
 	 */
+	@Override
 	public void renameColumns(String tableName, String[] oldColumns,
 			String[] newColumns) {
 		executeMigrateFragment(new RenameColumnFragment(this.adapter, dialect,
@@ -162,7 +172,9 @@ public class MigrationServiceImpl implements MigrationService {
 	 * @param tableName
 	 *            表名
 	 * @since 0.0.2
+	 * @see corner.migration.services.MigrationService#dropTable(java.lang.String)
 	 */
+	@Override
 	public void dropTable(String tableName) {
 		Table table = new Table(tableName);
 		this.executeSchemaScript(table.sqlDropString(this.dialect,
@@ -338,6 +350,10 @@ public class MigrationServiceImpl implements MigrationService {
 				this.sessionFactory);
 		SchemaInfo info = (SchemaInfo) hibernateTemplate
 				.execute(new HibernateCallback() {
+					/**
+					 * @see org.springframework.orm.hibernate3.HibernateCallback#doInHibernate(org.hibernate.Session)
+					 */
+					@Override
 					public Object doInHibernate(Session session)
 							throws HibernateException, SQLException {
 						Criteria criteria = session
@@ -355,12 +371,19 @@ public class MigrationServiceImpl implements MigrationService {
 		return info;
 	}
 
+	/**
+	 * @see corner.migration.services.MigrationService#updateDbMaxVersion(int, int)
+	 */
 	@Override
 	public void updateDbMaxVersion(int scriptType, int maxVersion) {
 		HibernateTemplate hibernateTemplate = new HibernateTemplate(
 				sessionFactory);
 		SchemaInfo info = (SchemaInfo) hibernateTemplate
 				.execute(new HibernateCallback() {
+					/**
+					 * @see org.springframework.orm.hibernate3.HibernateCallback#doInHibernate(org.hibernate.Session)
+					 */
+					@Override
 					public Object doInHibernate(Session session)
 							throws HibernateException, SQLException {
 						Criteria criteria = session

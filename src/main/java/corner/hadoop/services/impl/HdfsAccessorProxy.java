@@ -48,6 +48,7 @@ public class HdfsAccessorProxy implements AccessorProxy {
 	 * @see corner.hadoop.services.DistributedResourceAccessor#getFile(java.lang.String,
 	 *      java.io.OutputStream)
 	 */
+	@Override
 	public void getFile(String filePath, OutputStream out) throws IOException {
 		Path srcPath = new Path(filePath);
 		FileSystem srcFS = srcPath.getFileSystem(getConf());
@@ -59,6 +60,10 @@ public class HdfsAccessorProxy implements AccessorProxy {
 		return this.conf;
 	}
 
+	/**
+	 * @see corner.hadoop.services.impl.AccessorProxy#getFileMTTime(java.lang.String)
+	 */
+	@Override
 	public long getFileMTTime(String filePath) throws IOException {
 		Path srcPath = new Path(filePath);
 		FileSystem srcFS = srcPath.getFileSystem(getConf());
@@ -73,6 +78,7 @@ public class HdfsAccessorProxy implements AccessorProxy {
 	 * @see corner.hadoop.services.DistributedResourceAccessor#putFile(java.lang.String,
 	 *      java.io.InputStream)
 	 */
+	@Override
 	public void putFile(String filePath, InputStream is) throws IOException {
 		Path dstPath = new Path(filePath);
 		FileSystem dstFs = dstPath.getFileSystem(getConf());
@@ -95,6 +101,9 @@ public class HdfsAccessorProxy implements AccessorProxy {
 		return dstFs.delete(dstPath, false);
 	}
 
+	/**
+	 * @see corner.hadoop.services.impl.AccessorProxy#list(java.lang.String)
+	 */
 	@Override
 	public List<FileDesc> list(final String path) throws IOException {
 		String _path = path;

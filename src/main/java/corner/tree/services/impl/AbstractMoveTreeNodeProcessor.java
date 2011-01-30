@@ -158,7 +158,10 @@ abstract class AbstractMoveTreeNodeProcessor {
 	 */
 	private List<?> fetchReplaceNode(final int n) {
 		return this.hibernateEntityService.executeFind(new HibernateCallback(){
-
+			/**
+			 * @see org.springframework.orm.hibernate3.HibernateCallback#doInHibernate(org.hibernate.Session)
+			 */
+			@Override
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
 				Criteria criteria = session.createCriteria(entityService
@@ -211,6 +214,10 @@ abstract class AbstractMoveTreeNodeProcessor {
 			
 			List<?> list = hibernateEntityService.executeFind(new HibernateCallback(){
 
+				/**
+				 * @see org.springframework.orm.hibernate3.HibernateCallback#doInHibernate(org.hibernate.Session)
+				 */
+				@Override
 				public Object doInHibernate(Session session)
 						throws HibernateException, SQLException {
 					Criteria criteria =session.createCriteria(treeClassName);

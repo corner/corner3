@@ -55,6 +55,10 @@ public class ValidatorRenderSupportImpl implements ValidatorRenderSupport {
 		this.lv4t5Js = lv4t5Js;
 	}
 
+	/**
+	 * @see corner.livevalidator.ValidatorRenderSupport#renderAssetFiles()
+	 */
+	@Override
 	public void renderAssetFiles() {
 		renderSupport.addStylesheetLink(validatorCss, null);
 		renderSupport.addScriptLink(prototypeJs);
@@ -63,9 +67,12 @@ public class ValidatorRenderSupportImpl implements ValidatorRenderSupport {
 
 	}
 
+	/**
+	 * @see corner.livevalidator.ValidatorRenderSupport#addValidatorScript(java.lang.String, java.lang.String, org.apache.tapestry5.json.JSONObject)
+	 */
+	@Override
 	public void addValidatorScript(String fieldId, String validator,
 			JSONObject options) {
-
 		JSONArray parameterList = new JSONArray();
 		parameterList.put(fieldId);
 		parameterList.put(validator);

@@ -64,6 +64,7 @@ public class TreeServiceImpl implements TreeService {
 	/**
 	 * @see corner.tree.services.ouriba.eweb.services.tree.TreeService#saveTreeChildNode(corner.tree.base.ouriba.eweb.entities.base.TreeAdapter, corner.tree.base.ouriba.eweb.entities.base.TreeAdapter, java.lang.Class)
 	 */
+	@Override
 	public void saveTreeChildNode(TreeAdapter node, TreeAdapter parentNode, Class<? extends TreeAdapter> clazz) {
 		String treeClassName = getTreeClassName(node,clazz);
 
@@ -114,6 +115,7 @@ public class TreeServiceImpl implements TreeService {
 	/**
 	 * @see corner.tree.services.ouriba.eweb.services.tree.TreeService#getTree(java.lang.Class)
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<? extends TreeAdapter> getTree(
 			final Class<? extends TreeAdapter> clazz) {
@@ -133,6 +135,7 @@ public class TreeServiceImpl implements TreeService {
 	/**
 	 * @see corner.tree.services.ouriba.eweb.services.tree.TreeService#moveNode(corner.tree.base.ouriba.eweb.entities.base.TreeAdapter, int, java.lang.Class)
 	 */
+	@Override
 	public void moveNode(TreeAdapter node, int n, Class<? extends TreeAdapter> clazz) {
 		if (n == 0) {
 			return;
@@ -168,8 +171,8 @@ public class TreeServiceImpl implements TreeService {
 	/**
 	 * @see corner.tree.services.ouriba.eweb.services.tree.TreeService#deleteTreeNode(corner.tree.base.ouriba.eweb.entities.base.TreeAdapter, java.lang.Class)
 	 */
+	@Override
 	public void deleteTreeNode(TreeAdapter node, Class<? extends TreeAdapter> clazz) {
-		
 		String treeClassName =getTreeClassName(node,clazz);
 		int left = node.getLeft();
 		int right = node.getRight();

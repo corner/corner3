@@ -58,6 +58,7 @@ public class SecurityContextFilter implements RequestFilter {
 	 *      org.apache.tapestry.services.RequestHandler)
 	 * @since 0.0.1
 	 */
+	@Override
 	public boolean service(Request request, Response response, RequestHandler handler) throws IOException {
 		HttpServletRequest servletRequest = _requestGlobals.getHTTPServletRequest();
 		SecuredHttpServletRequestWrapper delegateRequest = new SecuredHttpServletRequestWrapper(servletRequest,this._principalService);

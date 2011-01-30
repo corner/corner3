@@ -47,6 +47,10 @@ public class SpringTransactionAdvisor implements TransactionAdvisor{
         	this.method = m;
 		}
 
+		/**
+		 * @see org.apache.tapestry5.ioc.MethodAdvice#advise(org.apache.tapestry5.ioc.Invocation)
+		 */
+		@Override
 		public void advise(final Invocation invocation)
         {
 			try {

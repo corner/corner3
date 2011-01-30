@@ -23,6 +23,7 @@ import corner.orm.base.BaseEntity;
 
 /**
  * 抽象的树的实现
+ * 
  * @author <a href="jun.tsai@ganshane.net">Jun Tsai</a>
  * @version $Revision$
  * @since 0.0.1
@@ -45,47 +46,64 @@ public class DatabaseTreeAdapterImpl extends BaseEntity implements TreeAdapter {
 	 * 深度
 	 */
 	private int depth;
+
 	/**
 	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#getLeft()
 	 */
-	@Column(name="TREE_LEFT")
+	@Override
+	@Column(name = "TREE_LEFT")
 	public int getLeft() {
 		return left;
 	}
+
 	/**
 	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#setLeft(int)
 	 */
+	@Override
 	public void setLeft(int left) {
 		this.left = left;
 	}
+
 	/**
 	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#getRight()
 	 */
-	@Column(name="TREE_RIGHT")
+	@Override
+	@Column(name = "TREE_RIGHT")
 	public int getRight() {
 		return right;
 	}
+
 	/**
 	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#setRight(int)
 	 */
+	@Override
 	public void setRight(int right) {
 		this.right = right;
 	}
+
 	/**
 	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#getDepth()
 	 */
-	@Column(name="TREE_DEPTH")
+	@Override
+	@Column(name = "TREE_DEPTH")
 	public int getDepth() {
 		return depth;
 	}
+
 	/**
 	 * @see corner.tree.base.ouriba.eweb.entities.base.TreeAdapter#setDepth(int)
 	 */
+	@Override
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+
+	/**
+	 * @see corner.tree.base.TreeAdapter#getIndentStr()
+	 */
+	@Override
 	@Transient
-	public String getIndentStr(){
+	public String getIndentStr() {
 		StringBuffer sb = new StringBuffer();
 		int i = this.getDepth();
 		while (i > 1) {
@@ -94,10 +112,11 @@ public class DatabaseTreeAdapterImpl extends BaseEntity implements TreeAdapter {
 		}
 		return sb.toString();
 	}
-    /* bean properties begin */
-    public static final String LEFT_PRO_NAME="left";
-    public static final String RIGHT_PRO_NAME="right";
-    public static final String DEPTH_PRO_NAME="depth";
-    /* bean properties end */
+
+	/* bean properties begin */
+	public static final String LEFT_PRO_NAME = "left";
+	public static final String RIGHT_PRO_NAME = "right";
+	public static final String DEPTH_PRO_NAME = "depth";
+	/* bean properties end */
 
 }

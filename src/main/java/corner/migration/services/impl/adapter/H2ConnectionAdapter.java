@@ -51,6 +51,7 @@ public class H2ConnectionAdapter extends AbstractConnectionAdapter {
 		/**
 		 * @see com.bjmaxinfo.piano.database.IConnectionAdapter#changeColumnSQL(java.lang.String, java.lang.String, java.lang.String)
 		 */
+		@Override
 		public String changeColumnSQL(String tableName, String newColumnType) {
 			return  String.format(CHAGE_COLUMN_SQL, tableName,newColumnType);
 		}
@@ -58,6 +59,7 @@ public class H2ConnectionAdapter extends AbstractConnectionAdapter {
 		/**
 		 * @see com.bjmaxinfo.piano.database.IConnectionAdapter#removeColumnSQL(java.lang.String, java.lang.String[])
 		 */
+		@Override
 		public List<String> removeColumnSQL(String tableName, String[] tableColumns) {
 			List<String> dropList = null;
 			if(tableColumns != null && tableColumns.length>0){
@@ -73,6 +75,7 @@ public class H2ConnectionAdapter extends AbstractConnectionAdapter {
 		/**
 		 * @see com.bjmaxinfo.piano.database.IConnectionAdapter#renameColumnSQL(java.lang.String, java.lang.String[], java.lang.String[])
 		 */
+		@Override
 		public List<String> renameColumnSQL(String tableName, String[] oldColumnsNames, String[] newColumnNames) {
 			List<String> renameList = null;
 			if(newColumnNames != null && newColumnNames.length>0 && newColumnNames.length>=oldColumnsNames.length){

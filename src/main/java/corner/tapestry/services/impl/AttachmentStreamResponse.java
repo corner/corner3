@@ -59,14 +59,26 @@ public class AttachmentStreamResponse implements StreamResponse {
 		this.is = is;
 	}
 
+	/**
+	 * @see org.apache.tapestry5.StreamResponse#getContentType()
+	 */
+	@Override
 	public String getContentType() {
 		return contentType;
 	}
 
+	/**
+	 * @see org.apache.tapestry5.StreamResponse#getStream()
+	 */
+	@Override
 	public InputStream getStream() throws IOException {
 		return is;
 	}
 
+	/**
+	 * @see org.apache.tapestry5.StreamResponse#prepareResponse(org.apache.tapestry5.services.Response)
+	 */
+	@Override
 	public void prepareResponse(Response arg0) {
 		arg0.setHeader("Content-Disposition", "attachment; filename="
 				+ filename);

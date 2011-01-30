@@ -52,6 +52,10 @@ public class ASCIICaptchaCodeImpl implements CaptchaCode {
 		this.codeLength = codeLength;
 	}
 
+	/**
+	 * @see corner.tapestry.captcha.CaptchaCode#getChallengeCode()
+	 */
+	@Override
 	public String getChallengeCode() {
 		final int size = ascii.length - 1;
 		final Random ran = new Random();
@@ -65,6 +69,10 @@ public class ASCIICaptchaCodeImpl implements CaptchaCode {
 		return crypt.encrypt(buf.toString());
 	}
 	
+	/**
+	 * @see corner.tapestry.captcha.CaptchaCode#getTextChallengeCode(java.lang.String)
+	 */
+	@Override
 	public String[] getTextChallengeCode(String encrypt){
 		if(encrypt == null){
 			throw new IllegalArgumentException("No encrypt");
@@ -81,6 +89,10 @@ public class ASCIICaptchaCodeImpl implements CaptchaCode {
 		return result;
 	}
 
+	/**
+	 * @see corner.tapestry.captcha.CaptchaCode#checkChallengerCode(java.lang.String, java.lang.String, long)
+	 */
+	@Override
 	public boolean checkChallengerCode(final String code,
 			final String encryptCode, final long expirse) {
 		if (code == null || encryptCode == null) {

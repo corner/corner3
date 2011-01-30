@@ -30,6 +30,7 @@ public class NonSecurityPrincipalService  implements SecurityPrincipalService {
      *
      * @return
      */
+	@Override
     public Principal getCurrentPrincipal() {
         return null;
     }
@@ -40,6 +41,7 @@ public class NonSecurityPrincipalService  implements SecurityPrincipalService {
      * @param princiapl
      * @return 如果principal没有任何角色,返回null;否则返回principal所拥有的角色
      */
+	@Override
     public String[] getPrincipalRoles(Principal princiapl) {
         return new String[0];
     }

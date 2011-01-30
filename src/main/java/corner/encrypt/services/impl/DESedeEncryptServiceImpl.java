@@ -50,6 +50,10 @@ public class DESedeEncryptServiceImpl implements EncryptService {
 		this.cipher = cipher;
 	}
 
+	/**
+	 * @see corner.encrypt.services.EncryptService#encrypt(byte[], byte[])
+	 */
+	@Override
 	public byte[] encrypt(byte[] src, byte[] key) {
 		try {
 			SecretKey deskey = new SecretKeySpec(key, Algorithm);
@@ -66,6 +70,10 @@ public class DESedeEncryptServiceImpl implements EncryptService {
 		return null;
 	}
 
+	/**
+	 * @see corner.encrypt.services.EncryptService#decrypt(byte[], byte[])
+	 */
+	@Override
 	public byte[] decrypt(byte[] src, byte[] keybyte) {
 		try {
 			SecretKey deskey = new SecretKeySpec(keybyte, Algorithm);
@@ -82,6 +90,10 @@ public class DESedeEncryptServiceImpl implements EncryptService {
 		return null;
 	}
 
+	/**
+	 * @see corner.encrypt.services.EncryptService#encrypt(java.lang.String)
+	 */
+	@Override
 	public String encrypt(final String src) {
 		if (src == null)
 			return null;
@@ -99,6 +111,10 @@ public class DESedeEncryptServiceImpl implements EncryptService {
 		return null;
 	}
 
+	/**
+	 * @see corner.encrypt.services.EncryptService#decrypt(java.lang.String)
+	 */
+	@Override
 	public String decrypt(final String cryptograph) {
 		if (cryptograph == null)
 			return null;

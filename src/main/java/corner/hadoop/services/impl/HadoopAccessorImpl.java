@@ -90,38 +90,65 @@ public class HadoopAccessorImpl implements DistributedResourceAccessor {
 		return this.protocol;
 	}
 
+	/**
+	 * @see corner.hadoop.services.DistributedResourceAccessor#getFile(java.lang.String, java.io.OutputStream)
+	 */
+	@Override
 	public void getFile(String filePath, OutputStream out) throws IOException {
 		proxy.getFile(filePath, out);
 	}
 
+	/**
+	 * @see corner.hadoop.services.DistributedResourceAccessor#getFileMTTime(java.lang.String)
+	 */
+	@Override
 	public long getFileMTTime(String filePath) throws IOException {
 		return proxy.getFileMTTime(filePath);
 	}
 
+	/**
+	 * @see corner.hadoop.services.DistributedResourceAccessor#putFile(java.lang.String, java.io.InputStream)
+	 */
+	@Override
 	public void putFile(String filePath, InputStream is) throws IOException {
 		proxy.putFile(filePath, is);
 	}
 
+	/**
+	 * @see corner.hadoop.services.DistributedResourceAccessor#deleteFile(java.lang.String)
+	 */
 	@Override
 	public boolean deleteFile(String filePath) throws IOException {
 		return proxy.deleteFile(filePath);
 	}
 
+	/**
+	 * @see corner.hadoop.services.DistributedResourceAccessor#list(java.lang.String)
+	 */
 	@Override
 	public List<FileDesc> list(String path) throws IOException {
 		return proxy.list(path);
 	}
 
+	/**
+	 * @see corner.hadoop.services.DistributedResourceAccessor#mkdirs(java.lang.String)
+	 */
 	@Override
 	public boolean mkdirs(String dirPath) throws IOException {
 		return proxy.mkdirs(dirPath);
 	}
 
+	/**
+	 * @see corner.hadoop.services.DistributedResourceAccessor#isFileExist(java.lang.String)
+	 */
 	@Override
 	public boolean isFileExist(String filePath) throws IOException {
 		return proxy.isFileExist(filePath);
 	}
 
+	/**
+	 * @see corner.hadoop.services.DistributedResourceAccessor#getFileDesc(java.lang.String)
+	 */
 	@Override
 	public FileDesc getFileDesc(String filePath) throws IOException {
 		return proxy.getFileDesc(filePath);

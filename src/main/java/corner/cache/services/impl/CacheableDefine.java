@@ -30,6 +30,10 @@ public final class CacheableDefine {
       return defaultInstance;
     }
     
+    /**
+     * @see com.google.protobuf.Message#getDefaultInstanceForType()
+     */
+    @Override
     public Definition getDefaultInstanceForType() {
       return defaultInstance;
     }
@@ -151,10 +155,18 @@ public final class CacheableDefine {
     }
     
     public static Builder newBuilder() { return new Builder(); }
+    /**
+     * @see com.google.protobuf.Message#newBuilderForType()
+     */
+    @Override
     public Builder newBuilderForType() { return new Builder(); }
     public static Builder newBuilder(corner.cache.services.impl.CacheableDefine.Definition prototype) {
       return new Builder().mergeFrom(prototype);
     }
+    /**
+     * @see com.google.protobuf.Message#toBuilder()
+     */
+    @Override
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
@@ -186,11 +198,19 @@ public final class CacheableDefine {
         return corner.cache.services.impl.CacheableDefine.Definition.getDescriptor();
       }
       
-      public corner.cache.services.impl.CacheableDefine.Definition getDefaultInstanceForType() {
+    /**
+     * @see com.google.protobuf.Message.Builder#getDefaultInstanceForType()
+     */
+      @Override
+    public corner.cache.services.impl.CacheableDefine.Definition getDefaultInstanceForType() {
         return corner.cache.services.impl.CacheableDefine.Definition.getDefaultInstance();
       }
       
-      public corner.cache.services.impl.CacheableDefine.Definition build() {
+      /**
+     * @see com.google.protobuf.Message.Builder#build()
+     */
+      @Override
+    public corner.cache.services.impl.CacheableDefine.Definition build() {
         if (result != null && !isInitialized()) {
           throw new com.google.protobuf.UninitializedMessageException(
             result);
@@ -207,7 +227,11 @@ public final class CacheableDefine {
         return buildPartial();
       }
       
-      public corner.cache.services.impl.CacheableDefine.Definition buildPartial() {
+      /**
+     * @see com.google.protobuf.Message.Builder#buildPartial()
+     */
+      @Override
+    public corner.cache.services.impl.CacheableDefine.Definition buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");  }
@@ -342,6 +366,10 @@ public final class CacheableDefine {
       "plB\017CacheableDefineH\001";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        /**
+         * @see com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner#assignDescriptors(com.google.protobuf.Descriptors.FileDescriptor)
+         */
+    	@Override
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;

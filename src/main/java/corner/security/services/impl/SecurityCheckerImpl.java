@@ -42,9 +42,9 @@ public class SecurityCheckerImpl implements SecurityChecker {
 	}
 
 	/**
-	 * 
-	 * @throws IOException
+	 * @see corner.security.services.SecurityChecker#check(corner.security.annotations.Security)
 	 */
+	@Override
 	public boolean check(Security secured) throws RequiredLoginException, InvlidateRoleException, IOException {
 		HttpServletRequest request = _requestGlobals.getHTTPServletRequest();
 		if (request.getUserPrincipal() == null) {

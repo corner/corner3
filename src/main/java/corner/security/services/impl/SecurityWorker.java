@@ -61,6 +61,7 @@ public class SecurityWorker implements ComponentClassTransformWorker {
 	 *      org.apache.tapestry.model.MutableComponentModel)
 	 * @since 0.0.1
 	 */
+	@Override
 	public void transform(ClassTransformation transformation,
 			MutableComponentModel model) {
 		// 对类的安全注释进行检查.

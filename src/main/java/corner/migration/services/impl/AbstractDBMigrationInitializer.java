@@ -83,6 +83,10 @@ public abstract class AbstractDBMigrationInitializer implements ApplicationIniti
 		System.out.println("Groovy script type:"+scriptType+" path:["+dbPath+"]");
 		
 		File[] files = FileUtils.dir(dbPath+File.separator+GROOVY_SCRIPT_NAME_PATTERN_STR).sort(new ISortCallback(){
+			/**
+			 * @see corner.migration.services.impl.FileUtils.ISortCallback#getSortData(java.io.File)
+			 */
+			@Override
 			public int getSortData(File file) {
 				Matcher matcher=GROOVY_SCRIPT_NAME_PATTERN.matcher(file.getName());
 				if(matcher.find()){

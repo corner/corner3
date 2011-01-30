@@ -183,6 +183,10 @@ public class CaptchaField extends AbstractField {
 	@Override
 	protected void processSubmission(final String elementName) {
 		Runnable command = new Runnable() {
+			/**
+			 * @see java.lang.Runnable#run()
+			 */
+			@Override
 			public void run() {
 				final String _encryptCode = request.getParameter(elementName);
 				final String _inputValue = inputValue;
@@ -236,14 +240,26 @@ public class CaptchaField extends AbstractField {
 			this.data = data;
 		}
 
+		/**
+		 * @see org.apache.tapestry5.StreamResponse#getContentType()
+		 */
+		@Override
 		public String getContentType() {
 			return this.contentType;
 		}
 
+		/**
+		 * @see org.apache.tapestry5.StreamResponse#getStream()
+		 */
+		@Override
 		public InputStream getStream() throws IOException {
 			return new ByteArrayInputStream(data);
 		}
 
+		/**
+		 * @see org.apache.tapestry5.StreamResponse#prepareResponse(org.apache.tapestry5.services.Response)
+		 */
+		@Override
 		public void prepareResponse(Response arg0) {
 		}
 	}

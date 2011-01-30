@@ -49,6 +49,7 @@ public class CacheHeaderWorker implements ComponentClassTransformWorker {
 	 *      org.apache.tapestry.model.MutableComponentModel)
 	 * @since 0.0.1
 	 */
+	@Override
 	public void transform(ClassTransformation transformation,
 			MutableComponentModel model) {
 

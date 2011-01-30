@@ -144,6 +144,10 @@ public class CacheIntegration2Test extends TapestryTestCase {
 	}
 	public static class TestServiceImpl implements TestService{
 		private List<TestMember> list= new ArrayList<TestMember>();
+		/**
+		 * @see corner.cache.services.impl.CacheIntegration2Test.TestService#getList()
+		 */
+		@Override
 		public List<TestMember> getList() {
 			testVar = testVar+1;
 			return list;
