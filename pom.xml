@@ -81,21 +81,18 @@
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-core</artifactId>
-			<version>${tapestry-release-version}
-			</version>
+			<version>${tapestry-release-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-hibernate</artifactId>
-			<version>${tapestry-release-version}
-			</version>
+			<version>${tapestry-release-version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate-release-version}
-			</version>
+			<version>${hibernate-release-version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.transaction</groupId>
