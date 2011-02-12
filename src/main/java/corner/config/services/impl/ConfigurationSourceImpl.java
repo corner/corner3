@@ -27,12 +27,12 @@ import javax.xml.bind.Unmarshaller;
 
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
-import org.apache.tapestry5.ioc.internal.util.Defense;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.ioc.util.StrategyRegistry;
 
 import corner.config.services.ConfigInitable;
 import corner.config.services.ConfigurationSource;
+import corner.utils.Defense;
 
 /**
  * 实现服务配置工厂类.

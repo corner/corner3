@@ -16,7 +16,6 @@
 package corner.tapestry.persistent;
 
 import static org.apache.tapestry5.ioc.internal.util.CollectionFactory.newList;
-import static org.apache.tapestry5.ioc.internal.util.Defense.notBlank;
 
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +29,8 @@ import org.apache.tapestry5.services.ClientDataSink;
 import org.apache.tapestry5.services.Cookies;
 import org.apache.tapestry5.services.PersistentFieldChange;
 import org.apache.tapestry5.services.PersistentFieldStrategy;
+
+import corner.utils.Defense;
 
 /**
  * 用来保存数据到客户端的cooki中的处理
@@ -125,8 +126,8 @@ public class CookiePersistentFieldStrategy implements PersistentFieldStrategy {
 	@Override
 	public void postChange(String pageName, String componentId,
 			String fieldName, Object newValue) {
-		notBlank(pageName, "pageName");
-		notBlank(fieldName, "fieldName");
+		Defense.notBlank(pageName, "pageName");
+		Defense.notBlank(fieldName, "fieldName");
 
 		StringBuilder builder = new StringBuilder(prefix);
 		builder.append(pageName);
@@ -150,7 +151,5 @@ public class CookiePersistentFieldStrategy implements PersistentFieldStrategy {
 			throw new RuntimeException(ex.getMessage(), ex);
 		}
 		cookies.writeCookieValue(builder.toString(), sink.getClientData(), 30 * 60);
-
 	}
-
 }

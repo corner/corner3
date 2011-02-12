@@ -43,8 +43,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<optimize>true</optimize>
 					<encoding>UTF-8</encoding>
 				</configuration>
@@ -88,6 +88,11 @@
 			<artifactId>tapestry-hibernate</artifactId>
 			<version>${tapestry-release-version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-ioc</artifactId>
+			<version>${tapestry-release-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -285,27 +290,20 @@
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-test</artifactId>
-			<version>${tapestry-release-version}
-			</version>
+			<version>${tapestry-release-version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<!-- <repositories> <repository> <id>mvnsearch</id> <url>http://www.mvnsearch.org/maven2</url> 
-		</repository> <repository> <id>fepss</id> <url>http://maven.fepss.com/nexus/content/groups/public 
-		</url> </repository> <repository> <id>fepss.snapshots</id> <url>http://maven.fepss.com/nexus/content/groups/public-snapshots 
-		</url> </repository> </repositories> -->
+
 	<distributionManagement>
-		<snapshotRepository>
-			<id>fepss.snapshots</id>
-			<url>
-				http://maven.fepss.com/nexus/content/repositories/snapshots/
-			</url>
-		</snapshotRepository>
 		<repository>
-			<id>fepss.releases</id>
-			<url>http://maven.fepss.com/nexus/content/repositories/fepss/
-			</url>
+			<id>corner.snapshots</id>
+			<url>http://dev.bjmaxinfo.com:5180/nexus/content/repositories/bjmaxinfo</url>
 		</repository>
+		<snapshotRepository>
+			<id>corner.snapshots</id>
+			<url>http://dev.bjmaxinfo.com:5180/nexus/content/repositories/bjmaxinfo-snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
 	<reporting>
 		<plugins>
@@ -367,7 +365,7 @@
 	<properties>
 		<hibernate-release-version>3.3.1.GA
 		</hibernate-release-version>
-		<tapestry-release-version>5.1.0.5</tapestry-release-version>
+		<tapestry-release-version>5.2.4</tapestry-release-version>
 		<hibernate-annotations-release-version>
 			3.4.0.GA
 		</hibernate-annotations-release-version>

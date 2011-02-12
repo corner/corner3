@@ -15,12 +15,12 @@
  */
 package corner.transaction.services.impl;
 
-import org.apache.tapestry5.ioc.internal.util.Defense;
 import org.apache.tapestry5.ioc.services.AspectDecorator;
 import org.apache.tapestry5.ioc.services.AspectInterceptorBuilder;
 
 import corner.transaction.services.TransactionAdvisor;
 import corner.transaction.services.TransactionDecorator;
+import corner.utils.Defense;
 
 /**
  * JPA Transaction decorder Implemention

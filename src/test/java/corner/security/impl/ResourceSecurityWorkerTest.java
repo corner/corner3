@@ -55,7 +55,6 @@ public class ResourceSecurityWorkerTest extends TapestryTestCase {
 		train_getMethodAnnotation(ct, sig, ResourceSecurity.class, rs);
 		train_addInjectedField(ct, ResourceCheck.class, "_$checker_for_"+sig.getMethodName(),checker,"_$checker");
 		train_getClassName(ct, TestApp.class.getName());
-		train_extendMethod(ct, sig, "try{if(!_$checker.check($1)){throw new corner.security.services.AclException(\"Can't access\");}}catch(Throwable te){throw new RuntimeException(te);}");
 		ResourceSecurityWorker worker = new ResourceSecurityWorker(locator);
 		expect(rs.service()).andReturn(ResourceCheck.class);
 		expect(rs.checkMethod()).andReturn("check");

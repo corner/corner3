@@ -19,23 +19,17 @@ import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.ActionRenderResponseGenerator;
 import org.apache.tapestry5.internal.services.ActionRenderResponseGeneratorImpl;
 import org.apache.tapestry5.internal.services.LinkSource;
-import org.apache.tapestry5.internal.services.PageTemplateLocator;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.annotations.ServiceId;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.services.AliasContribution;
-import org.apache.tapestry5.services.AssetFactory;
 import org.apache.tapestry5.services.BindingFactory;
-import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.ComponentClassTransformWorker;
-import org.apache.tapestry5.services.ContextProvider;
 import org.apache.tapestry5.services.LibraryMapping;
 import org.apache.tapestry5.services.PersistentFieldStrategy;
 import org.apache.tapestry5.services.Request;
@@ -54,8 +48,6 @@ import corner.security.SecurityModule;
 import corner.tapestry.bindings.BindingModule;
 import corner.tapestry.fckeditor.FckeditorModule;
 import corner.tapestry.persistent.CookiePersistentFieldStrategy;
-import corner.tapestry.services.HtmlTemplateProvider;
-import corner.tapestry.services.override.PageTemplateLocatorWithHtml;
 import corner.tapestry.services.override.RedirectMixedImmediateResponseGenerator;
 import corner.tapestry.transform.PageRedirectWorker;
 import corner.template.TemplateModule;
@@ -152,44 +144,6 @@ public class CoreModule {
 		configuration.add(CornerConstants.COMPOENT_TABLEVIEW_ROWS_PERPAGE, "15");
 	}
 
-	
-
-	
-
-
-	
-
-	/**
-	 * 构建基于HTML的PageTemplateLocator.
-	 */
-	@Marker(HtmlTemplateProvider.class)
-	public PageTemplateLocator buildPageTemplateLocatorWithHtml(
-			@ContextProvider
-			AssetFactory contextAssetFactory,
-
-			ComponentClassResolver componentClassResolver,
-			@Symbol(CornerConstants.ENABLE_HTML_TEMPLATE)
-			boolean enableHtmlTemplate) {
-		return new PageTemplateLocatorWithHtml(contextAssetFactory
-				.getRootResource(), componentClassResolver, enableHtmlTemplate);
-	}
-
-	/**
-	 * 复写系统提供的Page Template Locator.
-	 * 
-	 * @param configuration
-	 *            配置文件
-	 * @param htmlTemplateLocator
-	 *            html template locator.
-	 * @since 0.0.1
-	 */
-	public static void contributeAliasOverrides(
-			Configuration<AliasContribution<PageTemplateLocator>> configuration,
-			@HtmlTemplateProvider
-			PageTemplateLocator htmlTemplateLocator) {
-		configuration.add(AliasContribution.create(PageTemplateLocator.class,
-				htmlTemplateLocator));
-	}
 
 
 	//混合模式，支持@PageRedirect调用
