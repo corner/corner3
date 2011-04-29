@@ -15,18 +15,9 @@
  */
 package corner.tapestry.services.override;
 
-import static java.lang.String.format;
-
-import java.util.Locale;
-
-import org.apache.tapestry5.internal.InternalConstants;
-import org.apache.tapestry5.internal.services.PageTemplateLocator;
+import org.apache.tapestry5.internal.services.templates.PageTemplateLocator;
 import org.apache.tapestry5.ioc.Resource;
-import org.apache.tapestry5.ioc.internal.util.InternalUtils;
-import org.apache.tapestry5.model.ComponentModel;
 import org.apache.tapestry5.services.ComponentClassResolver;
-
-import corner.CornerConstants;
 
 /**
  * 针对在context中能够寻找html作为模板。
@@ -34,55 +25,17 @@ import corner.CornerConstants;
  * @version $Revision$
  * @since 0.0.1
  */
-public class PageTemplateLocatorWithHtml implements PageTemplateLocator {
+public class PageTemplateLocatorWithHtml extends PageTemplateLocator {
 
 
-	private final Resource contextRoot;
-
-    private final ComponentClassResolver resolver;
-
-	private String templateExtension;
-
-    public PageTemplateLocatorWithHtml(Resource contextRoot, ComponentClassResolver resolver, boolean enableHtmlTemplate)
-    {
-        this.contextRoot = contextRoot;
-        this.resolver = resolver;
-        if(enableHtmlTemplate){
-        	this.templateExtension = CornerConstants.HTML_TEMPLATE_EXTENSION;
-        }else{
-        	this.templateExtension = InternalConstants.TEMPLATE_EXTENSION;
-        }
-        
-    }
-
-    /**
-	 * @see org.apache.tapestry5.internal.services.PageTemplateLocator#findPageTemplateResource(org.apache.tapestry5.model.ComponentModel, java.util.Locale)
+	/**
+	 * @param contextRoot
+	 * @param resolver
 	 */
-	@Override
-	public Resource findPageTemplateResource(ComponentModel model, Locale locale) {
-       String className = model.getComponentClassName();
-
-        // A bit of a hack, but should work.
-
-        if (!className.contains(".pages.")) return null;
-
-        String logicalName = resolver.resolvePageClassNameToPageName(className);
-
-        int slashx = logicalName.lastIndexOf('/');
-
-        if (slashx > 0)
-        {
-            // However, the logical name isn't quite what we want. It may have been somewhat
-            // trimmed.
-
-            String simpleClassName = InternalUtils.lastTerm(className);
-
-            logicalName = logicalName.substring(0, slashx + 1) + simpleClassName;
-        }
-
-        String path = format("%s.%s", logicalName, templateExtension);
-
-        return contextRoot.forFile(path).forLocale(locale);
-    }
+	public PageTemplateLocatorWithHtml(Resource contextRoot,
+			ComponentClassResolver resolver) {
+		super(contextRoot, resolver);
+		
+	}
 	
 }
