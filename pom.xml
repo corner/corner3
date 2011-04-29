@@ -365,7 +365,7 @@
 	<properties>
 		<hibernate-release-version>3.3.1.GA
 		</hibernate-release-version>
-		<tapestry-release-version>5.2.4</tapestry-release-version>
+		<tapestry-release-version>5.2.5</tapestry-release-version>
 		<hibernate-annotations-release-version>
 			3.4.0.GA
 		</hibernate-annotations-release-version>
