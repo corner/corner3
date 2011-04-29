@@ -296,12 +296,18 @@
 	</dependencies>
 
 	<distributionManagement>
+		<site>
+			<id>maxinfo</id>
+			<url>scp://dev.bjmaxinfo.com/opt/sites/${pom.artifactId}</url>
+		</site>
 		<repository>
-			<id>corner.snapshots</id>
+			<id>maxinfo</id>
+			<name>bjmaxinfo release</name>
 			<url>http://dev.bjmaxinfo.com:5180/nexus/content/repositories/bjmaxinfo</url>
 		</repository>
 		<snapshotRepository>
-			<id>corner.snapshots</id>
+			<id>maxinfo</id>
+			<name>bjmaxinfo snapshot</name>
 			<url>http://dev.bjmaxinfo.com:5180/nexus/content/repositories/bjmaxinfo-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
